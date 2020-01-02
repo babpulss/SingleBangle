@@ -134,7 +134,7 @@ $RECYCLE.BIN/
 *.sw*
 .DS_Store
 .settings
-.springBeans
+#.springBeans
 bin
 build.sh
 integration-repo

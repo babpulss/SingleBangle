@@ -10,6 +10,6 @@
   src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-
+	<h1>여기는 admin page</h1>
 </body>
 </html>
