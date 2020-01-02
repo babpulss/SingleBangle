@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=java,windows,eclipse,java-web
 
 ### Eclipse ###
+*.MF
 .metadata
 bin/
 tmp/
