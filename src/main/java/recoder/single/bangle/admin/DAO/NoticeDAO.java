@@ -1,10 +1,12 @@
-package recoder.single.bangle.admin.DTO;
+package recoder.single.bangle.admin.DAO;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
-public class AdminDTO {
+@Repository
+public class NoticeDAO {
 
 	@Autowired
 	private JdbcTemplate jdbc;

@@ -3,11 +3,11 @@ package recoder.single.bangle.admin.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import recoder.single.bangle.admin.DAO.AdminDAO;
+import recoder.single.bangle.admin.DAO.NoticeDAO;
 
 @Service
 public class AdminService {
 
 	@Autowired
-	private AdminDAO dao;
+	private NoticeDAO dao;
 }
