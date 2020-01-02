@@ -17,4 +17,8 @@ transaction manager info
 </bean>		
 ```
 
+myBatis mapperLocations info
+```
+<property name="mapperLocations" value="classpath:/mappers/*mapper.xml"/>
+```
 
