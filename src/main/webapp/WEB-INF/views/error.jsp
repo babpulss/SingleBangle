@@ -10,6 +10,11 @@
   src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<img src="/img/temporary.png" width=500px height=150px>	
+	<div style="width:500px; margin:auto;">
+	<img src="/img/temporary_error_sign.png" width=500px height=200px><br>
+	<h1>에러 발생</h1><br>
+	<h1>관리자에게 문의하세요</h1><br>
+	<a href="${pageContext.request.contextPath}/">초기화면으로 가기</a>
+	</div>
 </body>
 </html>
