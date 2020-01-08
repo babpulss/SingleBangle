@@ -42,6 +42,26 @@ public class MemberService {
 		return loginResult;
 	}
 	
+	public MemberDTO myInfo(String id) {
+		MemberDTO infoResult = null;
+		try {
+			infoResult = dao.selectById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return infoResult;
+	}
+	
+	public int modifyInfo(MemberDTO dto) {
+		int updateResult = 0;
+		try {
+			updateResult = dao.update(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return updateResult;
+	}
+	
 	public int withdraw(String id) {
 		int deleteResult = 0;
 		try {

@@ -30,7 +30,13 @@ public class MemberDAO {
 		return sst.selectOne("Member.loginCheck", param);
 	}
 	
+	public MemberDTO selectById(String id) throws Exception {
+		return sst.selectOne("Member.selectById", id);
+	}
 	
+	public int update(MemberDTO dto) throws Exception {
+		return sst.update("Member.update", dto);
+	}
 	
 	public int deleteById(String id) throws Exception {
 		return sst.delete("Member.deleteById", id);

@@ -14,8 +14,8 @@
 	}
 	
 	#login_box{
-		border:2px solid #639ffd;
-		border-radius:10px;
+		border:2px solid #0085cb;
+		border-radius:5px;
 		width:250px;
 		text-align:center;
 		margin:auto;
@@ -30,8 +30,8 @@
 	}
 	
 	#mainpage{
-		border:2px solid #639ffd;
-		border-radius:10px;
+		border:2px solid #0085cb;
+		border-radius:5px;
 		width:250px;
 		text-align:center;
 		margin:auto;
@@ -40,14 +40,14 @@
 	.btns{
 		width:90px;
 		height:30px;
-		color:#639ffd;
+		color:#0085cb;
 		background-color:white;
-		border:1px solid #639ffd;
-		border-radius:5px;
+		border:1px solid #0085cb;
+		border-radius:3px;
 	}
 	.btns:hover{
 		color:white;
-		background-color:#639ffd;
+		background-color:#0085cb;
 		cursor:pointer;
 	}
 </style>
@@ -65,13 +65,14 @@
 					<br><br>
 					<input type="submit" class="btns" id="login" value="Login">
 					<button type="button" class="btns" id="signUp">Sign up</button>
+					<br><br>
 				</form>
 			</div>			
 		</c:when>
 		<c:otherwise>
 			<div id="mainpage">
 				<h3>${loginInfo.id}님 환영합니다.</h3>
-				<button class="btns" id="info">내 정보</button>
+				<button class="btns" id="myInfo">내 정보</button>
 				<button class="btns" id="modify">정보 수정</button>
 				<br><br>
 				<button class="btns" id="logout">로그아웃</button>
@@ -87,8 +88,8 @@
 			location.href="${pageContext.request.contextPath}/member/signUp.mem";
 		});
 		
-		$("#info").on("click", function(){
-			//location.href="${pageContext.request.contextPath}/member/info.mem";
+		$("#myInfo").on("click", function(){
+			location.href="${pageContext.request.contextPath}/member/myInfo.mem";
 		});
 		
 		$("#modify").on("click", function(){

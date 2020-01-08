@@ -17,7 +17,14 @@
 		select count(*) from member where id = #{id} and pw = #{pw}
 	</select>
 	
+	<select id="selectById" resultType="recoder.single.bangle.member.DTO.MemberDTO">
+		select * from member where id = #{id}
+	</select>
 	
+	<update id="update" parameterType="recoder.single.bangle.member.DTO.MemberDTO">
+		update member set pw = #{pw}, pwHint = #{pwHint}, pwAnswer = #{pwAnswer}, name = #{name}, phone = #{phone}, 
+							email = #{email}, postcode = #{postcode}, address1 = #{address1}, address2 = #{address2}
+	</update>
 	
 	<delete id="deleteById" parameterType="String">
 		delete from member where id = #{id}

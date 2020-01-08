@@ -52,6 +52,32 @@ public class MemberController {
 		return "member/loginCheck";
 	}
 	
+	@RequestMapping("/myInfo.mem")
+	public String myInfo(Model model) {
+		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		MemberDTO infoResult = memSvc.myInfo(id);
+		model.addAttribute("infoResult", infoResult);
+		
+		return "member/myInfo";
+	}
+	
+	@RequestMapping("/modifyInfo.mem")
+	public String modifyInfo(Model model) {
+		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		MemberDTO selectResult = memSvc.myInfo(id);
+		model.addAttribute("selectResult", selectResult);
+		
+		return "member/modifyForm";
+	}
+	
+	@RequestMapping("/modifyInfoProc.mem")
+	public String modifyInfoProc(MemberDTO dto, Model model) {
+		int updateResult = memSvc.modifyInfo(dto);
+		model.addAttribute("updateResult", updateResult);
+		
+		return "member/modifyCheck";
+	}
+	
 	@RequestMapping("/logout.mem")
 	public String logout() {
 		session.invalidate();

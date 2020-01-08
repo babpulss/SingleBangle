@@ -14,9 +14,25 @@ body {
 }
 
 #signupFrm {
-	border: 1px solid black;
 	width: 1000px;
 	margin: auto;
+}
+
+#signUpHeader{
+	width:400px;
+	height:80px;
+	line-height:40px;
+	margin:auto;
+	text-align:center;
+	color:white;
+	background-color:#0085cb;
+	border-radius:10px;
+}
+#signUpTitle{
+	font-size:30px;
+}
+#signUpNotice{
+	font-size:12px;
 }
 
 .info {
@@ -48,16 +64,37 @@ body {
 	font-size: 11px;
 }
 
-.submitContainer {
+#submitContainer {
 	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 15px;
+}
+
+.btns{
+	border:none;
+	border-radius:5px;
+	cursor:pointer;
+	color:white;
+	background-color:#0085cb;
+}
+.infoBtns{
+	width:100px;
+	height:25px;
+}
+.submitBtns{
+	width:120px;
+	height:40px;
+	font-size:16px;
 }
 </style>
 </head>
 <body>
 	<form action="${pageContext.request.contextPath}/member/signUpProc.mem" method="post" id="signupFrm"
 		onsubmit="return validCheck()">
+		<div id="signUpHeader">
+			<div id="signUpTitle">회원가입</div>
+			<div id="signUpNotice">회원가입 후 서비스 이용이 가능합니다.</div>
+		</div>
 		<div class="info">
 			<label class="label1" for="id">아이디</label>
 			<input type="text" class="infoVal" id="id" name="id" placeholder=" 5~12자 이내 영문(소문자), 숫자">
@@ -115,13 +152,13 @@ body {
 		<div class="info">
 			<label class="label1" for="email">이메일</label>
 			<input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 ">
-			<button type="button" id="emailBtn">이메일 인증</button>
+			<button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
 			<span class="validCheck" id="emailCheck"></span>
 		</div>
 		<div class="info">
 			<label class="label1" for="">우편번호</label>
 			<input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly>
-			<button type="button" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
+			<button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
 		</div>
 		<div class="info">
 			<label class="label1" for="">기본주소</label>
@@ -131,9 +168,9 @@ body {
 			<label class="label1" for="address2">상세주소</label>
 			<input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " >
 		</div>
-		<div class="submitContainer">
-			<input type="submit" value="회원가입" id="sbm">
-			<button type="button" id="cancel">회원가입 취소</button>
+		<div id="submitContainer">
+			<input type="submit" class="btns submitBtns" id="submit" value="회원가입">
+			<button type="button" class="btns submitBtns" id="cancel">회원가입 취소</button>
 		</div>
 	</form>
 
@@ -154,6 +191,7 @@ body {
 
 			if(idResult != null){
 				
+				// 아이디 중복 검사
 				$("#id").on("blur", function(){
 					$.ajax({
 						url:"idDuplCheck.mem",
@@ -253,6 +291,7 @@ body {
 			}
 		})
 
+		// 이메일 유효성 검사
 		$("#email").on("input", function(){
 			var email = $("#email").val();
 			var emailRegex = /^\w+@[a-z]+(\.[a-z]+){1,2}$/;
@@ -278,6 +317,7 @@ body {
 			}).open();
 		}
 
+		// 회원가입 form 제출하기 전에 전체 검사하기
 		function validCheck(){
 
 			for(var i = 0; i < $(".infoVal").length; i++){
@@ -301,6 +341,7 @@ body {
 			return confirm("회원가입 하시겠습니까?");
 		}
 		
+		// 회원가입 취소하고 메인으로 돌아가기
 		$("#cancel").on("click", function(){
 			var cancelConfirm = confirm("회원가입을 취소하시겠습니까?");
 			
