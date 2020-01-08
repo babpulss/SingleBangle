@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Member">
+	<insert id="insert" parameterType="recoder.single.bangle.member.DTO.MemberDTO">
+		insert into member values (#{id}, #{pw}, #{pwHint}, #{pwAnswer}, #{name}, #{gender}, 
+									#{phone}, #{email}, #{postcode}, #{address1}, #{address2}, 'N', 'N')
+	</insert>
+	
+	<select id="isIdExist" resultType="Integer">
+		select count(*) from member where id = #{id}
+	</select>
+	
+	<select id="loginCheck" resultType="Integer">
+		select count(*) from member where id = #{id} and pw = #{pw}
+	</select>
+	
+	
+	
+	<delete id="deleteById" parameterType="String">
+		delete from member where id = #{id}
+	</delete>
+</mapper>

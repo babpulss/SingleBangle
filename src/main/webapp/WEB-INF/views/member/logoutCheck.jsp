@@ -5,12 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그아웃</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}" method="post" id="signupFrm">
-		
-	</form>
+	<script>
+		alert("로그아웃 되었습니다.");
+		location.href="${pageContext.request.contextPath}/memberHome";
+	</script>
 </body>
 </html>
