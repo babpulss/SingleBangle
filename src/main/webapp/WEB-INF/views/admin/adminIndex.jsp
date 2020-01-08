@@ -12,6 +12,5 @@
 <body>
 	<img src="/img/temporary.png" width=500px height=150px>	
 	<h1>Hello world</h1>
-	<h2>world hello</h2>
 </body>
 </html>
