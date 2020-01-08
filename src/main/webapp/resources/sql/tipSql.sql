@@ -71,7 +71,7 @@ insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '칼이 �
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '검은 옷의 먼지를 털 때', '검은 옷의 먼지를 털 때는 옷솔보다는 스펀지로 하거나 고무장갑으로 하는 것이 매우 효과적이다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '국수를 삶을 때', '국수를 삶을 때 끓는 물에 참기름을 한 숟가락 넣어주면 면발이 서로 달라붙지 않고 맛도 부드러워진다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '방습제를 옷장에 두면', '김에 들어 있는 실리카겔을 모아 옷장에 넣어두면 효과적이다',sysdate,0,0,0);
-insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '변색된 '은'장신구', '누렇게 변할 때 레몬즙으로 닦고 뜨거운 물로 헹구면 자국이 잘 그리고 말끔하게 지워진다',sysdate,0,0,0);
+insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '변색된 '||CHR(39)||'은'||CHR(39)||'장신구', '누렇게 변할 때 레몬즙으로 닦고 뜨거운 물로 헹구면 자국이 잘 그리고 말끔하게 지워진다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '와인잔 씻을 때', '물과 베이킹파우더를 섞어 만든 얇은 반죽으로 와인잔을 문질러 물로 씻어내면 윤을 내는데 효과가 있다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '정전기가 잘 일어나는 옷', '정전기가 잘 일어나는 소재의 옷은 욕실에 걸어둔 뒤 적당히 습기가 스며들게 하고 입으면 잘 일어나지 않는다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '테이프 끝에 단추를 붙이면', '급히 써야할 대 테이프 시작 부분을 찾기 쉬워져 매우 좋다. 동일하게 클립을 붙여놓아도 좋다',sysdate,0,0,0);
@@ -82,7 +82,7 @@ insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '나무 �
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '시든 채소 싱싱하게 만들기', '각설탕과 식초를 한 두 방울 떨어뜨린 물에 담구면 채소가 싱싱하게 변한다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '식용유를 엎질렀을 때', '밀가루를 뿌려주면 기름을 흡수해서 완벽하게 제거할 수 있다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '달걀을 깨지지 않게 삶으려면', '삶을 때 달걀의 위 혹은 아래 끝에 작은 구멍을 뚫어두면 된다. 바늘정도의 구멍이면 충분하다',sysdate,0,0,0);
-insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '니코틴 자국이 남았을 때', '금연 후 손가락에 니코틴 자국이 남았을 때 레몬즙 + 과산화수소 수용액 '옥시풀'이 가장 효과가 좋다',sysdate,0,0,0);
+insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '니코틴 자국이 남았을 때', '금연 후 손가락에 니코틴 자국이 남았을 때 레몬즙 + 과산화수소 수용액 '||CHR(39)||'옥시풀'||CHR(39)||'이 가장 효과가 좋다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '머리카락에 껌이 붙었을 때', '헤어크림을 잔뜩 바르고 나서 마른 수건으로 떼어내면 껌을 손쉽게 떼어낼 수 있다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '키보드 손때', '피아노나 컴퓨터 키보드의손때는 부드러운 천에 치약을 발라 닦아내면 깨끗해진다',sysdate,0,0,0);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '콩자반을 만들 때', '콩자반을 만들 콩과 물을 1:3으로 보온병에 넣어두면 시간을 절약',sysdate,0,0,0);
