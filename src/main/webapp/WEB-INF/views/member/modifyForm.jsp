@@ -246,6 +246,9 @@ body {
 				}
 			}
 		})
+		
+		// 선택했던 비밀번호 확인 질문 유지하기
+		$("#pwHint>option[value=${infoResult.pwHint}]").attr("selected", true);
 	
 		// 전화번호 유효성 검사
 		$("#phone").on("input", function(){

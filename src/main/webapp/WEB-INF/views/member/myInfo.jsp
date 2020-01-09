@@ -144,6 +144,7 @@ body {
 	</div>
 
 	<script>
+		// 선택했던 비밀번호 확인 질문 유지하기
 		$("#pwHint>option[value=${infoResult.pwHint}]").attr("selected", true);
 	
 		// 정보 수정 페이지로 이동
