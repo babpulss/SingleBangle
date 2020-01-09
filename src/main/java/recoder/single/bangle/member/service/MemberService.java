@@ -32,17 +32,17 @@ public class MemberService {
 		return duplResult;
 	}
 	
-	public int login(MemberDTO dto) {
+	public int login(String id, String pw) {
 		int loginResult = 0;
 		try {
-			loginResult = dao.loginCheck(dto.getId(), dto.getPw());
+			loginResult = dao.loginCheck(id, pw);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return loginResult;
 	}
 	
-	public MemberDTO myInfo(String id) {
+	public MemberDTO getInfo(String id) {
 		MemberDTO infoResult = null;
 		try {
 			infoResult = dao.selectById(id);
@@ -52,7 +52,7 @@ public class MemberService {
 		return infoResult;
 	}
 	
-	public int modifyInfo(MemberDTO dto) {
+	public int modifyInfoProc(MemberDTO dto) {
 		int updateResult = 0;
 		try {
 			updateResult = dao.update(dto);

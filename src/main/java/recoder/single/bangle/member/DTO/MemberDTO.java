@@ -119,6 +119,15 @@ public class MemberDTO {
 		this.blackCheck = blackCheck;
 	}
 	
+	public String getRealGender() {
+		if(this.gender.equals("M")) {
+			return "남";
+		}
+		else {
+			return "여";
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "MemberDTO [id=" + id + ", pw=" + pw + ", pwHint=" + pwHint + ", pwAnswer=" + pwAnswer + ", name=" + name

@@ -93,7 +93,7 @@
 		});
 		
 		$("#modify").on("click", function(){
-			//location.href="${pageContext.request.contextPath}/member/modifyInfo.mem";
+			location.href="${pageContext.request.contextPath}/member/modifyInfo.mem";
 		});
 		
 		$("#logout").on("click", function(){

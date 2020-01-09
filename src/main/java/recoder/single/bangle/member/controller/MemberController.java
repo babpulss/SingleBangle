@@ -42,9 +42,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/login.mem")
-	public String login(MemberDTO dto, Model model) {
-		int loginResult = memSvc.login(dto);
+	public String login(String id, String pw, Model model) {
+		int loginResult = memSvc.login(id, pw);
 		if(loginResult > 0) {
+			MemberDTO dto = memSvc.getInfo(id);
 			session.setAttribute("loginInfo", dto);
 		}
 		model.addAttribute("loginResult", loginResult);
@@ -54,25 +55,22 @@ public class MemberController {
 	
 	@RequestMapping("/myInfo.mem")
 	public String myInfo(Model model) {
-		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
-		MemberDTO infoResult = memSvc.myInfo(id);
+		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
 		model.addAttribute("infoResult", infoResult);
-		
 		return "member/myInfo";
 	}
 	
 	@RequestMapping("/modifyInfo.mem")
 	public String modifyInfo(Model model) {
-		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
-		MemberDTO selectResult = memSvc.myInfo(id);
-		model.addAttribute("selectResult", selectResult);
-		
+		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
+		model.addAttribute("infoResult", infoResult);
 		return "member/modifyForm";
 	}
 	
 	@RequestMapping("/modifyInfoProc.mem")
 	public String modifyInfoProc(MemberDTO dto, Model model) {
-		int updateResult = memSvc.modifyInfo(dto);
+		dto.setId(((MemberDTO)session.getAttribute("loginInfo")).getId());
+		int updateResult = memSvc.modifyInfoProc(dto);
 		model.addAttribute("updateResult", updateResult);
 		
 		return "member/modifyCheck";

@@ -44,13 +44,13 @@ body {
 }
 
 .label1 {
-	display: inline-block;
+	/* display: inline-block;
 	width: 200px;
-	text-align: right;
-	font-size: 17px;
+	text-align: right; */
+	font-size: 12px;
 }
 
-.info input[type="text"], input[type="password"] {
+.info input[type="text"], .info input[type="password"] {
 	width: 275px;
 	height: 25px;
 	font-size: 12px;
@@ -96,22 +96,22 @@ body {
 			<div id="signUpNotice">회원가입 후 서비스 이용이 가능합니다.</div>
 		</div>
 		<div class="info">
-			<label class="label1" for="id">아이디</label>
+			<label class="label1" for="id">아이디</label><br>
 			<input type="text" class="infoVal" id="id" name="id" placeholder=" 5~12자 이내 영문(소문자), 숫자">
 			<span class="validCheck" id="idCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="pw">비밀번호</label>
+			<label class="label1" for="pw">비밀번호</label><br>
 			<input type="password" class="infoVal" id="pw" name="pw" placeholder=" 8~20자 이내 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*) ">
 			<span class="validCheck" id="pwCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="pwre">비밀번호 확인</label>
+			<label class="label1" for="pwre">비밀번호 확인</label><br>
 			<input type="password" class="infoVal" id="pwre" name="pwre" placeholder=" 비밀번호 확인 ">
 			<span class="validCheck" id="pwreCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="pwHint">비밀번호 확인 질문</label>
+			<label class="label1" for="pwHint">비밀번호 확인 질문</label><br>
 			<select id="pwHint" name="pwHint" size="1">
 				<option value="hint1">기억에 남는 추억의 장소는?</option>
 				<option value="hint2">자신의 인생 좌우명은?</option>
@@ -131,46 +131,46 @@ body {
 			</select>
 		</div>
 		<div class="info">
-			<label class="label1" for="pwAnswer">비밀번호 확인 답변</label>
+			<label class="label1" for="pwAnswer">비밀번호 확인 답변</label><br>
 			<input type="text" class="infoVal" id="pwAnswer" name="pwAnswer" placeholder=" 필수 입력 ">
 		</div>
 		<div class="info">
-			<label class="label1" for="name">이름</label>
+			<label class="label1" for="name">이름</label><br>
 			<input type="text" class="infoVal" id="name" name="name" placeholder=" 한글 이름 ">
 			<span class="validCheck" id="nameCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="">성별</label>
+			<label class="label1" for="">성별</label><br>
 			<input type="radio" id="male" name="gender" value="M"><label for="male">남</label>
 			<input type="radio" id="female" name="gender" value="F"><label for="female">여</label>
 		</div>
 		<div class="info">
-			<label class="label1" for="phone">전화번호</label>
-			<input type="text" class="infoVal" id="phone" name="phone" placeholder="000-0000-0000">
+			<label class="label1" for="phone">전화번호</label><br>
+			<input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 ">
 			<span class="validCheck" id="phoneCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="email">이메일</label>
+			<label class="label1" for="email">이메일</label><br>
 			<input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 ">
 			<button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
 			<span class="validCheck" id="emailCheck"></span>
 		</div>
 		<div class="info">
-			<label class="label1" for="">우편번호</label>
+			<label class="label1" for="">우편번호</label><br>
 			<input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly>
 			<button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
 		</div>
 		<div class="info">
-			<label class="label1" for="">기본주소</label>
+			<label class="label1" for="">기본주소</label><br>
 			<input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly>
 		</div>
 		<div class="info">
-			<label class="label1" for="address2">상세주소</label>
+			<label class="label1" for="address2">상세주소</label><br>
 			<input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " >
 		</div>
 		<div id="submitContainer">
-			<input type="submit" class="btns submitBtns" id="submit" value="회원가입">
-			<button type="button" class="btns submitBtns" id="cancel">회원가입 취소</button>
+			<input type="submit" class="btns submitBtns" id="submitBtn" value="회원가입">
+			<button type="button" class="btns submitBtns" id="cancelBtn">회원가입 취소</button>
 		</div>
 	</form>
 
@@ -278,7 +278,7 @@ body {
 		// 전화번호 유효성 검사
 		$("#phone").on("input", function(){
 			var phone = $("#phone").val();
-			var phoneRegex = /^0\d{2}-\d{3,4}-\d{4}$/;
+			var phoneRegex = /^0\d{2}\d{3,4}\d{4}$/;
 			var phoneResult = phoneRegex.exec(phone);
 
 			if(phoneResult != null){
@@ -342,7 +342,7 @@ body {
 		}
 		
 		// 회원가입 취소하고 메인으로 돌아가기
-		$("#cancel").on("click", function(){
+		$("#cancelBtn").on("click", function(){
 			var cancelConfirm = confirm("회원가입을 취소하시겠습니까?");
 			
 			if(cancelConfirm == true){
