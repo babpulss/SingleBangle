@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 페이지에 오신 것을 환영합니다</title>
+<title>title</title>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
@@ -18,6 +18,19 @@
 	</div>
 	<!-- 	결과물 출력 섹션 -->
 	<div id="screen">
+		<div>
+			<span>아이디</span>
+			<span>차단 시행 날짜</span>
+			<span>차단 사유</span>
+		</div>
+		<c:forEach items="${list}" var="i">
+			<div>
+				<span>${i.id}</span>
+				<span>${i.addedList}</span>
+				<span>${i.reason}</span>
+				<button>차단 해제</button>
+			</div>
+		</c:forEach>
 	</div>
 </body>
 </html>

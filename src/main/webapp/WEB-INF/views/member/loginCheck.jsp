@@ -5,12 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원가입</title>
+<title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}" method="post" id="signupFrm">
-		
-	</form>
+	<script>
+		if(${loginResult} > 0){
+			alert("로그인 되었습니다.");
+		}
+		else{
+			alert("아이디 또는 비밀번호를 확인해주세요.");
+		}
+		location.href="${pageContext.request.contextPath}/";
+	</script>
 </body>
 </html>
