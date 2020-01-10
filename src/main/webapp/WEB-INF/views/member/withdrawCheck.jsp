@@ -16,7 +16,7 @@
 		else{
 			alert("탈퇴에 실패했습니다. 다시 시도해주세요.");
 		}
-		location.href="${pageContext.request.contextPath}/memberHome";
+		location.href="${pageContext.request.contextPath}/";
 	</script>
 </body>
 </html>

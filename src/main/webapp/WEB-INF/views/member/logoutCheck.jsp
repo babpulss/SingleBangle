@@ -11,7 +11,7 @@
 <body>
 	<script>
 		alert("로그아웃 되었습니다.");
-		location.href="${pageContext.request.contextPath}/memberHome";
+		location.href="${pageContext.request.contextPath}/";
 	</script>
 </body>
 </html>

@@ -24,7 +24,7 @@
 				<img src="img/index/logo.png">
 			</div>
 			<span id="rightLogin" class="rightSidebar">Login</span> <span
-				id="rightJoin" class="">Join</span>
+				id="rightJoin" class=""><a href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 		</div>
 		<nav id="sidebar" class="main-menu sidebar">
 			<ul id="navBar" class="sidebar">

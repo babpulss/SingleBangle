@@ -12,7 +12,7 @@
 	<script>
 		if(${updateResult > 0}){
 			alert("회원님의 정보가 수정되었습니다.");
-			location.href="${pageContext.request.contextPath}/memberHome";
+			location.href="${pageContext.request.contextPath}/";
 		}
 		else{
 			alert("정보수정에 실패했습니다. 다시 시도해주세요.");

@@ -182,6 +182,7 @@ body {
 		var validName = 0;
 		var validPhone = 0;
 		var validEmail = 0;
+		var validEmailCheck = 0;
 
 		// 아이디 유효성 검사
 		$("#id").on("input", function(){
@@ -226,6 +227,10 @@ body {
 
 		// 비밀번호 유효성 검사
 		$("#pw").on("input", function(){
+			$("#pwre").val("");
+			$("#pwreCheck").html("");
+			validPwre = 0;
+			
 			var pw = $("#pw").val();
 			var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
 			var pwResult = pwRegex.exec(pw);
@@ -311,8 +316,11 @@ body {
 		$("#emailBtn").on("click", function(){
 			if(validEmail == 1){
 				var emailAddr = $("#email").val();
-				window.open("${pageContext.request.contextPath}/email/emailConfirm.email", "sendEmailView", 
-						"width=500px; height=400px, left=200px, top=100px");
+				window.open("${pageContext.request.contextPath}/email/emailConfirm.email?email="+emailAddr, "sendEmailView", 
+						"width=550px; height=350px, left=200px, top=100px");
+			}
+			else{
+				$("#emailCheck").html("이메일을 확인해주세요.").css("color", "red");
 			}
 		})
 
@@ -341,7 +349,7 @@ body {
 				return false;
 			}
 
-			validAll = validId * validPw * validPwre * validName * validPhone * validEmail;
+			validAll = validId * validPw * validPwre * validName * validPhone * validEmail * validEmailCheck;
 			if(validAll != 1){
 				alert("유효하지 않은 정보가 있습니다.");
 				return false;
