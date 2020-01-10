@@ -2,12 +2,13 @@ package recoder.single.bangle.admin.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import recoder.single.bangle.admin.DTO.BlackMember;
 import recoder.single.bangle.admin.service.BlackListService;
@@ -27,4 +28,15 @@ public class BlackList {
 		return "admin/blackList";
 	}
 
+	// 블랙리스트 해제
+	@RequestMapping(value="/unblock", produces="text/html; charset=UTF-8")
+	@ResponseBody
+	public void unblock(String id, HttpServletResponse res) {
+//		blackListService.unblock(id);
+		try {
+			res.getWriter().print(true);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

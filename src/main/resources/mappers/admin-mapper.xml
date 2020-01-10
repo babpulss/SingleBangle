@@ -7,7 +7,12 @@
   	
 <!--   	get blacklist -->
   	<select id="getBlackList" resultType="recoder.single.bangle.admin.DTO.BlackMember">
-  		select b.seq, id, b.addedDate, b.reason from member m natural join blacklist b
+  		select b.seq "seq", id, b.addedDate "addeddate"
+  		, b.reason "reason" from member m natural join blacklist b
   	</select>
   	
-  </mapper>
+<!--   	unblock Blacklist -->
+	<delete id="unblock">
+		delete from blacklist where id = #{id}
+	</delete>
+ </mapper>
