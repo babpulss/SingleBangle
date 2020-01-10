@@ -175,6 +175,7 @@ body {
 	</form>
 
 	<script>
+		// 유효성 검사 변수들
 		var validAll = 0;
 		var validId = 0;
 		var validIdDupl = 0;
@@ -343,6 +344,7 @@ body {
 		// 회원가입 form 제출하기 전에 전체 검사하기
 		function validCheck(){
 
+			// 유효성 변수 확인
 			console.log("ID 검사 : " + validId);
 			console.log("ID 중복 검사 : " + validIdDupl);
 			console.log("PW 검사 : " + validPw);
