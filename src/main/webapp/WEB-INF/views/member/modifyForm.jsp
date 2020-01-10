@@ -75,6 +75,10 @@ body {
 	color:white;
 	background-color:#0085cb;
 }
+.infoBtns{
+	width:100px;
+	height:25px;
+}
 .submitBtns{
 	width:120px;
 	height:40px;
