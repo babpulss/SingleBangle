@@ -1,0 +1,426 @@
+
+      @import url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+        }
+        
+        div {
+            /* border: 1px solid black; */
+        }
+
+        .d1 {
+            background-size: cover;
+            height: 50vh;
+            background-attachment: fixed;
+        }
+
+        .d2 {
+            width: 50%;
+            height: 50vh;
+            background-color: darkgray;
+            float: left;
+        }
+
+        .a1 {
+            background-image: url(/img/index/s1.jpg);
+            width: 50%;
+            float: left;
+        }
+
+        .a2 {
+            background-image: url(/img/index/s2.jpg);
+            width: 50%;
+            float: left;
+        }
+
+        .a3 {
+            background-image: url(/img/index/s3.jpg);
+            width: 50%;
+            float: left;
+        }
+
+       @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+
+        .fa-2x {
+            font-size: 2em;
+        }
+
+        .fa {
+            position: relative;
+/* table-cell : 동일한 간격으로 요소들을 정렬 */
+            display: table-cell;
+            width: 60px;
+            height: 50px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 30px;
+        }
+
+        .main-menu:hover,
+        nav.main-menu.expanded {
+            width: 250px;
+            overflow: visible;
+        }
+        
+        .main-menu {
+            background: #4f7eab;
+            border-right: 1px solid #e5e5e5;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            height: 100%;
+            left: 0;
+            width: 60px;
+            overflow: hidden;
+            transition: width .05s linear;
+            z-index: 1000;
+        }
+
+        .main-menu>ul {
+            margin: 7px 0 0 0;
+            width: 100%;
+            /* overflow: auto; */
+        }
+
+        .main-menu li {
+            position: relative;
+            display: block;
+            width: 250px;
+        }
+
+        .main-menu li>a {
+            position: relative;
+            display: table;
+            border-collapse: collapse;
+            border-spacing: 0;
+            color: white;
+            font-family: arial;
+            font-size: 20px;
+            text-decoration: none;
+            transition: all .1s linear;
+
+        }
+
+        .main-menu .nav-icon {
+            position: relative;
+            display: table-cell;
+            width: 60px;
+            height: 36px;
+            text-align: center;
+            vertical-align: middle;
+            font-size: 18px;
+        }
+
+        .main-menu .nav-text {
+            position: relative;
+            display: table-cell;
+            vertical-align: middle;
+            width: 290px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .main-menu>ul.logout {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+
+
+
+        .no-touch .scrollable.hover {
+            overflow-y: hidden;
+        }
+
+        .no-touch .scrollable.hover:hover {
+            overflow-y: auto;
+            overflow: visible;
+        }
+
+        a:hover,
+        a:focus {
+            text-decoration: none;
+        }
+
+        nav {
+            user-select: none;
+        }
+
+        nav ul,
+        nav li {
+            outline: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-menu li:hover>a,
+        nav.main-menu li.active>a,
+        .dropdown-menu>li>a:hover,
+        .dropdown-menu>li>a:focus,
+        .dropdown-menu>.active>a,
+        .dropdown-menu>.active>a:hover,
+        .dropdown-menu>.active>a:focus,
+        .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+        .dashboard-page nav.dashboard-menu ul li.active a {
+            color: #fff;
+            background-color: #5fa2db;
+            width: 120%;
+        }
+
+        .area {
+            float: left;
+            background: #e2e2e2;
+            width: 100%;
+            height: 100%;
+        }
+/*
+
+        @font-face {
+            font-family: 'Titillium Web';
+            font-style: normal;
+            font-weight: 300;
+            src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v2/anMUvcNT0H1YN4FII8wpr24bNCNEoFTpS2BTjF6FB5E.woff) format('woff');
+        }
+*/
+
+        html, body {margin: 0px; padding: 0px}
+        ::-webkit-scrollbar {width: 30px;}
+        ::-webkit-scrollbar-thumb {background-color: teal; border-radius: 10px;}
+        ::-webkit-scrollbar-thumb:hover {background-color: gold; border-radius: 10px;}
+        /* 상위 고정 바 */
+        #topbar {
+            position: fixed;
+            display: flex;
+            width: 100%;
+            top: 0px;
+            height: 60px;
+            background-color: white;
+            z-index: 3;
+            box-shadow: -5px 0px 10px 0 black;
+        } 
+        /* 좌측 네비바 */
+        #sidebar {
+            border: 1px solid red;
+            width: 300px;
+            height: 100vh;
+            position: absolute;
+            box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6); 
+            display: none;
+            background-color: #4f7eab;
+            top: 60px;
+            color: white;
+            font-size: 50px;
+            overflow-x: auto;
+            z-index: 2;
+        }
+        #sidebar ul {
+            width: 200px;
+        }
+        /* 좌측 네비바 작동버튼 */
+        #nav {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            top: 6px;
+        }
+        #logo {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 53px;
+            top: 5px;
+        }
+        .bar1, .bar2, .bar3 {
+            width: 35px;
+            height: 5px;
+            background-color: rgb(248, 85, 177);
+            margin: 6px 0 0 1vw;
+            transition: 0.4s;
+            border-radius: 90px;
+        }
+        .changeNav .bar1 {
+            transform: rotate(-45deg) translate(-9px, 6px);
+        }
+        .changeNav .bar2 {
+            opacity: 0;
+        }
+        .changeNav .bar3 {
+            transform: rotate(45deg) translate(-8px, -8px);
+        }
+        /* 우측 네비바 */
+        #rightLogin {
+            position: absolute;
+            right: 8vw;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            color: indianred;
+        }
+        #rightJoin {
+            position: absolute;
+            right: 3vw;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            color: indianred;
+        }
+        /* 우측 네비바 작동버튼 */
+        #rightLogin:hover {
+            color:#e80e0e;
+            text-shadow: 10px 10px goldenrod;
+            transform: translate(-5px, -5px);
+        }
+        #rightJoin:hover {
+            color:#e80e0e;
+            text-shadow: 10px 10px goldenrod;
+            transform: translate(-5px, -5px);
+        }
+        #rightSidebar {
+            border: 1px solid red;
+            width: 300px;
+            height: 30vh;
+            position: absolute;
+            box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6); 
+            display: none;
+            background-color: #4f7eab;
+            top: 100px;
+            right: 3vw;
+            color: white;
+            font-size: 50px;
+            overflow-x: auto;
+            z-index: 2;
+        }
+        #rightSidebar ul {
+            width: 200px;
+        }
+
+        /* 메인 화면 래퍼 */
+        #mainWrapper {
+            margin: 65px 110px 0 110px;
+        }
+        
+        /* 첫번째 행 */
+        #firstRow {
+            height: 100px;
+        }
+        #firstRow>span {margin-left: 100px;}
+        #firstRow>span:first-child {
+            color: pink;
+            cursor: default;
+        }
+        #firstRow>span:nth-of-type(2), #firstRow>span:last-child {
+            font-size: 75px;
+            position:relative;
+            z-index: 1;
+            cursor: default;
+        }
+        /* 두번째 행 */
+        #secondRow img {
+            width: 100%;
+            height: 540px;
+        }
+        /* 세번째 행 */
+        #thirdRow {
+            position:relative;
+            width: 100%;
+            height: 800px;
+            margin-top: 120px;
+            border: 1px solid gold;
+        }
+        #thirdRow>div:first-of-type {
+            width: 30%;
+            font-size: 30px;
+            cursor: default;
+            float: left;
+        }
+        #imgBox {
+            width: 70%;
+            height: 800px;
+            float: right;
+            display: grid;
+            grid-template-columns: auto auto;
+            grid-gap: 10px;
+        }
+        .imgDiv>img {
+            width: 100%;
+            height: 75%;
+        }
+        .clear {
+            clear: both;
+        }
+        /* 네번째 행 */
+        #fourthRow {
+            position: relative;
+            height: 1600px;
+        }
+
+        /* 푸터 */
+        #footer {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            background-color: silver;
+        }
+
+        
+        /* 모바일 환경 */
+        @media (max-width: 600px) {
+            #topbar { 
+                height: 60px; 
+            } 
+            #logo {
+                width: 70%;
+            }
+            #rightLogin {
+                right: 20vw;
+            }
+            #rightJoin {
+                right: 5vw;
+            }
+            #mainWrapper {
+                margin: 65px 0 0 0;
+                width: 100%;
+            }
+            #firstRow {
+                margin-top: 10px;
+            }
+            #firstRow>span {
+                margin-left: 0px;
+
+            }
+            #secondRow {
+                width: 100%;
+                overflow: hidden;
+            }
+            #secondRow>div {
+                width: 1700px;
+            }
+            #mainPic {
+                position: relative;
+                transform: translate(-33%, 0%);
+            }
+            #thirdRow {
+                height: 1500px;
+            }
+            #thirdRow>div:first-of-type {
+                width: 100%;
+                font-size: 60px;
+            }
+            #imgBox {
+                display: block;
+                width: 100%;
+                height: 1500px;
+                overflow: hidden;
+            }
+            .imgDiv>img {
+                width: 630px;
+                height: 300px;
+                transform: translate(-10%, 0%);
+            }
+            #fourthRow {
+                height: 1000px;
+            }
+        }
