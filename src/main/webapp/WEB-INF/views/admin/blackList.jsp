@@ -10,6 +10,14 @@
   src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<h1>this is admin notice page</h1>
+	<div class="list">
+		<a href="#">사용자 페이지 메인</a>
+		<a href="#">관리자 페이지 메인</a>
+		<a href="#">블랙리스트 조회</a>
+		<a href="#">신고접수 확인 조회</a>
+	</div>
+	<!-- 	결과물 출력 섹션 -->
+	<div id="screen">
+	</div>
 </body>
 </html>
