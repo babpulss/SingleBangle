@@ -2,7 +2,7 @@ package recoder.single.bangle.admin.DTO;
 
 import java.sql.Date;
 
-public class BlackMember {
+public class BlackMemberDTO {
 
 	private int seq;
 	private String id;
@@ -10,10 +10,10 @@ public class BlackMember {
 	private String reason;
 	
 	
-	public BlackMember() {
+	public BlackMemberDTO() {
 	}
 
-	public BlackMember(int seq, String id, Date addedDate, String reason) {
+	public BlackMemberDTO(int seq, String id, Date addedDate, String reason) {
 		this.seq = seq;
 		this.id = id;
 		this.addedDate = addedDate;

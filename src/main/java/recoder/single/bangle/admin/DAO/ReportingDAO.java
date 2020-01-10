@@ -1,5 +1,38 @@
 package recoder.single.bangle.admin.DAO;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import recoder.single.bangle.admin.DTO.ReportingDTO;
+
+@Repository
 public class ReportingDAO {
 
+	@Autowired
+	private SqlSessionTemplate sst;
+	
+	public List<ReportingDTO> getReportingList() {
+		return sst.selectList("Admin.getReportingList");
+	}
+	
+	public int deleteReporting(int seq) {
+		return sst.delete("Admin.deleteReporting", seq);
+	}
+
+	public int confirmReporting(int seq) {
+		return sst.update("Admin.confirmReporting", seq);
+	}
+
+	public int addReporting(String id, String reason, String url) {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("reason", reason);
+		param.put("url", url);
+		return sst.insert("Admin.addReporting", param);
+	}
 }
