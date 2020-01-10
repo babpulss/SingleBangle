@@ -278,6 +278,12 @@
             text-shadow: 10px 10px goldenrod;
             transform: translate(-5px, -5px);
         }
+        #rightJoin>a{
+        	text-decoration: none;
+        }
+        #rightJoin>a:visited{
+        	color: indianred;
+        }
         #rightSidebar {
             border: 1px solid red;
             width: 300px;

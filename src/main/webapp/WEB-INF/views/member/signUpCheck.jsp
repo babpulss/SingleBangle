@@ -12,7 +12,7 @@
 	<script>
 		if(${signUpResult > 0}){
 			alert("회원가입 되었습니다. 로그인 후 이용해주세요.");
-			location.href="${pageContext.request.contextPath}/memberHome";			
+			location.href="${pageContext.request.contextPath}/";			
 		}
 		else{
 			alert("회원가입에 실패했습니다. 다시 시도해주세요.");
