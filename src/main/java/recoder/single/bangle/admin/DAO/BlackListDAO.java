@@ -17,4 +17,8 @@ public class BlackListDAO {
 	public List<BlackMember> getBlackList() {
 		return sst.selectList("Admin.getBlackList");
 	}
+	
+	public int unblock(String id) {
+		return sst.delete("Admin.unblock", id);
+	}
 }

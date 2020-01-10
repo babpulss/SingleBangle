@@ -17,4 +17,8 @@ public class BlackListService {
 	public List<BlackMember> getBlackList() {
 		return blackListDAO.getBlackList();
 	}
+	
+	public int unblock(String id) {
+		return blackListDAO.unblock(id);
+	}
 }
