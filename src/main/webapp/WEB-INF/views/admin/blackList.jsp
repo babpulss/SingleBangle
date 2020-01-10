@@ -18,6 +18,19 @@
 	</div>
 	<!-- 	결과물 출력 섹션 -->
 	<div id="screen">
+		<div>
+			<span>아이디</span>
+			<span>차단 시행 날짜</span>
+			<span>차단 사유</span>
+		</div>
+		<c:forEach items="${list}" var="i">
+			<div>
+				<span>${i.id}</span>
+				<span>${i.addedList}</span>
+				<span>${i.reason}</span>
+				<button>차단 해제</button>
+			</div>
+		</c:forEach>
 	</div>
 </body>
 </html>

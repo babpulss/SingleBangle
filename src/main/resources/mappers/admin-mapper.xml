@@ -6,7 +6,7 @@
   <mapper namespace="Admin">
   	
 <!--   	get blacklist -->
-  	<select id="getBlackList" resultType="recoder.single.bangle.admin.BlackListDTO.BlackMember">
+  	<select id="getBlackList" resultType="recoder.single.bangle.admin.DTO.BlackMember">
   		select b.seq, id, b.addedDate, b.reason from member m natural join blacklist b
   	</select>
   	

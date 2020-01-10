@@ -19,12 +19,9 @@ public class BlackList {
 	@Autowired
 	private BlackListService blackListService;
 	
-	@Autowired
-	private Model m;
-	
 	// 블랙리스트 진입
 	@RequestMapping("/viewBlackList")
-	public String viewBlackList() {
+	public String viewBlackList(Model m) {
 		List<BlackMember> list = blackListService.getBlackList();
 		m.addAttribute("list", list);
 		return "admin/blackList";
