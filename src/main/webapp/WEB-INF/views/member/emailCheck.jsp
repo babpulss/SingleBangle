@@ -39,8 +39,10 @@
 	</div>
 	
 	<script>
+		// 인증이 완료되기 전에는 유효성 검사가 실패하게끔 변수를 0으로 설정
 		window.opener.validEmailCheck = 0;
 		
+		// 인증번호를 입력하여 인증받기
 		$("#checkBtn").on("click", function(){
 			var inputKey = $("#inputKey").val();
 			var emailKey = "${emailKey}";
