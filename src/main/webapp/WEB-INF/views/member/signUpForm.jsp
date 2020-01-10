@@ -306,6 +306,15 @@ body {
 				validEmail = 0;
 			}
 		})
+		
+		// 이메일 인증
+		$("#emailBtn").on("click", function(){
+			if(validEmail == 1){
+				var emailAddr = $("#email").val();
+				window.open("${pageContext.request.contextPath}/email/emailConfirm.email", "sendEmailView", 
+						"width=500px; height=400px, left=200px, top=100px");
+			}
+		})
 
 		// 우편번호 찾기 (다음 우편번호 서비스)
 		function findPostcode() {
