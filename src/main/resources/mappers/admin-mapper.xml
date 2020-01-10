@@ -3,6 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="admin">
+  <mapper namespace="Admin">
+  	
+<!--   	get blacklist -->
+  	<select id="getBlackList" resultType="recoder.single.bangle.admin.BlackListDTO.BlackMember">
+  		select b.seq, id, b.addedDate, b.reason from member m natural join blacklist b
+  	</select>
   	
   </mapper>
