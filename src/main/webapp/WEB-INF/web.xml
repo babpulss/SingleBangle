@@ -34,6 +34,29 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<!-- 	admin servlet -->
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>adminservlet</servlet-name> -->
+<!-- 		<servlet-class>org.springframework.web.servlet.dispatcherservlet</servlet-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>contextconfiglocation</param-name> -->
+<!-- 			<param-value>/web-inf/spring/appservlet/adminservlet.xml</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<load-on-startup>1</load-on-startup> -->
+<!-- 	</servlet> -->
+
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>adminservlet</servlet-name> -->
+<!-- 		<url-pattern>/*.admin</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+
+	<!-- Map all requests to the DispatcherServlet for handling -->
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>springDispatcherServlet</servlet-name> -->
+<!-- 		<url-pattern>url</url-pattern> -->
+<!-- 	</servlet-mapping></servlet-class> -->
+<!-- 	</servlet> -->
+
 	<!-- request 한글 깨짐 방지 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

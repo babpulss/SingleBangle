@@ -47,11 +47,6 @@ public class Admin {
 		} catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// 블랙리스트 등록 (@Autowired가 요구됨)
-	public boolean block(String id, String reason) {
-		return blackListService.block(id, reason);
-	}
-	
 	// 아이디로 블랙리스트 조회
 	@RequestMapping(value="/searchByBlockedId", produces="text/html; charset=UTF-8")
 	@ResponseBody
@@ -79,8 +74,4 @@ public class Admin {
 		} catch(Exception e) { e.printStackTrace(); }
 	}
 	
-	// 신고접수
-	public boolean reporting(String id, String reason, String url) {
-		return reportingService.addReporting(id, reason, url);
-	}
 }
