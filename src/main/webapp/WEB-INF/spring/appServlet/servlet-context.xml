@@ -107,4 +107,6 @@
 		</property>
 	</bean>
 
+<!-- 	AOP with annotation -->
+	<aop:aspectj-autoproxy/>
 </beans>
