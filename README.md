@@ -14,6 +14,7 @@ public boolean reporting(String id, String reason, String url) {
 	return reportingService.addReporting(id, reason, url);
 }
 ```
+<hr>
 
 DB info
 - id: recoder
