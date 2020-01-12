@@ -16,5 +16,6 @@
 	<h1>관리자에게 문의하세요</h1><br>
 	<a href="${pageContext.request.contextPath}/">초기화면으로 가기</a>
 	</div>
+	<h1>test</h1>
 </body>
 </html>
