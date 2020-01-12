@@ -175,13 +175,16 @@ body {
 	</form>
 
 	<script>
+		// 유효성 검사 변수들
 		var validAll = 0;
 		var validId = 0;
+		var validIdDupl = 0;
 		var validPw = 0;
 		var validPwre = 0;
 		var validName = 0;
 		var validPhone = 0;
 		var validEmail = 0;
+		var validEmailCheck = 0;
 
 		// 아이디 유효성 검사
 		$("#id").on("input", function(){
@@ -190,42 +193,51 @@ body {
 			var idResult = idRegex.exec(id);
 
 			if(idResult != null){
-				
-				// 아이디 중복 검사
-				$("#id").on("blur", function(){
-					$.ajax({
-						url:"idDuplCheck.mem",
-						type:"post",
-						data:{
-							id:id
-						},
-						dataType:"json"
-					}).done(function(data){
-						if(data.result == 1){
-							$("#idCheck").html("중복된 아이디입니다.").css("color", "red");
-							validId = 0;
-						}
-						else{
-							$("#idCheck").html("사용 가능한 아이디입니다.").css("color", "green");
-							validId = 1;
-						}
-					}).fail(function(a, b, c){
-						console.log(a);
-						console.log(b);
-						console.log(c);
-						alert("비동기 통신 실패");
-					});
-				})
-				
+				$("#idCheck").html("");
+				validId = 1;
 			}
 			else{
 				$("#idCheck").html("아이디 형식을 확인해주세요.").css("color", "red");
 				validId = 0;
 			}
 		})
+		
+		// 아이디 중복 검사
+		$("#id").on("blur", function(){
+			var id = $("#id").val();
+			
+			if(validId == 1){
+				$.ajax({
+					url:"idDuplCheck.mem",
+					type:"post",
+					data:{
+						id:id
+					},
+					dataType:"json"
+				}).done(function(data){
+					if(data.result == 1){
+						$("#idCheck").html("중복된 아이디입니다.").css("color", "red");
+						validIdDupl = 0;
+					}
+					else{
+						$("#idCheck").html("사용 가능한 아이디입니다.").css("color", "green");
+						validIdDupl = 1;
+					}
+				}).fail(function(a, b, c){
+					console.log(a);
+					console.log(b);
+					console.log(c);
+					alert("비동기 통신 실패");
+				});
+			}
+		})
 
 		// 비밀번호 유효성 검사
 		$("#pw").on("input", function(){
+			$("#pwre").val("");
+			$("#pwreCheck").html("");
+			validPwre = 0;
+			
 			var pw = $("#pw").val();
 			var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
 			var pwResult = pwRegex.exec(pw);
@@ -306,6 +318,18 @@ body {
 				validEmail = 0;
 			}
 		})
+		
+		// 이메일 인증
+		$("#emailBtn").on("click", function(){
+			if(validEmail == 1){
+				var emailAddr = $("#email").val();
+				window.open("${pageContext.request.contextPath}/email/emailConfirm.email?email="+emailAddr, "sendEmailView", 
+						"width=550px; height=350px, left=200px, top=100px");
+			}
+			else{
+				alert("이메일을 확인해주세요.");
+			}
+		})
 
 		// 우편번호 찾기 (다음 우편번호 서비스)
 		function findPostcode() {
@@ -320,6 +344,17 @@ body {
 		// 회원가입 form 제출하기 전에 전체 검사하기
 		function validCheck(){
 
+			// 유효성 변수 확인
+			console.log("ID 검사 : " + validId);
+			console.log("ID 중복 검사 : " + validIdDupl);
+			console.log("PW 검사 : " + validPw);
+			console.log("PW 확인 검사 : " + validPwre);
+			console.log("이름 검사 : " + validName);
+			console.log("전화번호 검사 : " + validPhone);
+			console.log("이메일 검사 : " + validEmail);
+			console.log("이메일 인증 검사 : " + validEmailCheck);
+			console.log("");
+
 			for(var i = 0; i < $(".infoVal").length; i++){
 				if($($(".infoVal")[i]).val() == ""){
 					alert("입력하지 않은 정보가 있습니다.");
@@ -331,8 +366,8 @@ body {
 				alert("입력하지 않은 정보가 있습니다.");
 				return false;
 			}
-
-			validAll = validId * validPw * validPwre * validName * validPhone * validEmail;
+			
+			validAll = validId * validIdDupl * validPw * validPwre * validName * validPhone * validEmail * validEmailCheck;
 			if(validAll != 1){
 				alert("유효하지 않은 정보가 있습니다.");
 				return false;

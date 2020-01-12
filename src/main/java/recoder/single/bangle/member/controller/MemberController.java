@@ -38,6 +38,8 @@ public class MemberController {
 	@ResponseBody
 	public String idDuplCheck(String id) {
 		int duplResult = memSvc.idDuplCheck(id);
+		System.out.println(id + " 아이디 중복체크 : " + duplResult);
+		System.out.println();
 		return "{\"result\":" + duplResult + "}";
 	}
 	

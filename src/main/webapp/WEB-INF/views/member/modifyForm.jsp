@@ -75,6 +75,10 @@ body {
 	color:white;
 	background-color:#0085cb;
 }
+.infoBtns{
+	width:100px;
+	height:25px;
+}
 .submitBtns{
 	width:120px;
 	height:40px;
@@ -211,9 +215,14 @@ body {
 		var validPwre = 0;
 		var validPhone = 1;
 		var validEmail = 1;
+		var validEmailCheck = 1;
 		
 		// 비밀번호 유효성 검사
 		$("#pw").on("input", function(){
+			$("#pwre").val("");
+			$("#pwreCheck").html("");
+			validPwre = 0;
+			
 			var pw = $("#pw").val();
 			var pwRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$/;
 			var pwResult = pwRegex.exec(pw);
@@ -281,6 +290,18 @@ body {
 				validEmail = 0;
 			}
 		})
+		
+		// 이메일 인증
+		$("#emailBtn").on("click", function(){
+			if(validEmail == 1){
+				var emailAddr = $("#email").val();
+				window.open("${pageContext.request.contextPath}/email/emailConfirm.email?email="+emailAddr, "sendEmailView", 
+						"width=550px; height=350px, left=200px, top=100px");
+			}
+			else{
+				$("#emailCheck").html("이메일을 확인해주세요.").css("color", "red");
+			}
+		})
 	
 		// 우편번호 찾기 (다음 우편번호 서비스)
 		function findPostcode() {
@@ -302,7 +323,7 @@ body {
 				}
 			}
 	
-			validAll = validPw * validPwre * validPhone * validEmail;
+			validAll = validPw * validPwre * validPhone * validEmail * validEmailCheck;
 			if(validAll != 1){
 				alert("유효하지 않은 정보가 있습니다.");
 				return false;
