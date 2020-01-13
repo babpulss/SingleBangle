@@ -13,7 +13,7 @@
     box-sizing: border-box;
 }
 body {
-	background-color: #f0f0f0;
+	background-color: #f5f5f5;
 }
 
 #signupFrm {
@@ -47,9 +47,12 @@ body {
 	margin-bottom: 25px;
 }
 .label1 {
+	display: inline-block;
+    margin-bottom:5px;
 	font-size: 16px;
 }
 .infoVal {
+	border: 1px solid #dadada;
 	width: 100%;
 	height: 40px;
 	font-size: 14px;
