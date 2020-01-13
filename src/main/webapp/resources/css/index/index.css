@@ -267,6 +267,22 @@
             font-size: 20px;
             color: indianred;
         }
+        #rightMyPage{
+        	position: absolute;
+            right: 10vw;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            color: indianred;
+        }
+        #rightLogout{
+        	position: absolute;
+            right: 3vw;
+            line-height: 40px;
+            cursor: pointer;
+            font-size: 20px;
+            color: indianred;
+        }
         /* 우측 네비바 작동버튼 */
         #rightLogin:hover {
             color:#e80e0e;
@@ -284,6 +300,22 @@
         #rightJoin>a:visited{
         	color: indianred;
         }
+        #rightMyPage:hover{
+        	color:#e80e0e;
+            text-shadow: 10px 10px goldenrod;
+            transform: translate(-5px, -5px);
+        }
+        #rightLogout:hover{
+        	color:#e80e0e;
+            text-shadow: 10px 10px goldenrod;
+            transform: translate(-5px, -5px);
+        }
+        #rightMyPage>a, #rightLogout>a{
+        	text-decoration: none;
+        }
+        #rightMyPage>a:visited, #rightLogout>a:visited{
+        	color: indianred;
+        }        
         #rightSidebar {
             border: 1px solid red;
             width: 300px;
@@ -295,7 +327,7 @@
             top: 100px;
             right: 3vw;
             color: white;
-            font-size: 50px;
+            font-size: 20px;
             overflow-x: auto;
             z-index: 2;
         }

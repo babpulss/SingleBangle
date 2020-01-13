@@ -23,8 +23,16 @@
 			<div id="logo">
 				<img src="img/index/logo.png">
 			</div>
-			<span id="rightLogin" class="rightSidebar">Login</span> <span
-				id="rightJoin" class=""><a href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
+			<c:choose>
+				<c:when test="${loginInfo==null}">
+					<span id="rightLogin" class="rightSidebar">Login</span>
+					<span id="rightJoin" class=""><a href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
+				</c:when>
+				<c:otherwise>
+					<span id="rightMyPage"><a href="${pageContext.request.contextPath}/memberHome" id="myPageBtn">My Page</a></span>
+					<span id="rightLogout"><a href="${pageContext.request.contextPath}/member/logout.mem" id="logoutBtn">Logout</a></span>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<nav id="sidebar" class="main-menu sidebar">
 			<ul id="navBar" class="sidebar">
@@ -58,25 +66,23 @@
 
 		<!-- 오른쪽 메뉴바 -->
 		<div id="rightSidebar" class="rightSidebar">
-			<ul class="rightSidebar">
-				<li class="rightSidebar">ID: <input type="text"
-					class="rightSidebar" name="id"><br>
-				</li>
-				<li class="rightSidebar">PW: <input type="password"
-					class="rightSidebar" name="pw"><br>
-				</li>
-				<li class="rightSidebar">
-					<button type="button">Login</button>
-				</li>
-				<li class="rightSidebar">
-					<button type="button">Join</button>
-				</li>
-				<li class="rightSidebar">hello</li>
-				<li class="rightSidebar">hello</li>
-				<li class="rightSidebar">hello</li>
-				<li class="rightSidebar">hello</li>
-				<li class="rightSidebar">hello</li>
-			</ul>
+			<form action="${pageContext.request.contextPath}/member/login.mem" method="post">
+				<ul class="rightSidebar">
+					<li class="rightSidebar">ID:
+					<input type="text" class="rightSidebar" name="id" id="id"><br>
+					</li>
+					<li class="rightSidebar">PW: 
+					<input type="password" class="rightSidebar" name="pw" id="pw"><br>
+					</li>
+					<li class="rightSidebar">
+						<button id="login">Login</button>
+						<button type="button" id="joinBtn">Join</button>
+					</li>
+					<li class="rightSidebar">hello</li>
+					<li class="rightSidebar">hello</li>
+					<li class="rightSidebar">hello</li>
+				</ul>
+			</form>
 		</div>
 	</div>
 
