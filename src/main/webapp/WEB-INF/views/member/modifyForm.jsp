@@ -313,7 +313,7 @@ body {
 			}).open();
 		}
 	
-		// 회원가입 form 제출하기 전에 전체 검사하기
+		// 정보 수정 form 제출하기 전에 전체 검사하기
 		function validCheck(){
 	
 			for(var i = 0; i < $(".infoVal").length; i++){
@@ -332,7 +332,7 @@ body {
 			return confirm("정보를 수정 하시겠습니까?");
 		}
 		
-		// 회원가입 취소하고 메인으로 돌아가기
+		// 정보 수정 취소하고 메인으로 돌아가기
 		$("#cancelBtn").on("click", function(){
 			var cancelConfirm = confirm("정보 수정을 취소하시겠습니까?");
 			

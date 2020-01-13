@@ -296,6 +296,7 @@
         }
         #rightJoin>a{
         	text-decoration: none;
+        	color: indianred;
         }
         #rightJoin>a:visited{
         	color: indianred;
@@ -312,6 +313,7 @@
         }
         #rightMyPage>a, #rightLogout>a{
         	text-decoration: none;
+        	color: indianred;
         }
         #rightMyPage>a:visited, #rightLogout>a:visited{
         	color: indianred;

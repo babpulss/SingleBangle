@@ -43,13 +43,13 @@ body {
 }
 
 .info {
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 .label1 {
 	display: inline-block;
-    margin-bottom:5px;
-	font-size: 16px;
+    margin-bottom: 5px;
+	font-size: 14px;
 }
 .infoVal {
 	border: 1px solid #dadada;
@@ -100,6 +100,7 @@ body {
                 <div id="signUpTitle">회원가입</div>
                 <div id="signUpNotice">회원가입 후 서비스 이용이 가능합니다.</div>
             </div>
+            <br>
             <div class="info">
                 <label class="label1" for="id"><b>아이디</b></label><br>
                 <input type="text" class="infoVal" id="id" name="id" placeholder=" 5~12자 이내 영문(소문자), 숫자">
@@ -139,6 +140,7 @@ body {
                 <label class="label1" for="pwAnswer"><b>비밀번호 확인 답변</b></label><br>
                 <input type="text" class="infoVal" id="pwAnswer" name="pwAnswer" placeholder=" 필수 입력 ">
             </div>
+            <br>
             <div class="info">
                 <label class="label1" for="name"><b>이름</b></label><br>
                 <input type="text" class="infoVal" id="name" name="name" placeholder=" 한글 이름 ">
@@ -167,6 +169,7 @@ body {
                 <button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
                 <span class="validCheck" id="emailCheck"></span>
             </div>
+            <br>
             <div class="info">
                 <label class="label1" for=""><b>우편번호</b></label><br>
                 <input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly>
@@ -395,7 +398,7 @@ body {
 			var cancelConfirm = confirm("회원가입을 취소하시겠습니까?");
 			
 			if(cancelConfirm == true){
-				location.href="${pageContext.request.contextPath}/memberHome";
+				location.href="${pageContext.request.contextPath}/";
 			}
 		})
 	</script>
