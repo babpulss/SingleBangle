@@ -26,11 +26,16 @@
 			<c:choose>
 				<c:when test="${loginInfo==null}">
 					<span id="rightLogin" class="rightSidebar">Login</span>
-					<span id="rightJoin" class=""><a href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
+					<span id="rightJoin" class=""><a
+						href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 				</c:when>
 				<c:otherwise>
-					<span id="rightMyPage"><a href="${pageContext.request.contextPath}/memberHome" id="myPageBtn">My Page</a></span>
-					<span id="rightLogout"><a href="${pageContext.request.contextPath}/member/logout.mem" id="logoutBtn">Logout</a></span>
+					<span id="rightMyPage"><a
+						href="${pageContext.request.contextPath}/memberHome"
+						id="myPageBtn">My Page</a></span>
+					<span id="rightLogout"><a
+						href="${pageContext.request.contextPath}/member/logout.mem"
+						id="logoutBtn">Logout</a></span>
 				</c:otherwise>
 			</c:choose>
 		</div>
@@ -66,13 +71,14 @@
 
 		<!-- 오른쪽 메뉴바 -->
 		<div id="rightSidebar" class="rightSidebar">
-			<form action="${pageContext.request.contextPath}/member/login.mem" method="post">
+			<form action="${pageContext.request.contextPath}/member/login.mem"
+				method="post">
 				<ul class="rightSidebar">
-					<li class="rightSidebar">ID:
-					<input type="text" class="rightSidebar" name="id" id="id"><br>
+					<li class="rightSidebar">ID: <input type="text"
+						class="rightSidebar" name="id" id="id"><br>
 					</li>
-					<li class="rightSidebar">PW: 
-					<input type="password" class="rightSidebar" name="pw" id="pw"><br>
+					<li class="rightSidebar">PW: <input type="password"
+						class="rightSidebar" name="pw" id="pw"><br>
 					</li>
 					<li class="rightSidebar">
 						<button id="login">Login</button>
@@ -139,7 +145,41 @@
 				<div class="d2 b3">메롱</div>
 			</div>
 		</div>
-		<div id="footer">footer</div>
+		<div id="footer">
+			<div>
+				<div id="footer1">
+					<div>
+						<a href="#"><b>이용규칙</b></a>
+					</div>
+					<div>
+						<a href="#"><b>운영알림판</b></a>
+					</div>
+					<div>
+						<a href="#"><b>도움말</b></a>
+					</div>
+					<div>
+						<a href="#"><b>버그신고</b></a>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div id="footer2">
+					<div>
+						<a href="#">개인정보 처리방침</a>
+					</div>
+					<div>
+						<a href="#">이용약관</a>
+					</div>
+					<div>
+						<a href="#">책임의 한계와 법적고지</a>
+					</div>
+					<div>
+						<a href="#">청소년 보호정책</a>
+					</div>
+				</div>
+			</div>
+			<div id="footer3"><strong>ⓒ 2020 · SingleBanlge</strong></div>
+		</div>
 	</div>
 
 	<script src="/js/index/index.js"></script>
