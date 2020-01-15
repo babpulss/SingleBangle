@@ -3,6 +3,45 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="admin">
+  <mapper namespace="Admin">
   	
-  </mapper>
+<!--   	get blacklist -->
+  	<select id="getBlackList" resultType="recoder.single.bangle.admin.DTO.BlackMemberDTO">
+  		select b.seq "seq", id, b.addedDate "addedDate"
+  		, b.reason "reason" from member m natural join blacklist b
+  	</select>
+  	
+<!--   	unblock Blacklist -->
+	<delete id="unblock">
+		delete from blacklist where id = #{id}
+	</delete>
+	
+<!-- 	block Blacklist -->
+	<insert id="block">
+		insert into blacklist values
+			(blacklist_seq.nextval, #{id}, sysdate, #{reason})
+	</insert>
+	
+<!-- 	searchByBlockedId -->
+  	<select id="searchByBlockedId" resultType="recoder.single.bangle.admin.DTO.BlackMemberDTO">
+  		select b.seq "seq", id, b.addedDate "addedDate"
+  		, b.reason "reason" from member m natural join blacklist b where id = #{value}
+  	</select>
+	
+<!-- 	get ReportingList -->
+	<select id="getReportingList" resultType="recoder.single.bangle.admin.DTO.ReportingDTO">
+		select * from hasReported where confirmReporting = 'N' 
+	</select>
+	
+<!-- 	confirm Reporting -->
+	<update id="confirmReporting">
+		update hasReported set confirmReporting = 'Y', confirmDate = sysdate
+			where seq = #{seq}
+	</update>
+	
+<!-- 	add Reporting -->
+	<insert id="addReporting">
+		insert into hasReported (seq, id, reportingDate, reason, reportedURL)
+			values(hasReported.seq.nextval, #{id}, sysdate, #{reason}, #{url})
+	</insert>
+ </mapper>

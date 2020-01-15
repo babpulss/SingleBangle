@@ -33,7 +33,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
+	
 	<!-- request 한글 깨짐 방지 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
