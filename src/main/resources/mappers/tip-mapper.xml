@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Tip">
+<!--  parameterType 안 써도  #{ }쓰면 자동으로 DTO로 인식함! 왜냐면 DAO에서 DTO를 매개변수로 넘겨서 mapper 실행했기 때문! -->
+	<insert id="insert">
+		insert into livingPoint values(livingpoint_seq.nextval,#{category},#{writer},#{title},#{contents}, sysdate, 0,0,0)
+	</insert>
+
+<!-- select는 resultType을 꼭 명시해주기! parameterType은 안 써도 되지만...ㅎ -->
+	<select id="selectAll" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from livingPoint
+	</select>
+
+	<select id="selectOne" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+<!-- 		이렇게 #{value}라고 적으면 매개변수가 1개일 때만, 매개변수를 받아줌! 여러개 일땐, 그냥 dto 넘겨 받기! -->
+		select * from livingPoint where seq = #{value}
+	</select>
+
+	<select id="getMaxSeq" resultType="Integer">
+		select max(seq) from livingPoint where writer = #{writer}
+	</select>
+	
+	<!-- update는 resultType 명시 안해도 됨? 결과 값으로 '1'행이 업뎃되었다고 나올텐데... -->
+	<update id="updateTip" parameterType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		update livingPoint set category=#{category}, title=#{title}, contents=#{contents} where seq=#{seq}
+	</update>
+<!-- 좋아요 관련 -->
+<!-- 	동일 게시글 추천 여부 검색! 좋아요는 1개 게시물에 1번만 -->
+	<select id="likeCheck" resultType="Integer">
+		select count(*) from livingLike where seq = #{seq} and id = #{id}
+	</select>
+
+<!-- 게시글 좋아요 누름 -->
+	<insert id="likeInsert" >
+		insert into livingLike values (#{seq},#{id})
+	</insert>
+	
+<!-- 게시글 좋아요 취소	 -->
+	<delete id="likeDelete">
+		delete from livingLike where seq = #{seq} and id = #{id}
+	</delete>
+<!-- 게시글 추천 수 구하기 -->
+	<select id="likeCount" resultType="Integer">
+		select likeCount from livingPoint where seq = #{seq}
+	</select>
+	
+	<update id="likePlus">
+		update livingPoint set likeCount = likeCount + 1 where seq = #{seq}
+	</update>
+	
+	<update id="likeMinus">
+		update livingPoint set likeCount = likeCount - 1 where seq = #{seq}
+	</update>
+	
+	<update id="viewCount">
+		update livingPoint set viewCount = viewCount + 1 where seq = #{seq}
+	</update>
+	
+<!-- 스크랩 관련	 -->
+	<insert id="scrap">
+		insert into livingScrap values(scrap_seq.nextval,#{rootSeq},#{category},#{title},#{id},sysdate)
+	</insert>
+	
+<!-- 	게시글 스크랩 수 구하기 -->
+	<select id="scrapCount" resultType="Integer">
+		select count(*) from livingScrap where rootSeq = #{seq}
+	</select>
+	
+	<select id="scrapCheck" resultType="Integer">
+		select count(*) from livingScrap where rootSeq = #{seq} and id = #{id}
+	</select>
+	
+	<update id="scrapPlus">
+		update livingPoint set scrapCount = scrapCount + 1 where seq = #{seq}
+	</update>
+	
+<!-- 	나의 스크랩 리스트 가져오기 -->
+	<select id="myScrap" resultType="recoder.single.bangle.tipBoard.DTO.ScrapDTO">
+		select * from livingScrap where id = #{id}
+	</select>
+</mapper>
+
+
