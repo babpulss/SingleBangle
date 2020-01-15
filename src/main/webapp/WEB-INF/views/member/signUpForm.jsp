@@ -225,7 +225,7 @@ body {
 			
 			if(validId == 1){
 				$.ajax({
-					url:"idDuplCheck.mem",
+					url:"${pageContext.request.contextPath}/member/idDuplCheck.mem",
 					type:"post",
 					data:{
 						id:id
