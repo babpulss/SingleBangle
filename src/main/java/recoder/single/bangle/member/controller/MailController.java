@@ -53,8 +53,10 @@ public class MailController {
 
 			messageHelper.setFrom("msg_account_jy");
 			messageHelper.setTo(email);
-			messageHelper.setSubject("안녕하세요. Single방글 입니다. 회원가입 인증번호를 보내드립니다.");
-			messageHelper.setText("이메일 인증번호는 [" + AuthenticationKey + "] 입니다.\n인증 후 회원가입을 진행하실 수 있습니다.");
+			messageHelper.setSubject("[싱글방글] 회원가입을 위한 이메일 인증번호");
+			messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
+								+ "싱글방글 회원가입을 위한 이메일 인증번호를 알려드립니다.\n"
+								+ "- 인증번호 : [" + AuthenticationKey + "]");
 			
 			mailSender.send(message);
 			model.addAttribute("emailKey", AuthenticationKey);

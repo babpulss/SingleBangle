@@ -2,25 +2,29 @@ package recoder.single.bangle.admin.DTO;
 
 import java.sql.Date;
 
-public class Reporting {
+public class ReportingDTO {
 	
 	private int seq;
 	private String id;
 	private Date reportingDate;
 	private String reason;
 	private String url;
+	private String confirmReporting;
+	private Date confirmDate;
 	
-	public Reporting() {
+	public ReportingDTO() {
 	}
 
-	public Reporting(int seq, String id, Date reportingDate, String reason, String url) {
+	public ReportingDTO(int seq, String id, Date reportingDate, String reason, String url, String confirmReporting,
+			Date confirmDate) {
 		this.seq = seq;
 		this.id = id;
 		this.reportingDate = reportingDate;
 		this.reason = reason;
 		this.url = url;
+		this.confirmReporting = confirmReporting;
+		this.confirmDate = confirmDate;
 	}
-
 
 	public int getSeq() {
 		return seq;
@@ -69,6 +73,22 @@ public class Reporting {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getConfirmReporting() {
+		return confirmReporting;
+	}
+
+	public void setConfirmReporting(String confirmReporting) {
+		this.confirmReporting = confirmReporting;
+	}
+
+	public Date getConfirmDate() {
+		return confirmDate;
+	}
+
+	public void setConfirmDate(Date confirmDate) {
+		this.confirmDate = confirmDate;
 	}
 
 	@Override
