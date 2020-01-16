@@ -11,7 +11,7 @@
 	</appender>
 	
 	<appender name="SingleBangleLogs" class="org.apache.log4j.FileAppender">
-		<param name="file" value="/SingleBangleLogs.log"/>
+		<param name="file" value="/SingleBangleLogs/SingleBangleLogs.log"/>
 		<param name="immediateFlush" value="true"/>
 		<param name="threshold" value="debug"/>
 		<param name="append" value="true"/>
@@ -27,7 +27,7 @@
 <!-- 		<param name="Password" value="recoder"/> -->
 <!-- 		<layout class="org.apache.log4j.PatternLayout"> -->
 <!-- 			<param name="ConversionPattern" -->
-<!-- 			value="insert into visitcount values(visitcount_seq.nextval, '%m', sysdate)"/> -->
+<!-- 			value="insert into visitcount values(visitcount_seq.nextval, sysdate);"/> -->
 <!-- 		</layout> -->
 <!-- 	</appender> -->
 	
