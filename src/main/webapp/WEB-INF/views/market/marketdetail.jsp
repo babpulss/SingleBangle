@@ -11,12 +11,25 @@
 </head>
 <body>
 	<div class="wrapper" style="width: 800px; border:1px solid black; margin: auto;">
+		<div id="contentBox">
 		<div>${dto.writer } ${dto.place }</div>
 		<div>${dto.title } ${dto.category }</div>
 		<div>${dto.price }원</div>
+		<div>
+		<c:choose>
+			<c:when test="${dto.writer == id && dto.done == 'N'}">
+				<button type="button" id="done_${dto.seq }" onclick="updateDone('${dto.seq}')">판매완료</button>
+			</c:when>
+		</c:choose>
+		<c:choose>
+			<c:when test="${dto.done == 'Y' }">
+				< < 판 매 완 료 > >
+			</c:when>
+		</c:choose>
+		</div>
 		<div>${dto.content }</div>
 		<c:choose>
-			<c:when test="${dto.writer == id }">
+			<c:when test="${dto.writer == id}">
 				<div><button id="update">수정하기</button><button id="delete">삭제하기</button></div>
 			</c:when>
 			<c:otherwise>
@@ -24,6 +37,7 @@
 			</c:otherwise>
 		</c:choose>
 		<div><button id="back">돌아가기</button></div>
+		</div>
 		<div>댓글</div>
 		<div class="replybox">
 			<c:choose>
@@ -57,6 +71,30 @@
 	</div>
 	
 	<script>
+	
+// 	$("#done").on("click", function(){
+// 		location.href="${pageContext.request.contextPath}/market/updateDone.do?seq=${dto.seq}"
+// 	});
+	
+	var updateDone = function(seq){
+		var updateDone = "#updateDone_"+seq;
+		var doneYes = "#doneYes_"+seq;
+		$(updateDone).css("display","none");
+		$.ajax({
+			url: "${pageContext.request.contextPath}/market/updateDone.do?seq="+seq,
+			type: "post",
+			data: {
+				seq : seq
+			},
+			success: function(data){
+				alert("판매완료상태로 전환되었습니다. 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.");
+				window.location.reload();
+			}
+		}).fail(function(data){
+			console.log(data);
+		})
+	};
+	
 	var deleteRe = function(seq){
 		var boardSeq= $("#boardSeqRe_"+seq).val();
 		console.log(boardSeq);
@@ -121,15 +159,15 @@
 		}
 
 		$("#back").on("click",function(){
-			location.href="${pageContext.request.contextPath}/board/boardList.do";
+			location.href="${pageContext.request.contextPath}/market/boardList.do";
 		})
 		
 		$("#delete").on("click",function(){
-			location.href="${pageContext.request.contextPath}/board/delete.do?seq=${dto.seq}";
+			location.href="${pageContext.request.contextPath}/market/delete.do?seq=${dto.seq}";
 		})
 	
 		$("#update").on("click",function(){
-			location.href="${pageContext.request.contextPath}/board/update.do?seq=${dto.seq}";
+			location.href="${pageContext.request.contextPath}/market/update.do?seq=${dto.seq}";
 		})
 		
 		$("#msg").on("click",function(){
@@ -138,7 +176,7 @@
 		})
 		
 		$("#report").on("click",function(){
-			location.href="${pageContext.request.contextPath}/board/report.do?url=${realUrl}";
+			location.href="${pageContext.request.contextPath}/market/report.do?url=${realUrl}";
 		})
 		
 		$("#reconfirm").on("click", function(){
