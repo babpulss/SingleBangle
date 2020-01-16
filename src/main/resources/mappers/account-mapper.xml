@@ -10,4 +10,8 @@
   	<select id="ListAllByFormedReportingDate" resultType="recoder.single.bangle.account.DTO.AccountDTO">
   		select * from account_book where id=#{id} and substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) = #{formedDate} order by reportingdate desc
   	</select>
+  	<insert id="insertAccountData">
+  		insert into account_book values (ACCOUNT_BOOK_SEQ.nextval,#{id},#{userName},#{reportingDate},#{details},#{payments},#{spec},#{income},#{expense},#{remarks})
+  	</insert>
   </mapper>
+  
