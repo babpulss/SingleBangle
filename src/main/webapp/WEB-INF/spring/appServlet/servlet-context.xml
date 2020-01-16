@@ -94,7 +94,8 @@
 	</bean>
 
 	<!-- JavaMail bean 설정 -->
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	<bean id="mailSender"
+		class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.naver.com" />
 		<property name="port" value="587" />
 		<property name="username" value="msg_account_jy" />
@@ -107,6 +108,6 @@
 		</property>
 	</bean>
 
-<!-- 	AOP with annotation -->
-	<aop:aspectj-autoproxy/>
+	<!-- AOP with annotation -->
+	<aop:aspectj-autoproxy />
 </beans>
