@@ -1,5 +1,8 @@
 package recoder.single.bangle.member.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.member.service.MemberService;
+import recoder.single.bangle.tipBoard.DAO.BoardDAO;
+import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
 @RequestMapping("/member")
 @Controller
@@ -20,6 +25,9 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memSvc;
+	
+	@Autowired
+	private BoardDAO boardDao;
 	
 	@RequestMapping("/signUp.mem")
 	public String signUp() {
@@ -96,4 +104,15 @@ public class MemberController {
 		return "member/withdrawCheck";
 	}
 	
+	@RequestMapping("/myScrap.mem")
+	public String myScrap(String id, Model model) {
+		List<ScrapDTO> myScrapList = new ArrayList<>();
+		try {
+			myScrapList = boardDao.myScrap(id);
+			model.addAttribute("myScrapList", myScrapList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "member/myScrapList";
+	}
 }

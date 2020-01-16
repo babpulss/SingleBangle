@@ -41,20 +41,19 @@ public class Admin {
 	// 블랙리스트 해제
 	@RequestMapping(value="/unblock", produces="text/html; charset=UTF-8")
 	@ResponseBody
-	public void unblock(String id, HttpServletResponse res) {
-		boolean result = blackListService.unblock(id);
-		try { res.getWriter().print(result);
-		} catch(Exception e) { e.printStackTrace(); }
+	public String unblock(String id, HttpServletResponse res) {
+		return String.valueOf(blackListService.unblock(id));
 	}
 	
 	// 아이디로 블랙리스트 조회
 	@RequestMapping(value="/searchByBlockedId", produces="text/html; charset=UTF-8")
 	@ResponseBody
-	public void searchByBlockedId(String id, HttpServletResponse res) {
+	public String searchByBlockedId(String id) {
 		List<BlackMemberDTO> list = blackListService.searchByBlockedId(id);
 		try { 
-			new Gson().toJson(list, res.getWriter());
+			return new Gson().toJson(list);
 		} catch(Exception e) { e.printStackTrace(); }
+		return null;
 	}
 	
 	// 신고접수리스트 보기
@@ -68,10 +67,8 @@ public class Admin {
 	// 신고접수 완료
 	@RequestMapping("/confirmReporting")
 	@ResponseBody
-	public void confirmReporting(int seq, HttpServletResponse res) {
-		boolean result = reportingService.confirmReporting(seq); 
-		try { res.getWriter().print(result);
-		} catch(Exception e) { e.printStackTrace(); }
+	public String confirmReporting(int seq) {
+		return String.valueOf(reportingService.confirmReporting(seq)); 
 	}
 	
 }

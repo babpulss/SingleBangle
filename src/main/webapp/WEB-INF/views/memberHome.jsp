@@ -78,6 +78,8 @@
 				<button class="btns" id="logout">로그아웃</button>
 				<button class="btns" id="withdraw">회원 탈퇴</button>
 				<br><br>
+				<button class="btns" id="myScrap">스크랩 모음</button>
+				<br><br>
 			</div>
 		</c:otherwise>
 	</c:choose>
@@ -111,6 +113,10 @@
 				location.href="${pageContext.request.contextPath}/member/withdraw.mem";
 			}
 		});
+		
+		$("#myScrap").on("click",function(){
+			location.href = "${pageContext.request.contextPath}/member/myScrap.mem?id=${loginInfo.id}";
+		})
 	</script>
 </body>
 </html>

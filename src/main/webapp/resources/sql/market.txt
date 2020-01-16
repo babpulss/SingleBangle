@@ -1,0 +1,59 @@
+create table marketFile(
+SEQ number primary key,
+BOARD_SEQ number not null,
+ORI_NAME varchar(1000) not null,
+SYS_NAME varchar(1000) not null
+);
+
+create sequence marketFile_seq
+start with 1
+increment by 1
+nomaxvalue
+nocache;
+
+create table msgbox(
+seq number primary key,
+sender varchar(100) not null,
+RECEIVER varchar(100) not null,
+TITLE varchar(200) not null,
+CONTENTS varchar(400) not null,
+VIEWCOUNT number
+);
+
+create sequence msgbox_seq
+start with 1
+increment by 1
+nomaxvalue
+nocache;
+
+create table marketReply(
+seq number primary key,
+recontent varchar(300),
+writeDate timestamp,
+writer varchar(100),
+boardSeq number
+);
+
+create sequence marketReply_seq
+start with 1
+increment by 1
+nomaxvalue
+nocache;
+
+create table market(
+seq number primary key,
+title varchar(100),
+price number,
+content varchar(2000),
+writer varchar(50),
+category varchar(200),
+place varchar(300),
+writeDate timestamp,
+viewCount number
+);
+
+create sequence market_seq
+start with 1
+increment by 1
+nomaxvalue
+nocache;
