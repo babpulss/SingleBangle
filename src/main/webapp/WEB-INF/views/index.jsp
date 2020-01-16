@@ -45,7 +45,7 @@
 						class="fa fa-exclamation fa-3x"></i> <span
 						class="nav-text sidebar"> 공지사항 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="#"> <i
+				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/board/boardList.bo"> <i
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
