@@ -169,6 +169,7 @@ public class BoardController {
 		obj.addProperty("scrapCount", scrapCount);
 		return obj.toString();	
 	}
+	
 
 }
 
