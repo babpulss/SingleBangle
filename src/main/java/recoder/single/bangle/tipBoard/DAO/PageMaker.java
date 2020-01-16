@@ -78,6 +78,7 @@ public class PageMaker {
 	}
 
 	public void setEndPage(int getLastBlock, int getCurrentBlock) {
+		// 현재 블록이 마지막 블록이면, 전체 
 		if (getLastBlock == getCurrentBlock) {
 			this.endPage = calcPage(getTotalCount(), getContentNum());
 		} else {
