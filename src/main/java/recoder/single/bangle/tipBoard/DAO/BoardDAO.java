@@ -107,4 +107,8 @@ public class BoardDAO {
 		public List<ScrapDTO> myScrap(String id) throws Exception{
 			return sst.selectList("Tip.myScrap",id);
 		}
+		
+		public int tipCount() throws Exception{
+			return sst.selectOne("Tip.tipCount");
+		}
 }

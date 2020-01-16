@@ -65,8 +65,12 @@ public class BoardController {
 	
 	//게시판 글 목록 화면
 	@RequestMapping("/boardList.bo")
-	public String boardList(Model model) {
+	public String boardList(Model model, int currentPage) {
+		System.out.println("controller에서 currentPage: "+currentPage);
 		List<BoardDTO> list = boardService.boardList();
+		String getNavi = boardService.getNavi(currentPage);
+		model.addAttribute("getNavi",getNavi);
+		
 		model.addAttribute("list", list);
 		System.out.println("DB에 있는 글의 개수: " + list.size());
 		return "tipBoard/boardList";
@@ -169,6 +173,7 @@ public class BoardController {
 		obj.addProperty("scrapCount", scrapCount);
 		return obj.toString();	
 	}
+	
 	
 
 }
