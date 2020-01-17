@@ -15,6 +15,7 @@ import recoder.single.bangle.remarket.DTO.MsgDTO;
 
 @Repository
 public class MsgDAO {
+	
 	@Autowired
 	private JdbcTemplate jdbc;
 	
