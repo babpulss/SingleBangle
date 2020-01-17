@@ -45,11 +45,13 @@
 						class="fa fa-exclamation fa-3x"></i> <span
 						class="nav-text sidebar"> 공지사항 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/board/boardList.bo"> <i
+				<li class="has-subnav sidebar"><a
+					href="${pageContext.request.contextPath}/board/boardList.bo"> <i
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
+				<li class="has-subnav sidebar"><a
+					href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
 						class="fa fa-map-marker fa-2x"></i> <span class="nav-text">
 							우리동네 </span>
 				</a></li>
@@ -57,14 +59,17 @@
 						class="fa fa-book fa-2x"></i> <span class="nav-text"> 문화생활
 					</span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-home fa-2x"></i> <span
-						class="nav-text"> 랜선집들이 </span>
+				<li class="has-subnav sidebar"><a href="#"> <i
+						class="fa fa-home fa-2x"></i> <span class="nav-text"> 랜선집들이
+					</span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
-						class="nav-text"> re마켓 </span>
+				<li class="has-subnav sidebar"><a href="#"> <i
+						class="fa fa-comments fa-2x"></i> <span class="nav-text">
+							re마켓 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
-						class="nav-text"> 가계부 </span>
+				<li class="has-subnav sidebar"><a href="#"> <i
+						class="fa fa-dollar fa-2x"></i> <span class="nav-text"> 가계부
+					</span>
 				</a></li>
 			</ul>
 		</nav>
@@ -112,26 +117,21 @@
 				<div class="imgDiv">
 					<img src="/img/index/cate_living.png">
 					<div id="p1">
-					<b>나를 위한 최고의 선택</b><br>
-					누군가는 말합니다. 혼자라 외롭지 않냐고.<br>
-					그러나, 혼자가 주는 큰 가치, 합리적 라이프스타일<br>
-					나를 위한 최고의 선택을 하기에 더 행복합니다.<br>
-					싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
+						<b>나를 위한 최고의 선택</b><br> 누군가는 말합니다. 혼자라 외롭지 않냐고.<br> 그러나,
+						혼자가 주는 큰 가치, 합리적 라이프스타일<br> 나를 위한 최고의 선택을 하기에 더 행복합니다.<br>
+						싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
 					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_local.png">
 					<div id="p2">
-					혼자 살 수 밖에 없고,<br>
-					혼자 살 수 있게 되었고,<br>
-					혼자 살고 싶다.<br>
+						혼자 살 수 밖에 없고,<br> 혼자 살 수 있게 되었고,<br> 혼자 살고 싶다.<br>
 					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_reMarket.png">
-					<div id="p3">
-					bar bar bar bar bar bar bar bar bar bar bar bar bar bar
-						bar bar bar</div>
+					<div id="p3">bar bar bar bar bar bar bar bar bar bar bar bar
+						bar bar bar bar bar</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_account.png">
@@ -186,18 +186,22 @@
 				</div>
 			</div>
 			<div id="footer3">
-			<img src="/img/index/logos/fullLogoColor.png">
-			<strong>ⓒ 2020 · SingleBanlge</strong>
+				<img src="/img/index/logos/fullLogoColor.png"> <strong>ⓒ
+					2020 · SingleBanlge</strong>
+			</div>
 		</div>
 	</div>
 
 	<script src="/js/index/index.js"></script>
-	
+
 	<script>
 		// 회원가입 페이지로 이동
-		$("#joinBtn").on("click", function(){
-			location.href="${pageContext.request.contextPath}/member/signUp.mem";
-		})
+		$("#joinBtn")
+				.on(
+						"click",
+						function() {
+							location.href = "${pageContext.request.contextPath}/member/signUp.mem";
+						})
 	</script>
 </body>
 </html>
