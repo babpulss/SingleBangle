@@ -31,7 +31,7 @@
 				</c:when>
 				<c:otherwise>
 					<span id="rightMyPage"><a
-						href="${pageContext.request.contextPath}/memberHome"
+						href="${pageContext.request.contextPath}/member/myPage"
 						id="myPageBtn">My Page</a></span>
 					<span id="rightLogout"><a
 						href="${pageContext.request.contextPath}/member/logout.mem"
