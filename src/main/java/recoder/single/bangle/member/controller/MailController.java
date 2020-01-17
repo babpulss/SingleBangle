@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/email")
 @Controller
+@RequestMapping("/email")
 public class MailController {
 
 	@Autowired
