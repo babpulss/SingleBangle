@@ -337,7 +337,7 @@ body {
 			var cancelConfirm = confirm("정보 수정을 취소하시겠습니까?");
 			
 			if(cancelConfirm == true){
-				location.href="${pageContext.request.contextPath}/memberHome";
+				location.href="${pageContext.request.contextPath}/member/myPage";
 			}
 		})
 	</script>

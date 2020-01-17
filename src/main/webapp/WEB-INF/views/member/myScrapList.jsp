@@ -32,11 +32,11 @@
 			</div>
 		</c:forEach>
 	</div>
-	<button id="toMemberhome">돌아가기</button>
+	<button id="toMyPage">돌아가기</button>
 	
 	<script>
-		$("#toMemberhome").on("click",function(){
-			location.href = "${pageContext.request.contextPath}/memberHome";
+		$("#toMyPage").on("click",function(){
+			location.href = "${pageContext.request.contextPath}/member/myPage";
 		})
 	</script>
 </body>

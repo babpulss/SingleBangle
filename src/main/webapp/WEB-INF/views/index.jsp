@@ -21,7 +21,7 @@
 				<div class="bar3 sidebar"></div>
 			</div>
 			<div id="logo">
-				<img src="img/index/logo.png">
+				<img src="img/index/logos/fullLogoColor.png">
 			</div>
 			<c:choose>
 				<c:when test="${loginInfo==null}">
@@ -31,7 +31,7 @@
 				</c:when>
 				<c:otherwise>
 					<span id="rightMyPage"><a
-						href="${pageContext.request.contextPath}/memberHome"
+						href="${pageContext.request.contextPath}/member/myPage"
 						id="myPageBtn">My Page</a></span>
 					<span id="rightLogout"><a
 						href="${pageContext.request.contextPath}/member/logout.mem"
@@ -49,21 +49,21 @@
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav"><a href="#"> <i
-						class="fa fa-map-marker fa-2x"></i> <span class="nav-text">
+				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
+						class="fa fa-map-marker fa-2x"></i> <span class="nav-text sidebar">
 							우리동네 </span>
 				</a></li>
-				<li class="has-subnav"><a href="#"> <i
-						class="fa fa-book fa-2x"></i> <span class="nav-text"> 문화생활
+				<li class="has-subnav sidebar"><a href="#"> <i
+						class="fa fa-book fa-2x"></i> <span class="nav-text sidebar"> 문화생활
 					</span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-home fa-2x"></i> <span
-						class="nav-text"> 랜선집들이 </span>
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-home fa-2x"></i> <span
+						class="nav-text sidebar"> 랜선집들이 </span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
-						class="nav-text"> re마켓 </span>
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
+						class="nav-text sidebar"> re마켓 </span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
 						class="nav-text"> 가계부 </span>
 				</a></li>
 			</ul>
@@ -71,22 +71,22 @@
 
 		<!-- 오른쪽 메뉴바 -->
 		<div id="rightSidebar" class="rightSidebar">
-			<form action="${pageContext.request.contextPath}/member/login.mem"
-				method="post">
+			<br>
+			<div id="loginTitle"><b>싱글방글 로그인</b></div>
+			<br>
+			
+			<form action="${pageContext.request.contextPath}/member/login.mem" method="post">
 				<ul class="rightSidebar">
-					<li class="rightSidebar">ID: <input type="text"
-						class="rightSidebar" name="id" id="id"><br>
-					</li>
-					<li class="rightSidebar">PW: <input type="password"
-						class="rightSidebar" name="pw" id="pw"><br>
+					<li class="rightSidebar">
+						<input type="text" class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
 					</li>
 					<li class="rightSidebar">
-						<button id="login">Login</button>
-						<button type="button" id="joinBtn">Join</button>
+						<input type="password" class="rightSidebar loginVal" id="pw" name="pw" placeholder=" PASSWORD"><br>
 					</li>
-					<li class="rightSidebar">hello</li>
-					<li class="rightSidebar">hello</li>
-					<li class="rightSidebar">hello</li>
+					<li class="rightSidebar" id="loginBtnBox">
+						<button class="loginBtns" id="loginBtn">Login</button>
+						<button type="button" class="loginBtns" id="joinBtn">Join</button>
+					</li>
 				</ul>
 			</form>
 		</div>
@@ -110,24 +110,32 @@
 			</div>
 			<div id="imgBox">
 				<div class="imgDiv">
-					<img src="/img/index/cate_living.png"> Riders on the storm<br>
-					Riders on the storm<br> Riders on the storm<br>
-					<div></div>
+					<img src="/img/index/cate_living.png">
+					<div id="p1">
+					<b>나를 위한 최고의 선택</b><br>
+					누군가는 말합니다. 혼자라 외롭지 않냐고.<br>
+					그러나, 혼자가 주는 큰 가치, 합리적 라이프스타일<br>
+					나를 위한 최고의 선택을 하기에 더 행복합니다.<br>
+					싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
+					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_local.png">
-					<div>
-						foo<br> foo<br>
+					<div id="p2">
+					혼자 살 수 밖에 없고,<br>
+					혼자 살 수 있게 되었고,<br>
+					혼자 살고 싶다.<br>
 					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_reMarket.png">
-					<div>bar bar bar bar bar bar bar bar bar bar bar bar bar bar
+					<div id="p3">
+					bar bar bar bar bar bar bar bar bar bar bar bar bar bar
 						bar bar bar</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_account.png">
-					<div>
+					<div id="p4">
 						Recoder <br>
 					</div>
 				</div>
@@ -135,14 +143,13 @@
 		</div>
 		<div class="clear"></div>
 		<div id="fourthRow">
-			<div class="col-12"></div>
 			<div id="psWrapper">
-				<div class="d1 a1"></div>
 				<div class="d2 b1">어쩌구 저쩌구</div>
-				<div class="d2 b2">여기가 메인입니당</div>
+				<div class="d1 a1"></div>
 				<div class="d1 a2"></div>
-				<div class="d1 a3"></div>
+				<div class="d2 b2">여기가 메인입니당</div>
 				<div class="d2 b3">메롱</div>
+				<div class="d1 a3"></div>
 			</div>
 		</div>
 		<div id="footer">
@@ -178,10 +185,20 @@
 					</div>
 				</div>
 			</div>
-			<div id="footer3"><strong>ⓒ 2020 · SingleBanlge</strong></div>
+			<div id="footer3">
+			<img src="/img/index/logos/fullLogoColor.png">
+			<strong>ⓒ 2020 · SingleBanlge</strong>
 		</div>
+	</div>
 	</div>
 
 	<script src="/js/index/index.js"></script>
+	
+	<script>
+		// 회원가입 페이지로 이동
+		$("#joinBtn").on("click", function(){
+			location.href="${pageContext.request.contextPath}/member/signUp.mem";
+		})
+	</script>
 </body>
-</html>
+</html>	

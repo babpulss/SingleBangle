@@ -16,8 +16,8 @@ import recoder.single.bangle.member.service.MemberService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
-@RequestMapping("/member")
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired
@@ -61,6 +61,11 @@ public class MemberController {
 		model.addAttribute("loginResult", loginResult);
 		
 		return "member/loginCheck";
+	}
+	
+	@RequestMapping("/myPage")
+	public String memberHome() {
+		return "member/myPage";
 	}
 	
 	@RequestMapping("/myInfo.mem")

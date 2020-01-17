@@ -1,5 +1,7 @@
 package recoder.single.bangle.remarket.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
 
 @Controller
@@ -31,7 +34,7 @@ public class MsgController {
 		return "msg/writemsg";
 	}
 	
-	@RequestMapping("/replyMsgProc.do")
+	@RequestMapping("/replyMsgProc.do")//서비스ok
 	public String replyMsgProc() {
 		String sender = (String) session.getAttribute("id");
 		String receiver = request.getParameter("receiver");
@@ -43,5 +46,34 @@ public class MsgController {
 			e.printStackTrace();
 		}
 		return "home";
+	}
+	
+	@RequestMapping("/msgList.do")//메세지 리스트 확인하기
+	public String msgList(Model model) {
+		try {
+			String receiver = (String)request.getParameter("receiver");
+			List<MsgDTO> list = service.msgList(receiver);
+			model.addAttribute("list", list);
+			return "msg/msgbox";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@RequestMapping("/msgDetail.do")//메세지상세
+	public String msgDetail(int seq, Model model) {
+		try {
+			MsgDTO dto = service.msgDetail(seq);
+			model.addAttribute("dto", dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "msg/msgdetail";
+	}
+
+	@RequestMapping("/replyMsg.do")
+	public String replyMsg() {
+		return "msg/writemsg";
 	}
 }

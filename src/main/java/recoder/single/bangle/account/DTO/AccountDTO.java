@@ -3,7 +3,7 @@ package recoder.single.bangle.account.DTO;
 import java.sql.Date;
 
 public class AccountDTO {
-	
+
 	private int seq;			// 시퀀스
 	private String id;			// 회원ID
 	private String userName;	// 회원명
@@ -15,7 +15,7 @@ public class AccountDTO {
 	private int income;			// 수입(원)
 	private int expense;		// 지출(원)
 	private String remarks;		// 비고
-	
+
 	public AccountDTO() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -132,12 +132,13 @@ public class AccountDTO {
 		this.remarks = remarks;
 	}
 
+
 	@Override
 	public String toString() {
 		return "AccountDTO [seq=" + seq + ", id=" + id + ", userName=" + userName + ", reportingDate=" + reportingDate
 				+ ", formedReportingDate=" + formedReportingDate + ", details=" + details + ", payments=" + payments
 				+ ", spec=" + spec + ", income=" + income + ", expense=" + expense + ", remarks=" + remarks + "]";
 	}
-	
-	
-	}
+
+
+}

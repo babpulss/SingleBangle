@@ -1,6 +1,28 @@
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
+/* 메인 폰트 */
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* 메뉴 폰트 */
+@font-face {
+	font-family: 'BMHANNAAir';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+.sidebar {
+	font-family: 'BMHANNAAir';
+}
+
 * {
 	box-sizing: border-box;
 	padding: 0px;
@@ -21,29 +43,32 @@ div {
 .d2 {
 	width: 50%;
 	height: 50vh;
-	background-color: darkgray;
+	background-color: white;
 	float: left;
 }
 
 .a1 {
-	background-image: url(/img/index/s1.jpg);
+	background-image: url(/img/index/intro1.png);
+	background-size: 50% 100%;
 	width: 50%;
 	float: left;
 }
 
 .a2 {
-	background-image: url(/img/index/s2.jpg);
+	background-image: url(/img/index/intro2.png);
+	background-size: 50% 100%;	
 	width: 50%;
 	float: left;
 }
 
 .a3 {
-	background-image: url(/img/index/s3.jpg);
+	background-image: url(/img/index/intro3.png);
+	background-size: 50% 100%;
 	width: 50%;
 	float: left;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+/* @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300); */
 
 .fa-2x {
 	font-size: 2em;
@@ -118,7 +143,7 @@ div {
 	display: table-cell;
 	vertical-align: middle;
 	width: 290px;
-	font-family: 'Titillium Web', sans-serif;
+/* 	font-family: 'Titillium Web', sans-serif; */
 }
 
 .main-menu>ul.logout {
@@ -180,17 +205,15 @@ html, body {
 }
 
 ::-webkit-scrollbar {
-	width: 30px;
+	width: 20px;
 }
 
 ::-webkit-scrollbar-thumb {
-	background-color: teal;
-	border-radius: 10px;
+	background-color: #b2b2b2;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background-color: gold;
-	border-radius: 10px;
+	background-color: #827e7e;
 }
 /* 상위 고정 바 */
 #topbar {
@@ -205,13 +228,14 @@ html, body {
 }
 /* 좌측 네비바 */
 #sidebar {
-	border: 1px solid red;
+	border: 1px solid black;
 	width: 300px;
 	height: 100vh;
 	position: absolute;
 	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
 	display: none;
-	background-color: #4f7eab;
+	opacity: 0.9;
+	background-color: #0085cb;
 	top: 60px;
 	color: white;
 	font-size: 50px;
@@ -230,6 +254,10 @@ html, body {
 	top: 6px;
 }
 
+#nav * {
+	background-color: #0085cb;
+}
+
 #logo {
 	position: relative;
 	display: flex;
@@ -237,6 +265,10 @@ html, body {
 	width: 100%;
 	height: 53px;
 	top: 5px;
+}
+
+#logo * {
+	height: 100%;
 }
 
 .bar1, .bar2, .bar3 {
@@ -263,99 +295,132 @@ html, body {
 #rightLogin {
 	position: absolute;
 	right: 8vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightJoin {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
+}
+
+#rightJoin a {
+	color: #0085cb;
 }
 
 #rightMyPage {
 	position: absolute;
 	right: 10vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightLogout {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
-	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	color: #0085cb;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightJoin:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightJoin>a {
 	text-decoration: none;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightJoin>a:visited {
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightMyPage:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightLogout:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightMyPage>a, #rightLogout>a {
 	text-decoration: none;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightMyPage>a:visited, #rightLogout>a:visited {
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightSidebar {
-	border: 1px solid red;
+	border: 1px solid black;
+	border-radius: 5px;
 	width: 300px;
-	height: 30vh;
+	height: 300px;
 	position: absolute;
-	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
+	top : 200px;
+	/* right: 3vw; */
+	left: 50%;
+	transform: translate(-50%);
 	display: none;
-	background-color: #4f7eab;
-	top: 100px;
-	right: 3vw;
-	color: white;
-	font-size: 20px;
+	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
 	overflow-x: auto;
+	font-size: 20px;
+	background-color: #f5f5f5;
 	z-index: 2;
+	text-align: center;
 }
 
 #rightSidebar ul {
-	width: 200px;
+	/* width: 200px; */
+}
+
+#loginTitle{
+	font-family: 'BMHANNAAir';
+	font-size: 24px;
+}
+
+.loginVal{
+	border: 1px solid #dadada;
+	width: 90%;
+	height: 40px;
+	font-size: 16px;
+}
+
+#loginBtnBox{
+	margin-top:30px;
+}
+.loginBtns{
+	border: none;
+	width: 90%;
+	height: 40px;
+	margin-bottom:5px;
+	cursor: pointer;
+	font-size: 16px;
+	color: white;
+	background-color: #0085cb;
 }
 
 /* 메인 화면 래퍼 */
@@ -370,10 +435,11 @@ html, body {
 
 #firstRow>span {
 	margin-left: 100px;
+	font-family: 'yg-jalnan';
 }
 
 #firstRow>span:first-child {
-	color: pink;
+	color: #0085cb;
 	cursor: default;
 }
 
@@ -418,6 +484,10 @@ html, body {
 	height: 75%;
 }
 
+#p1, #p2, #p3, #p4 {
+	text-align: center;
+}
+
 .clear {
 	clear: both;
 }
@@ -435,7 +505,7 @@ html, body {
 }
 
 #footer1 {
-	background-color: deeppink;
+	background-color: #0085cb;
 	height: 40px;
 	display: flex;
 	justify-content: center;
@@ -462,9 +532,15 @@ html, body {
 #footer3 {
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	margin-top: 30px;
+	margin-bottom: 10px;
 	cursor: default;
+}
+
+#footer3 img {
+	height: 100px;
 }
 
 /* 모바일 환경 */
@@ -535,5 +611,9 @@ html, body {
 	}
 	#footer3 {
 		margin-bottom: 5vh;
+	}
+	#footer3 img {
+		width: 250px;
+		height: 60px;
 	}
 }
