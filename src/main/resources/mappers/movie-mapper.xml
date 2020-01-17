@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="movie">
+  	<insert id="insertAll" parameterType="recoder.single.bangle.movie.DTO.MovieDTO">
+  		insert into movie values(movie_seq.nextval, #{title}, ${grade}, #{rate}, #{releaseDate}, #{videoId}, #{img}, #{story})
+  	</insert>
+  	
+  	<insert id="MovieinsertAll" parameterType="java.util.List">
+  		insert all
+  		<foreach collection="list" item="item" index="index" close="select * from dual">
+  		into movie values(
+  			(select get_movie_seq() from dual), 
+  			#{item.title}, ${item.grade}, #{item.rate}, #{item.releaseDate}, #{item.videoId}, #{item.img}, #{item.story}
+  		)
+  		</foreach>
+  	</insert>
+  	
+  	<delete id="deleteAll">
+  		delete from movie
+  	</delete>
+  	
+  	<select id="selectAll" resultType="recoder.single.bangle.movie.DTO.MovieDTO">
+  		select seq, title, grade, rate, to_char(releaseDate, 'yyyy-MM-dd') as releaseDate, videoId, img, story from movie order by seq
+  	</select>
+  </mapper>
