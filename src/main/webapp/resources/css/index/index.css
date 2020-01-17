@@ -19,7 +19,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
-.sidebar, .rightSidebar {
+.sidebar {
 	font-family: 'BMHANNAAir';
 }
 
@@ -295,7 +295,7 @@ html, body {
 #rightLogin {
 	position: absolute;
 	right: 8vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
 	color: #0085cb;
@@ -304,7 +304,7 @@ html, body {
 #rightJoin {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
 	color: #0085cb;
@@ -317,19 +317,19 @@ html, body {
 #rightMyPage {
 	position: absolute;
 	right: 10vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightLogout {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
@@ -376,22 +376,51 @@ html, body {
 
 #rightSidebar {
 	border: 1px solid black;
+	border-radius: 5px;
 	width: 300px;
-	height: 30vh;
+	height: 300px;
 	position: absolute;
-	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
+	top : 200px;
+	/* right: 3vw; */
+	left: 50%;
+	transform: translate(-50%);
 	display: none;
-	background-color: #0085cb; top : 100px;
-	right: 3vw;
-	color: white;
-	font-size: 20px;
+	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
 	overflow-x: auto;
+	font-size: 20px;
+	background-color: #f5f5f5;
 	z-index: 2;
-	top: 100px
+	text-align: center;
 }
 
 #rightSidebar ul {
-	width: 200px;
+	/* width: 200px; */
+}
+
+#loginTitle{
+	font-family: 'BMHANNAAir';
+	font-size: 24px;
+}
+
+.loginVal{
+	border: 1px solid #dadada;
+	width: 90%;
+	height: 40px;
+	font-size: 16px;
+}
+
+#loginBtnBox{
+	margin-top:30px;
+}
+.loginBtns{
+	border: none;
+	width: 90%;
+	height: 40px;
+	margin-bottom:5px;
+	cursor: pointer;
+	font-size: 16px;
+	color: white;
+	background-color: #0085cb;
 }
 
 /* 메인 화면 래퍼 */
