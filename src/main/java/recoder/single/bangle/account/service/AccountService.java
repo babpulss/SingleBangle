@@ -38,7 +38,7 @@ public class AccountService {
 
 
 		for(AccountDTO tmp : list) {
-			if(tmp.getPayments().equals("카드")) {
+			if(tmp.getPayments().equals("카드")&&tmp.getSpec().equals("지출")) {
 				cardIn += tmp.getIncome();
 				cardOut += tmp.getExpense();
 			}

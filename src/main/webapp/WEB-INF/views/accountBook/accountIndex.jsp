@@ -8,6 +8,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<a href="${pageContext.request.contextPath }/accountBook">가계부로</a>
+	<a href="${pageContext.request.contextPath }/accountBook/accountBook">가계부로</a>
 </body>
 </html>

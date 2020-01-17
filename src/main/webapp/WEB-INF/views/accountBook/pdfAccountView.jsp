@@ -17,7 +17,7 @@
 <script src="/resources/js/accountJS/accountJS.js"></script>
 </head>
 <body>
-	<form id="pdf" action="${pageContext.request.contextPath }/accountPDF"
+	<form id="pdf" action="${pageContext.request.contextPath }/accountBook/accountPDF"
 		method="post">
 		<input type="hidden" class="pdfValue btn btn-info" id="pdfValue"
 			name="pdfValue" value="" />
@@ -143,7 +143,7 @@
 
 		<div class="text-light mt-5 mb-5 text-center small" style="text-align: center">
 			by : <a class="text-light" target=""
-				href="${pageContext.request.contextPath}/">Single Bangle</a>
+				href="#">Single Bangle</a>
 		</div>
 	</div>
 	<script>
