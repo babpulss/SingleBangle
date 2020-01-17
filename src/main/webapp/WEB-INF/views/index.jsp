@@ -183,5 +183,12 @@
 	</div>
 
 	<script src="/js/index/index.js"></script>
+	
+	<script>
+		// 회원가입 페이지로 이동
+		$("#joinBtn").on("click", function(){
+			location.href="${pageContext.request.contextPath}/member/signUp.mem";
+		})
+	</script>
 </body>
 </html>
