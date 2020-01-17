@@ -21,7 +21,7 @@
 				<div class="bar3 sidebar"></div>
 			</div>
 			<div id="logo">
-				<img src="img/index/logo.png">
+				<img src="img/index/logos/fullLogoColor.png">
 			</div>
 			<c:choose>
 				<c:when test="${loginInfo==null}">
@@ -178,7 +178,9 @@
 					</div>
 				</div>
 			</div>
-			<div id="footer3"><strong>ⓒ 2020 · SingleBanlge</strong></div>
+			<div id="footer3">
+			<img src="/img/index/logos/fullLogoColor.png">
+			<strong>ⓒ 2020 · SingleBanlge</strong>
 		</div>
 	</div>
 

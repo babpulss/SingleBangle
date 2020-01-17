@@ -1,6 +1,13 @@
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
+@font-face {
+	font-family: 'yg-jalnan';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 * {
 	box-sizing: border-box;
 	padding: 0px;
@@ -238,6 +245,9 @@ html, body {
 	height: 53px;
 	top: 5px;
 }
+#logo * {
+	height: 100%;
+}
 
 .bar1, .bar2, .bar3 {
 	width: 35px;
@@ -266,7 +276,7 @@ html, body {
 	line-height: 40px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightJoin {
@@ -275,7 +285,11 @@ html, body {
 	line-height: 40px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
+}
+
+#rightJoin a {
+	color: #0085cb;
 }
 
 #rightMyPage {
@@ -297,45 +311,45 @@ html, body {
 }
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
-	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	color: #0085cb;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightJoin:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightJoin>a {
 	text-decoration: none;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightJoin>a:visited {
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightMyPage:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightLogout:hover {
 	color: #e80e0e;
-	text-shadow: 10px 10px goldenrod;
+	text-shadow: 10px 10px #b2b2b2;
 	transform: translate(-5px, -5px);
 }
 
 #rightMyPage>a, #rightLogout>a {
 	text-decoration: none;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightMyPage>a:visited, #rightLogout>a:visited {
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightSidebar {
@@ -370,6 +384,7 @@ html, body {
 
 #firstRow>span {
 	margin-left: 100px;
+	font-family: 'yg-jalnan';
 }
 
 #firstRow>span:first-child {
@@ -462,13 +477,19 @@ html, body {
 #footer3 {
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	margin-top: 30px;
+	margin-bottom: 10px;
 	cursor: default;
+}
+#footer3 img {
+	width: 500px;
+	height: 100px;
 }
 
 /* 모바일 환경 */
-@media ( max-width : 600px) {
+@media ( max-width : 1000px) {
 	#topbar {
 		height: 60px;
 	}
@@ -536,4 +557,8 @@ html, body {
 	#footer3 {
 		margin-bottom: 5vh;
 	}
+#footer3 img {
+	width: 250px;
+	height: 60px;
+}
 }
