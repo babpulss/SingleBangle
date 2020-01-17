@@ -49,21 +49,21 @@
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav"><a href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
+				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
 						class="fa fa-map-marker fa-2x"></i> <span class="nav-text">
 							우리동네 </span>
 				</a></li>
-				<li class="has-subnav"><a href="#"> <i
+				<li class="has-subnav sidebar"><a href="#"> <i
 						class="fa fa-book fa-2x"></i> <span class="nav-text"> 문화생활
 					</span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-home fa-2x"></i> <span
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-home fa-2x"></i> <span
 						class="nav-text"> 랜선집들이 </span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
 						class="nav-text"> re마켓 </span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
+				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
 						class="nav-text"> 가계부 </span>
 				</a></li>
 			</ul>
@@ -110,24 +110,32 @@
 			</div>
 			<div id="imgBox">
 				<div class="imgDiv">
-					<img src="/img/index/cate_living.png"> Riders on the storm<br>
-					Riders on the storm<br> Riders on the storm<br>
-					<div></div>
+					<img src="/img/index/cate_living.png">
+					<div id="p1">
+					<b>나를 위한 최고의 선택</b><br>
+					누군가는 말합니다. 혼자라 외롭지 않냐고.<br>
+					그러나, 혼자가 주는 큰 가치, 합리적 라이프스타일<br>
+					나를 위한 최고의 선택을 하기에 더 행복합니다.<br>
+					싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
+					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_local.png">
-					<div>
-						foo<br> foo<br>
+					<div id="p2">
+					혼자 살 수 밖에 없고,<br>
+					혼자 살 수 있게 되었고,<br>
+					혼자 살고 싶다.<br>
 					</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_reMarket.png">
-					<div>bar bar bar bar bar bar bar bar bar bar bar bar bar bar
+					<div id="p3">
+					bar bar bar bar bar bar bar bar bar bar bar bar bar bar
 						bar bar bar</div>
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_account.png">
-					<div>
+					<div id="p4">
 						Recoder <br>
 					</div>
 				</div>
@@ -135,7 +143,6 @@
 		</div>
 		<div class="clear"></div>
 		<div id="fourthRow">
-			<div class="col-12"></div>
 			<div id="psWrapper">
 				<div class="d1 a1"></div>
 				<div class="d2 b1">어쩌구 저쩌구</div>
