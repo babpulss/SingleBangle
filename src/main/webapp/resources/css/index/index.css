@@ -292,7 +292,7 @@ html, body {
 #rightLogin {
 	position: absolute;
 	right: 8vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
 	color: #0085cb;
@@ -301,7 +301,7 @@ html, body {
 #rightJoin {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
 	color: #0085cb;
@@ -314,19 +314,19 @@ html, body {
 #rightMyPage {
 	position: absolute;
 	right: 10vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 
 #rightLogout {
 	position: absolute;
 	right: 3vw;
-	line-height: 40px;
+	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
-	color: indianred;
+	color: #0085cb;
 }
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
