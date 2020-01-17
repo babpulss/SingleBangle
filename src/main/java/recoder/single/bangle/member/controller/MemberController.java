@@ -63,6 +63,11 @@ public class MemberController {
 		return "member/loginCheck";
 	}
 	
+	@RequestMapping("/myPage")
+	public String memberHome() {
+		return "member/myPage";
+	}
+	
 	@RequestMapping("/myInfo.mem")
 	public String myInfo(Model model) {
 		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
