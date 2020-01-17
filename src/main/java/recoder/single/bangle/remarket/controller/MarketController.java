@@ -17,11 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import configuration.Configuration;
 import recoder.single.bangle.member.DTO.MemberDTO;
+import recoder.single.bangle.remarket.DAO.MarketDAO;
 import recoder.single.bangle.remarket.DAO.MarketFileDAO;
 import recoder.single.bangle.remarket.DTO.MarketDTO;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
-import recoder.single.bangle.remarket.DTO.marketReplyDTO;
 import recoder.single.bangle.remarket.service.MarketReplyService;
 import recoder.single.bangle.remarket.service.MarketService;
 
@@ -30,8 +31,11 @@ import recoder.single.bangle.remarket.service.MarketService;
 public class MarketController {
 
 	@Autowired
+	private MarketDAO dao;
+
+	@Autowired
 	private MarketService service;
-	
+
 	@Autowired
 	private MarketReplyService reService;
 
@@ -49,10 +53,23 @@ public class MarketController {
 
 	@RequestMapping("/boardList.do") //게시글 전체 리스트
 	public String board(Model model, MarketDTO dto) {
-		System.out.println("boardList 도착~.~");
-		List<String> fileList = new ArrayList<String>();
 		try {
+			String navi = dao.getPageNavi(1);
+			int cpage=1;
+			String page = request.getParameter("cpage");
+			if(page != null) {
+				cpage = Integer.parseInt(page);
+			}
+			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
+			int end = cpage * Configuration.recordCountPerPage;
+			List<MarketDTO> navilist = dao.selectByPage(start, end);
+			System.out.println(start + " : " + end);
+			model.addAttribute("navilist", navilist);
+			model.addAttribute("navi", navi);
+
+			List<String> fileList = new ArrayList<String>();
 			List<MarketDTO> list = service.board();
+
 			for(int i = 0; i < list.size(); i++) {
 				int board_seq = list.get(i).getSeq();
 				System.out.println(board_seq);
@@ -66,6 +83,7 @@ public class MarketController {
 			e.printStackTrace();
 			return null;
 		}
+
 	}
 
 	@RequestMapping("/delete.do")
@@ -89,12 +107,9 @@ public class MarketController {
 		model.addAttribute("dto", dto);
 		return "board/updateBoard";
 	}
-	
+
 	@RequestMapping("/updateProc.do")//게시글 업데이트
 	public String updateProc(MarketDTO dto, Model model) {
-//		int seq = Integer.parseInt(request.getParameter("seq"));
-//		int seq = dto.getSeq();//보드시퀀스
-//		System.out.println("글 수정 확인 : " + seq);//ok
 		String path = session.getServletContext().getRealPath("files");
 		service.updateProc(dto.getTitle(), dto.getPrice(), dto.getContent(), dto.getCategory(), dto.getSeq(), path);
 		return "home";
@@ -105,26 +120,26 @@ public class MarketController {
 		System.out.println("writeboard.do 도착");
 		return "board/writeboard";
 	}
-	
+
 	@RequestMapping("/reportBoard.do") 
 	public String reportBoard() {
 		return "board/report";
 	}
-	
+
 	@RequestMapping("/report.do")
 	public String report(Model model) {//신고하기 버튼 누름
-//		int seq = Integer.parseInt(request.getParameter("seq"));
+		//		int seq = Integer.parseInt(request.getParameter("seq"));
 		String url = request.getParameter("url");
 		model.addAttribute("url", url);
 		return "board/reportdetail";
 	}
-	
-	
+
+
 	@RequestMapping("/reportProc.do")
 	public String reportProc(Model model) {
 		String url = request.getParameter("url");
 		String reason = request.getParameter("report");
-//		int seq = Integer.parseInt(request.getParameter("seq"));
+		//		int seq = Integer.parseInt(request.getParameter("seq"));
 		String id = (String) session.getAttribute("id");
 		System.out.println("신고자 : " + id + " 링크 : " + url + " 신고사유 : " + reason);
 		service.report(id, url, reason);
@@ -136,7 +151,7 @@ public class MarketController {
 		try {
 			String id = (String)session.getAttribute("id");//ok
 			MemberDTO myInfo = (MemberDTO) session.getAttribute("myInfo");
-			String place = myInfo.getAdd1();
+			String place = myInfo.getAddress1();
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();
 			content.replace("<", "&lt");
@@ -193,7 +208,7 @@ public class MarketController {
 					model.addAttribute("fileList", fileList);
 					model.addAttribute("list", list);
 				}
-				
+
 			}else if(title == "") {
 				List<String> fileList = new ArrayList<>();
 				List<MarketDTO> list = service.searchNoTitle(category);

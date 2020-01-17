@@ -16,8 +16,8 @@ import recoder.single.bangle.member.service.MemberService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
-@RequestMapping("/member")
 @Controller
+@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired

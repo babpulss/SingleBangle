@@ -49,7 +49,7 @@
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav"><a href="#"> <i
+				<li class="has-subnav"><a href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
 						class="fa fa-map-marker fa-2x"></i> <span class="nav-text">
 							우리동네 </span>
 				</a></li>
