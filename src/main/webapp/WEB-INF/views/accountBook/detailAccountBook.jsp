@@ -30,8 +30,6 @@
 </style>
 </head>
 <body>
-
-
 	<div class="container">
 		<div class="invoice row">
 			<div class="col-12">
@@ -50,7 +48,7 @@
 									<i class="fa fa-print"></i>Print
 								</button>
 								<form id="pdf"
-									action="${pageContext.request.contextPath }/accountPDF"
+									action="${pageContext.request.contextPath }/accountBook/accountPDF"
 									method="post">
 									<input type="hidden" class="pdfValue btn btn-info"
 										name="pdfValue" value=""> <input type="button"
@@ -182,7 +180,7 @@
 
 		<div class="text-light mt-5 mb-5 text-center small">
 			by : <a class="text-light" target=""
-				href="${pageContext.request.contextPath}/">Single Bangle</a>
+				href="#">Single Bangle</a>
 		</div>
 	</div>
 
@@ -208,7 +206,7 @@
 				.on(
 						"click",
 						function() {
-							location.href = "${pageContext.request.contextPath}/ListViewForPDF";
+							location.href = "${pageContext.request.contextPath}/accountBook/ListViewForPDF";
 						});
 
 		$(function() {

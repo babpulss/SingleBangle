@@ -1,9 +1,5 @@
 package recoder.single.bangle.account.controller;
 
-import java.io.FileInputStream;
-import java.io.StringReader;
-import java.net.URLEncoder;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -14,32 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.tool.xml.XMLWorker;
-import com.itextpdf.tool.xml.XMLWorkerFontProvider;
-import com.itextpdf.tool.xml.XMLWorkerHelper;
-import com.itextpdf.tool.xml.css.CssFile;
-import com.itextpdf.tool.xml.css.StyleAttrCSSResolver;
-import com.itextpdf.tool.xml.html.CssAppliers;
-import com.itextpdf.tool.xml.html.CssAppliersImpl;
-import com.itextpdf.tool.xml.html.Tags;
-import com.itextpdf.tool.xml.parser.XMLParser;
-import com.itextpdf.tool.xml.pipeline.css.CSSResolver;
-import com.itextpdf.tool.xml.pipeline.css.CssResolverPipeline;
-import com.itextpdf.tool.xml.pipeline.end.PdfWriterPipeline;
-import com.itextpdf.tool.xml.pipeline.html.HtmlPipeline;
-import com.itextpdf.tool.xml.pipeline.html.HtmlPipelineContext;
 
 import recoder.single.bangle.account.DTO.AccountDTO;
 import recoder.single.bangle.account.service.AccountService;
 import recoder.single.bangle.account.service.PdfService;
 
+@RequestMapping("/accountBook")
 @Controller
 public class AccountController {
 	@Autowired
@@ -111,7 +87,6 @@ public class AccountController {
 		return "accountBook/detailAccountBook";
 	}
 	
-	@ResponseBody
 	@RequestMapping("/Account.add")
 	public String insertAccount(AccountDTO dto) {
 		String id = (String)session.getAttribute("id");
@@ -128,18 +103,9 @@ public class AccountController {
 			dtos = new AccountDTO(0, id, userName, dto.getReportingDate(), null, dto.getDetails(), dto.getPayments(), dto.getSpec(), 0, dto.getExpense(), dto.getRemarks());
 			System.out.println(dtos);
 		}
-		int result = accService.insertAccountData(dtos);
-		if(result > 0) {
-			try {
-				List<AccountDTO> list = accService.monthListById(session);
-				return new Gson().toJson(list);
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return null;
+		accService.insertAccountData(dtos);
+		
+		return "redirect:accountBook";
 	}
 	
 	@RequestMapping("/ListViewForPDF")
