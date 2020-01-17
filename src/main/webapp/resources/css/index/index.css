@@ -48,24 +48,24 @@ div {
 }
 
 .a1 {
-	background-image: url(/img/index/s1.jpg);
+	background-image: url(/img/index/intro1.png);
 	width: 50%;
 	float: left;
 }
 
 .a2 {
-	background-image: url(/img/index/s2.jpg);
+	background-image: url(/img/index/intro2.png);
 	width: 50%;
 	float: left;
 }
 
 .a3 {
-	background-image: url(/img/index/s3.jpg);
+	background-image: url(/img/index/intro3.png);
 	width: 50%;
 	float: left;
 }
 
-@import url(https://fonts.googleapis.com/css?family=Titillium+Web:300);
+/* @import url(https://fonts.googleapis.com/css?family=Titillium+Web:300); */
 
 .fa-2x {
 	font-size: 2em;
@@ -140,7 +140,7 @@ div {
 	display: table-cell;
 	vertical-align: middle;
 	width: 290px;
-	font-family: 'Titillium Web', sans-serif;
+/* 	font-family: 'Titillium Web', sans-serif; */
 }
 
 .main-menu>ul.logout {
@@ -512,7 +512,7 @@ html, body {
 }
 
 /* 모바일 환경 */
-@media ( max-width : 1000px) {
+@media ( max-width : 600px) {
 	#topbar {
 		height: 60px;
 	}
