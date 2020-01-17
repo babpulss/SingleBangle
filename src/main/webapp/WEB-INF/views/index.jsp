@@ -76,22 +76,22 @@
 
 		<!-- 오른쪽 메뉴바 -->
 		<div id="rightSidebar" class="rightSidebar">
-			<form action="${pageContext.request.contextPath}/member/login.mem"
-				method="post">
+			<br>
+			<div id="loginTitle"><b>싱글방글 로그인</b></div>
+			<br>
+			
+			<form action="${pageContext.request.contextPath}/member/login.mem" method="post">
 				<ul class="rightSidebar">
-					<li class="rightSidebar">ID: <input type="text"
-						class="rightSidebar" name="id" id="id"><br>
-					</li>
-					<li class="rightSidebar">PW: <input type="password"
-						class="rightSidebar" name="pw" id="pw"><br>
+					<li class="rightSidebar">
+						<input type="text" class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
 					</li>
 					<li class="rightSidebar">
-						<button id="login">Login</button>
-						<button type="button" id="joinBtn">Join</button>
+						<input type="password" class="rightSidebar loginVal" id="pw" name="pw" placeholder=" PASSWORD"><br>
 					</li>
-					<li class="rightSidebar">hello</li>
-					<li class="rightSidebar">hello</li>
-					<li class="rightSidebar">hello</li>
+					<li class="rightSidebar" id="loginBtnBox">
+						<button class="loginBtns" id="loginBtn">Login</button>
+						<button type="button" class="loginBtns" id="joinBtn">Join</button>
+					</li>
 				</ul>
 			</form>
 		</div>
