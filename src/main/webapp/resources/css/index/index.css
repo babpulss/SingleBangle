@@ -43,24 +43,27 @@ div {
 .d2 {
 	width: 50%;
 	height: 50vh;
-	background-color: darkgray;
+	background-color: white;
 	float: left;
 }
 
 .a1 {
 	background-image: url(/img/index/intro1.png);
+	background-size: 50% 100%;
 	width: 50%;
 	float: left;
 }
 
 .a2 {
 	background-image: url(/img/index/intro2.png);
+	background-size: 50% 100%;	
 	width: 50%;
 	float: left;
 }
 
 .a3 {
 	background-image: url(/img/index/intro3.png);
+	background-size: 50% 100%;
 	width: 50%;
 	float: left;
 }
