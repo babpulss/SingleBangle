@@ -105,13 +105,43 @@
 		<div id="thirdRow">
 			<div>
 				<div>
-					싱글을 위한 <br>싱글에 의한
+					싱글에 의한 <br>
+					싱글을 위한 <br>
 				</div>
 			</div>
 			<div id="imgBox">
 				<div class="imgDiv">
 					<img src="/img/index/cate_living.png">
-					<div id="p1">
+					<div class="indexText">
+					Living Point
+					</div>
+				</div>
+				<div class="imgDiv">
+					<img src="/img/index/cate_local.png">
+					<div class="indexText">
+					혼밥/혼술 플레이스<br>
+					병원 위치검색
+					</div>
+				</div>
+				<div class="imgDiv">
+					<img src="/img/index/cate_reMarket.png">
+					<div  class="indexText">
+					쇼핑을 바꾸는 쇼핑<br>
+					Re:Market
+					</div>
+				</div>
+				<div class="imgDiv">
+					<img src="/img/index/cate_account.png">
+					<div class="indexText">
+					나만의 가계부를 PDF로...
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="fourthRow">
+			<div id="psWrapper">
+				<div class="d2 b1">
+					<div class="indexText">
 					<b>나를 위한 최고의 선택</b><br>
 					누군가는 말합니다. 혼자라 외롭지 않냐고.<br>
 					그러나, 혼자가 주는 큰 가치, 합리적 라이프스타일<br>
@@ -119,77 +149,57 @@
 					싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
 					</div>
 				</div>
-				<div class="imgDiv">
-					<img src="/img/index/cate_local.png">
-					<div id="p2">
+				<div class="d1 a1"></div>
+				<div class="d1 a2"></div>
+				<div class="d2 b2"> 
+					<div class="indexText">
 					혼자 살 수 밖에 없고,<br>
 					혼자 살 수 있게 되었고,<br>
 					혼자 살고 싶다.<br>
 					</div>
 				</div>
-				<div class="imgDiv">
-					<img src="/img/index/cate_reMarket.png">
-					<div id="p3">
-					bar bar bar bar bar bar bar bar bar bar bar bar bar bar
-						bar bar bar</div>
-				</div>
-				<div class="imgDiv">
-					<img src="/img/index/cate_account.png">
-					<div id="p4">
-						Recoder <br>
+				<div class="d2 b3">
+					<div class="indexText">
+					text
 					</div>
 				</div>
-			</div>
-		</div>
-		<div class="clear"></div>
-		<div id="fourthRow">
-			<div id="psWrapper">
-				<div class="d2 b1">어쩌구 저쩌구</div>
-				<div class="d1 a1"></div>
-				<div class="d1 a2"></div>
-				<div class="d2 b2">여기가 메인입니당</div>
-				<div class="d2 b3">메롱</div>
 				<div class="d1 a3"></div>
 			</div>
 		</div>
 		<div id="footer">
-			<div>
-				<div id="footer1">
-					<div>
-						<a href="#"><b>이용규칙</b></a>
-					</div>
-					<div>
-						<a href="#"><b>운영알림판</b></a>
-					</div>
-					<div>
-						<a href="#"><b>도움말</b></a>
-					</div>
-					<div>
-						<a href="#"><b>버그신고</b></a>
-					</div>
+			<div id="footer1">
+				<div>
+					<a href="#"><b>이용규칙</b></a>
+				</div>
+				<div>
+					<a href="#"><b>운영알림판</b></a>
+				</div>
+				<div>
+					<a href="#"><b>도움말</b></a>
+				</div>
+				<div>
+					<a href="#"><b>버그신고</b></a>
 				</div>
 			</div>
-			<div>
-				<div id="footer2">
-					<div>
-						<a href="#">개인정보 처리방침</a>
-					</div>
-					<div>
-						<a href="#">이용약관</a>
-					</div>
-					<div>
-						<a href="#">책임의 한계와 법적고지</a>
-					</div>
-					<div>
-						<a href="#">청소년 보호정책</a>
-					</div>
+			<div id="footer2">
+				<div>
+					<a href="#">개인정보 처리방침</a>
 				</div>
+				<div>
+					<a href="#">이용약관</a>
+				</div>
+				<div>
+					<a href="#">책임의 한계와 법적고지</a>
+				</div>
+				<div>
+					<a href="#">청소년 보호정책</a>
+				</div>
+	</div>
 			</div>
 			<div id="footer3">
 			<img src="/img/index/logos/fullLogoColor.png">
 			<strong>ⓒ 2020 · SingleBanlge</strong>
-		</div>
-	</div>
+			</div>
 	</div>
 
 	<script src="/js/index/index.js"></script>
