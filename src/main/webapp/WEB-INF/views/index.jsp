@@ -82,8 +82,7 @@
 			</div>
 			<br>
 
-			<form action="${pageContext.request.contextPath}/member/login.mem"
-				method="post">
+			<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
 				<ul class="rightSidebar">
 					<li class="rightSidebar"><input type="text"
 						class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
@@ -93,7 +92,11 @@
 						placeholder=" PASSWORD"><br></li>
 					<li class="rightSidebar" id="loginBtnBox">
 						<button class="loginBtns" id="loginBtn">Login</button>
-						<button type="button" class="loginBtns" id="joinBtn">Join</button>
+					</li>
+					<li class="rightSidebar" id="joinBox">
+						<a href="${pageContext.request.contextPath}/member/findId.mem">아이디 찾기</a> | 
+						<a href="${pageContext.request.contextPath}/member/findPw.mem">비밀번호 찾기</a> | 
+						<a href="${pageContext.request.contextPath}/member/signUp.mem">회원가입</a>
 					</li>
 				</ul>
 			</form>
@@ -194,14 +197,5 @@
 
 	<script src="/js/index/index.js"></script>
 
-	<script>
-		// 회원가입 페이지로 이동
-		$("#joinBtn")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/member/signUp.mem";
-						})
-	</script>
 </body>
 </html>

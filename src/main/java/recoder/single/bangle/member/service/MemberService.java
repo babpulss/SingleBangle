@@ -1,5 +1,7 @@
 package recoder.single.bangle.member.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDAO dao;
+	
+	
 	
 	public int signUp(MemberDTO dto) {
 		int signUpResult = 0;
@@ -40,6 +44,36 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		return loginResult;
+	}
+	
+	public List<String> findIdResult(String name, String phone) {
+		List<String> findIdResult = null;
+		try {
+			findIdResult = dao.findId(name, phone);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return findIdResult;
+	}
+	
+	public int findPwResult(String id, String pwHint, String pwAnswer, String email) {
+		int findPwResult = 0;
+		try {
+			findPwResult = dao.findPw(id, pwHint, pwAnswer, email);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return findPwResult;
+	}
+	
+	public int updatePw(String id, String pw) {
+		int updatePwResult = 0;
+		try {
+			updatePwResult = dao.updatePw(id, pw);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return updatePwResult;
 	}
 	
 	public MemberDTO getInfo(String id) {
