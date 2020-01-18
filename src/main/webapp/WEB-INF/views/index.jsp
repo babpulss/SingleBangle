@@ -60,7 +60,7 @@
 				<li><a href="#"> <i class="fa fa-home fa-2x"></i> <span
 						class="nav-text"> 랜선집들이 </span>
 				</a></li>
-				<li><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
+				<li><a href="${pageContext.request.contextPath }/market/boardList.do"> <i class="fa fa-comments fa-2x"></i> <span
 						class="nav-text"> re마켓 </span>
 				</a></li>
 				<li><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
