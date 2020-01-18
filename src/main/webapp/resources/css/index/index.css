@@ -374,8 +374,7 @@ html, body {
 	margin-top: 30px;
 }
 
-
-.loginBtns {
+#loginBtn {
 	border: none;
 	width: 90%;
 	height: 40px;

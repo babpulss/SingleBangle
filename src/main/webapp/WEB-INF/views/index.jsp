@@ -82,9 +82,7 @@
 			</div>
 			<br>
 
-
-			<form action="${pageContext.request.contextPath}/member/login.mem"
-				method="post">
+			<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
 				<ul class="rightSidebar">
 					<li class="rightSidebar"><input type="text"
 						class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
@@ -199,15 +197,5 @@
 
 	<script src="/js/index/index.js"></script>
 
-
-	<script>
-		// 회원가입 페이지로 이동
-		$("#joinBtn")
-				.on(
-						"click",
-						function() {
-							location.href = "${pageContext.request.contextPath}/member/signUp.mem";
-						})
-	</script>
 </body>
 </html>
