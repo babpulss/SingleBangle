@@ -132,11 +132,16 @@ width:800px;
 <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
 </a></div>
 	</div>
+	<c:choose>
+	<c:when test="${loginInfo.id == detailView.writer}">
 	<div class="row">
 		<div class="col-8"></div>
 		<div class="col-2"><button id="updateTip">글 수정</button></div>
 		<div class="col-2"><button id="deleteTip">글 삭제</button></div>
 	</div>
+	</c:when>
+	<c:otherwise></c:otherwise>
+	</c:choose>
 	<div class="row">
 	<div class="col-10"><button id="goBoardList">목록으로</button></div>
 	<div class="col-2">
@@ -164,7 +169,7 @@ width:800px;
 	});
 	
 	$("#deleteTip").on("click",function(){
-		location.href = "${pageContext.request.contextPath}/board/deleteTip.bo";
+		location.href = "${pageContext.request.contextPath}/board/deleteTip.bo?seq=${detailView.seq}";
 	});
 	
 //  스크랩 기능은 ajax로 바꿀거라서 성공하면 이거 필요 없음!	

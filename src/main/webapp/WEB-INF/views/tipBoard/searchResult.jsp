@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +9,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-	<h2>BoardList</h2>
+	<h2>검색결과</h2>
+	<h3>총 ${searchResultSize}의 결과가 있습니다.</h3>
 	<table border=1>
 		<tr>
 			<th>NO</th>
@@ -19,7 +20,7 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
-		<c:forEach items="${list}" var="dto">
+		<c:forEach items="${searchResult}" var="dto">
 			<tr>
 				<td>${dto.seq}</td>
 				<td><c:choose>
@@ -38,31 +39,5 @@
 		</c:forEach>
 	</table>
 
-	<br>
-	<button type="button" id="btnToWrite">글쓰기</button>
-	<button type="button" id="btnToBack">돌아가기</button>
-	<br>
-	<br>
-	<form action="tipSearch.bo" method="post">
-	<div class="searchBox">
-		<select id="searchType" name="tipCategory">
-			<option value="title">제목</option>
-			<option value="contents">본문</option>
-			<option value="both">제목+본문</option>
-		</select> 
-		<input type="text" id="searchInput" name="searchInput">
-		<button type="submit" id="btnSearch">검색</button>
-	</div>
-	</form>
-	${getNavi}
-
-	<script>
-		$("#btnToWrite").on("click",function() {
-			location.href = "${pageContext.request.contextPath}/board/toBoardWrite.bo";
-		})
-		$("#btnToBack").on("click", function() {
-			location.href = "${pageContext.request.contextPath}/memberHome";
-		})
-	</script>
 </body>
 </html>
