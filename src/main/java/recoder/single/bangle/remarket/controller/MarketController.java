@@ -54,6 +54,7 @@ public class MarketController {
 	@RequestMapping("/boardList.do") //게시글 전체 리스트
 	public String board(Model model, MarketDTO dto) {
 		try {
+			System.out.println("리마켓버튼 클릭");
 			String navi = dao.getPageNavi(1);
 			int cpage=1;
 			String page = request.getParameter("cpage");
@@ -78,7 +79,7 @@ public class MarketController {
 			}	
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("list", list);
-			return "board/board";
+			return "market/marketList";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -96,7 +97,7 @@ public class MarketController {
 		file_dao.delete(board_seq); //board삭제할때 file에서도 삭제
 		int boardSeq = board_seq;
 		reService.deleteUseBoardSeq(boardSeq);
-		return "redirect:/board/boardList.do";
+		return "redirect:/board/marketList.do";
 	}
 
 	@RequestMapping("/update.do")
@@ -161,7 +162,7 @@ public class MarketController {
 			List<MarketDTO> list = service.board();
 			ModelAndView mav = new ModelAndView();
 			model.addAttribute("list", list);
-			return "redirect:/board/boardList.do";
+			return "redirect:/board/marketList.do";
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;

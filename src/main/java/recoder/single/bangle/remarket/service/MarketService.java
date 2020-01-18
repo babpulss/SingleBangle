@@ -50,29 +50,34 @@ public class MarketService {
 	public void updateProc(String title, int price, String content, String category, int seq, String path) { //글수정
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
-		Pattern p = Pattern.compile("<img.+?src=\"(.+?)\".+?data-filename=\"(.+?)\".*?>");
+		Pattern p = Pattern.compile("<img.+?src=\"(.+?base64,.+?)\".+?data-filename=\"(.+?)\".*?>");
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
+		
 		if(!filePath.exists()) {
 			filePath.mkdir();
 		}
 		try {
 			List<MarketFileDTO> list = new ArrayList<>();
-			while(m.find()) {
-				String oriName = m.group(2);
-				String sysName = System.currentTimeMillis() + "_" + oriName;
-				String mgroup = m.group(1);
-				String imgString = m.group(1).split(",")[1];
-				byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
-				FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
-				DataOutputStream dos = new DataOutputStream(fos);
-				dos.write(imgBytes);
-				dos.flush();
-				dos.close();
-				content = content.replaceFirst(Pattern.quote(m.group(1)), "/files/"+sysName);
-				MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
-				list.add(file_dto);
-			}		
+				while(m.find()) {
+					System.out.println("업데이트프록 서비스");
+					String oriName = m.group(2);
+					String sysName = System.currentTimeMillis() + "_" + oriName;
+					String mgroup = m.group(1);
+					System.out.println("oriNamegroup2 : " + oriName);
+					System.out.println("mgroupgroup1 : " + mgroup);
+					String imgString = m.group(1).split(",")[1];
+					byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
+					FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
+					DataOutputStream dos = new DataOutputStream(fos);
+					dos.write(imgBytes);
+					dos.flush();
+					dos.close();
+					content = content.replaceFirst(Pattern.quote(m.group(1)), "/files/"+sysName);
+					MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
+					list.add(file_dto);
+				}		
+				
 			dao.update(title, price, content, category, seq);
 			int board_seq = seq;
 			for(MarketFileDTO tmp : list) {

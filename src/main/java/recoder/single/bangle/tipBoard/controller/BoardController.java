@@ -1,17 +1,14 @@
 package recoder.single.bangle.tipBoard.controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.JsonObject;
@@ -65,10 +62,20 @@ public class BoardController {
 	
 	//게시판 글 목록 화면
 	@RequestMapping("/boardList.bo")
-	public String boardList(Model model) {
-		List<BoardDTO> list = boardService.boardList();
+	public String boardList(Model model, @RequestParam(value="currentPage", required=false)String currentPage_) {
+		int currentPage;
+		if (currentPage_ == null) 
+			currentPage = 1;
+		else 
+			currentPage = Integer.parseInt(currentPage_);
+		System.out.println("controller에서 currentPage: "+currentPage);
+		
+		List<BoardDTO> list = boardService.selectByPage(currentPage);
+		String getNavi = boardService.getNavi(currentPage);
+		
+		model.addAttribute("getNavi",getNavi);		
 		model.addAttribute("list", list);
-		System.out.println("DB에 있는 글의 개수: " + list.size());
+
 		return "tipBoard/boardList";
 	}
 	
@@ -109,6 +116,18 @@ public class BoardController {
 		
 		model.addAttribute("updateResult", updateResult);
 		return "tipBoard/boardUpdateCheck";
+	}
+	
+	@RequestMapping("/deleteTip.bo")
+	public String deleteTip(int seq) {
+		System.out.println("deleteTip.bo에 잘 도착!");
+		int deleteResult = boardService.deleteTip(seq);
+		if(deleteResult>0) {
+			System.out.println("팁게시판 게시글 삭제 성공!");
+		}else {
+			System.out.println("팁게시판 게시글 삭제 실패ㅠ");
+		}
+		return "redirect:,boardList.bo";
 	}
 	
 	@RequestMapping(value = "/like.bo", produces = "application/json; charset=UTF-8")
@@ -169,6 +188,39 @@ public class BoardController {
 		obj.addProperty("scrapCount", scrapCount);
 		return obj.toString();	
 	}
+	
+	@RequestMapping("/tipSearch.bo")
+	public String tipSearch(String tipCategory, String searchInput, Model model) {
+		String cate = tipCategory;
+		String input = searchInput;
+		// category가 '제목'일때
+		if(cate.contentEquals("title")) {
+			System.out.println("제목으로 검색 도착!");
+		List<BoardDTO> dtoB = boardService.searchTitle(input);
+		int size =	dtoB.size();
+		//제목으로 검색해서 나온 결과	
+		model.addAttribute("searchResult",dtoB);
+		//제목으로 검색해서 나온 결과의 수
+		model.addAttribute("searchResultSize",size);
+		
+		}else if(cate.contentEquals("contents")) {
+			System.out.println("본문으로 검색 도착");
+			List<BoardDTO> dtoB = boardService.searchContents(input);
+			int size = dtoB.size();
+			//본문으로 검색해서 나온 결과
+			model.addAttribute("searchResult",dtoB);
+			//본문으로 검색해서 나온 결과의 수
+			model.addAttribute("searchResultSize",size);
+		}else if(cate.contentEquals("both")){
+			System.out.println("제목+본문으로 검색 도착");
+			List<BoardDTO> dtoB = boardService.searchBoth(input);
+			int size = dtoB.size();
+			model.addAttribute("searchResult",dtoB);
+			model.addAttribute("searchResultSize",size);
+		}
+		return "tipBoard/searchResult";
+	}
+	
 
 }
 
