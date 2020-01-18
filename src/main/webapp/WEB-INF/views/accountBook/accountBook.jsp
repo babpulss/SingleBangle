@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/resources/css/accountCSS/accountCSS.css" />
 <link rel="stylesheet"
@@ -41,24 +42,24 @@
 			</h2>
 		</div>
 		<div class="card-block p-0">
-			<table class="table">
-				<thead>
-					<tr>
-						<th class="border-0 text-uppercase small font-weight-bold">날짜</th>
-						<th class="border-0 text-uppercase small font-weight-bold">용도</th>
-						<th class="border-0 text-uppercase small font-weight-bold">결제방식</th>
-						<th class="border-0 text-uppercase small font-weight-bold">입/출금</th>
-						<th class="border-0 text-uppercase small font-weight-bold">금액</th>
-						<th class="border-0 text-uppercase small font-weight-bold">비고</th>
-						<th class="border-0 text-uppercase small font-weight-bold"
-							id="modiBtn" style="display: none">선택</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<form action="${pageContext.request.contextPath }/Account.add"
-							method="post">
-							<td><input type="text" id="datepicker" name="reportingDate"></td>
+			<form id="addFrm"action="${pageContext.request.contextPath }/accountBook/Account.add"
+				method="post">
+				<table class="table">
+					<thead>
+						<tr>
+							<th class="border-0 text-uppercase small font-weight-bold">날짜</th>
+							<th class="border-0 text-uppercase small font-weight-bold">용도</th>
+							<th class="border-0 text-uppercase small font-weight-bold">결제방식</th>
+							<th class="border-0 text-uppercase small font-weight-bold">입/출금</th>
+							<th class="border-0 text-uppercase small font-weight-bold">금액</th>
+							<th class="border-0 text-uppercase small font-weight-bold">비고</th>
+							<th class="border-0 text-uppercase small font-weight-bold"
+								id="modiBtn" style="display: none">선택</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td id="datePic"><input type="text" id="datepicker" name="reportingDate"></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 								id="detailsSelect" name="details">
 									<option selected>선택</option>
@@ -90,10 +91,10 @@
 								placeholder="비고란"></td>
 							<td class="plusBtn"><input type="button" id="addBtn"
 								value="적용"></td>
-						</form>
-					</tr>
-				</tbody>
-			</table>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 			<table
 				class="table table-bordered table-sm m-0 table table-condensed table-hover">
 				<thead>
@@ -117,7 +118,7 @@
 							<td class="total"><fmt:formatNumber
 									value="${list.income-list.expense}" pattern="###,###,###원" /></td>
 							<td><a
-								href="${pageContext.request.contextPath }/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
+								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
 									class="detailBtn" value="상세보기"></a> <a><input
 									type="button" name="${list.formedReportingDate}"
@@ -143,65 +144,6 @@
 			</nav>
 		</div>
 	</div>
-	<!--         <table class="table table-bordered table-definition mb-5"> -->
-	<!--             <thead class="table-warning "> --> <!--                 <tr> -->
-	<!--                     <th></th> --> <!--                     <th>Name</th> -->
-	<!--                     <th>Registration Date</th> --> <!--                     <th>E-mail address</th> -->
-	<!--                     <th>Premium Plan</th> --> <!--                 </tr> -->
-	<!--             </thead> --> <!--             <tbody> --> <!--                 <tr> -->
-	<!--                     <td> --> <!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td>jhlilk22@yahoo.com</td> --> <!--                     <td>No</td> -->
-	<!--                 </tr> --> <!--                 <tr> --> <!--                     <td> -->
-	<!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td>jhlilk22@yahoo.com</td> --> <!--                     <td>No</td> -->
-	<!--                 </tr> --> <!--                 <tr> --> <!--                     <td> -->
-	<!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td>jhlilk22@yahoo.com</td> --> <!--                     <td>No</td> -->
-	<!--                 </tr> --> <!--             </tbody> --> <!--             <tfoot> -->
-	<!--                 <tr> --> <!--                     <th></th> --> <!--                     <th colspan="4"> -->
-	<!--                         <button class="btn btn-primary float-right">Add User</button> -->
-	<!--                         <button class="btn btn-default">Approve</button> -->
-	<!--                         <button class="btn btn-default">Approve All</button> -->
-	<!--                     </th> --> <!--                 </tr> --> <!--             </tfoot> -->
-	<!--         </table> --> <!--         <table class="table  table-sm"> -->
-	<!--             <thead class="table-info"> --> <!--                 <tr> -->
-	<!--                     <th></th> --> <!--                     <th>Name</th> -->
-	<!--                     <th>Registration Date</th> --> <!--                     <th>E-mail address</th> -->
-	<!--                     <th>Premium Plan</th> --> <!--                 </tr> -->
-	<!--             </thead> --> <!--             <tbody> --> <!--                 <tr> -->
-	<!--                     <td> --> <!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td>jhlilk22@yahoo.com</td> --> <!--                     <td>No</td> -->
-	<!--                 </tr> --> <!--                 <tr> --> <!--                     <td> -->
-	<!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td class="table-danger">jhlilk22@yahoo.com</td> -->
-	<!--                     <td>No</td> --> <!--                 </tr> -->
-	<!--                 <tr> --> <!--                     <td> --> <!--                         <label class="custom-control custom-checkbox"> -->
-	<!--                             <input type="checkbox" class="custom-control-input"> -->
-	<!--                             <span class="custom-control-indicator"></span> -->
-	<!--                         </label> --> <!--                     </td> -->
-	<!--                     <td>John Lilki</td> --> <!--                     <td>September 14, 2013</td> -->
-	<!--                     <td>jhlilk22@yahoo.com</td> --> <!--                     <td>No</td> -->
-	<!--                 </tr> --> <!--             </tbody> --> <!--         </table> -->
 	</main>
 	<script>
 		$(function() {
@@ -244,64 +186,72 @@
 								,
 								minDate : "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 								,
-								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
+								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)   
+								,
+								changeMonth : true
+								,
+								changeDay : true
+								,
+								changeYear : true
 							});
 
 			//초기값을 오늘 날짜로 설정
-			$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)            
+			$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
+			
 		});
-		$(".detailBtn")
-				.on(
-						"click",
-						function() {
-							var report = $(this).attr("name");
-							console.log(report);
-							location.href = "${pageContext.request.contextPath}/detailAccount?formedReportingDate="
-									+ report;
-						});
+// 		$(".detailBtn")
+// 				.on(
+// 						"click",
+// 						function() {
+// 							var report = $(this).attr("name");
+// 							console.log(report);
+// 							location.href = "${pageContext.request.contextPath}/accountBook/detailAccount?formedReportingDate="
+// 									+ report;
+// 						});
 		$("#addBtn").on("click", function() {
-						var reportingDates = $("#datepicker").val();
-						var detail = $("#detailsSelect").val();
-						var payment = $("#paymentsSelect").val();
-						var specs = $("#specSelect").val();
-						var prices = $("#price").val();
-						var remark = $("#remarks").val();
+				$("#addFrm").submit();
+			// 						var reportingDates = $("#datepicker").val();
+			// 						var detail = $("#detailsSelect").val();
+			// 						var payment = $("#paymentsSelect").val();
+			// 						var specs = $("#specSelect").val();
+			// 						var prices = $("#price").val();
+			// 						var remark = $("#remarks").val();
 
-						$.ajax({
-							url : "/Account.add",
-							dataType : "json",
-							type : "post",
-							data : {
-								reportingDate : reportingDates,
-								details : detail,
-								payments : payment,
-								spec : specs,
-								price : prices,
-								remarks : remark
-							}
-						}).done(function(resp) {
-							$(".monthData").remove();
-							$.each(resp, function(i,list){
-								console.log(i);
-							$("#monthDataBody").append("<tr class=\"monthData"+i+"\"></tr>");
-							$(".monthData"+i).append("<td class=\"formedDate"+i+"\">"+list.formedReportingDate+"</td>");
-							var incomePrice = addComma(list.income);
-							
-							$(".monthData"+i).append("<td class=\"'income'"+i+" style='color:dodgerblue'\">"+incomePrice+"</td>");
-							addComma(list.expense);
-							$(".monthData"+i).append("<td class=\"'expense'"+i+" style='color:red'\">"+list.expense+"</td>");
-							$(".monthData"+i).append("<td class=\"'total"+i+"'>"+list.income-list.expense+"</td>");
-							$(".monthData"+i).append("<td><input type='button' class='detailBtn' name="+list.formedReportingDate+" value='상세보기'>"
-							+"<input type='button' class='deleteBtn' name="+list.formedReportingDate+" value='삭제'></td>");
-							$(".formedDate").html(list.formedReportingDate);
-							$(".income").html(list.income);
-							$(".expense").html(list.expense);
-							$(".total").html(list.income-list.expense);					
-							})
-							console.log(resp);
-						}).fail(function() {
-							console.log("fail");
-						});
+			// 						$.ajax({
+			// 							url : "/Account.add",
+			// 							dataType : "json",
+			// 							type : "post",
+			// 							data : {
+			// 								reportingDate : reportingDates,
+			// 								details : detail,
+			// 								payments : payment,
+			// 								spec : specs,
+			// 								price : prices,
+			// 								remarks : remark
+			// 							}
+			// 						}).done(function(resp) {
+			// 							$(".monthData").remove();
+			// 							$.each(resp, function(i,list){
+			// 								console.log(i);
+			// 							$("#monthDataBody").append("<tr class=\"monthData"+i+"\"></tr>");
+			// 							$(".monthData"+i).append("<td class=\"formedDate"+i+"\">"+list.formedReportingDate+"</td>");
+			// 							var incomePrice = addComma(list.income);
+
+			// 							$(".monthData"+i).append("<td class=\"'income'"+i+" style='color:dodgerblue'\">"+incomePrice+"</td>");
+			// 							addComma(list.expense);
+			// 							$(".monthData"+i).append("<td class=\"'expense'"+i+" style='color:red'\">"+list.expense+"</td>");
+			// 							$(".monthData"+i).append("<td class=\"'total"+i+"'>"+list.income-list.expense+"</td>");
+			// 							$(".monthData"+i).append("<td><input type='button' class='detailBtn' name="+list.formedReportingDate+" value='상세보기'>"
+			// 							+"<input type='button' class='deleteBtn' name="+list.formedReportingDate+" value='삭제'></td>");
+			// 							$(".formedDate").html(list.formedReportingDate);
+			// 							$(".income").html(list.income);
+			// 							$(".expense").html(list.expense);
+			// 							$(".total").html(list.income-list.expense);					
+			// 							})
+			// 							console.log(resp);
+			// 						}).fail(function() {
+			// 							console.log("fail");
+			// 						});
 
 		});
 		function addComma(num) {

@@ -45,6 +45,10 @@ public class BoardDAO {
 			return tmp;
 		}
 		
+		public int deleteTip(int seq) throws Exception{
+			return sst.delete("Tip.deleteTip",seq);
+		}
+		
 		public int likeCheck(int seq, String id) throws Exception{
 //			매개변수 2개니까 map에 넣어준다! <String,Object> 이거는 map의 자료형!
 			Map<String,Object> param = new HashMap<>();
@@ -106,5 +110,28 @@ public class BoardDAO {
 		
 		public List<ScrapDTO> myScrap(String id) throws Exception{
 			return sst.selectList("Tip.myScrap",id);
+		}
+		
+		public int tipCount() throws Exception{
+			return sst.selectOne("Tip.tipCount");
+		}
+		
+		public List<BoardDTO> selectByPage(int startNum, int endNum){
+			Map<String, Object> param = new HashMap<>();
+			param.put("startNum", startNum);
+			param.put("endNum", endNum);
+			return sst.selectList("Tip.selectByPage", param);
+		}
+		
+		public List<BoardDTO> searchTitle(String title){
+			return sst.selectList("Tip.searchTitle", title);
+		}
+		
+		public List<BoardDTO> searchContents(String contents){
+			return sst.selectList("Tip.searchContents", contents);
+		}
+		
+		public List<BoardDTO> searchBoth(String both){
+			return sst.selectList("Tip.searchBoth", both);
 		}
 }
