@@ -19,6 +19,7 @@
 	font-weight: normal;
 	font-style: normal;
 }
+
 .sidebar {
 	font-family: 'BMHANNAAir';
 }
@@ -27,40 +28,6 @@
 	box-sizing: border-box;
 	padding: 0px;
 	margin: 0px;
-}
-
-.d1 {
-	background-size: cover;
-	height: 50vh;
-	background-attachment: fixed;
-}
-
-.d2 {
-	width: 50%;
-	height: 50vh;
-	background-color: white;
-	float: left;
-}
-
-.a1 {
-	background-image: url(/img/index/intro1.png);
-	background-size: 50% 100%;
-	width: 50%;
-	float: left;
-}
-
-.a2 {
-	background-image: url(/img/index/intro2.png);
-	background-size: 50% 100%;	
-	width: 50%;
-	float: left;
-}
-
-.a3 {
-	background-image: url(/img/index/intro3.png);
-	background-size: 50% 100%;
-	width: 50%;
-	float: left;
 }
 
 .fa-2x {
@@ -136,7 +103,7 @@
 	display: table-cell;
 	vertical-align: middle;
 	width: 290px;
-/* 	font-family: 'Titillium Web', sans-serif; */
+	/* 	font-family: 'Titillium Web', sans-serif; */
 }
 
 .main-menu>ul.logout {
@@ -373,7 +340,7 @@ html, body {
 	width: 300px;
 	height: 300px;
 	position: absolute;
-	top : 200px;
+	top: 200px;
 	/* right: 3vw; */
 	left: 50%;
 	transform: translate(-50%);
@@ -388,28 +355,30 @@ html, body {
 
 #rightSidebar ul {
 	/* width: 200px; */
+	
 }
 
-#loginTitle{
+#loginTitle {
 	font-family: 'BMHANNAAir';
 	font-size: 24px;
 }
 
-.loginVal{
+.loginVal {
 	border: 1px solid #dadada;
 	width: 90%;
 	height: 40px;
 	font-size: 16px;
 }
 
-#loginBtnBox{
-	margin-top:30px;
+#loginBtnBox {
+	margin-top: 30px;
 }
-.loginBtns{
+
+.loginBtns {
 	border: none;
 	width: 90%;
 	height: 40px;
-	margin-bottom:5px;
+	margin-bottom: 5px;
 	cursor: pointer;
 	font-size: 16px;
 	color: white;
@@ -420,6 +389,7 @@ html, body {
 #mainWrapper {
 	margin: 65px 110px 0 110px;
 }
+
 #mainWrapper * {
 	font-family: 'yg-jalnan';
 }
@@ -485,10 +455,38 @@ html, body {
 
 /* 네번째 행 */
 #fourthRow {
-	position: relative;
-	height: 1500px;
+	width: 100%;
+	display: grid;
+	grid-gap: 0px;
+	align-items: center;
+	grid-template-rows: 400px 550px 550px;
 }
 
+#fourthRow * {
+	text-align: center;
+}
+
+.pic1, .pic2, .pic3 {
+	background-attachment: fixed;
+	background-repeat: round;
+}
+
+.pic1 {
+	background-image: url(/img/index/intro1.png);	
+	grid-column: 1/span 2;
+	padding-top: 100px;
+	height: 100%;
+}
+
+.pic2 {
+	background-image: url(/img/index/intro2.png);
+	height: 100%;
+}
+
+.pic3 {
+	background-image: url(/img/index/intro3.png);
+	height: 100%;
+}
 /* 푸터 */
 #footer {
 	position: relative;
@@ -536,7 +534,7 @@ html, body {
 }
 
 /* 모바일 환경 */
-@media ( max-width: 1900px) {
+@media ( max-width : 1900px) {
 	#mainWrapper {
 		margin: 65px 0 0 0;
 	}
@@ -601,7 +599,13 @@ html, body {
 		margin: 20px 0 20px 0;
 	}
 	#fourthRow {
-		height: 1000px;
+		height: 2350px;
+	}
+	.pic1 {
+		grid-column: 1;
+	}
+	.pic3 {
+		grid-area: 5/1/6/2;
 	}
 	#footer {
 		height: 100%;
