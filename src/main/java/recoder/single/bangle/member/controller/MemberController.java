@@ -29,6 +29,8 @@ public class MemberController {
 	@Autowired
 	private BoardDAO boardDao;
 	
+	
+	
 	@RequestMapping("/signUp.mem")
 	public String signUp() {
 		return "member/signUpForm";
@@ -52,7 +54,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/login.mem")
-	public String login(String id, String pw, Model model) {
+	public String login() {
+		return "member/login";
+	}
+	
+	@RequestMapping("/loginProc.mem")
+	public String loginProc(String id, String pw, Model model) {
 		int loginResult = memSvc.login(id, pw);
 		if(loginResult > 0) {
 			MemberDTO dto = memSvc.getInfo(id);
@@ -61,6 +68,25 @@ public class MemberController {
 		model.addAttribute("loginResult", loginResult);
 		
 		return "member/loginCheck";
+	}
+	
+	@RequestMapping("/findId.mem")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping("/findIdResult.mem")
+	public String findIdResult(String name, String phone, Model model) {
+		List<String> findIdResult = memSvc.findIdResult(name, phone);
+		model.addAttribute("findIdResult", findIdResult);
+		System.out.println(findIdResult.size());
+		
+		return "member/findIdResult";
+	}
+	
+	@RequestMapping("/findPw.mem")
+	public String findPw() {
+		return "member/findPw";
 	}
 	
 	@RequestMapping("/myPage")
@@ -72,6 +98,7 @@ public class MemberController {
 	public String myInfo(Model model) {
 		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
 		model.addAttribute("infoResult", infoResult);
+		
 		return "member/myInfo";
 	}
 	
@@ -79,6 +106,7 @@ public class MemberController {
 	public String modifyInfo(Model model) {
 		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
 		model.addAttribute("infoResult", infoResult);
+		
 		return "member/modifyForm";
 	}
 	

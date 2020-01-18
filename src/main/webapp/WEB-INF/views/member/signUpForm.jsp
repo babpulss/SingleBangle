@@ -103,7 +103,7 @@ body {
             <br>
             <div class="info">
                 <label class="label1" for="id"><b>아이디</b></label><br>
-                <input type="text" class="infoVal" id="id" name="id" placeholder=" 5~12자 이내 영문(소문자), 숫자">
+                <input type="text" class="infoVal" id="id" name="id" placeholder=" 5~12자 이내 영문(소문자), 숫자 ">
                 <span class="validCheck" id="idCheck"></span>
             </div>
             <div class="info">
@@ -117,7 +117,7 @@ body {
                 <span class="validCheck" id="pwreCheck"></span>
             </div>
             <div class="info">
-                <label class="label1" for="pwHint"><b>비밀번호 확인 질문</b></label><br>
+                <label class="label1" for="pwHint"><b>비밀번호 찾기 질문</b></label><br>
                 <select class="infoVal" id="pwHint" name="pwHint" size="1">
                     <option value="hint1">기억에 남는 추억의 장소는?</option>
                     <option value="hint2">자신의 인생 좌우명은?</option>
@@ -137,7 +137,7 @@ body {
                 </select>
             </div>
             <div class="info">
-                <label class="label1" for="pwAnswer"><b>비밀번호 확인 답변</b></label><br>
+                <label class="label1" for="pwAnswer"><b>비밀번호 찾기 답변</b></label><br>
                 <input type="text" class="infoVal" id="pwAnswer" name="pwAnswer" placeholder=" 필수 입력 ">
             </div>
             <br>
@@ -160,7 +160,7 @@ body {
             </div>
             <div class="info">
                 <label class="label1" for="phone"><b>전화번호</b></label><br>
-                <input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 ">
+                <input type="text" class="infoVal" id="phone" name="phone" placeholder=" '-'없이 숫자만 입력 ">
                 <span class="validCheck" id="phoneCheck"></span>
             </div>
             <div class="info">

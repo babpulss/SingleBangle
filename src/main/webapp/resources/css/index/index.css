@@ -405,7 +405,7 @@ html, body {
 #loginBtnBox{
 	margin-top:30px;
 }
-.loginBtns{
+#loginBtn{
 	border: none;
 	width: 90%;
 	height: 40px;
@@ -414,6 +414,15 @@ html, body {
 	font-size: 16px;
 	color: white;
 	background-color: #0085cb;
+}
+
+#joinBox{
+	margin-top: 10px;
+	font-size: 12px;
+}
+#joinBox>a{
+	color: #0085cb;
+	text-decoration: none;
 }
 
 /* 메인 화면 래퍼 */
