@@ -1,4 +1,4 @@
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -27,6 +27,11 @@
 	<update id="updateTip" parameterType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
 		update livingPoint set category=#{category}, title=#{title}, contents=#{contents} where seq=#{seq}
 	</update>
+	
+	<delete id="deleteTip">
+		delete from livingPoint where seq = #{value}
+	</delete>
+	
 <!-- 좋아요 관련 -->
 <!-- 	동일 게시글 추천 여부 검색! 좋아요는 1개 게시물에 1번만 -->
 	<select id="likeCheck" resultType="Integer">
@@ -84,6 +89,23 @@
 	
 	<select id="tipCount" resultType="Integer">
 		select count(*) from livingPoint
+	</select>
+	
+	<select id="selectByPage" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint) where rown between #{startNum} and #{endNum}
+	</select>
+	
+<!-- 상세검색  -->
+	<select id="searchTitle" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from livingPoint where title like '%'||#{value}||'%'
+	</select>
+
+	<select id="searchContents" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from livingPoint where contents like '%'||#{value}||'%'
+	</select>
+	
+	<select id="searchBoth" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from livingPoint where title like '%'||#{value}||'%' or contents like '%'||#{value}||'%'
 	</select>
 </mapper>
 

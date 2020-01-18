@@ -248,7 +248,7 @@ public class BoardService {
 		}
 		return myScrapList;
 	}
-	
+		
 	public String getNavi(int currentPage) {
 										// currentPage = 현재 페이지 번호
 		int recordTotalCount = 0;	 	// 전체 게시물 개수
@@ -268,7 +268,7 @@ public class BoardService {
 			pageTotalCount = recordTotalCount/Configuration.recordCountPerPage;
 		}
 
-		if(currentPage < 1) { //페이지값을 1 이하 숫자로 하는 경우
+		if(currentPage <= 1) { //페이지값을 1 이하 숫자로 하는 경우
 			currentPage = 1;
 		}else if(currentPage > pageTotalCount){ // 마지막 페이지값보다 높은 페이지값을 요청하는 경우
 			currentPage = pageTotalCount;
@@ -289,20 +289,56 @@ public class BoardService {
 		if(endNavi == pageTotalCount) {
 			needNext = false;
 		}
-
+		
 		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
 
 		if(needPrev) {
-			sb.append("<a href='boardList.do?cpage="+(startNavi - 1)+"'> < </a>");
+			sb.append("<a href='boardList.bo?currentPage="+(startNavi - 1)+"'> < </a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='boardList.do?cpage="+i+"'>"); //cpage = currentpage
+			sb.append("<a href='boardList.bo?currentPage="+i+"'>"); //cpage = currentpage
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext) {
-			sb.append("<a href='boardList.do?cpage="+(endNavi + 1) +"' > > </a>");
+			sb.append("<a href='boardList.bo?currentPage="+(endNavi + 1) +"' > > </a>");
 		}
 		return sb.toString();
+	}
+	
+		public List<BoardDTO> selectByPage(int currentPage){
+			
+			int recordCountPerPage = 10; // 한 페이지 게시물 수
+
+			int endNum = recordCountPerPage * currentPage; 
+			int startNum = endNum - (recordCountPerPage - 1);
+			System.out.println("service에서 start랑 end: "+startNum+":"+endNum);
+			List<BoardDTO> selectByPage = boardDao.selectByPage(startNum, endNum);
+			return selectByPage;
+		}
+
+	public List<BoardDTO> searchTitle(String title) {
+		List<BoardDTO> searchTitle = boardDao.searchTitle(title);
+		return searchTitle;
+	}
+
+	public List<BoardDTO> searchContents(String contents) {
+		List<BoardDTO> searchContents = boardDao.searchContents(contents);
+		return searchContents;
+	}
+
+	public List<BoardDTO> searchBoth(String both) {
+		List<BoardDTO> searchBoth = boardDao.searchBoth(both);
+		return searchBoth;
+	}
+	
+	public int deleteTip(int seq) {
+		int deleteResult = 0;
+		try {
+			deleteResult = boardDao.deleteTip(seq);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deleteResult;
 	}
 }
