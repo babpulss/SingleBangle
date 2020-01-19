@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<title>비밀번호 찾기 결과</title>
+		
 		<style>
             *{
                 box-sizing: border-box;
@@ -70,15 +71,10 @@
                 border-bottom: 1px solid #b2b2b2;
             }
 
-            .pwList{
+            #pwList{
                 margin-top: 15px;
                 margin-bottom: 15px;
                 text-align: center;
-            }
-            .label1{
-                display: inline-block;
-                margin-bottom: 5px;
-                font-size: 14px;
             }
 
             #toLoginContainer{
@@ -126,7 +122,7 @@
                 </div>
             </div>
             <br>
-            <div class="pwList">
+            <div id="pwList">
             <c:choose>
                 <c:when test="${findPwResult > 0 }">
 	                <b>로그인 후 비밀번호를 변경하여</b><br>

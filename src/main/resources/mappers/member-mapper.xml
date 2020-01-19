@@ -38,6 +38,10 @@
 						postcode = #{postcode}, address1 = #{address1}, address2 = #{address2} where id = #{id}
 	</update>
 	
+	<select id="pwCheck" resultType="Integer">
+		select count(*) from member where id = #{id} and pw = #{pw}
+	</select>
+	
 	<delete id="deleteById" parameterType="String">
 		delete from member where id = #{id}
 	</delete>

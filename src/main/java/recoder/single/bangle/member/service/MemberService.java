@@ -96,6 +96,16 @@ public class MemberService {
 		return updateResult;
 	}
 	
+	public int pwCheck(String id, String pw) {
+		int pwCheckResult = 0;
+		try {
+			pwCheckResult = dao.pwCheck(id, pw);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return pwCheckResult;
+	}
+	
 	public int withdraw(String id) {
 		int deleteResult = 0;
 		try {

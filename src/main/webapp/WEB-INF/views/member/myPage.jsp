@@ -4,119 +4,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Member Home</title>
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
-<style>
-	*{
-		box-sizing:border-box;
-	}
+	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+	<title>마이 페이지</title>
 	
-	#login_box{
-		border:2px solid #0085cb;
-		border-radius:5px;
-		width:250px;
-		text-align:center;
-		margin:auto;
-	}
-	
-	.info{
-		width:100%;
-		height:30px;
-		border:1px solid #bcbcbc;
-		text-align:center;
-		font-size:15px;
-	}
-	
-	#mainpage{
-		border:2px solid #0085cb;
-		border-radius:5px;
-		width:250px;
-		text-align:center;
-		margin:auto;
-	}
-	
-	.btns{
-		width:90px;
-		height:30px;
-		color:#0085cb;
-		background-color:white;
-		border:1px solid #0085cb;
-		border-radius:3px;
-	}
-	.btns:hover{
-		color:white;
-		background-color:#0085cb;
-		cursor:pointer;
-	}
-</style>
+	<style>
+        *{
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #f5f5f5;
+        }
+        
+        #logo{
+            text-align: center;
+        }
+        #logo img{
+            height: 180px;
+        }
+        
+        #myPageContainer{
+            width: 800px;
+            margin: auto;
+        }
+        #myPageHeader{
+            width: 800px;
+            height: 80px;
+            line-height: 40px;
+            margin: auto;
+        }
+        #myPageTitle{
+            font-size: 32px;
+        }
+        #myPageNotice{
+            font-size: 12px;
+            border-bottom: 1px solid black;
+        }
+        
+        #menuContainer{
+            width: 800px;
+            text-align: center;
+            margin: auto;
+        }
+        .myMenu{
+            display: inline-block;
+            width: 120px;
+            text-decoration: none;
+            color: #b2b2b2;
+        }
+        .menuIcon img{
+            height: 80px;
+        }
+        .menuText{
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-
 	<c:choose>
 		<c:when test="${loginInfo==null}">
-			<div id="login_box">
-				<form action="${pageContext.request.contextPath}/member/login.mem" method="post" id="frm">
-					<h3>Login</h3>
-					<input type="text" class="info" id="id" name="id" placeholder="Input your ID">
-					<br>
-					<input type="password" class="info" id="pw" name="pw" placeholder="Input your PW">
-					<br><br>
-					<input type="submit" class="btns" id="login" value="Login">
-					<button type="button" class="btns" id="signUp">Sign up</button>
-					<br><br>
-				</form>
-			</div>			
+			<script>
+				alert("로그인 후 이용하실 수 있습니다.");
+				location.href="${pageContext.request.contextPath}/member/login.mem";
+			</script>		
 		</c:when>
 		<c:otherwise>
-			<div id="mainpage">
-				<h3>${loginInfo.id}님 환영합니다.</h3>
-				<button class="btns" id="myInfo">내 정보</button>
-				<button class="btns" id="modify">정보 수정</button>
-				<br><br>
-				<button class="btns" id="logout">로그아웃</button>
-				<button class="btns" id="withdraw">회원 탈퇴</button>
-				<br><br>
-				<button class="btns" id="myScrap">스크랩 모음</button>
-				<br><br>
-			</div>
+			<div id="logo">
+		        <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
+		    </div>
+		    <br>
+		    <div id="myPageContainer">
+		        <div id="myPageHeader">
+		            <div id="myPageTitle"><b>마이 페이지</b></div>
+		            <div id="myPageNotice"><b>${loginInfo.id}</b>님의 정보를 관리할 수 있습니다.</div>
+		        </div>
+		        <br><br><br>
+		        <div id="menuContainer">
+		            <a href="${pageContext.request.contextPath}/member/myInfo.mem" class="myMenu" id="myInfo">
+		                <div class="menuIcon">
+		                    <img src="/img/member/info_unchecked.png" alt="">
+		                </div>
+		                <div class="menuText">
+		                    <b>내 정보</b>
+		                </div>
+		            </a>
+		            <a href="${pageContext.request.contextPath}/member/modifyInfo.mem" class="myMenu" id="modifyInfo">
+		                <div class="menuIcon">
+		                    <img src="/img/member/modify_unchecked.png" alt="">
+		                </div>
+		                <div class="menuText">
+		                    <b>정보 수정</b>
+		                </div>
+		            </a>
+		            <a href="${pageContext.request.contextPath}/member/myScrap.mem?id=${loginInfo.id}" class="myMenu" id="myScrap">
+		                <div class="menuIcon">
+		                    <img src="/img/member/bookmark01_unchecked.png" alt="">
+		                </div>
+		                <div class="menuText">
+		                    <b>스크랩</b>
+		                </div>
+		            </a>
+		            <a href="${pageContext.request.contextPath}/member/withdraw.mem" class="myMenu" id="withdraw">
+		                <div class="menuIcon">
+		                    <img src="/img/member/withdraw_unchecked.png" alt="">
+		                </div>
+		                <div class="menuText">
+		                    <b>탈퇴</b>
+		                </div>
+		            </a>
+		        </div>
+		    </div>
 		</c:otherwise>
 	</c:choose>
 	
-	
 	<script>
-		$("#signUp").on("click", function(){
-			location.href="${pageContext.request.contextPath}/member/signUp.mem";
-		});
 		
-		$("#myInfo").on("click", function(){
-			location.href="${pageContext.request.contextPath}/member/myInfo.mem";
-		});
-		
-		$("#modify").on("click", function(){
-			location.href="${pageContext.request.contextPath}/member/modifyInfo.mem";
-		});
-		
-		$("#logout").on("click", function(){
-            var logoutConfirm = confirm("정말 로그아웃 하시겠습니까?");
-
-            if(logoutConfirm == true){
-                location.href="${pageContext.request.contextPath}/member/logout.mem";
-            }
-        });
-		
-		$("#withdraw").on("click", function(){
-			var memberoutConfirm = confirm("정말 탈퇴하시겠습니까?");
-			
-			if(memberoutConfirm == true){
-				location.href="${pageContext.request.contextPath}/member/withdraw.mem";
-			}
-		});
-		
-		$("#myScrap").on("click",function(){
-			location.href = "${pageContext.request.contextPath}/member/myScrap.mem?id=${loginInfo.id}";
-		})
 	</script>
 </body>
 </html>
