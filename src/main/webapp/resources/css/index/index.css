@@ -470,32 +470,38 @@ html, body {
 	grid-gap: 0px;
 	align-items: center;
 	grid-template-rows: 400px 550px 550px;
-}
+	grid-template-columns: 40% auto;
+	text-align: center;
+}j
 
 #fourthRow * {
-	text-align: center;
+	justify-content: center;
 }
 
 .pic1, .pic2, .pic3 {
 	background-attachment: fixed;
 	background-repeat: round;
+	background-size: cover;
 }
 
 .pic1 {
-	background-image: url(/img/index/intro1.png);	
+	background-image: url(/img/index/intro1.jpg);	
 	grid-column: 1/span 2;
 	padding-top: 100px;
+	width: 100%;
 	height: 100%;
+	color: white;
 }
 
 .pic2 {
-	background-image: url(/img/index/intro2.png);
+	background-image: url(/img/index/intro2.jpg);
 	height: 100%;
 }
 
 .pic3 {
-	background-image: url(/img/index/intro3.png);
+	background-image: url(/img/index/intro3.jpg);
 	height: 100%;
+	background-size: auto;
 }
 /* 푸터 */
 #footer {
@@ -610,12 +616,19 @@ html, body {
 	}
 	#fourthRow {
 		height: 2350px;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
 	}
 	.pic1 {
 		grid-column: 1;
 	}
+	.pic2 {
+		grid-column: 1;
+		width: 200%;
+	}
 	.pic3 {
 		grid-area: 5/1/6/2;
+		width: 150%;
 	}
 	#footer {
 		height: 100%;
