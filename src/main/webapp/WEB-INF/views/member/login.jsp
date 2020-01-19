@@ -16,18 +16,21 @@
 	font-style: normal;
 }
 
+body{
+    background-color: #aaaaaa;
+}
+
 #loginContainer{
 	width: 300px;
 	margin: auto;
 }
 #loginFrm {
-	border: 1px solid black;
 	border-radius: 5px;
 	width: 300px;
 	height: 300px;
 	position: absolute;
 	top: 20%;
-	animation-name: fadeInLeft;
+	animation-name: fadeInDown;
 	animation-duration: 1s;
 	text-align: center;
 	font-size: 20px;
@@ -43,6 +46,7 @@
 	border: 1px solid #dadada;
 	width: 90%;
 	height: 40px;
+	text-align: center;
 	font-size: 16px;
 }
 

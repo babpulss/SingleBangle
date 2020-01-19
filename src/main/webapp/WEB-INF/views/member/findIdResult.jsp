@@ -61,7 +61,6 @@
                 line-height: 40px;
                 margin: auto;
                 text-align: center;
-                border-radius: 10px;
             }
             #findIdTitle{
                 font-size: 32px;
