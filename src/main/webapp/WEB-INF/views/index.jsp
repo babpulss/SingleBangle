@@ -60,13 +60,8 @@
 				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-home fa-2x"></i> <span
 						class="nav-text sidebar"> 랜선집들이 </span>
 				</a></li>
-<<<<<<< HEAD
 				<li><a href="${pageContext.request.contextPath }/market/boardList.do"> <i class="fa fa-comments fa-2x"></i> <span
 						class="nav-text"> re마켓 </span>
-=======
-				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
-						class="nav-text sidebar"> re마켓 </span>
->>>>>>> 8ca763bbb044f7ffc2ddb10b9abbd00ece0d89ec
 				</a></li>
 				<li class="has-subnav sidebar"><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
 						class="nav-text"> 가계부 </span>

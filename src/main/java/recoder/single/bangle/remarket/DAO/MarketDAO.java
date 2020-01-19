@@ -156,7 +156,7 @@ public class MarketDAO {
 
 		public int getArticleCount() throws Exception{ //게시판 내의 총 글 수
 			String sql = "select count(*) from market";
-			return jdbc.queryForObject(sql, Integer.class); //여기 수정해야할수도..
+			return jdbc.queryForObject(sql, Integer.class);
 		}
 
 		public String getPageNavi(int currentPage) throws Exception { //게시판에서 페이지 넘기기 (int 값은 모두 예시)
