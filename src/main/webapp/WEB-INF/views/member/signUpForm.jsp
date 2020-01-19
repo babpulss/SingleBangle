@@ -25,21 +25,25 @@ body {
     margin: auto;
 }
 
+#logo{
+	text-align: center;
+}
+#logo img{
+	height: 180px;
+}
+
 #signUpHeader{
 	width: 400px;
 	height: 80px;
 	line-height: 40px;
 	margin: auto;
-	text-align: center;
-	color: white;
-	background-color: #0085cb;
-	border-radius: 10px;
 }
 #signUpTitle{
-	font-size: 30px;
+	font-size: 32px;
 }
 #signUpNotice{
 	font-size: 12px;
+	border-bottom: 1px solid black;
 }
 
 .info {
@@ -96,8 +100,11 @@ body {
 	<form action="${pageContext.request.contextPath}/member/signUpProc.mem" method="post" id="signupFrm"
 		onsubmit="return validCheck()">
 		<div id="inputContainer">
+			<div id="logo">
+				<a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
+			</div>
             <div id="signUpHeader">
-                <div id="signUpTitle">회원가입</div>
+                <div id="signUpTitle"><b>회원가입</b></div>
                 <div id="signUpNotice">회원가입 후 서비스 이용이 가능합니다.</div>
             </div>
             <br>
