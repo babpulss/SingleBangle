@@ -73,20 +73,26 @@ body {
 .info1{
 	width: 160px;
 	background-color: #e0e0e0;
-	padding-left: 15px;
+	padding-right: 10px;
+	text-align: right;
 }
 .info2{
 	min-width: 400px;
 	padding-left: 15px;
 }
 
-.info input[type="text"], .info input[type="password"] {
-	width: 275px;
-	height: 25px;
-	font-size: 12px;
+.infoVal {
+	border: 1px solid #dadada;
+	width: 330px;
+	height: 40px;
+	font-size: 14px;
 }
-#pwHint {
-	height: 30px;
+#email, #postcode{
+	width: 225px;
+}
+.infoBtns{
+	width: 100px;
+	height: 35px;
 }
 .validCheck {
 	font-size: 11px;
@@ -103,10 +109,6 @@ body {
 	cursor:pointer;
 	color:white;
 	background-color:#0085cb;
-}
-.infoBtns{
-	width:100px;
-	height:25px;
 }
 .submitBtns{
 	width:120px;
@@ -131,8 +133,8 @@ body {
 	<br>
 	<div id="infoContainer">
 		<div id="infoHeader">
-			<div id="infoTitle">정보 수정</div>
-			<div id="infoNotice">아이디와 이름 외의 정보만 수정 가능합니다.</div>
+			<div id="infoTitle"><b>정보 수정</b></div>
+			<div id="infoNotice">아이디와 이름 정보는 수정하실 수 없습니다.</div>
 		</div>
 		<br><br><br>
 		<div id="menuContainer">
@@ -172,7 +174,6 @@ body {
         <br><br><br>
 		<form action="${pageContext.request.contextPath}/member/modifyInfoProc.mem" method="post" id="signupFrm"
 			onsubmit="return validCheck()">
-			<br>
 			<table id="allInfo">
 				<tbody>
 					<tr>
@@ -203,7 +204,7 @@ body {
 						<td class="info1">비밀번호 확인 질문</td>
 						<td class="info2">
 							<div class="info">
-								<select id="pwHint" name="pwHint" size="1">
+								<select class="infoVal" id="pwHint" name="pwHint" size="1">
 									<option value="hint1">기억에 남는 추억의 장소는?</option>
 									<option value="hint2">자신의 인생 좌우명은?</option>
 									<option value="hint3">자신의 보물 1호는?</option>
@@ -227,7 +228,7 @@ body {
 						<td class="info1">비밀번호 확인 답변</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="pwAnswer" name="pwAnswer" placeholder=" 필수 입력 " value="${infoResult.pwAnswer}">
+								<input type="text" class="infoVal" id="pwAnswer" name="pwAnswer" placeholder=" 필수 입력 " value=" ${infoResult.pwAnswer}">
 							</div>
 						</td>
 					</tr>
@@ -239,7 +240,8 @@ body {
 						<td class="info1">전화번호</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value="${infoResult.phone}">
+								<input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value=" ${infoResult.phone}">
+								<br>
 								<span class="validCheck" id="phoneCheck"></span>
 							</div>
 						</td>
@@ -248,8 +250,9 @@ body {
 						<td class="info1">이메일</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value="${infoResult.email}">
+								<input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value=" ${infoResult.email}">
 								<button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
+								<br>
 								<span class="validCheck" id="emailCheck"></span>
 							</div>
 						</td>
@@ -258,7 +261,7 @@ body {
 						<td class="info1">우편번호</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value="${infoResult.postcode}">
+								<input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value=" ${infoResult.postcode}">
 								<button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
 							</div>
 						</td>
@@ -267,7 +270,7 @@ body {
 						<td class="info1">기본주소</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value="${infoResult.address1}">
+								<input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value=" ${infoResult.address1}">
 							</div>
 						</td>
 					</tr>
@@ -275,7 +278,7 @@ body {
 						<td class="info1">상세주소</td>
 						<td class="info2">
 							<div class="info">
-								<input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value="${infoResult.address2}">
+								<input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value=" ${infoResult.address2}">
 							</div>
 						</td>
 					</tr>

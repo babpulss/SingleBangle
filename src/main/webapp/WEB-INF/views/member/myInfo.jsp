@@ -72,7 +72,8 @@ body {
 .info1{
 	width: 160px;
 	background-color: #e0e0e0;
-	padding-left: 15px;
+	padding-right: 10px;
+	text-align: right;
 }
 .info2{
 	min-width: 400px;
