@@ -89,7 +89,7 @@ public class MemberController {
 		return "member/findPw";
 	}
 	
-	@RequestMapping("/myPage")
+	@RequestMapping("/myPage.mem")
 	public String memberHome() {
 		return "member/myPage";
 	}
@@ -103,9 +103,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/modifyInfo.mem")
-	public String modifyInfo(Model model) {
-		MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
-		model.addAttribute("infoResult", infoResult);
+	public String modifyInfo() {
+		return "member/modifyVerify";
+	}
+	
+	@RequestMapping("/modifyInfoForm.mem")
+	public String modifyInfoForm(String pw, Model model) {
+		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		int pwCheckResult = memSvc.pwCheck(id, pw);
+		model.addAttribute("pwCheckResult", pwCheckResult);
+		
+		if(pwCheckResult > 0) {
+			MemberDTO infoResult = memSvc.getInfo(((MemberDTO)session.getAttribute("loginInfo")).getId());
+			model.addAttribute("infoResult", infoResult);
+		}
 		
 		return "member/modifyForm";
 	}
@@ -127,11 +138,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/withdraw.mem")
-	public String withdraw(Model model) {
+	public String withdraw() {
+		return "member/withdrawVerify";
+	}
+	
+	@RequestMapping("/withdrawProc.mem")
+	public String withdrawProc(String pw, Model model) {
 		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		int pwCheckResult = memSvc.pwCheck(id, pw);
 		
-		session.invalidate();
-		int deleteResult = memSvc.withdraw(id);
+		int deleteResult = 0;
+		if(pwCheckResult > 0) {
+			session.invalidate();
+			deleteResult = memSvc.withdraw(id);			
+		}
 		model.addAttribute("deleteResult", deleteResult);
 		
 		return "member/withdrawCheck";
