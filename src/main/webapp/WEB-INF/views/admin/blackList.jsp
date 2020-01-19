@@ -48,32 +48,24 @@ html, body {
 
 .bRow * {
 	line-height: 50px;
-	text-align: center;
+    text-align: center;
+    border: 1px solid black;
 }
 
 .bRow>span:first-child {
-	flex-grow: 1;
+    flex-grow: 2;
 }
 
 .bRow>span:nth-child(2) {
-	flex-grow: 2;
+    flex-grow: 1;
 }
 
 .bRow>span:nth-child(3) {
-	flex-grow: 5;
-	flex-basis: 200px;
-}
-
-.bRow a {
-	text-decoration: none;
-}
-
-.bRow>span:nth-child(4) {
-	flex-grow: 1;
+    flex-grow: 6;
 }
 
 .bRow>span:last-child {
-	flex-grow: 1;
+    flex-basis: 300px;
 }
 
 .bRow:last-child {
@@ -81,44 +73,21 @@ html, body {
 	background-color: #e05252;
 }
 
-#btns {
-	margin: 20px 110px 0 110px;
-	display: flex;
-	justify-content: space-between;
-}
-
-#btns>button:first-child, #btns>div>button {
-	border: none;
-	width: 50px;
-	height: 30px;
-	border-radius: 10px;
-}
-
-#btns>div>input {
-	width: 100px;
-	height: 30px;
-	border-radius: 10px;
-}
-
-#btns>button:last-child {
-	border: none;
-	width: 80px;
-	height: 30px;
-	border-radius: 10px;
-}
-
-@media ( max-width : 600px ) {
+@media ( max-width : 650px ) {
 	#board {
 		margin: 65px 0 0 0;
 	}
 	#bHeader {
 		border-radius: 0;
 	}
-	.bRow>span:first-child {
-		display: none;
+	#bHeader input {
+		width: 100px;
 	}
-	#btns {
-		margin: 20px 0 0 0;
+	.bRow>span:last-child {
+		flex-basis: 150px;
+	}
+	#searchById {
+		display: none;
 	}
 }
 </style>
@@ -139,7 +108,7 @@ html, body {
 			<span>차단 시행 날짜</span> 
 			<span>차단 사유</span> 
 			<span>
-				아이디로 검색: <input type="text" id="input">
+				<span id="searchById">아이디로 검색:</span> <input type="text" id="input">
 				<button id="search">검색</button>
 			</span>
 		</div>
@@ -162,7 +131,7 @@ html, body {
 				</div>
 			</c:otherwise>
 		</c:choose>
-		<div class="bRow">
+		<div class="bRow" style="height: 50px">
 		</div>
 	</div>
 

@@ -133,8 +133,12 @@ html, body {
 	<!-- 	결과물 출력 섹션 -->
    <div id="board">
 		<div id="bHeader" class="bRow">
-			<span>아이디</span> <span>신고 접수 날짜</span> <span>신고 사유</span> <span>신고
-				URL</span> <span> 아이디로 검색: <input type="text" id="input">
+			<span>아이디</span> 
+			<span>신고 접수 날짜</span> 
+			<span>신고 사유</span> 
+			<span>신고 URL</span> 
+			<span> 
+				<span id="searchById">아이디로 검색:</span> <input type="text" id="input">
 				<button id="search">검색</button>
 			</span>
 		</div>
