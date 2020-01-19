@@ -616,12 +616,19 @@ html, body {
 	}
 	#fourthRow {
 		height: 2350px;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
 	}
 	.pic1 {
 		grid-column: 1;
 	}
+	.pic2 {
+		grid-column: 1;
+		width: 200%;
+	}
 	.pic3 {
 		grid-area: 5/1/6/2;
+		width: 150%;
 	}
 	#footer {
 		height: 100%;

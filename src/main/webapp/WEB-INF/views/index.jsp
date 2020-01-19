@@ -20,7 +20,7 @@
 				<div class="bar3 sidebar"></div>
 			</div>
 			<div id="logo">
-				<img src="img/index/logos/fullLogoColor.png">
+				<img src="img/index/logos/logo.png">
 			</div>
 			<c:choose>
 				<c:when test="${loginInfo==null}">
