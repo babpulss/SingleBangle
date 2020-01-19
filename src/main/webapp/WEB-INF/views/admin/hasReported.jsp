@@ -41,7 +41,7 @@ html, body {
 
 .bRow {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 }
 
@@ -51,16 +51,15 @@ html, body {
 }
 
 .bRow>span:first-child {
-	flex-grow: 1;
+    flex-basis: 10%;
 }
 
 .bRow>span:nth-child(2) {
-	flex-grow: 2;
+    flex-basis: 10%;
 }
 
 .bRow>span:nth-child(3) {
-	flex-grow: 5;
-	flex-basis: 200px;
+    flex-basis: 50%;
 }
 
 .bRow a {
@@ -68,11 +67,12 @@ html, body {
 }
 
 .bRow>span:nth-child(4) {
-	flex-grow: 1;
+    flex-basis: 20%;
+    flex-shrink: unset;
 }
 
 .bRow>span:last-child {
-	flex-grow: 1;
+    flex-basis: 10%;
 }
 
 .bRow:last-child {
@@ -137,6 +137,7 @@ html, body {
 			<span>신고 접수 날짜</span> 
 			<span>신고 사유</span> 
 			<span>신고 URL</span> 
+			<span>접수 완료 여부</span> 
 		</div>
 		<c:choose>
 			<c:when test="${!empty list}">
@@ -146,9 +147,11 @@ html, body {
 						<span>${i.reportingDate}</span> 
 						<span>${i.reason}</span>
 						<span>
-							<a href="${i.url}" target="_blank">해당 URL로 이동</a>
+							<a href="${i.reportedUrl}" target="_blank">해당 URL로 이동</a>
 						</span>
-						<button class="unblock" name="${i.seq}">접수 완료</button>
+						<span>
+							<button class="unblock" name="${i.seq}">접수 완료</button>
+						</span>
 					</div>
 				</c:forEach>
 			</c:when>

@@ -107,6 +107,11 @@ html, body {
 			href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트
 			조회</a> <a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
 			확인 조회</a>
+			<div style="text-align:center">
+			<br>
+				회원 목록에서 아이디로 검색: 
+				<input type="text" id="searchId"> <button type="button" id="searchIdBtn">회원 찾기</button>
+			</div>
 	</div>
 	<!-- 	결과물 출력 섹션 -->
 	<div id="board">
@@ -142,6 +147,10 @@ html, body {
 	</div>
 
 	<script>
+	$("#searchIdBtn").click(() => {
+		var id = $("#searchId").val();
+		window.open("/admin/searchId", "_blank", "width=500px, height=500px, resizable=no");
+	})
 		$(".unblock").click(function() {
 			var conf = confirm("차단을 해제합니까?");
 			if (conf) {
