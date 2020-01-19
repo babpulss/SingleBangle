@@ -137,17 +137,17 @@ html, body {
 			<span>신고 접수 날짜</span> 
 			<span>신고 사유</span> 
 			<span>신고 URL</span> 
-			<span> 
-				<span id="searchById">아이디로 검색:</span> <input type="text" id="input">
-				<button id="search">검색</button>
-			</span>
 		</div>
 		<c:choose>
 			<c:when test="${!empty list}">
 				<c:forEach items="${list}" var="i">
 					<div class="bRow">
-						<span>${i.id}</span> <span>${i.reportingDate}</span> <span>${i.reason}</span>
-						<span><a href="${i.url}" target="_blank">해당 URL로 이동</a> ||</span>
+						<span>${i.id}</span> 
+						<span>${i.reportingDate}</span> 
+						<span>${i.reason}</span>
+						<span>
+							<a href="${i.url}" target="_blank">해당 URL로 이동</a>
+						</span>
 						<button class="unblock" name="${i.seq}">접수 완료</button>
 					</div>
 				</c:forEach>
@@ -158,8 +158,7 @@ html, body {
 				</div>
 			</c:otherwise>
 		</c:choose>
-		<div class="bRow">
-		</div>
+		<div class="bRow" style="height: 50px"></div>
 	</div>
 
 		<script>
