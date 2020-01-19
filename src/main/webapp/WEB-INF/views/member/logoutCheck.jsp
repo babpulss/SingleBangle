@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그아웃</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<title>로그아웃</title>
 </head>
 <body>
 	<script>

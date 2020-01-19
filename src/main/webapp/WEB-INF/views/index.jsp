@@ -30,7 +30,7 @@
 				</c:when>
 				<c:otherwise>
 					<span id="rightMyPage"><a
-						href="${pageContext.request.contextPath}/member/myPage"
+						href="${pageContext.request.contextPath}/member/myPage.mem"
 						id="myPageBtn">My Page</a></span>
 					<span id="rightLogout"><a
 						href="${pageContext.request.contextPath}/member/logout.mem"

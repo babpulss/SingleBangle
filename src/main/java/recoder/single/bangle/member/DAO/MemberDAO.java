@@ -62,6 +62,13 @@ public class MemberDAO {
 		return sst.update("Member.update", dto);
 	}
 	
+	public int pwCheck(String id, String pw) throws Exception {
+		Map<String, String> param = new HashMap<>();
+		param.put("id", id);
+		param.put("pw", pw);
+		return sst.selectOne("Member.pwCheck", param);
+	}
+	
 	public int deleteById(String id) throws Exception {
 		return sst.delete("Member.deleteById", id);
 	}

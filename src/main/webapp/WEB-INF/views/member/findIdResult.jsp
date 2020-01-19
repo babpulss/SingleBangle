@@ -8,6 +8,7 @@
 		<meta charset="UTF-8">
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <title>아이디 찾기 결과</title>
+        
         <style>
             *{
                 box-sizing: border-box;
@@ -71,15 +72,10 @@
                 border-bottom: 1px solid #b2b2b2;
             }
 
-            .idList{
+            #idList{
                 margin-top: 15px;
                 margin-bottom: 15px;
                 text-align: center;
-            }
-            .label1{
-                display: inline-block;
-                margin-bottom: 5px;
-                font-size: 14px;
             }
 
             #toLoginContainer{
@@ -118,7 +114,7 @@
                 <div id="findIdNotice">입력하신 정보와 일치하는 아이디 목록입니다.</div>
             </div>
             <br>
-            <div class="idList">
+            <div id="idList">
             	<c:choose>
 					<c:when test="${fn:length(findIdResult) != 0}">
 						<c:forEach items="${findIdResult}" var="id">
