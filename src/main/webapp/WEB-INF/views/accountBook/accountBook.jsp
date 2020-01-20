@@ -33,7 +33,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <div id="mainWrapper">
-	<main class="container pt-5">
+	<main class="container-fluid pt-5">
 	<div class="card mb-5">
 
 		<div class="card-header">
