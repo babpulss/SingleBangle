@@ -13,7 +13,6 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
 	<!-- 메인 메뉴 -->
 	<div id="mainWrapper">
 		<div id="firstRow">
