@@ -116,7 +116,7 @@
 				<c:forEach items="${list }" var="list" varStatus="i">
 					<div class="bRow" style="text-align: center">
  					<div style="width: 40%; height: 100%; float: left"><a href="marketDetail.do?seq=${list.seq}">
-					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index]}"></a></div>
+					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index].sys_name}"></a></div>
 					<div style="float:left;">${list.title }
 					<br>${list.place }
 					<br>${list.price }원</div>
@@ -147,13 +147,19 @@
             <button>검색</button>
             </form>
         </div>
-        <button type="button" id="write">글쓰기</button>
+        <c:choose>
+        	<c:when test="${loginInfo != null}">
+        		<button type="button" id="write">글쓰기</button>
+        	</c:when>
+        </c:choose>
+        
    </div>
 </div>
 	<script>
 		$("#write").on("click", function(){
 			location.href="${pageContext.request.contextPath}/market/writeboard.do";
 		})
+		
 	</script>
 </body>
 </html>

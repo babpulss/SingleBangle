@@ -4,23 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="Market">
-	<insert id="insert">
-		insert into board values(market.seq.nextval, #{title}, #{price}, #{title}, #{content}, #{writer}, #{category}, #{place}, sysdate, 0)
+	<insert id="insert" parameterType="java.util.Map">
+		insert into market values(market_seq.nextval, #{title}, #{price}, #{content}, #{writer}, #{category}, #{place}, sysdate, 0, 'N')
 	</insert>
 	
 	<update id="updateDone">
 		update market set title=#{title}, price=#{price}, content=#{content}, category = #{category} where seq = #{seq} 
 	</update>
 	
-	<insert id="insertFile">
-		select max(seq) from market where writer = #{id}
-	</insert>
+	<select id="insertFile" resultType="Integer">
+		select max(seq) from market where writer = #{writer}
+	</select>
 	
 	<delete id="delete">
 		delete from market where seq=#{seq}
 	</delete>
 	
-	<update id="update">
+	<update id="update" parameterType="java.util.Map">
 		update market set title=#{title}, price=#{price}, content=#{content}, category=#{category} where seq=#{seq}
 	</update>
 	
@@ -53,7 +53,7 @@
 	</select>
 	
 	<select id="selectByPageUseTitle" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
-		select * from(select market.*, row_number() over (order by seq desc)rown from market where title=#{title}) where rown between #{start} and #{end}
+		select * from(select market.*, row_number() over (order by seq desc)rown from market where title like #{title}) where rown between #{start} and #{end}
 	</select>
 	
 	<select id="getArticleCountUseTitle" resultType="Integer">

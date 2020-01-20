@@ -35,7 +35,7 @@
 	<option>뷰티</option>
 	<option>스포츠/레저</option>
 	<option>게임/취미</option>
-	<option>기타</option>
+	<option>기타</option>	
 </select><br>
 <textarea style="display:none;" name="content" id="content"></textarea>
 <div id="summernote"></div>

@@ -17,25 +17,38 @@ public class MarketDAO {
 	@Autowired
 	private SqlSessionTemplate jdbc;
 
-	public int insert(MarketDTO dto) throws Exception{
-		return jdbc.insert("Market.insert", dto);
+	public int insert(MarketDTO dto, String content, String writer, String place) throws Exception{
+		Map<String, Object> param = new HashMap<>();
+		param.put("title", dto.getTitle());
+		param.put("price", dto.getPrice());
+		param.put("content", content);
+		param.put("writer", writer);
+		param.put("category", dto.getCategory());
+		param.put("place", place);
+		return jdbc.insert("Market.insert", param);
 	}
 	
 	public int updateDone(int seq) throws Exception{
 		return jdbc.update("Market.updateDone", seq);
 	}
 
-
-	public int insertFile(String id) throws Exception{
-		return jdbc.insert("Market.insertFile");
+	public int insertFile(String writer) throws Exception{
+		return jdbc.selectOne("Market.insertFile", writer);
 	};
 
 	public int delete(int seq) throws Exception{
 		return jdbc.delete("Market.delete", seq);
 	}
 
-	public int update(MarketDTO dto) throws Exception{
-		return jdbc.update("Market.update", dto);
+	public int update(MarketDTO dto, String content, String writer) throws Exception{
+		Map<String, Object> param = new HashMap<>();
+		param.put("title", dto.getTitle());
+		param.put("price", dto.getPrice());
+		param.put("content", content);
+		param.put("writer", writer);
+		param.put("category", dto.getCategory());
+		param.put("seq", dto.getSeq());
+		return jdbc.update("Market.update", param);
 	}
 
 	public List<MarketDTO> getBoardList() throws Exception{
@@ -128,6 +141,7 @@ public class MarketDAO {
 		public List<MarketDTO> selectByPageUseTitle(String title, int start, int end) throws Exception{
 			title = "%" + title + "%";
 			Map<String, Object> param = new HashMap<>();
+			
 			param.put("title", title);
 			param.put("start", start);
 			param.put("end", end);

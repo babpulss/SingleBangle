@@ -19,7 +19,7 @@
 		<div>${dto.price }원</div>
 		<div>
 		<c:choose>
-			<c:when test="${dto.writer == id && dto.done == 'N'}">
+			<c:when test="${dto.writer == loginInfo.id && dto.done == 'N'}">
 				<button type="button" id="done_${dto.seq }" onclick="updateDone('${dto.seq}')">판매완료</button>
 			</c:when>
 		</c:choose>
@@ -31,7 +31,7 @@
 		</div>
 		<div>${dto.content }</div>
 		<c:choose>
-			<c:when test="${dto.writer == id}">
+			<c:when test="${dto.writer == loginInfo.id}">
 				<div><button id="update">수정하기</button><button id="delete">삭제하기</button></div>
 			</c:when>
 			<c:otherwise>

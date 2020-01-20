@@ -50,7 +50,7 @@
       
       $("#confirm").on("click",function(){
     	  $("#content").val($(".note-editable").html());
-    	  var regex = /<img src/;
+    	  var regex = /<img.*/;
           var data = $("#content").val();
           var result = regex.exec(data);
     	  if($("#content").val() == "" || result == null){

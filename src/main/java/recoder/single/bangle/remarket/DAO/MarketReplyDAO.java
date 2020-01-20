@@ -17,7 +17,6 @@ public class MarketReplyDAO {
 	private SqlSessionTemplate jdbc;
 
 	public int insert(String recontent, String writer, int boardSeq) throws Exception{
-		System.out.println(recontent + " : " + writer + " : " + boardSeq);
 		Map<String, Object> param = new HashMap<>();
 		param.put("recontent", recontent);
 		param.put("writer", writer);
