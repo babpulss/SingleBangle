@@ -87,13 +87,13 @@
 									<option value="지출">지출</option>
 							</select></td>
 
-							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)"></td>
+							<td><input type="number" id="price" name="price"
+								placeholder="(ex. 10000)" maxlength="15" oninput="numberMaxLength(this);"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
-								placeholder="비고란"></td>
-							<td class="plusBtn"><input type="button" id="addBtn"
-								value="적용"></td>
+								placeholder="비고란" maxlength="30"></td>
+							<td class="plusBtn"><button type="button" class="btn btn-secondary" id="addBtn"
+								>적용</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -123,9 +123,9 @@
 							<td><a
 								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									class="detailBtn" value="상세보기"></a> <a><input
+									id="detailBtn" class="btn btn-info"value="상세보기"></a> <a><input
 									type="button" name="${list.formedReportingDate}"
-									class="deleteBtn" value="삭제"></a></td>
+									id="deleteBtn" class="btn btn-dark"value="삭제"></a></td>
 						</tr>
 
 					</c:forEach>
@@ -150,7 +150,11 @@
 	</main>
 	</div>
 	<script>
-		
+	function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }
 		$(function() {
 			//input을 datepicker로 선언
 			$("#datepicker")
