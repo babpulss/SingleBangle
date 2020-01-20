@@ -1,3 +1,18 @@
+
+```html
+<link rel="stylesheet" href="/css/nav.css">
+</head>
+<body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper">
+본문 내용 작성 부문
+</div>
+.
+.
+.
+```
+
+
 <h2>회원 블랙리스트 등록과 신고접수 메서드</h2>
 
 AdminService를 Autowired로 인스턴스 생성 후 아래의 메서드를 호출  
