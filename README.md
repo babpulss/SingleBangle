@@ -1,3 +1,28 @@
+
+<h1> 네비게이션 바를 jsp인클루드 방식으로 포함시키기 </h1>
+
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+.
+.
+.
+<link rel="stylesheet" href="/css/nav.css"> // <head>영역에 css를 임포트를 함
+</head>
+<body>
+<jsp:include page="/resources/jsp/nav.jsp"/> // <body> 시작부분에 nav.jsp를 인클루드함
+<div id="mainWrapper"> 			    // mainWrapper안에 콘텐츠를 작성
+본문 내용 작성 부문
+</div>
+.
+.
+.
+</body>
+```  
+  
+  
 <h2>회원 블랙리스트 등록과 신고접수 메서드</h2>
 
 AdminService를 Autowired로 인스턴스 생성 후 아래의 메서드를 호출  

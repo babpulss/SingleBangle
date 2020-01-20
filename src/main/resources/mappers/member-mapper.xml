@@ -17,6 +17,18 @@
 		select count(*) from member where id = #{id} and pw = #{pw}
 	</select>
 	
+	<select id="findId" resultType="String">
+		select id from member where name = #{name} and phone = #{phone}
+	</select>
+	
+	<select id="findPw" resultType="Integer">
+		select count(*) from member where id = #{id} and pwHint = #{pwHint} and pwAnswer = #{pwAnswer} and email = #{email}
+	</select>
+	
+	<update id="updatePw">
+		update member set pw = #{pw} where id = #{id}
+	</update>
+	
 	<select id="selectById" resultType="recoder.single.bangle.member.DTO.MemberDTO">
 		select * from member where id = #{id}
 	</select>
@@ -25,6 +37,10 @@
 		update member set pw = #{pw}, pwHint = #{pwHint}, pwAnswer = #{pwAnswer}, phone = #{phone}, email = #{email}, 
 						postcode = #{postcode}, address1 = #{address1}, address2 = #{address2} where id = #{id}
 	</update>
+	
+	<select id="pwCheck" resultType="Integer">
+		select count(*) from member where id = #{id} and pw = #{pw}
+	</select>
 	
 	<delete id="deleteById" parameterType="String">
 		delete from member where id = #{id}

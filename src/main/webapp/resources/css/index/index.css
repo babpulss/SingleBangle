@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import
 	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
@@ -358,10 +359,16 @@ html, body {
 #rightSidebar ul {
 	width: 200px;
 }
+=======
+>>>>>>> branch 'master' of https://github.com/babpulss/SingleBangle.git
 
 /* 메인 화면 래퍼 */
 #mainWrapper {
 	margin: 65px 110px 0 110px;
+}
+
+#mainWrapper * {
+	font-family: 'yg-jalnan';
 }
 
 /* 첫번째 행 */
@@ -371,10 +378,11 @@ html, body {
 
 #firstRow>span {
 	margin-left: 100px;
+	font-family: 'yg-jalnan';
 }
 
 #firstRow>span:first-child {
-	color: pink;
+	color: #0085cb;
 	cursor: default;
 }
 
@@ -395,7 +403,6 @@ html, body {
 	width: 100%;
 	height: 800px;
 	margin-top: 120px;
-	border: 1px solid gold;
 }
 
 #thirdRow>div:first-of-type {
@@ -419,24 +426,60 @@ html, body {
 	height: 75%;
 }
 
-.clear {
-	clear: both;
-}
-/* 네번째 행 */
-#fourthRow {
-	position: relative;
-	height: 1500px;
+.indexText {
+	text-align: center;
 }
 
+/* 네번째 행 */
+#fourthRow {
+	width: 100%;
+	display: grid;
+	grid-gap: 0px;
+	align-items: center;
+	grid-template-rows: 400px 550px 550px;
+	grid-template-columns: 40% auto;
+	text-align: center;
+}
+
+#fourthRow * {
+	justify-content: center;
+}
+
+.pic1, .pic2, .pic3 {
+	background-attachment: fixed;
+	background-repeat: round;
+	background-size: cover;
+}
+
+.pic1 {
+	background-image: url(/img/index/intro1.jpg);	
+	grid-column: 1/span 2;
+	padding-top: 100px;
+	width: 100%;
+	height: 100%;
+	color: white;
+}
+
+.pic2 {
+	background-image: url(/img/index/intro2.jpg);
+	height: 100%;
+}
+
+.pic3 {
+	background-image: url(/img/index/intro3.jpg);
+	height: 100%;
+	background-size: auto;
+}
 /* 푸터 */
 #footer {
 	position: relative;
 	width: 100%;
 	height: 100px;
+	font-family: 'yg-jalnan';
 }
 
 #footer1 {
-	background-color: deeppink;
+	background-color: #0085cb;
 	height: 40px;
 	display: flex;
 	justify-content: center;
@@ -445,7 +488,6 @@ html, body {
 
 #footer1 * {
 	margin-left: 2vw;
-	border-right: 1px solid black;
 	padding-right: 2vw;
 	text-decoration: none;
 }
@@ -463,25 +505,20 @@ html, body {
 #footer3 {
 	display: flex;
 	justify-content: center;
+	flex-direction: column;
 	align-items: center;
 	margin-top: 30px;
+	margin-bottom: 10px;
 	cursor: default;
 }
 
+#footer3 img {
+	height: 100px;
+}
+
 /* 모바일 환경 */
-@media ( max-width : 600px) {
-	#topbar {
-		height: 60px;
-	}
-	#logo {
-		width: 70%;
-	}
-	#rightLogin {
-		right: 20vw;
-	}
-	#rightJoin {
-		right: 5vw;
-	}
+
+@media ( max-width : 650px) {
 	#mainWrapper {
 		margin: 65px 0 0 0;
 		width: 100%;
@@ -491,6 +528,7 @@ html, body {
 	}
 	#firstRow>span {
 		margin-left: 0px;
+		text-align: center;
 	}
 	#secondRow {
 		width: 100%;
@@ -504,7 +542,8 @@ html, body {
 		transform: translate(-33%, 0%);
 	}
 	#thirdRow {
-		height: 1500px;
+		height: 100%;
+		left: 0;
 	}
 	#thirdRow>div:first-of-type {
 		width: 100%;
@@ -513,28 +552,63 @@ html, body {
 	#imgBox {
 		display: block;
 		width: 100%;
-		height: 1500px;
+		height: 2010px;
 		overflow: hidden;
 	}
 	.imgDiv>img {
-		width: 630px;
-		height: 300px;
-		transform: translate(-10%, 0%);
+		width: 800px;
+		height: 100%;
+		transform: translate(-20%, 0%);
+	}
+	.imgDiv>div {
+		font-size: 30px;
+		margin: 20px 0 20px 0;
 	}
 	#fourthRow {
-		height: 1000px;
+		height: 2350px;
+		grid-template-rows: auto;
+		grid-template-columns: auto;
 	}
-	#footer1 {
+	.pic1 {
+		grid-column: 1;
+	}
+	.pic2 {
+		grid-column: 1;
+		width: 100%;
+		transfrom: translate(-500px, 0);
+	}
+	.pic3 {
+		grid-area: 5/1/6/2;
+	}
+	#footer {
+		height: 100%;
+		top: 100px;
+		display: flex;
+	}
+	#footer1, #footer2 {
 		flex-wrap: wrap;
-		height: 50px;
+		height: 500px;
+		width: 50%;
 	}
 	#footer1 * {
 		border: none;
+		width: 100%;
+		justify-content: center;
 	}
 	#footer2 {
-		flex-wrap: wrap;
+		background-color: #e05252;
+		align-items: center;
+		flex-direction: column;
+	}
+	#footer2 * {
+		text-decoration: none;
 	}
 	#footer3 {
+		margin-top: 20vh;
 		margin-bottom: 5vh;
+	}
+	#footer3 img {
+		width: 250px;
+		height: 60px;
 	}
 }

@@ -71,4 +71,10 @@ public class Admin {
 		return String.valueOf(reportingService.confirmReporting(seq)); 
 	}
 	
+	// 아이디 검색으로 블랙리스트 추가
+	@RequestMapping("/searchId")
+	public String searchId(String id) {
+		// 아이디 조회할 서비스를 호출
+		return "admin/searchId";
+	}
 }

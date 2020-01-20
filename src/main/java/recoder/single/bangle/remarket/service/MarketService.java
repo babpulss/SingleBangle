@@ -23,6 +23,7 @@ import recoder.single.bangle.remarket.DTO.MarketFileDTO;
 
 @Service
 public class MarketService {
+
 	@Autowired
 	private MarketDAO dao;
 
@@ -35,7 +36,7 @@ public class MarketService {
 	@Autowired
 	private HttpServletRequest request;
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public List<MarketDTO> board() {
 		try {
 			List<MarketDTO> list = dao.getBoardList();
@@ -46,38 +47,56 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")//글 수정
-	public void updateProc(String title, int price, String content, String category, int seq, String path) { //글수정
+	@Transactional("tx")
+	public MarketDTO updateDone(int seq) {
+		try {
+			int result = dao.updateDone(seq);
+			System.out.println("성공이면 1 : " + result);
+			MarketDTO dto = dao.writeDetail(seq);
+			return dto;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Transactional("tx")//글 수정
+	public void updateProc(MarketDTO dto, String path) { //글수정
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
-		Pattern p = Pattern.compile("<img.+?src=\"(.+?)\".+?data-filename=\"(.+?)\".*?>");
+		Pattern p = Pattern.compile("<img.+?src=\"(.+?base64,.+?)\".+?data-filename=\"(.+?)\".*?>");
+		String content = dto.getContent();
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
+		
 		if(!filePath.exists()) {
 			filePath.mkdir();
 		}
 		try {
 			List<MarketFileDTO> list = new ArrayList<>();
-			while(m.find()) {
-				String oriName = m.group(2);
-				String sysName = System.currentTimeMillis() + "_" + oriName;
-				String mgroup = m.group(1);
-				String imgString = m.group(1).split(",")[1];
-				byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
-				FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
-				DataOutputStream dos = new DataOutputStream(fos);
-				dos.write(imgBytes);
-				dos.flush();
-				dos.close();
-				content = content.replaceFirst(Pattern.quote(m.group(1)), "/files/"+sysName);
-				MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
-				list.add(file_dto);
-			}		
-			dao.update(title, price, content, category, seq);
-			int board_seq = seq;
+				while(m.find()) {
+					System.out.println("업데이트프록 서비스");
+					String oriName = m.group(2);
+					String sysName = System.currentTimeMillis() + "_" + oriName;
+					String mgroup = m.group(1);
+					System.out.println("oriNamegroup2 : " + oriName);
+					System.out.println("mgroupgroup1 : " + mgroup);
+					String imgString = m.group(1).split(",")[1];
+					byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
+					FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
+					DataOutputStream dos = new DataOutputStream(fos);
+					dos.write(imgBytes);
+					dos.flush();
+					dos.close();
+					content = content.replaceFirst(Pattern.quote(m.group(1)), "/files/"+sysName);
+					MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
+					list.add(file_dto);
+				}		
+			dao.update(dto);
+			int board_seq = dto.getSeq();
 			for(MarketFileDTO tmp : list) {
 				tmp.setBoard_seq(board_seq);
-				file_dao.update(tmp, board_seq);
+				file_dao.update(tmp);
 			}
 
 		}catch(Exception e) {
@@ -86,7 +105,7 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public void delete(int seq) {
 		System.out.println("삭제서비스 도착");
 		try {
@@ -99,22 +118,23 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
-	public void report(String id, String url, String reason) {
-		try {
-			dao.insertReport(id, url, reason);
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("신고게시판 글작성 오류");
-		}
+//	@Transactional("memberManager")
+//	public void report(String id, String url, String reason) {
+//		try {
+//			dao.insertReport(id, url, reason);
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			System.out.println("신고게시판 글작성 오류");
+//		}
+//
+//	}
 
-	}
-
-	@Transactional("memberManager")
-	public void write(String title, int price, String content, String category, String place, String path, String id) {
+	@Transactional("tx")
+	public void write(MarketDTO dto, String path) {
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
 		Pattern p = Pattern.compile("<img.+?src=\"(.+?)\".+?data-filename=\"(.+?)\".*?>");
+		String content = dto.getContent();
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
 		if(!filePath.exists()) {
@@ -126,7 +146,9 @@ public class MarketService {
 				String oriName = m.group(2);
 				String sysName = System.currentTimeMillis() + "_" + oriName;
 				String mgroup = m.group(1);
+				System.out.println("처음 등록시 mgroup : " + mgroup);
 				String imgString = m.group(1).split(",")[1];
+				System.out.println("처음 등록시 imgString : " + imgString);
 				byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
 				FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
 				DataOutputStream dos = new DataOutputStream(fos);
@@ -137,8 +159,8 @@ public class MarketService {
 				MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
 				list.add(file_dto);
 			}		
-			dao.insert(title, price, content, id, category, place);
-			int boardSeq = dao.insertFile(id);
+			dao.insert(dto);
+			int boardSeq = dao.insertFile(dto.getWriter());
 			for(MarketFileDTO tmp : list) {
 				tmp.setBoard_seq(boardSeq);
 				file_dao.insert(tmp);
@@ -150,11 +172,12 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public MarketDTO writedetail(int seq) {//게시글 상세
 		try {
 			MarketDTO dto = dao.writeDetail(seq); // 글 정보가져오기
-			//			dao.updateViewCount(seq);//뷰카운트 올라감
+			System.out.println("글상세에서 사진이랑 글내용" + dto.getContent());
+			//				System.out.println(dto.getWriter() + " : " + dto.getDone());
 			return dto;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -162,7 +185,7 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public List<MarketDTO> search(String title, String category) {
 		try {
 			//			System.out.println("검색서비스 : " + title);
@@ -176,12 +199,12 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public List<MarketDTO> searchNoCategory(String title) {
 		try {
-			//			System.out.println("검색서비스 : " + title);
+
 			List<MarketDTO> list = dao.searchNoCategory(title);
-			//			System.out.println("검색서비스 dto : " + dto);
+
 			return list;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -190,7 +213,7 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public List<MarketDTO> searchNoTitle(String category){
 		try {
 			List<MarketDTO> list = dao.searchNoTitle(category);
@@ -202,7 +225,7 @@ public class MarketService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public MarketDTO report(int seq) {
 		try {
 			MarketDTO dto = dao.writeDetail(seq);
@@ -214,3 +237,5 @@ public class MarketService {
 		}
 	}
 }
+
+

@@ -7,58 +7,146 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>Insert title here</title>
 <style>
-	table{
-		border: 1px solid black;
-		width : 800px;
-		margin: auto;
-	}
-	th{
-		border: 1px solid black;
-	}
-	td{
-		border: 1px solid black;
-	}
+	 @font-face {
+            font-family: 'BMHANNAAir';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+                format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html, body { margin: 0px; padding: 0px;}
+        * {
+             box-sizing: border-box; 
+            font-family: 'BMHANNAAir';
+        }
+        #board {
+        	width: 800px;
+            margin: auto;
+        }
+        #bHeader {
+            background-color: #0085cb;
+            border-radius: 10px 10px 0 0;
+        }
+        .bRow {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .bRow * {
+            line-height: 50px;
+            text-align: center;
+        }
+        .bRow>span:first-child {
+            flex-basis: 10%;
+        }
+        .bRow>span:nth-child(2) {
+            flex-basis: 20%;
+        }
+        .bRow>span:nth-child(3) {
+            flex-basis: 50%;
+            text-align: left;
+        }
+        .bRow a {
+            text-decoration: none;
+        }
+        .bRow>span:nth-child(4) {
+            flex-basis: 10%;
+        }
+        .bRow>span:last-child {
+            flex-basis: 10%;
+        }
+        .bRow:last-child {
+            border-radius: 0 0 10px 10px;
+            background-color: #e05252;
+        }
+        #btns {
+        	width: 800px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        #btns>button:first-child, #btns>div>button {
+            border: none;
+            width: 50px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        #btns>div>input {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        #btns>button:last-child {
+            border: none;
+            width: 80px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        @media ( max-width: 600px ) {
+            #board {
+                margin: 65px 0 0 0;
+            }
+            #bHeader {
+                border-radius: 0;
+            }
+            .bRow>span:first-child {
+                display: none;
+            }
+            #btns {
+                margin: 20px 0 0 0;
+            }
+        }
 </style>
 </head>
 <body>
-	<table>
-		<tr style="border: 1px solid black"><th>미리보기<th colspan="3">제품상세</tr>
+	 <div id="board">
+        <div id="bHeader" class="bRow">
+            <div style="float: left; width: 40%;">미리보기</div>
+            <div style="float: left; width: 60%; text-align: center;">제품상세</div>
+        </div>
 		<c:choose>
 			<c:when test="${list == null}">
-				<tr><td>게시글이 없습니다.</tr>
+				<div class="bRow">게시글이 없습니다.</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach items="${list }" var="list" varStatus="i">
- 					<tr><td style="width: 30%;"><a href="${pageContext.request.contextPath}/board/writedetail.do?seq=${list.seq}">
-					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index]}"></a>
-					<td>${list.title }
+					<div class="bRow" style="text-align: center">
+ 					<div style="width: 40%; height: 100%; float: left"><a href="marketDetail.do?seq=${list.seq}">
+					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index]}"></a></div>
+					<div style="float:left;">${list.title }
 					<br>${list.place }
-					<br>${list.price }원
-					</tr>
+					<br>${list.price }원</div>
+					</div>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
-		<tr><td colspan="2" style="text-align: right;"><button id="write">글쓰기</button></tr>
-		<tr><td colspan="2" style="text-align: center;">
-		<form action="search.do" method="post">
-		<select name="category">
-		<option>전체</option>
-		<option>디지털/가전</option>
-		<option>가구/인테리어</option>
-		<option>생활/가공식품</option>
-		<option>의류</option>
-		<option>잡화</option>
-		<option>뷰티</option>
-		<option>스포츠/레저</option>
-		<option>게임/취미</option>
-		<option>기타</option>
-		</select>
-		<input type="text" name="title">
-		<button>검색</button>
-		</form>
-		</tr>
-	</table>
 	
+		<div class="bRow" style="height:20px"></div>
+	</div>
+         <div id="btns">
+        <button type="button">목록</button>
+        <div>
+          	<form action="search.do" method="post">
+			<select name="category">
+			<option>전체</option>
+			<option>디지털/가전</option>
+			<option>가구/인테리어</option>
+			<option>생활/가공식품</option>
+			<option>의류</option>
+			<option>잡화</option>
+			<option>뷰티</option>
+			<option>스포츠/레저</option>
+			<option>게임/취미</option>
+			<option>기타</option>
+			</select>
+			<input type="text" placeholder="search" name="title">
+            <button>검색</button>
+            </form>
+        </div>
+        <button type="button">글쓰기</button>
+   </div>
+        
 	<script>
 		$("#write").on("click", function(){
 			location.href="${pageContext.request.contextPath}/board/writeboard.do";

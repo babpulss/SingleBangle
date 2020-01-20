@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 
+import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
 import recoder.single.bangle.remarket.service.MarketReplyService;
 
@@ -29,12 +30,14 @@ public class MarketReplyController {
 
 	@RequestMapping("/insert.do")
 	@ResponseBody
-	public String insert(MarketReplyDTO dto) { //댓글작성
+	public String insert() { //댓글작성
 		String recontent = request.getParameter("recontent");
-		String id = (String) session.getAttribute("id");
+		MemberDTO dto = (MemberDTO) session.getAttribute("loginInfo");
+		String writer = dto.getId();
+		System.out.println("writer : " + writer);
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		int boardSeq = seq;
-		service.insert(recontent, id, boardSeq);
+		service.insert(recontent, writer, boardSeq);
 		List<MarketReplyDTO> list = service.list(boardSeq);
 		Gson g = new Gson();
 		String json = g.toJson(list);
