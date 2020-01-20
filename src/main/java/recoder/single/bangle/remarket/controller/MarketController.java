@@ -123,7 +123,7 @@ public class MarketController {
 	@RequestMapping("/writeboard.do") //게시판에서 글쓰기버튼 클릭
 	public String writeBoard() {
 		System.out.println("writeboard.do 도착");
-		return "market/writeboard";
+		return "market/writemarket";
 	}
 
 	@RequestMapping("/updateDone")//판매완료누르기
@@ -152,9 +152,11 @@ public class MarketController {
 	@RequestMapping("/write.do") //writeboard에서 글쓰기 버튼 클릭
 	public String write(MarketDTO dto, Model model) {
 		try {
-			String writer = (String)session.getAttribute("id");//ok
-			MemberDTO myInfo = (MemberDTO) session.getAttribute("myInfo");
-			String place = myInfo.getAddress1();
+//			String writer = (String)session.getAttribute("id");//ok
+			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+			String writer = loginInfo.getId();
+			System.out.println("글쓴 사람 주소 : " + loginInfo.getAddress1() + "글쓴이 : " + writer);
+			String place = loginInfo.getAddress1();
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();
 			content.replace("<", "&lt");

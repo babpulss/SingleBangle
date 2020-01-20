@@ -147,12 +147,12 @@
             <button>검색</button>
             </form>
         </div>
-        <button type="button">글쓰기</button>
+        <button type="button" id="write">글쓰기</button>
    </div>
 </div>
 	<script>
 		$("#write").on("click", function(){
-			location.href="${pageContext.request.contextPath}/board/writeboard.do";
+			location.href="${pageContext.request.contextPath}/market/writeboard.do";
 		})
 	</script>
 </body>
