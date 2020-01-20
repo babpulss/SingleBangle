@@ -41,11 +41,11 @@ public class AccountController {
 	@RequestMapping("/accountBook")
 	public String account() {
 		
-		session.setAttribute("id", "shinikho");
-		session.setAttribute("userName", "신익호");
-		System.out.println(session.getAttribute("userName"));
+		session.setAttribute("id", "shinikho");		
 		try {
 			List<AccountDTO> list = accService.monthListById(session);
+			session.setAttribute("userName",list.get(0).getUserName());
+			System.out.println(session.getAttribute("userName"));
 			request.setAttribute("list", list);
 			
 		} catch (Exception e) {

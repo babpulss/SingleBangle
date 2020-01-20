@@ -43,7 +43,7 @@
 								</h1>
 							</div>
 
-							<div class="col-md-6 text-right">
+							<div class="col-md-6 text-right" style="float:left">
 								<button id="printInvoice" class="btn btn-info">
 									<i class="fa fa-print"></i>Print
 								</button>
@@ -51,8 +51,8 @@
 									action="${pageContext.request.contextPath }/accountBook/accountPDF"
 									method="post">
 									<input type="hidden" class="pdfValue btn btn-info"
-										name="pdfValue" value=""> <input type="button"
-										class="pdfBtn btn btn-info" value="PDF View" />
+										name="pdfValue" value=""> <button type="button"
+										class="pdfBtn btn btn-info" value="PDF View" />PDF View</button>
 								</form>
 
 							</div>
@@ -90,21 +90,24 @@
 								<table class="table">
 									<thead>
 										<tr>
-											<th class="border-0 text-uppercase small font-weight-bold">날짜</th>
-											<th class="border-0 text-uppercase small font-weight-bold">용도</th>
-											<th class="border-0 text-uppercase small font-weight-bold">결제방식</th>
-											<th class="border-0 text-uppercase small font-weight-bold">입/출금</th>
-											<th class="border-0 text-uppercase small font-weight-bold">금액</th>
-											<th class="border-0 text-uppercase small font-weight-bold">비고</th>
-											<th class="border-0 text-uppercase small font-weight-bold"
-												id="modiBtn" style="visibility: hidden;">선택</th>
+											<th style="display: none"></th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:5%">No</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:30%">날짜</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:13%">용도</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">결제방식</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">입/출금</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">금액</th>
+											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">비고</th>
+											<th class="border-0 text-uppercase small font-weight-bold">선택</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${list }" var="list">
+										<c:forEach items="${list }" var="list" varStatus="status">
 											<tr>
+												<td>${status.count }</td>
+												<td id="seq" style="display: none">${list.seq }</td>
 												<td><input type="text" value="${list.reportingDate }"
-													class="datepicker"></td>
+													class="datepicker col-10"></td>
 												<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 													id="detailsSelect">
 														<option selected>${list.details}</option>
@@ -139,9 +142,11 @@
 																value="${list.expense}" pattern="###,###원" /></td>
 													</c:otherwise>
 												</c:choose>
-												<td>${list.remarks}</td>
-												<td style="visibility: hidden;" class="modifyBtn"><input
-													type="button" value="수정"></td>
+												<td><input type="text" class="remarks" name="remarks"value="${list.remarks}" style="border: 1px solid white;"></td>
+												<td class="modifyBtn"><input
+													type="button" class="btn btn-info"id="deleteBtn"value="수정">
+												<input
+													type="button" class="btn btn-dark"id="deleteBtn"value="삭제"></td>
 											</tr>
 
 										</c:forEach>
@@ -201,6 +206,11 @@
 							"visibility", "visible");
 
 				});
+		$(".remarks").on("keydown",function(){
+			$("#modiBtn").css("visibility", "visible");
+			$(this).parent().parent().children(".modifyBtn").css(
+					"visibility", "visible");
+		})
 
 		$(".pdfBtn")
 				.on(
@@ -252,6 +262,10 @@
 								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
 							});
 
+		});
+		
+		$(".modifyBtn").on("click",function(){
+			$(this).attr("id","seq");
 		});
 	</script>
 </body>

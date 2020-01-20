@@ -33,6 +33,7 @@ div {
 
 .a2 {
 	background-image: url(/img/index/s2.jpg);
+	background-size : 50% 50%;
 	width: 50%;
 	float: left;
 }

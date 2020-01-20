@@ -63,9 +63,14 @@
 				<li><a href="#"> <i class="fa fa-comments fa-2x"></i> <span
 						class="nav-text"> re마켓 </span>
 				</a></li>
+				
+				<c:if test="${loginInfo != null}">				
+				
 				<li><a href="#"> <i class="fa fa-dollar fa-2x"></i> <span
 						class="nav-text"> 가계부 </span>
 				</a></li>
+				</c:if>
+				
 			</ul>
 		</nav>
 
@@ -137,12 +142,12 @@
 		<div id="fourthRow">
 			<div class="col-12"></div>
 			<div id="psWrapper">
-				<div class="d1 a1"></div>
 				<div class="d2 b1">어쩌구 저쩌구</div>
-				<div class="d2 b2">여기가 메인입니당</div>
+				<div class="d1 a1"></div>
 				<div class="d1 a2"></div>
-				<div class="d1 a3"></div>
+				<div class="d2 b2">여기가 메인입니당</div>
 				<div class="d2 b3">메롱</div>
+				<div class="d1 a3"></div>
 			</div>
 		</div>
 		<div id="footer">

@@ -18,6 +18,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/css/nav.css"/>
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -30,6 +31,8 @@
 </style>
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper">
 	<main class="container pt-5">
 	<div class="card mb-5">
 
@@ -145,7 +148,9 @@
 		</div>
 	</div>
 	</main>
+	</div>
 	<script>
+		
 		$(function() {
 			//input을 datepicker로 선언
 			$("#datepicker")
@@ -210,48 +215,7 @@
 // 						});
 		$("#addBtn").on("click", function() {
 				$("#addFrm").submit();
-			// 						var reportingDates = $("#datepicker").val();
-			// 						var detail = $("#detailsSelect").val();
-			// 						var payment = $("#paymentsSelect").val();
-			// 						var specs = $("#specSelect").val();
-			// 						var prices = $("#price").val();
-			// 						var remark = $("#remarks").val();
-
-			// 						$.ajax({
-			// 							url : "/Account.add",
-			// 							dataType : "json",
-			// 							type : "post",
-			// 							data : {
-			// 								reportingDate : reportingDates,
-			// 								details : detail,
-			// 								payments : payment,
-			// 								spec : specs,
-			// 								price : prices,
-			// 								remarks : remark
-			// 							}
-			// 						}).done(function(resp) {
-			// 							$(".monthData").remove();
-			// 							$.each(resp, function(i,list){
-			// 								console.log(i);
-			// 							$("#monthDataBody").append("<tr class=\"monthData"+i+"\"></tr>");
-			// 							$(".monthData"+i).append("<td class=\"formedDate"+i+"\">"+list.formedReportingDate+"</td>");
-			// 							var incomePrice = addComma(list.income);
-
-			// 							$(".monthData"+i).append("<td class=\"'income'"+i+" style='color:dodgerblue'\">"+incomePrice+"</td>");
-			// 							addComma(list.expense);
-			// 							$(".monthData"+i).append("<td class=\"'expense'"+i+" style='color:red'\">"+list.expense+"</td>");
-			// 							$(".monthData"+i).append("<td class=\"'total"+i+"'>"+list.income-list.expense+"</td>");
-			// 							$(".monthData"+i).append("<td><input type='button' class='detailBtn' name="+list.formedReportingDate+" value='상세보기'>"
-			// 							+"<input type='button' class='deleteBtn' name="+list.formedReportingDate+" value='삭제'></td>");
-			// 							$(".formedDate").html(list.formedReportingDate);
-			// 							$(".income").html(list.income);
-			// 							$(".expense").html(list.expense);
-			// 							$(".total").html(list.income-list.expense);					
-			// 							})
-			// 							console.log(resp);
-			// 						}).fail(function() {
-			// 							console.log("fail");
-			// 						});
+			
 
 		});
 		function addComma(num) {
