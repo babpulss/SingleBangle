@@ -40,6 +40,7 @@ public class MarketService {
 	public List<MarketDTO> board() {
 		try {
 			List<MarketDTO> list = dao.getBoardList();
+			
 			return list;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -61,11 +62,10 @@ public class MarketService {
 	}
 
 	@Transactional("tx")//글 수정
-	public void updateProc(MarketDTO dto, String path) { //글수정
+	public void updateProc(MarketDTO dto, String content, String writer, String path) { //글수정
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
 		Pattern p = Pattern.compile("<img.+?src=\"(.+?base64,.+?)\".+?data-filename=\"(.+?)\".*?>");
-		String content = dto.getContent();
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
 		
@@ -80,8 +80,9 @@ public class MarketService {
 					String sysName = System.currentTimeMillis() + "_" + oriName;
 					String mgroup = m.group(1);
 					System.out.println("oriNamegroup2 : " + oriName);
-					System.out.println("mgroupgroup1 : " + mgroup);
+//					System.out.println("mgroupgroup1 : " + mgroup);
 					String imgString = m.group(1).split(",")[1];
+					System.out.println("imgString : " + imgString);
 					byte[] imgBytes = Base64Utils.decodeFromString(imgString); // string값을 byte 배열로 만들어서 리턴시킴
 					FileOutputStream fos = new FileOutputStream(rootPath + "/" + sysName);
 					DataOutputStream dos = new DataOutputStream(fos);
@@ -92,7 +93,7 @@ public class MarketService {
 					MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
 					list.add(file_dto);
 				}		
-			dao.update(dto);
+			dao.update(dto, content, writer);
 			int board_seq = dto.getSeq();
 			for(MarketFileDTO tmp : list) {
 				tmp.setBoard_seq(board_seq);
@@ -130,11 +131,10 @@ public class MarketService {
 //	}
 
 	@Transactional("tx")
-	public void write(MarketDTO dto, String path) {
+	public void write(MarketDTO dto,String content, String writer, String place, String path) {
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
 		Pattern p = Pattern.compile("<img.+?src=\"(.+?)\".+?data-filename=\"(.+?)\".*?>");
-		String content = dto.getContent();
 		Matcher m = p.matcher(content);
 		StringBuffer sb = new StringBuffer();
 		if(!filePath.exists()) {
@@ -158,12 +158,14 @@ public class MarketService {
 				content = content.replaceFirst(Pattern.quote(m.group(1)), "/files/"+sysName);
 				MarketFileDTO file_dto = new MarketFileDTO(0, 0, oriName, sysName);
 				list.add(file_dto);
-			}		
-			dao.insert(dto);
-			int boardSeq = dao.insertFile(dto.getWriter());
+			}
+			System.out.println("글쓴이 : " + writer);
+			dao.insert(dto, content, writer, place);
+			int board_seq = dao.insertFile(writer);
+			System.out.println("맥스시퀀스 : " + board_seq);
 			for(MarketFileDTO tmp : list) {
-				tmp.setBoard_seq(boardSeq);
-				file_dao.insert(tmp);
+				tmp.setBoard_seq(board_seq);
+				file_dao.insert(tmp, board_seq);
 			}
 
 		}catch(Exception e) {
