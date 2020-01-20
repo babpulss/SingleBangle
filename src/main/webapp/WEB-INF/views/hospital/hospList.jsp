@@ -5,6 +5,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd"></script>
         <title>병원 목록</title>
@@ -18,6 +19,8 @@
 			}
 			
 			#logo{
+				width: 800px;
+                margin: auto;
 				text-align: center;
 			}
 			#logo img{
@@ -73,6 +76,7 @@
         </style>
     </head>
     <body>
+    	<div id="mainWrapper">
     	<div id="logo">
 	        <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
 	    </div>
@@ -128,7 +132,7 @@
         </div>
         
 		<br><hr><br>
-        <div id="map" style="width:80%; height:700px; margin:auto"></div>
+        <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
         <br><hr><br>
         
         <div id="hospInfoBox">
@@ -154,7 +158,7 @@
             </table>
         </div>
         <br><br><br>
-
+		</div>
         <script>
             //////////////////////////////////////////////////
 
