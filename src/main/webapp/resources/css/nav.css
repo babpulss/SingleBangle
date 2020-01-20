@@ -190,7 +190,7 @@ nav ul, nav li {
 	background-color: #0085cb;
 }
 
-#logo {
+#navLogo {
 	position: relative;
 	display: flex;
 	justify-content: center;
@@ -199,7 +199,7 @@ nav ul, nav li {
 	top: 5px;
 }
 
-#logo * {
+#navLogo * {
 	height: 100%;
 }
 
@@ -325,6 +325,11 @@ nav ul, nav li {
 	text-align: center;
 }
 
+#rightSidebar ul {
+	/* width: 200px; */
+	
+}
+
 #loginTitle {
 	font-family: 'BMHANNAAir';
 	font-size: 24px;
@@ -378,7 +383,7 @@ nav ul, nav li {
 	#topbar {
 		height: 60px;
 	}
-	#logo {
+	#navLogo {
 		width: 70%;
 	}
 	#rightLogin {

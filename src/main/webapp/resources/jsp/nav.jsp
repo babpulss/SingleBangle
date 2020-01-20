@@ -10,7 +10,7 @@
 				<div class="bar2 sidebar"></div>
 				<div class="bar3 sidebar"></div>
 			</div>
-			<div id="logo">
+			<div id="navLogo">
 				<img src="/img/index/logos/logo.png">
 			</div>
 			<c:choose>

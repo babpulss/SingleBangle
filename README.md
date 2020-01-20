@@ -1,10 +1,17 @@
 
+<h1> 네비게이션 바를 jsp인클루드 방식으로 포함시키기
 ```html
-<link rel="stylesheet" href="/css/nav.css">
+<!DOCTYPE html>
+<html>
+<head>
+.
+.
+.
+<link rel="stylesheet" href="/css/nav.css"> // <head>영역에 css를 임포트를 함
 </head>
 <body>
-<jsp:include page="/resources/jsp/nav.jsp"/>
-<div id="mainWrapper">
+<jsp:include page="/resources/jsp/nav.jsp"/> // <body> 시작부분에 nav.jsp를 인클루드함
+<div id="mainWrapper"> 			    // mainWrapper안에 콘텐츠를 작성
 본문 내용 작성 부문
 </div>
 .
