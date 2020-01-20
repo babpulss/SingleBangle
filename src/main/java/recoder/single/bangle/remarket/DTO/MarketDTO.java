@@ -14,13 +14,14 @@ public class MarketDTO {
 	private String place;
 	private Timestamp writeDate;
 	private int viewCount;
+	private String done;
 	private MultipartFile[] file;
 	public MarketDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public MarketDTO(int seq, String title, int price, String content, String writer, String category, String place,
-			Timestamp writeDate, int viewCount, MultipartFile[] file) {
+			Timestamp writeDate, int viewCount, String done, MultipartFile[] file) {
 		super();
 		this.seq = seq;
 		this.title = title;
@@ -31,6 +32,7 @@ public class MarketDTO {
 		this.place = place;
 		this.writeDate = writeDate;
 		this.viewCount = viewCount;
+		this.done = done;
 		this.file = file;
 	}
 	public int getSeq() {
@@ -87,10 +89,17 @@ public class MarketDTO {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
+	public String getDone() {
+		return done;
+	}
+	public void setDone(String done) {
+		this.done = done;
+	}
 	public MultipartFile[] getFile() {
 		return file;
 	}
 	public void setFile(MultipartFile[] file) {
 		this.file = file;
 	}
+	
 }

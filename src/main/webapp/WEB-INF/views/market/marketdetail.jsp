@@ -66,7 +66,7 @@
 			</c:choose>
 		</div>
 		<div>
-			<input type="text" id="recontent" name="recontent"><button id="reconfirm">확인</button>
+			<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
 		</div>
 	</div>
 	

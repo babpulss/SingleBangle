@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import recoder.single.bangle.remarket.DAO.MarketReplyDAO;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
@@ -22,21 +23,25 @@ public class MarketReplyService {
 
 	@Autowired
 	private HttpServletRequest request;
-
-	public void insert(String recontent, String id, int boardSeq) {
+	
+	@Transactional("tx")
+	public void insert(String recontent, String writer, int boardSeq) {
 		try {
-			dao.insert(recontent, id, boardSeq);
+			System.out.println("서비스 댓글 내용 : " + recontent);
+			dao.insert(recontent, writer, boardSeq);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 	
+	@Transactional("tx")
 	public List<MarketReplyDTO> list(int boardSeq) {
 		List<MarketReplyDTO> list = dao.list(boardSeq);
 		return list;
 	}
 	
+	@Transactional("tx")
 	public void delete(int seq) {
 		try {
 			dao.delete(seq);
@@ -45,6 +50,7 @@ public class MarketReplyService {
 		}
 	}
 	
+	@Transactional("tx")
 	public void deleteUseBoardSeq(int boardSeq) {
 		try {
 			dao.deleteUseBoardSeq(boardSeq);
@@ -53,6 +59,7 @@ public class MarketReplyService {
 		}
 	}
 	
+	@Transactional("tx")
 	public int update(String recontent, int seq) {
 		try {
 			int updateReply = dao.update(recontent, seq);
@@ -63,5 +70,5 @@ public class MarketReplyService {
 			return 0;
 		}
 		
-	}	
+	}
 }
