@@ -1,53 +1,108 @@
 package recoder.single.bangle.remarket.DAO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import configuration.Configuration;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
 
 @Repository
 public class MarketReplyDAO {
 	@Autowired
-	private JdbcTemplate jdbc;
-	
-	public int insert(String recontent, String id, int boardseq) throws Exception{
-		String sql = "insert into marketReply values(marketReply_seq.nextval, ?, sysdate, ?, ?)";
-		return jdbc.update(sql, recontent, id, boardseq);
+	private SqlSessionTemplate jdbc;
+
+	public int insert(String recontent, String writer, int boardSeq) throws Exception{
+		System.out.println(recontent + " : " + writer + " : " + boardSeq);
+		Map<String, Object> param = new HashMap<>();
+		param.put("recontent", recontent);
+		param.put("writer", writer);
+		param.put("boardSeq", boardSeq);
+		return jdbc.update("MarketReply.insert", param);
 	}
-	
+
 	public List<MarketReplyDTO> list(int boardSeq){
-		String sql = "select * from marketReply where boardSeq = ?";
-		return jdbc.query(sql, new Object[]{boardSeq},new RowMapper<MarketReplyDTO>() {
-			@Override
-			public MarketReplyDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				MarketReplyDTO dto = new MarketReplyDTO();
-				dto.setRecontent(rs.getString("recontent"));
-				dto.setWriter(rs.getString("writer"));
-				dto.setBoardSeq(rs.getInt("boardSeq"));
-				dto.setSeq(rs.getInt("seq"));
-				return dto;
-			}
-		});
+		return jdbc.selectList("MarketReply.list", boardSeq);
 	}
-	
+
 	public int delete(int seq) throws Exception{
-		String sql = "delete from marketReply where seq = ?";
-		return jdbc.update(sql, seq);
+		return jdbc.delete("MarketReply.delete", seq);
 	}
-	
+
 	public int deleteUseBoardSeq(int boardSeq) throws Exception{
-		String sql = "delete from marketReply where boardSeq = ?";
-		return jdbc.update(sql, boardSeq);
+		return jdbc.delete("MarketReply.deleteUseBoardSeq", boardSeq);
 	}
-	
+
 	public int update(String recontent, int seq) throws Exception{
-		String sql = "update marketReply set recontent = ?, writeDate = sysdate where seq = ?";
-		return jdbc.update(sql, recontent, seq);
+		Map<String, Object> param = new HashMap<>();
+		param.put("recontent", recontent);
+		param.put("seq", seq);
+		return jdbc.update("MarketReply.update", param);
+	}
+
+	//댓글페이징//
+	public List<MarketReplyDTO> selectByPage(int start, int end) throws Exception{
+		Map<String, Object> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		return jdbc.selectList("MarketReply.selectByPage", param);
+	}
+
+	public int getArticleCount(int boardSeq) throws Exception{ //게시판 내의 총 글 수
+		return jdbc.selectOne("MarketReply.getArticleCount", boardSeq);
+	}
+
+	public String getPageNavi(int currentPage, int boardSeq) throws Exception { 
+		int recordTotalCount = this.getArticleCount(boardSeq); 
+		int recordCountPerPage = 10; 
+		int naviCountPerPage = 10; 
+		int pageTotalCount = 0;
+
+		if(recordTotalCount % Configuration.recordCountPerPage > 0) { 
+			pageTotalCount = recordTotalCount/Configuration.recordCountPerPage +1;
+		}else {
+			pageTotalCount = recordTotalCount/Configuration.recordCountPerPage;
+		}
+
+		if(currentPage < 1) { 
+			currentPage = 1;
+		}else if(currentPage > pageTotalCount){ 
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = ((currentPage-1) / naviCountPerPage) * naviCountPerPage + 1;
+		int endNavi = startNavi + naviCountPerPage - 1; 
+
+		if(endNavi > pageTotalCount) { 
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; 
+		boolean needNext = true; 
+
+		if(startNavi == 1) {
+			needPrev = false;
+		}
+		if(endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder(); 
+
+		if(needPrev) {
+			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(startNavi - 1)+"'> < </a>");
+		}
+		for(int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+i+"'>"); 
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if(needNext) {
+			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(endNavi + 1) +"' > > </a>");
+		}
+		return sb.toString();
 	}
 }

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="MarketFile">
+	<insert id="insert">
+		insert into marketFile values(marketFile.seq.nextval, #{board_seq}, #{ori_name}, #{sys_name})
+	</insert>
+	
+	<update id="update">
+		update marketFile set ori_name=#{ori_name}, sys_name=#{sys_name} where board_seq=#{board_seq}
+	</update>
+	
+	<delete id="delete">
+		delete from market where board_seq=#{board_seq}
+	</delete>
+	
+	<select id="selectAll"  resultType="recoder.single.bangle.remarket.DTO.MarketFileDTO">
+		select * from marketFile
+	</select>
+	
+	<select id="selectByPage" resultType="recoder.single.bangle.remarket.DTO.MarketFileDTO">
+		select * from (select marketFile.*,row_number() over(order by board_seq desc)rown from marketFile 
+				where (board_seq, seq) in (select board_seq, max(seq) from marketFile group by board_seq) order by 1 desc) 
+				where rown between #{start} and #{end}
+	</select>
+	
+	<select id="review" resultType="recoder.single.bangle.remarket.DTO.MarketFileDTO">
+		select sys_name from marketFile where seq=(select max(seq) from marketFile where board_seq = #{board_seq})
+	</select>
+	
+	<select id="selectByPageUseTitle" resultType="recoder.single.bangle.remarket.DTO.MarketFileDTO">
+		select * from (select marketFile.*,row_number() over(order by board_seq desc)rown 
+				from marketFile where board_seq = #{board_seq} and (board_seq, seq) in (select board_seq, max(seq) from marketFile group by board_seq) order by 1 desc) 
+				where (rown between #{start} and #{end})
+	</select>
+	
+	<select id="searchReview" resultType="recoder.single.bangle.remarket.DTO.MarketFileDTO">
+		select sys_name from marketFile where seq=(select max(seq) from marketFile where board_seq = #{board_seq}
+	</select>
+</mapper>
