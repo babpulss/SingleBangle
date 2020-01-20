@@ -95,8 +95,7 @@
 	<div id="mainWrapper">
 	<h1>블랙리스트</h1>
 	<div class="list">
-		<a href="${pageContext.request.contextPath}/">사용자 페이지 메인</a> <a
-			href="${pageContext.request.contextPath}/admin">관리자 페이지 메인</a> <a
+			href="${pageContext.request.contextPath}/admin">대쉬 보드</a> <a
 			href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트
 			조회</a> <a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
 			확인 조회</a>
@@ -125,7 +124,7 @@
 						<span>${i.id}</span> 
 						<span>${i.addedDate}</span> 
 						<span>${i.reason} </span>
-						<span>블록 해제까지 ${i.blockTime}시간 남음 </span>
+						<span>${i.blockTime}시간 남음 </span>
 						<span>
 							<button class="unblock" name="${i.id}">차단 해제</button>
 						</span>

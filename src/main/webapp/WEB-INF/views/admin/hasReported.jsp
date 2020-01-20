@@ -30,10 +30,6 @@ html, body {
 	font-family: 'BMHANNAAir';
 }
 
-#board {
-	margin: 65px 110px 0 110px;
-}
-
 #bHeader {
 	background-color: #0085cb;
 	border-radius: 10px 10px 0 0;
@@ -103,8 +99,7 @@ html, body {
 <div id="mainWrapper">
 <h1>신고리스트</h1>
 	<div class="list">
-		<a href="${pageContext.request.contextPath}/">사용자 페이지 메인</a>
-		<a href="${pageContext.request.contextPath}/admin">관리자 페이지 메인</a>
+		<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a>
 		<a href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트 조회</a>
 		<a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수 확인 조회</a>
 	</div>
@@ -125,7 +120,7 @@ html, body {
 						<span>${i.reportingDate}</span> 
 						<span>${i.reason}</span>
 						<span>
-							<a href="${i.reportedUrl}" target="_blank">해당 URL로 이동</a>
+							<a href="${i.reportedUrl}" target="_blank">URL로 이동(${i.reportedUrl})</a>
 						</span>
 						<span>
 							<button class="unblock" name="${i.seq}">접수 완료</button>
@@ -154,7 +149,7 @@ html, body {
 					type: "POST",
 					data: { seq: seq }
 				}).done(function(e) {
-					if (e) $(target).parent().remove();
+					if (e) $(target).closest("div").remove();
 					else alert('error occured');
 				}).fail(() => { console.log(e);	});
 			}
