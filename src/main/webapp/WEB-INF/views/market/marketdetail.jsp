@@ -14,13 +14,13 @@
 <div id="mainWrapper"> 
 	<div class="wrapper" style="width: 800px; border:1px solid black; margin: auto;">
 		<div id="contentBox">
-		<div>${dto.writer } ${dto.place }</div>
+		<div>${dto.writer } ${dto.place } ${dto.gender }</div>
 		<div>${dto.title } ${dto.category }</div>
 		<div>${dto.price }원</div>
 		<div>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id && dto.done == 'N'}">
-				<button type="button" id="done_${dto.seq }" onclick="updateDone('${dto.seq}')">판매완료</button>
+				<button type="button" id="updateSellDone_${dto.seq }" onclick="updateSellDone('${dto.seq}')">판매완료</button>
 			</c:when>
 		</c:choose>
 		<c:choose>
@@ -35,7 +35,8 @@
 				<div><button id="update">수정하기</button><button id="delete">삭제하기</button></div>
 			</c:when>
 			<c:otherwise>
-				<div><button id="msg">쪽지보내기</button><button id="report">신고하기</button></div>
+				<div><button id="msg">쪽지보내기</button>
+				<button id="report">신고하기</button></div>
 			</c:otherwise>
 		</c:choose>
 		<div><button id="back">돌아가기</button></div>
@@ -54,7 +55,7 @@
 								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
-									<c:when test="${list.writer == id }">
+									<c:when test="${list.writer == loginInfo.id }">
 										<button type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정하기</button>
 										<input type="hidden" id="boardSeqRe_${list.seq }" value="${list.boardSeq }">
 										<button id="deleteRe_${list.seq }" type="button" onclick="deleteRe('${list.seq}')">삭제하기</button>
@@ -67,8 +68,15 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div>
-			<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
+		<div style="width: 100%;">
+			<c:choose>
+				<c:when test="${loginInfo != null }">
+					<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
+				</c:when>
+				<c:otherwise>
+					로그인 후 댓글 입력이 가능합니다.
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	</div>
@@ -78,12 +86,12 @@
 // 		location.href="${pageContext.request.contextPath}/market/updateDone.do?seq=${dto.seq}"
 // 	});
 	
-	var updateDone = function(seq){
-		var updateDone = "#updateDone_"+seq;
+	var updateSellDone = function(seq){
+		var updateSellDone = "#updateSellDone_"+seq;
 		var doneYes = "#doneYes_"+seq;
-		$(updateDone).css("display","none");
+		$(updateSellDone).css("display","none");
 		$.ajax({
-			url: "${pageContext.request.contextPath}/market/updateDone.do?seq="+seq,
+			url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
 			type: "post",
 			data: {
 				seq : seq
@@ -119,6 +127,7 @@
 				}
 				$("#recontent").val("");
 				alert("댓글이 삭제되었습니다.");
+				window.location.reload();
 			}
 			
 		})
@@ -155,6 +164,7 @@
 					$(updateRe).css("display","block");
 					$(deleteRe).css("display","block");
 					$(updateOk).css("display","inline");
+					window.location.reload();
 				}
 			})
 			
@@ -174,7 +184,7 @@
 		
 		$("#msg").on("click",function(){
 			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.writer }";
-			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
+			window.open(url, "메세지", "width=400px, height=500px, location=no, status=no, scrollbars=no");
 		})
 		
 		$("#report").on("click",function(){
@@ -207,6 +217,7 @@
 						}
 						$("#recontent").val("");
 						alert("댓글이 등록되었습니다.");
+						window.location.reload();
 					},
 					error: function(data){
 						alert("댓글작성에 실패했습니다.");

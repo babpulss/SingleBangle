@@ -22,7 +22,7 @@
 	
 	<script>
 		$("#reply").on("click", function(){
-			location.href="${pageContext.request.contextPath }/member/writeMsg.do?receiver=${dto.sender }"
+			location.href="${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }"
 		})
 	</script>
 </body>

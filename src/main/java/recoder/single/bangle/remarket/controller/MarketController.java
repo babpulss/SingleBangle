@@ -135,12 +135,12 @@ public class MarketController {
 		return "market/writemarket";
 	}
 
-	@RequestMapping("/updateDone")//판매완료누르기
+	@RequestMapping("/updateSellDone")//판매완료누르기
 	@ResponseBody
 	public String updateDone() {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		System.out.println("판매완료 보드 : " + seq);
-		MarketDTO dto = service.updateDone(seq);
+		MarketDTO dto = service.updateSellDone(seq);
 		Gson g = new Gson();
 		String json = g.toJson(dto);
 		System.out.println(json);
@@ -163,13 +163,14 @@ public class MarketController {
 		try {
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 			String writer = loginInfo.getId();
+			String gender = loginInfo.getGender();
 			String place = loginInfo.getAddress1();
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();			
 			content.replace("<", "&lt");
 			content.replace(">", "&gt");
 			content.replace("&", "&amp");
-			service.write(dto, content, writer, place, path);
+			service.write(dto, content, writer, place, gender, path);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("list", list);
 			return "redirect:/market/boardList.do";

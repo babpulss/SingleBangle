@@ -17,7 +17,7 @@ public class MarketDAO {
 	@Autowired
 	private SqlSessionTemplate jdbc;
 
-	public int insert(MarketDTO dto, String content, String writer, String place) throws Exception{
+	public int insert(MarketDTO dto, String content, String writer, String place, String gender) throws Exception{
 		Map<String, Object> param = new HashMap<>();
 		param.put("title", dto.getTitle());
 		param.put("price", dto.getPrice());
@@ -25,11 +25,12 @@ public class MarketDAO {
 		param.put("writer", writer);
 		param.put("category", dto.getCategory());
 		param.put("place", place);
+		param.put("gender", gender);
 		return jdbc.insert("Market.insert", param);
 	}
 	
-	public int updateDone(int seq) throws Exception{
-		return jdbc.update("Market.updateDone", seq);
+	public int updateSellDone(int seq) throws Exception{
+		return jdbc.update("Market.updateSellDone", seq);
 	}
 
 	public int insertFile(String writer) throws Exception{

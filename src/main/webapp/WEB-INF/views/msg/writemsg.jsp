@@ -11,9 +11,12 @@
 <body>
 <form action="replyMsgProc.do" id="frm" method="post">
 	<table>
-		<tr><td>받는 사람 : <input type="text" name="receiver" value="${receiver }" readonly><td></tr>
-		<tr><td>제목 : <td><input type="text" name="title"></tr>
-		<tr><td>내용 : <td><input type="text" name="contents"></tr>
+		<tr><td>받는사람 : <input type="text" name="receiver" value="${receiver }" readonly><td></tr>
+		<tr><td>제목 : <input type="text" name="title"></tr>
+		<tr><td>내용
+		<tr><td>
+		<textarea style="resize:none;" name="contents" rows="20px" cols="50px"></textarea>
+		</tr>
 		<tr><td><button id="send" type="button">보내기</button></tr>
 	</table>
 	</form>
