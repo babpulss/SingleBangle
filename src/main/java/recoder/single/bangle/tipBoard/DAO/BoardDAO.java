@@ -10,6 +10,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import recoder.single.bangle.tipBoard.DTO.BoardDTO;
+import recoder.single.bangle.tipBoard.DTO.CommentDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
 @Repository
@@ -133,5 +135,32 @@ public class BoardDAO {
 		
 		public List<BoardDTO> searchBoth(String both){
 			return sst.selectList("Tip.searchBoth", both);
+		}
+		
+		public int report(ReportDTO dtoR){
+			return sst.insert("Tip.report",dtoR);
+		}
+		
+		public int addComment(CommentDTO dtoC) {
+			return sst.insert("Tip.addComment",dtoC);
+		}
+		
+		public List<CommentDTO> cmtList(int rootSeq){
+			return sst.selectList("Tip.cmtList", rootSeq);
+		}
+		
+		public int cmtDelete(int seq) {
+			return sst.delete("Tip.cmtDelete", seq);
+		}
+		
+		public int getRootSeq(int seq) {
+			return sst.selectOne("Tip.getRootSeq", seq);
+		}
+		
+		public int cmtUpdate(int seq, String contents) {
+			Map<String, Object> param = new HashMap<>();
+			param.put("seq", seq);
+			param.put("contents", contents);
+			return sst.update("Tip.cmtUpdate",param );
 		}
 }

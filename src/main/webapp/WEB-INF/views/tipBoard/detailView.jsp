@@ -22,6 +22,41 @@ width:800px;
 }
 
 </style>
+<script>
+$(function(){
+	//****동적바인딩****//
+	$(document).on("click",".replyUpdate",function(){
+// replyUpdate : 수정 / reUpdate : (수정)확인 / reDelete : 삭제 / reCancel : (수정)취소
+
+	var oriContents = $(this).parent().siblings(".cmtContents").html();
+		$(this).parent().siblings(".cmtContents").attr("contenteditable","true");
+		$(this).attr("hidden","true");
+		$(this).siblings(".replyDelete").attr("hidden","true");
+		$(this).siblings(".reUpdate").attr("hidden",false);
+		$(this).siblings(".reCancel").attr("hidden",false);
+		
+			var seq = ($(this).attr("seq"));
+		
+		$(".reUpdate").on("click",function(){
+			var contents = $(this).parent().siblings(".cmtContents").html();
+			console.log(seq + " : " + contents);
+			
+			location.href = "${pageContext.request.contextPath}/board/replyUpdate.bo?seq="+seq+"&contents="+contents;
+		})
+		
+		$(".reCancel").on("click",function(){
+			$(this).parent().siblings(".cmtContents").attr("contenteditable","false");
+			$(this).parent().siblings(".cmtContents").html(oriContents);
+			$(this).siblings(".replyUpdate").attr("hidden",false);
+			$(this).siblings(".replyDelete").attr("hidden",false);
+			$(this).attr("hidden",true);
+			$(this).siblings(".reUpdate").attr("hidden",true);
+		})
+	})
+	getCommentList(); 
+});
+</script>
+
 </head>
 <body>
 <!-- 이제 여기서 ${detailView} 내용 꺼내기! -->
@@ -51,7 +86,16 @@ width:800px;
 		<c:choose>
 			<c:when test="${loginInfo == null}"></c:when>
 			<c:otherwise>
-				<button type="button" id="btnScrap">스크랩</button>
+				<c:choose>
+					<c:when test="${scrapCheck == 0}">
+				<button type="button" id="btnScrap" style="border:0px;outline:0px;background-color:transparent;">
+				<img id="scrapImage" src="/img/tipBoard/star.png" style="width:30px;height:30px;"></button>
+					</c:when>
+					<c:otherwise>
+				<button type="button" id="btnScrap" style="border:0px;outline:0px;background-color:transparent;">
+				<img id="scrapImage" src="/img/tipBoard/coloredStar.png" style="width:30px;height:30px;"></button>
+					</c:otherwise>
+				</c:choose>
 <!-- 	ajax를 이 위치에서 쓰는 이유는?ㅜ.ㅜ			 -->
 				<script>
 				$("#btnScrap").on("click",function(){
@@ -72,6 +116,7 @@ width:800px;
 						if(data.scrapCheckResult != 0){
 							alert("이미 스크랩된 게시글입니다.");
 						}else if(data.scrapCheckResult == 0){
+							$("#scrapImage").attr('src','/img/tipBoard/coloredStar.png');
 							alert("스크랩 성공! 마이페이지에서 확인하세요!");
 						}
 					}).fail(function(data){
@@ -91,10 +136,10 @@ width:800px;
 			<c:choose>
 				<c:when test="${likeCheck == 1}">
 					<button type="button" id="btnLike" style="border:0px;outline:0px;background-color:transparent;">
-					<img id="heartImage" src="/img/tipBoard/coloredHeart.png" style="width:20px;height:20px;"></button>
+					<img id="heartImage" src="/img/tipBoard/coloredHeart.png" style="width:30px;height:30px;"></button>
 				</c:when>
 				<c:otherwise><button type="button" id="btnLike" style="border:0px;outline:0px;background-color:transparent;">
-					<img id="heartImage" src="/img/tipBoard/heart.png" style="width:20px;height:20px;"></button>
+					<img id="heartImage" src="/img/tipBoard/heart.png" style="width:30px;height:30px;"></button>
 				</c:otherwise>
 			</c:choose>
 			
@@ -146,12 +191,40 @@ width:800px;
 	<div class="col-10"><button id="goBoardList">목록으로</button></div>
 	<div class="col-2">
 	<c:choose>
-		<c:when test="${loginInfo.adminCheck == 'Y'}"><button id="black">블랙리스트</button></c:when>
-		<c:otherwise><button id="report">신고하기</button></c:otherwise>
+		<c:when test="${loginInfo == null}"></c:when>
+		<c:otherwise><input type="button" value="신고하기" onclick="window.open('../board/reportPage.bo?url=${pageContext.request.contextPath}/board/detailView.bo?seq=${detailView.seq}','신고하기','width=500px, height=500px')"></c:otherwise>
 	</c:choose>
 	</div>
 	</div>
 	</div>
+
+		<div id="replyBox">
+			<form id="cmtForm" name="cmtForm" method="post">
+				<br>
+				<br>
+				<div class="row">
+					<div col-12>
+						<span><strong>Comments</strong></span>  [<span id="cmtCount">0</span>]
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+						<textarea style="width: 800px" rows="3" cols="30" id="cmtWrite"></textarea>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12">
+					<button type="button" onclick="fn_Cmt()">댓글달기</button>
+					</div>
+				</div>
+				<input type="hidden" id="seqB" name="seqB" value="${detailView.seq }">
+			</form>
+			
+			<div>
+				<div id="cmtListForm"></div>
+				</form>
+			</div>
+		</div>
 	</div>
 <!-- 	script 겹쳐서 이미지 불러오는 데 에러생김! 그래서 아래로 내려주고, image 먼저 로딩되고 bootstrap 실행되도록 함! -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -172,11 +245,60 @@ width:800px;
 		location.href = "${pageContext.request.contextPath}/board/deleteTip.bo?seq=${detailView.seq}";
 	});
 	
-//  스크랩 기능은 ajax로 바꿀거라서 성공하면 이거 필요 없음!	
-// 	여기서 seq값을 가지고 가야 controller에서 이 seq값을 가지고 boardTB의 값을 가져올 수 있음!
-//	$("#btnScrap").on("click",function(){
-//		location.href = "${pageContext.request.contextPath}/board/tipScrap.bo?seq=${detailView.seq}";
-//	})
+	function fn_Cmt(){
+		var seqB = ${detailView.seq};
+		var cmtWrite = $("#cmtWrite").val();
+		var writer = '${loginInfo.id}';
+		console.log(cmtWrite);
+		$.ajax({
+			type: "post",
+			url: "addComment.bo",
+			data: {contents:cmtWrite, rootSeq:seqB, writer:writer},
+			dataType: "json"
+		}).done(function(data){
+			if(data.cmtResult == 1){
+				alert("댓글이 성공적으로 입력되었습니다.");
+				getCommentList();
+				$("#cmtWrite").val("");
+			}else{
+				alert("댓글이 입력되지 않았습니다.")
+			}
+		}).fail(function(data){
+			alert("비동기 실패ㅠ");
+		})
+	}
+	
+	function getCommentList(){
+		var rootSeq = ${detailView.seq};
+// 		var writer = "${detailView.writer}";
+		var id = "${loginInfo.id}";
+		
+		$.ajax({
+			type:"post",
+			url:"cmtList.bo",
+			data:{rootSeq:rootSeq},
+			dataType: "json"
+		}).done(function(data){
+			$("#cmtListForm").html("");
+			$("#cmtCount").html(data.length);
+			
+			for(var i = 0; i <data.length; i++){
+				console.log(data[i].contents);
+							
+				if(data[i].writer != id){
+					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-7'>"+data[i].contents
+					+"</div><div class='col-3'>"+data[i].writeDate+"</div></div>");			
+				}else{
+					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-5 cmtContents'>"+data[i].contents
+							+"</div><div class='col-3'>"+data[i].writeDate
+							+"</div><div class='col-2'><a class='replyUpdate' seq="+data[i].seq+">수정</a> <a class='replyDelete' href='${pageContext.request.contextPath}/board/replyDelete.bo?seq=" 
+							+ data[i].seq + "&contents="+data[i].contents+"'>삭제</a> <a class='reUpdate' seq=" + data[i].seq + " hidden>확인</a> <a class='reCancel' seq="+data[i].seq+" hidden>취소</a></div>");
+				}		
+			}
+		}).fail(function(data){
+			alert("비동기 실패ㅠ")
+		})
+	}
 	
 	//<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.
