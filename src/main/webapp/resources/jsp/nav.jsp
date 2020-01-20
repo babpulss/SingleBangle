@@ -11,7 +11,7 @@
 				<div class="bar3 sidebar"></div>
 			</div>
 			<div id="navLogo">
-				<img src="/img/index/logos/logo.png">
+				<a href="/"><img src="/img/index/logos/logo.png"></a>
 			</div>
 			<c:choose>
 				<c:when test="${loginInfo==null}">
