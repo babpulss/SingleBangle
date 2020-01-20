@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
 
@@ -35,13 +36,15 @@ public class MsgController {
 	}
 	
 	@RequestMapping("/replyMsgProc.do")//서비스ok
-	public String replyMsgProc() {
-		String sender = (String) session.getAttribute("id");
-		String receiver = request.getParameter("receiver");
-		String title = request.getParameter("title");
-		String contents = request.getParameter("contents");
+	public String replyMsgProc(MsgDTO dto) {
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		String sender = loginInfo.getId();
+		String receiver = dto.getReceiver();
+		String title = dto.getTitle();
+		String contents = dto.getContents();
+		//내용 전부 들어옴ㅇㅇ
 		try {
-			service.writeMsg(sender, receiver, title, contents);
+			service.writeMsg(dto, sender);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
