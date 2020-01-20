@@ -25,7 +25,7 @@ html, body {
 	padding: 0px;
 }
 
-* {
+*:not (.rightSidebar ) {
 	box-sizing: border-box;
 	font-family: 'BMHANNAAir';
 }
@@ -75,35 +75,13 @@ html, body {
     flex-basis: 10%;
 }
 
+.bRow button {
+	line-height: 25px;
+}
+
 .bRow:last-child {
 	border-radius: 0 0 10px 10px;
 	background-color: #e05252;
-}
-
-#btns {
-	margin: 20px 110px 0 110px;
-	display: flex;
-	justify-content: space-between;
-}
-
-#btns>button:first-child, #btns>div>button {
-	border: none;
-	width: 50px;
-	height: 30px;
-	border-radius: 10px;
-}
-
-#btns>div>input {
-	width: 100px;
-	height: 30px;
-	border-radius: 10px;
-}
-
-#btns>button:last-child {
-	border: none;
-	width: 80px;
-	height: 30px;
-	border-radius: 10px;
 }
 
 @media ( max-width : 600px ) {
@@ -116,13 +94,13 @@ html, body {
 	.bRow>span:first-child {
 		display: none;
 	}
-	#btns {
-		margin: 20px 0 0 0;
-	}
 }
 </style>
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper">
 <h1>신고리스트</h1>
 	<div class="list">
 		<a href="${pageContext.request.contextPath}/">사용자 페이지 메인</a>
@@ -163,19 +141,23 @@ html, body {
 		</c:choose>
 		<div class="bRow" style="height: 50px"></div>
 	</div>
+</div>
 
 		<script>
 		$(".unblock").on("click", function() {
-			var target = $(this);
-			var seq = $(this).attr("name");
-			$.ajax({
-				url: "/admin/confirmReporting",
-				type: "POST",
-				data: { seq: seq }
-			}).done(function(e) {
-				if (e) $(target).parent().remove();
-				else alert('error occured');
-			}).fail(() => { console.log(e);	});
+			var conf = confirm("신고요청완료하시겠습니까?");
+			if (conf) {
+				var target = $(this);
+				var seq = $(this).attr("name");
+				$.ajax({
+					url: "/admin/confirmReporting",
+					type: "POST",
+					data: { seq: seq }
+				}).done(function(e) {
+					if (e) $(target).parent().remove();
+					else alert('error occured');
+				}).fail(() => { console.log(e);	});
+			}
 		});
 	</script>
 </body>

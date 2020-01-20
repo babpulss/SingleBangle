@@ -37,7 +37,6 @@
 
 .fa {
 	position: relative;
-	/* table-cell : 동일한 간격으로 요소들을 정렬 */
 	display: table-cell;
 	width: 60px;
 	height: 50px;
@@ -68,7 +67,6 @@
 .main-menu>ul {
 	margin: 7px 0 0 0;
 	width: 100%;
-	/* overflow: auto; */
 }
 
 .main-menu li {
@@ -104,7 +102,6 @@
 	display: table-cell;
 	vertical-align: middle;
 	width: 290px;
-	/* 	font-family: 'Titillium Web', sans-serif; */
 }
 
 .main-menu>ul.logout {

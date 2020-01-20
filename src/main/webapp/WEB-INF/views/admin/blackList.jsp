@@ -13,15 +13,6 @@
 <link rel="stylesheet" href="/css/nav.css">
 <style>
 /* 메뉴 폰트 */
-html, body {
-	margin: 0px;
-	padding: 0px;
-}
-
-* {
-	box-sizing: border-box;
-}
-
 *:not (.rightSidebar ) {
 	box-sizing: border-box;
 	font-family: 'BMHANNAAir';
@@ -34,7 +25,7 @@ html, body {
 
 .bRow {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 }
 
@@ -44,21 +35,20 @@ html, body {
 }
 
 .bRow>span:first-child {
-	flex-grow: 2;
+    flex-basis: 10%;
 }
 
 .bRow>span:nth-child(2) {
-	flex-grow: 1;
+    flex-basis: 10%;
 }
 
 .bRow>span:nth-child(3) {
-	flex-grow: 6;
-	flex-basis: 300px;
+	flex-basis: 50%;
 	flex-shrink: unset;
 }
 
 .bRow>span:last-child {
-	flex-basis: 310px;
+	flex-basis: 400px;
 }
 
 .bRow:last-child {
@@ -71,6 +61,11 @@ html, body {
 	margin: 5px 0 5px 0;
 	text-align: left;
 }
+
+.bRow button {
+	line-height: 25px;
+}
+
 
 @media ( max-width : 650px ) {
 	#board {
