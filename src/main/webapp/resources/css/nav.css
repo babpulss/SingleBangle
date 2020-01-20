@@ -1,0 +1,398 @@
+@charset "UTF-8";
+@import
+	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
+/* 메인 폰트 */
+@font-face {
+	font-family: 'yg-jalnan';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* 메뉴 폰트 */
+@font-face {
+	font-family: 'BMHANNAAir';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.sidebar {
+	font-family: 'BMHANNAAir';
+}
+
+* {
+	box-sizing: border-box;
+	padding: 0px;
+	margin: 0px;
+}
+
+.fa-2x {
+	font-size: 2em;
+}
+
+.fa {
+	position: relative;
+	/* table-cell : 동일한 간격으로 요소들을 정렬 */
+	display: table-cell;
+	width: 60px;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 30px;
+}
+
+.main-menu:hover, nav.main-menu.expanded {
+	width: 250px;
+	overflow: visible;
+}
+
+.main-menu {
+	background: #4f7eab;
+	border-right: 1px solid #e5e5e5;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	height: 100%;
+	left: 0;
+	width: 60px;
+	overflow: hidden;
+	transition: width .05s linear;
+	z-index: 1000;
+}
+
+.main-menu>ul {
+	margin: 7px 0 0 0;
+	width: 100%;
+	/* overflow: auto; */
+}
+
+.main-menu li {
+	position: relative;
+	display: block;
+	width: 250px;
+}
+
+.main-menu li>a {
+	position: relative;
+	display: table;
+	border-collapse: collapse;
+	border-spacing: 0;
+	color: white;
+	font-family: arial;
+	font-size: 20px;
+	text-decoration: none;
+	transition: all .1s linear;
+}
+
+.main-menu .nav-icon {
+	position: relative;
+	display: table-cell;
+	width: 60px;
+	height: 36px;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 18px;
+}
+
+.main-menu .nav-text {
+	position: relative;
+	display: table-cell;
+	vertical-align: middle;
+	width: 290px;
+	/* 	font-family: 'Titillium Web', sans-serif; */
+}
+
+.main-menu>ul.logout {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+a:hover, a:focus {
+	text-decoration: none;
+}
+
+nav {
+	user-select: none;
+}
+
+nav ul, nav li {
+	outline: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover,
+	.dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
+	.dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
+	.dashboard-page nav.dashboard-menu ul li.active a {
+	color: #fff;
+	background-color: #5fa2db;
+	width: 120%;
+}
+
+::-webkit-scrollbar {
+	width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #b2b2b2;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: #827e7e;
+}
+/* 상위 고정 바 */
+#topbar {
+	position: fixed;
+	display: flex;
+	width: 100%;
+	top: 0px;
+	height: 60px;
+	background-color: white;
+	z-index: 3;
+	box-shadow: -5px 0px 10px 0 black;
+}
+/* 좌측 네비바 */
+#sidebar {
+	border: 1px solid black;
+	width: 300px;
+	height: 100vh;
+	position: absolute;
+	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
+	display: none;
+	opacity: 0.9;
+	background-color: #0085cb;
+	top: 60px;
+	color: white;
+	font-size: 50px;
+	overflow-x: auto;
+	z-index: 2;
+}
+
+#sidebar ul {
+	width: 200px;
+}
+/* 좌측 네비바 작동버튼 */
+#nav {
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	top: 6px;
+}
+
+#nav * {
+	background-color: #0085cb;
+}
+
+#navLogo {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 53px;
+	top: 5px;
+}
+
+#navLogo * {
+	height: 100%;
+}
+
+.bar1, .bar2, .bar3 {
+	width: 35px;
+	height: 5px;
+	background-color: rgb(248, 85, 177);
+	margin: 6px 0 0 1vw;
+	transition: 0.4s;
+	border-radius: 90px;
+}
+
+.changeNav .bar1 {
+	transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.changeNav .bar2 {
+	opacity: 0;
+}
+
+.changeNav .bar3 {
+	transform: rotate(45deg) translate(-8px, -8px);
+}
+/* 우측 네비바 */
+#rightLogin {
+	position: absolute;
+	right: 8vw;
+	line-height: 60px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #0085cb;
+}
+
+#rightJoin {
+	position: absolute;
+	right: 3vw;
+	line-height: 60px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #0085cb;
+}
+
+#rightJoin a {
+	color: #0085cb;
+}
+
+#rightMyPage {
+	position: absolute;
+	right: 10vw;
+	line-height: 60px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #0085cb;
+}
+
+#rightLogout {
+	position: absolute;
+	right: 3vw;
+	line-height: 60px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #0085cb;
+}
+/* 우측 네비바 작동버튼 */
+#rightLogin:hover {
+	color: #0085cb;
+	text-shadow: 10px 10px #b2b2b2;
+	transform: translate(-5px, -5px);
+}
+
+#rightJoin:hover {
+	color: #e80e0e;
+	text-shadow: 10px 10px #b2b2b2;
+	transform: translate(-5px, -5px);
+}
+
+#rightJoin>a {
+	text-decoration: none;
+	color: #0085cb;
+}
+
+#rightJoin>a:visited {
+	color: #0085cb;
+}
+
+#rightMyPage:hover {
+	color: #e80e0e;
+	text-shadow: 10px 10px #b2b2b2;
+	transform: translate(-5px, -5px);
+}
+
+#rightLogout:hover {
+	color: #e80e0e;
+	text-shadow: 10px 10px #b2b2b2;
+	transform: translate(-5px, -5px);
+}
+
+#rightMyPage>a, #rightLogout>a {
+	text-decoration: none;
+	color: #0085cb;
+}
+
+#rightMyPage>a:visited, #rightLogout>a:visited {
+	color: #0085cb;
+}
+
+#rightSidebar {
+	border: 1px solid black;
+	border-radius: 5px;
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	top: 200px;
+	/* right: 3vw; */
+	left: 50%;
+	transform: translate(-50%);
+	display: none;
+	box-shadow: 0px 0px 5000px 2000px rgb(0, 0, 0, 0.6);
+	overflow-x: auto;
+	font-size: 20px;
+	background-color: #f5f5f5;
+	z-index: 2;
+	text-align: center;
+}
+
+#rightSidebar ul {
+	/* width: 200px; */
+	
+}
+
+#loginTitle {
+	font-family: 'BMHANNAAir';
+	font-size: 24px;
+}
+
+.loginVal {
+	border: 1px solid #dadada;
+	width: 90%;
+	height: 40px;
+	text-align: center;
+	font-size: 16px;
+}
+
+#loginBtnBox {
+	margin-top: 30px;
+}
+
+#loginBtn {
+	border: none;
+	width: 90%;
+	height: 40px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	font-size: 16px;
+	color: white;
+	background-color: #0085cb;
+}
+
+#joinBox{
+	margin-top: 10px;
+	font-size: 12px;
+}
+#joinBox>a{
+	color: #0085cb;
+	text-decoration: none;
+}
+
+/* 메인 화면 래퍼 */
+#mainWrapper {
+	margin: 65px 110px 0 110px;
+}
+
+/* 모바일 환경 */
+@media ( max-width : 1900px) {
+	#mainWrapper {
+		margin: 65px 0 0 0;
+	}
+}
+
+@media ( max-width : 650px) {
+	#topbar {
+		height: 60px;
+	}
+	#navLogo {
+		width: 70%;
+	}
+	#rightLogin {
+		right: 20vw;
+	}
+	#rightJoin {
+		right: 5vw;
+	}
+	#mainWrapper {
+		margin: 65px 0 0 0;
+		width: 100%;
+	}

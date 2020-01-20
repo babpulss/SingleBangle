@@ -7,6 +7,7 @@
 		<meta charset="UTF-8">
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<title>아이디 찾기</title>
+		
         <style>
             *{
                 box-sizing: border-box;
