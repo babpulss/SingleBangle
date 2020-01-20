@@ -11,7 +11,7 @@
 </head>
 <body>
 	<c:choose>
-	<c:when test="${!empty searchedId}">
+	<c:when test="${!empty id}">
 		<div>블랙리스트 추가 대상: ${id}</div>
 		<div>제재 사유: <textarea style="resize: none"></textarea>	</div>
 		<button>확인</button>

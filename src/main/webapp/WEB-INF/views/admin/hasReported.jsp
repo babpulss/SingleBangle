@@ -101,7 +101,6 @@ html, body {
 	<div class="list">
 		<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a>
 		<a href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트 조회</a>
-		<a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수 확인 조회</a>
 	</div>
 	<!-- 	결과물 출력 섹션 -->
    <div id="board">

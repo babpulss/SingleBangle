@@ -221,6 +221,22 @@ nav ul, nav li {
 	transform: rotate(45deg) translate(-8px, -8px);
 }
 /* 우측 네비바 */
+#note {
+	position: relative;
+	right: 20vw;
+	line-height: 60px;
+	cursor: pointer;
+	font-size: 20px;
+	color: #0085cb;
+}
+
+#note>a {
+	text-decoration: none;
+}
+#note>a:visited {
+	color: #0085cb;
+}
+
 #rightLogin {
 	position: absolute;
 	right: 8vw;
