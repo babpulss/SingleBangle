@@ -19,7 +19,9 @@ import configuration.Configuration;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DAO.FileDAO;
 import recoder.single.bangle.tipBoard.DTO.BoardDTO;
+import recoder.single.bangle.tipBoard.DTO.CommentDTO;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
 @Service
@@ -341,4 +343,36 @@ public class BoardService {
 		}
 		return deleteResult;
 	}
+	
+	public int report(ReportDTO dtoR) {
+		int reportResult = boardDao.report(dtoR);
+		System.out.println("service에서 신고하기 결과: "+reportResult);
+		return reportResult;
+	}
+	
+	public int addComment(CommentDTO dtoC) {
+		int cmtResult = boardDao.addComment(dtoC);
+		System.out.println("service에서 댓글쓰기 결과: "+cmtResult);
+		return cmtResult;
+	}
+	
+	public List<CommentDTO> cmtList(int rootSeq) {
+		List<CommentDTO> cmtList = boardDao.cmtList(rootSeq);
+		return cmtList;
+	}
+	
+	public int cmtDelete(int seq) {
+		int deleteResult = boardDao.cmtDelete(seq);
+		return deleteResult;
+	}
+	
+	public int getRootSeq(int seq) {
+		return boardDao.getRootSeq(seq);
+	}
+	
+	public int cmtUpdate(int seq, String contents) {
+		return boardDao.cmtUpdate(seq, contents);
+	}
 }
+
+

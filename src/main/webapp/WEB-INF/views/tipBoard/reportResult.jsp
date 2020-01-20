@@ -9,6 +9,19 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-
+<c:choose>
+	<c:when test="${reportResult == 1}">
+		<script>alert("신고가 완료되었습니다.")
+		window.close();
+		</script>
+		
+	</c:when>
+	<c:otherwise>
+		<script>alert("신고가 정상적으로 처리되지 않았습니다.")
+		window.close();
+		</script>
+		
+	</c:otherwise>
+</c:choose>
 </body>
 </html>
