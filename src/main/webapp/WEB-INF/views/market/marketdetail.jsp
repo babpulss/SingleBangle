@@ -7,9 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper"> 
 	<div class="wrapper" style="width: 800px; border:1px solid black; margin: auto;">
 		<div id="contentBox">
 		<div>${dto.writer } ${dto.place }</div>
@@ -50,7 +52,7 @@
 								<div class="outputRe">
 								<div style="width:20%; float:left;">${list.writer }</div>
 								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
-								<input type="hidden" id="reTextProc_"+${list.seq }>
+								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == id }">
 										<button type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정하기</button>
@@ -69,7 +71,7 @@
 			<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
 		</div>
 	</div>
-	
+	</div>
 	<script>
 	
 // 	$("#done").on("click", function(){

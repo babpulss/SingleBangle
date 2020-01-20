@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>Insert title here</title>
 <style>
@@ -100,6 +101,8 @@
 </style>
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper"> 
 	 <div id="board">
         <div id="bHeader" class="bRow">
             <div style="float: left; width: 40%;">미리보기</div>
@@ -146,7 +149,7 @@
         </div>
         <button type="button">글쓰기</button>
    </div>
-        
+</div>
 	<script>
 		$("#write").on("click", function(){
 			location.href="${pageContext.request.contextPath}/board/writeboard.do";

@@ -8,12 +8,20 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <title>회원가입</title>
+
 <style>
 *{
     box-sizing: border-box;
 }
 body {
 	background-color: #f5f5f5;
+}
+
+#logo{
+	text-align: center;
+}
+#logo img{
+	height: 180px;
 }
 
 #signupFrm {
@@ -23,13 +31,6 @@ body {
 #inputContainer{
     width: 400px;
     margin: auto;
-}
-
-#logo{
-	text-align: center;
-}
-#logo img{
-	height: 180px;
 }
 
 #signUpHeader{
@@ -97,12 +98,11 @@ body {
 </style>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/member/signUpProc.mem" method="post" id="signupFrm"
-		onsubmit="return validCheck()">
+	<div id="logo">
+		<a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
+	</div>
+	<form action="${pageContext.request.contextPath}/member/signUpProc.mem" method="post" id="signupFrm" onsubmit="return validCheck()">
 		<div id="inputContainer">
-			<div id="logo">
-				<a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
-			</div>
             <div id="signUpHeader">
                 <div id="signUpTitle"><b>회원가입</b></div>
                 <div id="signUpNotice">회원가입 후 서비스 이용이 가능합니다.</div>

@@ -8,9 +8,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Single Bangle</title>
 <link rel="stylesheet" href="/css/index/index.css">
+<link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
+
 	<div class="wrapper">
 		<!-- 네비 바 -->
 		<div id="topbar">
@@ -101,6 +103,9 @@
 			</form>
 		</div>
 	</div>
+
+<jsp:include page="/resources/jsp/nav.jsp"/>
+>>>>>>> fe7650d2bf520574de9d09425711e799171b28b1
 
 	<!-- 메인 메뉴 -->
 	<div id="mainWrapper">
@@ -194,7 +199,6 @@
 		</div>
 	</div>
 
-	<script src="/js/index/index.js"></script>
 
 </body>
 </html>
