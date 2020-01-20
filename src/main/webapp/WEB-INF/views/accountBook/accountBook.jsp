@@ -18,6 +18,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/css/nav.css"/>
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -30,7 +31,9 @@
 </style>
 </head>
 <body>
-	<main class="container pt-5">
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper">
+	<main class="container-fluid pt-5">
 	<div class="card mb-5">
 
 		<div class="card-header">
@@ -84,13 +87,13 @@
 									<option value="지출">지출</option>
 							</select></td>
 
-							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)"></td>
+							<td><input type="number" id="price" name="price"
+								placeholder="(ex. 10000)" maxlength="15" oninput="numberMaxLength(this);"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
-								placeholder="비고란"></td>
-							<td class="plusBtn"><input type="button" id="addBtn"
-								value="적용"></td>
+								placeholder="비고란" maxlength="30"></td>
+							<td class="plusBtn"><button type="button" class="btn btn-secondary" id="addBtn"
+								>적용</button></td>
 						</tr>
 					</tbody>
 				</table>
@@ -120,9 +123,9 @@
 							<td><a
 								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									class="detailBtn" value="상세보기"></a> <a><input
+									id="detailBtn" class="btn btn-info"value="상세보기"></a> <a><input
 									type="button" name="${list.formedReportingDate}"
-									class="deleteBtn" value="삭제"></a></td>
+									id="deleteBtn" class="btn btn-dark"value="삭제"></a></td>
 						</tr>
 
 					</c:forEach>
@@ -145,7 +148,13 @@
 		</div>
 	</div>
 	</main>
+	</div>
 	<script>
+	function numberMaxLength(e){
+        if(e.value.length > e.maxLength){
+            e.value = e.value.slice(0, e.maxLength);
+        }
+    }
 		$(function() {
 			//input을 datepicker로 선언
 			$("#datepicker")
@@ -210,48 +219,7 @@
 // 						});
 		$("#addBtn").on("click", function() {
 				$("#addFrm").submit();
-			// 						var reportingDates = $("#datepicker").val();
-			// 						var detail = $("#detailsSelect").val();
-			// 						var payment = $("#paymentsSelect").val();
-			// 						var specs = $("#specSelect").val();
-			// 						var prices = $("#price").val();
-			// 						var remark = $("#remarks").val();
-
-			// 						$.ajax({
-			// 							url : "/Account.add",
-			// 							dataType : "json",
-			// 							type : "post",
-			// 							data : {
-			// 								reportingDate : reportingDates,
-			// 								details : detail,
-			// 								payments : payment,
-			// 								spec : specs,
-			// 								price : prices,
-			// 								remarks : remark
-			// 							}
-			// 						}).done(function(resp) {
-			// 							$(".monthData").remove();
-			// 							$.each(resp, function(i,list){
-			// 								console.log(i);
-			// 							$("#monthDataBody").append("<tr class=\"monthData"+i+"\"></tr>");
-			// 							$(".monthData"+i).append("<td class=\"formedDate"+i+"\">"+list.formedReportingDate+"</td>");
-			// 							var incomePrice = addComma(list.income);
-
-			// 							$(".monthData"+i).append("<td class=\"'income'"+i+" style='color:dodgerblue'\">"+incomePrice+"</td>");
-			// 							addComma(list.expense);
-			// 							$(".monthData"+i).append("<td class=\"'expense'"+i+" style='color:red'\">"+list.expense+"</td>");
-			// 							$(".monthData"+i).append("<td class=\"'total"+i+"'>"+list.income-list.expense+"</td>");
-			// 							$(".monthData"+i).append("<td><input type='button' class='detailBtn' name="+list.formedReportingDate+" value='상세보기'>"
-			// 							+"<input type='button' class='deleteBtn' name="+list.formedReportingDate+" value='삭제'></td>");
-			// 							$(".formedDate").html(list.formedReportingDate);
-			// 							$(".income").html(list.income);
-			// 							$(".expense").html(list.expense);
-			// 							$(".total").html(list.income-list.expense);					
-			// 							})
-			// 							console.log(resp);
-			// 						}).fail(function() {
-			// 							console.log("fail");
-			// 						});
+			
 
 		});
 		function addComma(num) {

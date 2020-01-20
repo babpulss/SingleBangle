@@ -24,12 +24,11 @@ public class Adviser {
 	@Autowired
 	private HttpServletRequest req;
 	
-	@Autowired
-	private HttpSession session;
 	
 	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
-			"execution(* recoder.single.bangle.*.*.*(..)) ")
+			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
+			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())") 
 	public Object getInfoFromIndex(ProceedingJoinPoint pjp) {
 		String url = req.getRequestURL().toString();
 		String path = req.getServletPath();

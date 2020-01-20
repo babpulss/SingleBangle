@@ -7,9 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+<div id="mainWrapper"> 
 	<div class="wrapper" style="width: 800px; border:1px solid black; margin: auto;">
 		<div id="contentBox">
 		<div>${dto.writer } ${dto.place }</div>
@@ -17,7 +19,7 @@
 		<div>${dto.price }원</div>
 		<div>
 		<c:choose>
-			<c:when test="${dto.writer == id && dto.done == 'N'}">
+			<c:when test="${dto.writer == loginInfo.id && dto.done == 'N'}">
 				<button type="button" id="done_${dto.seq }" onclick="updateDone('${dto.seq}')">판매완료</button>
 			</c:when>
 		</c:choose>
@@ -29,7 +31,7 @@
 		</div>
 		<div>${dto.content }</div>
 		<c:choose>
-			<c:when test="${dto.writer == id}">
+			<c:when test="${dto.writer == loginInfo.id}">
 				<div><button id="update">수정하기</button><button id="delete">삭제하기</button></div>
 			</c:when>
 			<c:otherwise>
@@ -50,7 +52,7 @@
 								<div class="outputRe">
 								<div style="width:20%; float:left;">${list.writer }</div>
 								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
-								<input type="hidden" id="reTextProc_"+${list.seq }>
+								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == id }">
 										<button type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정하기</button>
@@ -66,10 +68,10 @@
 			</c:choose>
 		</div>
 		<div>
-			<input type="text" id="recontent" name="recontent"><button id="reconfirm">확인</button>
+			<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
 		</div>
 	</div>
-	
+	</div>
 	<script>
 	
 // 	$("#done").on("click", function(){

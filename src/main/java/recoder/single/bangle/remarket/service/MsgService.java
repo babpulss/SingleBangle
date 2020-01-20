@@ -24,7 +24,7 @@ public class MsgService {
 	@Autowired
 	private HttpServletRequest request;
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public void writeMsg(String sender, String receiver, String title, String contents) {
 		try {
 			dao.writeMsg(sender, receiver, title, contents);
@@ -33,7 +33,7 @@ public class MsgService {
 		}
 	}
 
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public List<MsgDTO> msgList(String receiver) {
 		try {
 			List<MsgDTO> list = dao.selectAllMsg(receiver);
@@ -45,7 +45,7 @@ public class MsgService {
 		}
 	}
 	
-	@Transactional("memberManager")
+	@Transactional("tx")
 	public MsgDTO msgDetail(int seq) {
 		try {
 			dao.viewCount(seq);

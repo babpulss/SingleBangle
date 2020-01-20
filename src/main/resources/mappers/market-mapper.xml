@@ -4,5 +4,76 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="Market">
+	<insert id="insert" parameterType="java.util.Map">
+		insert into market values(market_seq.nextval, #{title}, #{price}, #{content}, #{writer}, #{category}, #{place}, sysdate, 0, 'N')
+	</insert>
+	
+	<update id="updateDone">
+		update market set title=#{title}, price=#{price}, content=#{content}, category = #{category} where seq = #{seq} 
+	</update>
+	
+	<select id="insertFile" resultType="Integer">
+		select max(seq) from market where writer = #{writer}
+	</select>
+	
+	<delete id="delete">
+		delete from market where seq=#{seq}
+	</delete>
+	
+	<update id="update" parameterType="java.util.Map">
+		update market set title=#{title}, price=#{price}, content=#{content}, category=#{category} where seq=#{seq}
+	</update>
+	
+	<select id="getBoardList" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from market order by 1 desc
+	</select>
+	
+	<select id="writeDetail" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from market where seq = #{seq}
+	</select>
+	
+	<select id="search" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from market where title like #{title} and category = #{category}
+	</select>
+	
+	<select id="searchNoCategory" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from market where title like #{title}
+	</select>
+	
+	<select id="searchNoTitle" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from market where category = #{category}
+	</select>
+	
+	<select id="selectByPage" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from(select market.*, row_number() over (order by seq desc)rown from market) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getArticleCount" resultType="Integer">
+		select count(*) from market
+	</select>
+	
+	<select id="selectByPageUseTitle" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from(select market.*, row_number() over (order by seq desc)rown from market where title like #{title}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getArticleCountUseTitle" resultType="Integer">
+		select count(*) from market where title=#{title}
+	</select>
+	
+	<select id="selectByPageUseCategory" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from(select market.*, row_number() over (order by seq desc)rown from market where category=#{category}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getArticleCountUseCategory" resultType="Integer">
+		select count(*) from market where category=#{category}
+	</select>
+	
+	<select id="selectByPageUseCaTi" resultType="recoder.single.bangle.remarket.DTO.MarketDTO">
+		select * from(select market.*, row_number() over (order by seq desc)rown from market where category=#{category} and title=#{title}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getArticleCountUseCaTi" resultType="Integer">
+		select count(*) from market where category=#{category} and title=#{title}
+	</select>
 	
 </mapper>

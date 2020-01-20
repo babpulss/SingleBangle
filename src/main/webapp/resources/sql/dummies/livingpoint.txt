@@ -10,7 +10,7 @@ insert into livingPoint values(livingpoint_seq.nextval, 5, 'jeongyi', '물병에
 insert into livingPoint values(livingpoint_seq.nextval, 3, 'jeongyi', '옷에 묻은 잉크 얼룩 지우기', '옷에 묻은 잉크 얼룩은 하룻밤 동안 해당 부위를 우유에 담가두었다가 빨아주면 깨끗이 없어진다','2019/3/11',39,27,19);
 insert into livingPoint values(livingpoint_seq.nextval, 2, 'jeongyi', '화장실의 물때, 얼룩 지우기', '화장실의 더러운 물때 혹은 얼룩들을 지우려면 버터와 고운 소금, 우유를 섞어 닦아주면 새것과 같이 윤이 난다','2019/11/6',33,12,13);
 insert into livingPoint values(livingpoint_seq.nextval, 1, 'jeongyi', '하수구 뚫기', '하수구가 막히면 거친 소금을 한 주먹 넣고 뜨거운 물을 부어주면 잘 뚫린다','2019/12/29',85,2,18);
-insert into livingPoint values(livingpoint_seq.nextval, 2, 'jeongyi', '삶는 빨래 하양게 만들기', '거름망에 마른 계란 껍질을 넣고 옷을 함께 삶아주면 눈 같이 하얗게 된다','2019/3/30',21,31,25);
+insert into livingPoint values(livingpoint_seq.nextval, 2, 'jeongyi', '삶는 빨래 하얗게 만들기', '거름망에 마른 계란 껍질을 넣고 옷을 함께 삶아주면 눈 같이 하얗게 된다','2019/3/30',21,31,25);
 insert into livingPoint values(livingpoint_seq.nextval, 3, 'jeongyi', '물건에 있는 가격표, 상표 지우기', '가격표나 상표가 붙어 있던 자리에 남아있는 흔적은 식용유로 닦으면 쉽게 제거 된다','2019/7/8',4,5,48);
 insert into livingPoint values(livingpoint_seq.nextval, 5, 'jeongyi', '양파 싹 나지 않게하기', '양파를 사오면 싹이 나오는데, 이 때 양파 봉지에 빵 한 쪽을 넣어두면 쉽게 싹이 자라지 못한다','2019/4/23',42,35,23);
 insert into livingPoint values(livingpoint_seq.nextval, 2, 'jeongyi', '거울이나 유리 닦을 때', '젖은 숙너에 식초를 묻혀 닦으면 깨끗하게 얼룩이 지워진다. 냄새는 자연스럽게 휘발된다','2019/8/23',52,47,21);

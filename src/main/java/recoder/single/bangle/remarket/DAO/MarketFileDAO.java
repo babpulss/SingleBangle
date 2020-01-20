@@ -1,12 +1,11 @@
 package recoder.single.bangle.remarket.DAO;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import recoder.single.bangle.remarket.DTO.MarketFileDTO;
@@ -15,45 +14,69 @@ import recoder.single.bangle.remarket.DTO.MarketFileDTO;
 public class MarketFileDAO {
 	
 	@Autowired
-	private JdbcTemplate jdbc;
+	private SqlSessionTemplate jdbc;
 	
-	public int insert(MarketFileDTO dto) {
-		String sql = "insert into marketFile values (file_seq.nextval,?,?,?)";
-		return jdbc.update(sql, dto.getBoard_seq(), dto.getOri_name(), dto.getSys_name());
+	public int insert(MarketFileDTO dto, int board_seq) throws Exception {
+		System.out.println("ori : " + dto.getOri_name() + "sys :" + dto.getSys_name());
+		Map<String, Object> param = new HashMap<>();
+		param.put("board_seq", board_seq);
+		param.put("ori_name", dto.getOri_name());
+		param.put("sys_name", dto.getSys_name());
+		return jdbc.insert("MarketFile.insert", param);
 	}
 	
-	public int update(MarketFileDTO dto, int board_seq) {
-		String sql = "update marketFile set ori_name=?, sys_name=? where board_seq=?";
-		return jdbc.update(sql, dto.getOri_name(), dto.getSys_name(), board_seq);
+	public int update(MarketFileDTO dto) {
+		System.out.println(dto.getBoard_seq() + " : " + dto.getSeq() + " : " + dto.getOri_name() + " : " + dto.getSys_name());
+		return jdbc.update("MarketFile.update", dto);
 	}
 	
 	public int delete(int board_seq) {
-		String sql = "delete from marketFile where board_seq = ?";
-		return jdbc.update(sql, board_seq);
+		return jdbc.delete("MarketFile.delete", board_seq);
 	}
 	
 	public List<MarketFileDTO> selectAll() {
-		String sql = "select * from marketFile";
-		return jdbc.query(sql, new RowMapper<MarketFileDTO>() {
-			@Override
-			public MarketFileDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
-				MarketFileDTO dto = new MarketFileDTO();
-				dto.setBoard_seq(rs.getInt("board_seq"));
-				dto.setSys_name(rs.getString("sys_name"));
-				dto.setOri_name(rs.getString("ori_name"));
-				return dto;
-			}
-		});
+		return jdbc.selectList("MarketFile.selectAll");
+	}
+	
+	public List<MarketFileDTO> selectByPage(int start, int end) throws Exception{
+		HashMap<String, Object> param = new HashMap<>();
+		param.put("start", start);
+		param.put("end", end);
+		return jdbc.selectList("MarketFile.selectByPage", param);
 	}
 	
 	public String review (int board_seq) {
-		String sql = "select sys_name from marketFile where seq=(select max(seq) from marketFile where board_seq = ?)"; //한 게시글에서 seq값 가장 큰 하나만 출력
-		return jdbc.queryForObject(sql, String.class, board_seq);
+		return jdbc.selectOne("MarketFile.review", board_seq);
 	}
 	
-	public String searchReview(int board_seq) {
+//	public List<FileDTO> selectByPageUseTitle(int board_seq, int start, int end) throws Exception{
+//		String sql = "select * from (select marketFile.*,row_number() over(order by board_seq desc)rown " + 
+//				"from marketFile where board_seq = ? and (board_seq, seq) in (select board_seq, max(seq) from marketFile group by board_seq) order by 1 desc) " + 
+//				"where (rown between ? and ?)";
+//		return jdbc.query(sql, new Object[] {board_seq, start, end}, new RowMapper<FileDTO>() {
+//			@Override
+//			public FileDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+//				FileDTO dto = new FileDTO();
+//				dto.setSeq(rs.getInt("seq"));
+//				dto.setBoard_seq(rs.getInt("board_seq"));
+//				dto.setOri_name(rs.getString("ori_name"));
+//				dto.setSys_name(rs.getString("sys_name"));
+//				return dto;
+//			}
+//		});
+//	}
+	
+	public MarketFileDTO selectByPageUseTitle(int board_seq, int start, int end) throws Exception{
+		Map<String, Object> param = new HashMap<>();
+		param.put("board_seq", board_seq);
+		param.put("start", start);
+		param.put("end", end);
+		return jdbc.selectOne("MarketFile.selectByPageUseTitle", param);
+	}
+	
+	public MarketFileDTO searchReview(int board_seq) {
 		System.out.println(board_seq);
-		String sql = "select sys_name from marketFile where seq=(select max(seq) from marketFile where board_seq = ?)"; //한 게시글에서 seq값 가장 큰 하나만 출력
-		return jdbc.queryForObject(sql, String.class, board_seq);
+		return jdbc.selectOne("MarketFile.searchReview", board_seq);
+
 	}
 }
