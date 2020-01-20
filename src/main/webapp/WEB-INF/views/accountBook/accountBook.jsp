@@ -88,10 +88,10 @@
 							</select></td>
 
 							<td><input type="number" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="15" oninput="numberMaxLength(this);"></td>
+								placeholder="(ex. 10000)" maxlength="15" onkeyup="characterCheck()" onkeydown="characterCheck()"oninput="numberMaxLength(this);"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
-								placeholder="비고란" maxlength="30"></td>
+								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
 							<td class="plusBtn"><button type="button" class="btn btn-secondary" id="addBtn"
 								>적용</button></td>
 						</tr>
@@ -123,9 +123,9 @@
 							<td><a
 								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									id="detailBtn" class="btn btn-info"value="상세보기"></a> <a><input
+									id="detailBtn" class="btn btn-primary"value="상세보기"></a> <a href="${pageContext.request.contextPath }/accountBook/deleteAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									id="deleteBtn" class="btn btn-dark"value="삭제"></a></td>
+									class="deleteBtn btn-danger"value="삭제"></a></td>
 						</tr>
 
 					</c:forEach>
@@ -150,9 +150,27 @@
 	</main>
 	</div>
 	<script>
+	$(".deleteBtn").on("click",function(){
+		var formedReportingDate = $(this).attr("name");
+		console.log(formedReportingDate);
+		var result = confirm("삭제하시겠습니까?");
+		if(result){
+			alert("삭제되었습니다.");
+		}else{
+			alert("삭제가 취소되었습니다.");
+		}
+	});
 	function numberMaxLength(e){
         if(e.value.length > e.maxLength){
             e.value = e.value.slice(0, e.maxLength);
+        }
+    }
+	function characterCheck() {
+        var RegExp = /[ \{\}\[\]\/?.;|\)*~`!^\+┼<>@\#$%&\'\"\\\(\=]/gi;//정규식 구문
+        var obj = document.getElementsByName("remarks")[0]
+        if (RegExp.test(obj.value)) {
+            alert("특수문자는 입력하실 수 없습니다.");
+            obj.value = "";//특수문자를 지우는 구문
         }
     }
 		$(function() {
@@ -193,7 +211,7 @@
 								dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일',
 										'금요일', '토요일' ] //달력의 요일 부분 Tooltip 텍스트
 								,
-								minDate : "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+								minDate : "-10M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 								,
 								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)   
 								,
@@ -208,18 +226,18 @@
 			$('#datepicker').datepicker('setDate', 'today'); //(-1D:하루전, -1M:한달전, -1Y:일년전), (+1D:하루후, -1M:한달후, -1Y:일년후)
 			
 		});
-// 		$(".detailBtn")
-// 				.on(
-// 						"click",
-// 						function() {
-// 							var report = $(this).attr("name");
-// 							console.log(report);
-// 							location.href = "${pageContext.request.contextPath}/accountBook/detailAccount?formedReportingDate="
-// 									+ report;
-// 						});
+		$(".deleteBtn")
+				.on(
+						"click",
+						function() {
+							var formedReportingDate = $(this).attr("name");
+							console.log(report);
+							location.href = "${pageContext.request.contextPath}/accountBook/detailAccount?formedReportingDate="
+									+ formedReportingDate;
+						});
 		$("#addBtn").on("click", function() {
 				$("#addFrm").submit();
-			
+		
 
 		});
 		function addComma(num) {

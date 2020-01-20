@@ -95,4 +95,10 @@ public class AccountService {
 		System.out.println("서비스"+dto);
 		return dao.insertData(dto);
 	}
+	
+	//가계부 월 전체삭제
+	public int deleteAccountByMonth(String formedReportingDate) {
+		
+		return dao.deleteAccountByMonth(formedReportingDate);
+	}
 }

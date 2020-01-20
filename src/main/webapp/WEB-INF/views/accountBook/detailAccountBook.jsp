@@ -43,13 +43,13 @@
 								</h1>
 							</div>
 
-							<div class="col-md-6 text-right" style="float:left">
-								<button id="printInvoice" class="btn btn-info">
-									<i class="fa fa-print"></i>Print
+							<div class="col-md-6 text-right" >
+								<button type="button"id="printInvoice" class="btn btn-info"style="margin-right:7px;">
+									Print
 								</button>
 								<form id="pdf"
 									action="${pageContext.request.contextPath }/accountBook/accountPDF"
-									method="post">
+									method="post" style="float:right;">
 									<input type="hidden" class="pdfValue btn btn-info"
 										name="pdfValue" value=""> <button type="button"
 										class="pdfBtn btn btn-info" value="PDF View" />PDF View</button>
@@ -135,11 +135,11 @@
 
 													<c:when test="${list.income != 0 }">
 														<td style="color: dodgerblue"><fmt:formatNumber
-																value="${list.income}" pattern="###,###원" /></td>
+																value="${list.income}" pattern="###,###" />원</td>
 													</c:when>
 													<c:otherwise>
 														<td style="color: red"><fmt:formatNumber
-																value="${list.expense}" pattern="###,###원" /></td>
+																value="${list.expense}" pattern="###,###" />원</td>
 													</c:otherwise>
 												</c:choose>
 												<td><input type="text" class="remarks" name="remarks"value="${list.remarks}" style="border: 1px solid white;"></td>

@@ -36,4 +36,8 @@ public class AccountDAO {
 		
 		return accountJdbc.insert("account.insertAccountData", dto);
 	}
+	
+	public int deleteAccountByMonth(String formedReportingDate) {
+		return accountJdbc.delete("account.deleteAccountByMonth", formedReportingDate);
+	}
 }

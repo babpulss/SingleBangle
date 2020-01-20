@@ -144,4 +144,15 @@ public class AccountController {
 		pdfService.createPdf(req, resp, pdfValue);
 	}
 	
+	@RequestMapping("/deleteAccount")
+	public String deleteAccount() {
+		String formedReportingDate = request.getParameter("formedReportingDate");
+		
+		int result = accService.deleteAccountByMonth(formedReportingDate);
+		if(result>0) {
+			return "redirect:accountBook";
+		}
+		
+		return "error";
+	}
 }
