@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<script src="/js/index/index.js"></script>
 	<div class="wrapper">
 		<!-- 네비 바 -->
 		<div id="topbar">
@@ -95,3 +94,4 @@
 			</form>
 		</div>
 	</div>
+<script src="/js/index/index.js"></script>

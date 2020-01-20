@@ -310,7 +310,6 @@ nav ul, nav li {
 	height: 300px;
 	position: absolute;
 	top: 200px;
-	/* right: 3vw; */
 	left: 50%;
 	transform: translate(-50%);
 	display: none;
