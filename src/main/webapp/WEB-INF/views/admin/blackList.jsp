@@ -95,10 +95,8 @@
 	<div id="mainWrapper">
 	<h1>블랙리스트</h1>
 	<div class="list">
-			href="${pageContext.request.contextPath}/admin">대쉬 보드</a> <a
-			href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트
-			조회</a> <a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
-			확인 조회</a>
+			<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a> 
+			<a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수 확인 조회</a>
 			<div style="text-align:center">
 			<br>
 				회원 목록에서 아이디로 검색: 
@@ -144,7 +142,7 @@
 	<script>
 	$("#searchIdBtn").click(() => {
 		var id = $("#searchId").val();
-		window.open("/admin/searchId", "_blank", "width=500px, height=500px, resizable=no");
+		window.open("/admin/searchId?id=" + id, "_blank", "width=500px, height=500px, resizable=no");
 	})
 		$(".unblock").click(function() {
 			var conf = confirm("차단을 해제합니까?");

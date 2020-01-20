@@ -19,6 +19,7 @@
 						href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 				</c:when>
 				<c:otherwise>
+					<span id="note"><a href="#">✉</a></span>
 					<span id="rightMyPage"><a
 						href="${pageContext.request.contextPath}/member/myPage.mem"
 						id="myPageBtn">My Page</a></span>

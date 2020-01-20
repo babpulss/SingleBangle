@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import recoder.single.bangle.admin.DAO.BlackListDAO;
 import recoder.single.bangle.admin.DTO.BlackMemberDTO;
+import recoder.single.bangle.member.DTO.MemberDTO;
 
 @Service
 public class BlackListService {
@@ -32,5 +33,10 @@ public class BlackListService {
 
 	public List<BlackMemberDTO> searchByBlockedId(String id) {
 		return blackListDAO.searchByBlockedId(id);
+	}
+
+	public String searchId(String id) throws Exception {
+		MemberDTO dto = blackListDAO.searchID(id);
+		return dto.getId();
 	}
 }

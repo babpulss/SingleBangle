@@ -44,4 +44,10 @@
 		insert into hasReported (seq, id, reportingDate, reason, reportedURL)
 			values(hasReported.seq.nextval, #{id}, sysdate, #{reason}, #{url})
 	</insert>
+	
+<!-- 	reduce the blocktime -->
+	<update id="reduceTime">
+		update blacklist set blocktime = blocktime - 1
+	</update>
+
  </mapper>

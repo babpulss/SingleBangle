@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import recoder.single.bangle.admin.DTO.BlackMemberDTO;
+import recoder.single.bangle.member.DTO.MemberDTO;
 
 @Repository
 public class BlackListDAO {
@@ -33,5 +34,9 @@ public class BlackListDAO {
 
 	public List<BlackMemberDTO> searchByBlockedId(String id) {
 		return sst.selectList("Admin.searchByBlockedId", id);
+	}
+	
+	public MemberDTO searchID(String id) {
+		return sst.selectOne("Member.selectById", id);
 	}
 }

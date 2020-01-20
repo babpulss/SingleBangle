@@ -25,7 +25,7 @@ public class Admin {
 
 	@Autowired
 	private ReportingService reportingService;
-	
+
 	@RequestMapping("")
 	public String adminIndex() {
 		return "admin/adminIndex";
@@ -44,7 +44,7 @@ public class Admin {
 	public String unblock(String id, HttpServletResponse res) {
 		return String.valueOf(blackListService.unblock(id));
 	}
-	
+
 	// 아이디로 블랙리스트 조회
 	@RequestMapping(value="/searchByBlockedId", produces="text/html; charset=UTF-8")
 	@ResponseBody
@@ -55,7 +55,7 @@ public class Admin {
 		} catch(Exception e) { e.printStackTrace(); }
 		return null;
 	}
-	
+
 	// 신고접수리스트 보기
 	@RequestMapping("/viewReporting")
 	public String viewReporting(Model m) {
@@ -63,18 +63,24 @@ public class Admin {
 		m.addAttribute("list", list);
 		return "admin/hasReported";
 	}
-	
+
 	// 신고접수 완료
 	@RequestMapping("/confirmReporting")
 	@ResponseBody
 	public String confirmReporting(int seq) {
 		return String.valueOf(reportingService.confirmReporting(seq)); 
 	}
-	
+
 	// 아이디 검색으로 블랙리스트 추가
 	@RequestMapping("/searchId")
-	public String searchId(String id) {
-		// 아이디 조회할 서비스를 호출
+	public String searchId(String id, Model m) {
+		try {
+			String searchedId = blackListService.searchId(id);
+			if (searchedId != null)
+				m.addAttribute("id", searchedId);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
 		return "admin/searchId";
 	}
 }
