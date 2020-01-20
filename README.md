@@ -1,6 +1,8 @@
 
 <h1> 네비게이션 바를 jsp인클루드 방식으로 포함시키기 </h1>
-```
+
+
+```html
 <!DOCTYPE html>
 <html>
 <head>
