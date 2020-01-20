@@ -12,7 +12,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-
 <jsp:include page="/resources/jsp/nav.jsp"/>
 	<!-- 메인 메뉴 -->
 	<div id="mainWrapper">
@@ -54,19 +53,10 @@
 			</div>
 		</div>
 		<div id="fourthRow">
-			<div class="col-12"></div>
-			<div id="psWrapper">
-				<div class="d2 b1">어쩌구 저쩌구</div>
-				<div class="d1 a1"></div>
-				<div class="d1 a2"></div>
-				<div class="d2 b2">여기가 메인입니당</div>
-				<div class="d2 b3">메롱</div>
-				<div class="d1 a3"></div>
 			<div class="pic1">
 			<h1>혼족이란?</h1><br>
 			혼자 밥을 먹거나 여가생활과 쇼핑을 즐기며, 여행도 홀로 떠나는 등<br>
 			혼자만의 활동을 즐기고 다른 사람과 섞이지 않고 취미를 즐기는 사람을 일컫는 말
-
 			</div>
 			<div>
 				<h2>나를 위한 최고의 선택</h2><br> 
