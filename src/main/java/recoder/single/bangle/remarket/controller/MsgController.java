@@ -48,12 +48,13 @@ public class MsgController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "home";
+		return "redirect:/msg/msgList.do?receiver="+sender;
 	}
 	
 	@RequestMapping("/msgList.do")//메세지 리스트 확인하기
 	public String msgList(Model model) {
 		try {
+			System.out.println("메세지 리스트 확인하기");
 			String receiver = (String)request.getParameter("receiver");
 			List<MsgDTO> list = service.msgList(receiver);
 			model.addAttribute("list", list);
