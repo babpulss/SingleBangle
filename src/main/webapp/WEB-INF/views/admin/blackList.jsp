@@ -10,16 +10,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/css/nav.css">
 <style>
 /* 메뉴 폰트 */
-@font-face {
-	font-family: 'BMHANNAAir';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
 
 html, body {
 	margin: 0px;
@@ -29,10 +22,6 @@ html, body {
 * {
 	box-sizing: border-box;
 	font-family: 'BMHANNAAir';
-}
-
-#board {
-	margin: 65px 110px 0 110px;
 }
 
 #bHeader {
@@ -100,6 +89,8 @@ html, body {
 </style>
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp"/>
+	<div id="mainWrapper">
 	<h1>블랙리스트</h1>
 	<div class="list">
 		<a href="${pageContext.request.contextPath}/">사용자 페이지 메인</a> <a
@@ -144,6 +135,7 @@ html, body {
 			</c:otherwise>
 		</c:choose>
 		<div class="bRow" style="height: 50px"></div>
+	</div>
 	</div>
 
 	<script>
