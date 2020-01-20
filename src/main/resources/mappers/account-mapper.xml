@@ -5,7 +5,7 @@
   
   <mapper namespace="account">
   	<select id="selectAccountAll" resultType="recoder.single.bangle.account.DTO.AccountDTO">
-  		select substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8)as formedreportingdate,sum(income)as income,sum(expense)as expense from account_book where id=#{id} group by substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) order by formedreportingdate desc
+  		select userName,substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8)as formedreportingdate,sum(income)as income,sum(expense)as expense from account_book where id=#{id}  group by userName,substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) order by formedreportingdate desc
   	</select>
   	<select id="ListAllByFormedReportingDate" resultType="recoder.single.bangle.account.DTO.AccountDTO">
   		select * from account_book where id=#{id} and substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) = #{formedDate} order by reportingdate desc
