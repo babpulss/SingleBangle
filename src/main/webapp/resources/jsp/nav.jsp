@@ -58,10 +58,12 @@
 						<i class="fa fa-comments fa-2x"></i> <span class="nav-text">
 							re마켓 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a href="#"> <i
+				<c:if test="${!empty loginInfo}">
+				<li class="has-subnav sidebar" id="account"><a href="${pageContext.request.contextPath }/accountBook/accountBook"> <i
 						class="fa fa-dollar fa-2x"></i> <span class="nav-text"> 가계부
 					</span>
 				</a></li>
+				</c:if>
 			</ul>
 		</nav>
 

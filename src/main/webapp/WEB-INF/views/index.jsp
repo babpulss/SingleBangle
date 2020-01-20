@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Single Bangle</title>
-<link rel="stylesheet" href="/css/index/index.css">
-<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/nav.css"/>
+<link rel="stylesheet" href="/css/index/index.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
@@ -104,7 +104,7 @@
 				2020 · SingleBanlge</strong>
 		</div>
 	</div>
-
+</div>
 
 </body>
 </html>
