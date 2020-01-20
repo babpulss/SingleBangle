@@ -47,6 +47,10 @@
 	flex-shrink: unset;
 }
 
+.bRow>span:nth-child(4) {
+    flex-basis: 10%;
+}
+
 .bRow>span:last-child {
 	flex-basis: 400px;
 }
@@ -91,8 +95,7 @@
 	<div id="mainWrapper">
 	<h1>블랙리스트</h1>
 	<div class="list">
-		<a href="${pageContext.request.contextPath}/">사용자 페이지 메인</a> <a
-			href="${pageContext.request.contextPath}/admin">관리자 페이지 메인</a> <a
+			href="${pageContext.request.contextPath}/admin">대쉬 보드</a> <a
 			href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트
 			조회</a> <a href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
 			확인 조회</a>
@@ -108,6 +111,7 @@
 			<span>아이디</span> 
 			<span>차단 시행 날짜</span> 
 			<span>차단 사유</span> 
+			<span>해지까지 남은 시간</span>
 			<span>
 				<span id="searchById">아이디로 검색:</span> <input type="text" id="input">
 				<button id="search">검색</button>
@@ -120,6 +124,7 @@
 						<span>${i.id}</span> 
 						<span>${i.addedDate}</span> 
 						<span>${i.reason} </span>
+						<span>${i.blockTime}시간 남음 </span>
 						<span>
 							<button class="unblock" name="${i.id}">차단 해제</button>
 						</span>
@@ -127,7 +132,7 @@
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				<div class="bRow">
+				<div class="bRow" style="display:flex; justify-content:center">
 					<span>게시물이 없습니다</span>
 				</div>
 			</c:otherwise>
