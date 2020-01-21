@@ -11,8 +11,8 @@ public class AdminScheduler {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	@Scheduled(cron="0 * * * * *")
+	@Scheduled(cron="0 0 * * * *")
 	public void blockedId() {
-		sst.update("Admin.reduceTime");
+//		sst.update("Admin.reduceTime");
 	}
 }

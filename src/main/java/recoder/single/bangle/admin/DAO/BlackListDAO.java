@@ -32,11 +32,16 @@ public class BlackListDAO {
 		return sst.insert("Admin.block", param);
 	}
 
-	public List<BlackMemberDTO> searchByBlockedId(String id) {
-		return sst.selectList("Admin.searchByBlockedId", id);
+	public BlackMemberDTO searchByBlockedId(String id) {
+		return sst.selectOne("Admin.searchByBlockedId", id);
 	}
 	
 	public MemberDTO searchID(String id) {
 		return sst.selectOne("Member.selectById", id);
 	}
+
+	public BlackMemberDTO checkId(String id) {
+		return sst.selectOne("Admin.checkId");
+	}
+
 }
