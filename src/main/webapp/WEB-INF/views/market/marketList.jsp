@@ -127,7 +127,8 @@
 	
 		<div class="bRow" style="height:20px"></div>
 	</div>
-         <div id="btns">
+	<br><div style="text-align: center">${navi }</div>
+       <br><div id="btns">
         <button type="button">목록</button>
         <div>
           	<form action="search.do" method="post">
