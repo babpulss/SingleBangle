@@ -129,8 +129,8 @@
 	</div>
 	<br><div style="text-align: center">${navi }</div>
        <br><div id="btns">
-        <button type="button">목록</button>
-        <div>
+        <div style="float:left; width: 10%;"><button type="button">목록</button></div>
+        <div style="float:left; width: 50%;">
           	<form action="search.do" method="post">
 			<select name="category">
 			<option>전체</option>
@@ -150,10 +150,10 @@
         </div>
         <c:choose>
         	<c:when test="${loginInfo != null}">
-        		<button type="button" id="write">글쓰기</button>
+        		<div style="float:left; width: 10%;"><button type="button" id="write">글쓰기</button></div>
         	</c:when>
         </c:choose>
-        
+        <div style="float:left; width: 10%;">&nbsp</div>
    </div>
 </div>
 	<script>

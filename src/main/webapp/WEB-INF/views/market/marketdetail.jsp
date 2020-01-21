@@ -103,8 +103,8 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
-        <div id="bHeader" class="bRow">
-            <span style="text-align: center; font-size: 20px;">${dto.title }</span>
+        <div id="bHeader" class="bRow" style="text-align: center; font-size: 20px;">
+            <span>${dto.title }</span>
         </div>
 		<div id="contentBox">
 		<div style="border-bottom: 1px solid #c4c4c4;">
@@ -155,7 +155,7 @@
 		<br>
 		</div>
 		<br>
-		<div style="text-align: center; font-size: 20px; border-bottom: 1px solid #c4c4c4">댓글</div><br>
+		<div style="text-align: center; font-size: 20px; border-bottom: 1px solid #c4c4c4">댓글<br></div><br>
 		<div class="replybox" style="margin: auto;">
 			<c:choose>
 				<c:when test="${list.size() == 0 }">
