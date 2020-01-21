@@ -188,7 +188,7 @@ BMHANNAAir
 					dataType: "json",
 					data: {id: id}
 				}).done(res => {
-					var btn = '<button class="unblock" name='"' + " + res.id + '">차단 해제</button>'
+					var btn = '<button class="unblock" name=" + ' + res.id + '">차단 해제</button>'
 					var element = '<span>' + res.id + '</span>' +
 					'<span>' + res.addedDate + '</span>' +
 					'<span>' + res.reason + '</span>' +
