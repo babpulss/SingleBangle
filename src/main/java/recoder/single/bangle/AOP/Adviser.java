@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import recoder.single.bangle.member.DTO.MemberDTO;
+import recoder.single.bangle.remarket.service.MsgService;
+
 @Component
 @Aspect
 public class Adviser {
@@ -24,6 +27,11 @@ public class Adviser {
 	@Autowired
 	private HttpServletRequest req;
 	
+	@Autowired
+	private MsgService msgService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
@@ -35,8 +43,11 @@ public class Adviser {
 		String ip = req.getRemoteAddr();
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd hh:mm:ss");
-//		logger.debug(url + " ~ " + path);
-//		logger.debug(ip + " - " + sdf.format(d.getTime()));
+		
+
+		logger.debug(url + " ~ " + path);
+		logger.debug(ip + " - " + sdf.format(d.getTime()));
+
 		try {
 			return pjp.proceed();
 		} catch(Throwable e) {
@@ -45,4 +56,17 @@ public class Adviser {
 		return null;
 	}
 
+	@Before("execution(* recoder.single.bangle.index.*.*(..))" +
+			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
+			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
+			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())")
+	public void beford(JoinPoint jp) {
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		System.out.println(loginInfo);
+		if(loginInfo != null) {
+			String receiver = loginInfo.getId();
+			int notRead = msgService.notRead(receiver);
+			session.setAttribute("notRead", notRead);
+		}
+	}
 }

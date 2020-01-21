@@ -20,6 +20,11 @@
 				</c:when>
 				<c:otherwise>
 					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
+					<c:choose>
+						<c:when test="${notRead != 0 }">
+							<span>🆕</span>
+						</c:when>
+					</c:choose>
 					<span id="rightMyPage"><a
 						href="${pageContext.request.contextPath}/member/myPage.mem"
 						id="myPageBtn">My Page</a></span>

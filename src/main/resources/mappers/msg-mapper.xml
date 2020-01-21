@@ -15,4 +15,12 @@
 	<insert id="writeMsg" parameterType="java.util.Map">
 		insert into msgBox values(msgbox_seq.nextval, #{sender}, #{receiver}, #{title}, #{contents}, 0)
 	</insert>
+	
+	<update id="updateRead">
+		update msgbox set read='Y' where seq=#{seq}
+	</update>
+	
+	<select id="notRead" resultType="Integer">
+		select count(*) from msgbox where receiver=#{receiver} and read = 'N'
+	</select>
 </mapper>
