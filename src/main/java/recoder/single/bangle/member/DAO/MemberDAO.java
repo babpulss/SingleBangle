@@ -38,11 +38,9 @@ public class MemberDAO {
 		return sst.selectList("Member.findId", param);
 	}
 	
-	public int findPw(String id, String pwHint, String pwAnswer, String email) throws Exception {
+	public int findPw(String id, String email) throws Exception {
 		Map<String, String> param = new HashMap<>();
 		param.put("id", id);
-		param.put("pwHint", pwHint);
-		param.put("pwAnswer", pwAnswer);
 		param.put("email", email);
 		return sst.selectOne("Member.findPw", param);
 	}

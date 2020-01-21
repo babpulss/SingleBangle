@@ -10,6 +10,7 @@
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd"></script>
         <title>병원 목록</title>
         
+        <link rel="stylesheet" href="/css/nav.css">
         <style>
         	*{
 				box-sizing: border-box;
@@ -76,88 +77,86 @@
         </style>
     </head>
     <body>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
+    
+    	<br><br><br>
     	<div id="mainWrapper">
-    	<div id="logo">
-	        <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
-	    </div>
-		<br>
+			<div id="searchBox">
+		        <select class="addrSelect" id="sidoCd" name="sidoCd">
+		            <option value="0">시/도 선택</option>
+		            <option value="110000">서울</option>
+		            <option value="210000">부산</option>
+		            <option value="220000">인천</option>
+		            <option value="230000">대구</option>
+		            <option value="240000">광주</option>
+		            <option value="250000">대전</option>
+		            <option value="260000">울산</option>
+		            <option value="310000">경기</option>
+		            <option value="320000">강원</option>
+		            <option value="330000">충북</option>
+		            <option value="340000">충남</option>
+		            <option value="350000">전북</option>
+		            <option value="360000">전남</option>
+		            <option value="370000">경북</option>
+		            <option value="380000">경남</option>
+		            <option value="390000">제주</option>
+		            <option value="410000">세종</option>
+		        </select>
 		
-		<div id="searchBox">
-	        <select class="addrSelect" id="sidoCd" name="sidoCd">
-	            <option value="0">시/도 선택</option>
-	            <option value="110000">서울</option>
-	            <option value="210000">부산</option>
-	            <option value="220000">인천</option>
-	            <option value="230000">대구</option>
-	            <option value="240000">광주</option>
-	            <option value="250000">대전</option>
-	            <option value="260000">울산</option>
-	            <option value="310000">경기</option>
-	            <option value="320000">강원</option>
-	            <option value="330000">충북</option>
-	            <option value="340000">충남</option>
-	            <option value="350000">전북</option>
-	            <option value="360000">전남</option>
-	            <option value="370000">경북</option>
-	            <option value="380000">경남</option>
-	            <option value="390000">제주</option>
-	            <option value="410000">세종</option>
-	        </select>
-	
-	        <select class="addrSelect" id="sgguCd" name="sgguCd">
-	            <option value="0">시/군/구 선택</option>
-	        </select>
-	
-	        <select class="addrSelect" id="emdongNm" name="emdongNm">
-	            <option value="0">읍/면/동 선택</option>
-	        </select>
-	
-	        <select class="addrSelect" id="hospType" name="hospType">
-	            <option value="0">병원 종류 선택</option>
-	            <option value="치과">치과</option>
-	            <option value="안과">안과</option>
-	            <option value="이비인후과">이비인후과</option>
-	            <option value="내과">내과</option>
-	            <option value="외과">외과</option>
-	            <option value="신경과">신경과</option>
-	            <option value="신경외과">신경외과</option>
-	            <option value="정형외과">정형외과</option>
-	            <option value="피부과">피부과</option>
-	            <option value="성형외과">성형외과</option>
-	            <option value="산부인과">산부인과</option>
-	            <option value="비뇨기과">비뇨기과</option>
-	        </select>
-	
-	        <button type="button" id="searchHosp">검색</button>
-        </div>
-        
-		<br><hr><br>
-        <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
-        <br><hr><br>
-        
-        <div id="hospInfoBox">
-            <table id="hospInfo">
-            	<tbody>
-	                <tr>
-	                    <td class="hospKey">병원명</td>
-	                    <td class="hospVal" id="hospName"></td>
-	                </tr>
-	                <tr>
-	                    <td class="hospKey">주소</td>
-	                    <td class="hospVal" id="hospAddr"></td>
-	                </tr>
-	                <tr>
-	                    <td class="hospKey">전화번호</td>
-	                    <td class="hospVal" id="hospTel"></td>
-	                </tr>
-	                <tr>
-	                    <td class="hospKey">홈페이지</td>
-	                    <td class="hospVal" id="hospUrl"></td>
-	                </tr>
-                </tbody>
-            </table>
-        </div>
-        <br><br><br>
+		        <select class="addrSelect" id="sgguCd" name="sgguCd">
+		            <option value="0">시/군/구 선택</option>
+		        </select>
+		
+		        <select class="addrSelect" id="emdongNm" name="emdongNm">
+		            <option value="0">읍/면/동 선택</option>
+		        </select>
+		
+		        <select class="addrSelect" id="hospType" name="hospType">
+		            <option value="0">병원 종류 선택</option>
+		            <option value="치과">치과</option>
+		            <option value="안과">안과</option>
+		            <option value="이비인후과">이비인후과</option>
+		            <option value="내과">내과</option>
+		            <option value="외과">외과</option>
+		            <option value="신경과">신경과</option>
+		            <option value="신경외과">신경외과</option>
+		            <option value="정형외과">정형외과</option>
+		            <option value="피부과">피부과</option>
+		            <option value="성형외과">성형외과</option>
+		            <option value="산부인과">산부인과</option>
+		            <option value="비뇨기과">비뇨기과</option>
+		        </select>
+		
+		        <button type="button" id="searchHosp">검색</button>
+	        </div>
+	        
+			<br><hr><br>
+	        <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
+	        <br><hr><br>
+	        
+	        <div id="hospInfoBox">
+	            <table id="hospInfo">
+	            	<tbody>
+		                <tr>
+		                    <td class="hospKey">병원명</td>
+		                    <td class="hospVal" id="hospName"></td>
+		                </tr>
+		                <tr>
+		                    <td class="hospKey">주소</td>
+		                    <td class="hospVal" id="hospAddr"></td>
+		                </tr>
+		                <tr>
+		                    <td class="hospKey">전화번호</td>
+		                    <td class="hospVal" id="hospTel"></td>
+		                </tr>
+		                <tr>
+		                    <td class="hospKey">홈페이지</td>
+		                    <td class="hospVal" id="hospUrl"></td>
+		                </tr>
+	                </tbody>
+	            </table>
+	        </div>
+	        <br><br><br>
 		</div>
         <script>
             //////////////////////////////////////////////////

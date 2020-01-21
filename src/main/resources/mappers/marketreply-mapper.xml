@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="list" resultType="recoder.single.bangle.remarket.DTO.MarketReplyDTO">
-		select * from marketReply where boardSeq = #{boardSeq}
+		select * from marketReply where boardSeq = #{boardSeq} order by 1
 	</select>
 	
 	<delete id="delete">

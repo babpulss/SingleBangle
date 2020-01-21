@@ -56,10 +56,10 @@ public class MemberService {
 		return findIdResult;
 	}
 	
-	public int findPwResult(String id, String pwHint, String pwAnswer, String email) {
+	public int findPwResult(String id, String email) {
 		int findPwResult = 0;
 		try {
-			findPwResult = dao.findPw(id, pwHint, pwAnswer, email);
+			findPwResult = dao.findPw(id, email);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

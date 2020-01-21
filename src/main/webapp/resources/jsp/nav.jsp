@@ -21,8 +21,8 @@
 				<c:otherwise>
 					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
 					<c:choose>
-						<c:when test="${notRead != 0 }">
-							<span>🆕</span>
+						<c:when test="${notRead > 0 }">
+							<span style="position: relative; right: 370px; top: 10px; color: red;">new!</span>
 						</c:when>
 					</c:choose>
 					<span id="rightMyPage"><a
