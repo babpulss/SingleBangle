@@ -14,44 +14,7 @@
 <link rel="stylesheet" href="/css/nav.css">
 <style>
 /* 메뉴 폰트 */
-*
-
-
-:not
-
- 
-
-(
-.rightSidebar
-
- 
-
-)
-{
-box-sizing
-
-
-:
-
- 
-
-border-box
-
-
-;
-font-family
-
-
-:
-
- 
-
-'
-BMHANNAAir
-
-
-';
-}
+* :not ( .rightSidebar ) { box-sizing : border-box ; font-family : ' BMHANNAAir '; }
 #bHeader {
 	background-color: #0085cb;
 	border-radius: 10px 10px 0 0;
@@ -91,7 +54,6 @@ BMHANNAAir
 
 .bRow:last-child {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
 }
 
 #input {
@@ -147,14 +109,16 @@ BMHANNAAir
 			</div>
 			<c:choose>
 				<c:when test="${!empty list}">
-					<c:forEach items="${list}" var="i">
-						<div class="bRow" id="bContents">
+				<div id="bContents">
+				<c:forEach items="${list}" var="i">
+				<div class="bRow">
 							<span>${i.id}</span> <span>${i.addedDate}</span> <span>${i.reason}
 							</span> <span>${i.blockTime}시간 남음 </span> <span>
 								<button class="unblock" name="${i.id}">차단 해제</button>
 							</span>
-						</div>
+				</div>
 					</c:forEach>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="bRow" style="display: flex; justify-content: center">
@@ -163,7 +127,7 @@ BMHANNAAir
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="bRow" style="height: 50px"></div>
+		<div class="bRow" style="height: 50px; background-color:#e05252;"></div>
 	</div>
 
 	<script>
@@ -188,17 +152,16 @@ BMHANNAAir
 					dataType: "json",
 					data: {id: id}
 				}).done(res => {
+					$("#bContents").children().remove();
 					var btn = '<button class="unblock" name=" + ' + res.id + '">차단 해제</button>'
-					var element = '<span>' + res.id + '</span>' +
+					var element = '<div class="bRow"><span>' + res.id + '</span>' +
 					'<span>' + res.addedDate + '</span>' +
 					'<span>' + res.reason + '</span>' +
 					'<span>' + res.blockTime + '</span>' +
-					'<span>' + btn + '</span>';
+					'<span>' + btn + '</span></div>';
 					
 					$("#bContents").append(element);
-					});
-				}).fail(() => console.log("failed")
-				)
+				})
 			}
 		});
 	$("#searchIdBtn").click(() => {

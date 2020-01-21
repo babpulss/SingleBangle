@@ -3,6 +3,7 @@ package recoder.single.bangle.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,9 @@ public class Admin {
 
 	@Autowired
 	private ReportingService reportingService;
+	
+	@Autowired
+	private HttpSession session;
 
 	@RequestMapping("")
 	public String adminIndex() {
@@ -74,6 +78,28 @@ public class Admin {
 	// 아이디 검색으로 블랙리스트 추가
 	@RequestMapping("/searchId")
 	public String searchId(String id, Model m) {
+		try {
+			int checkId = blackListService.checkId(id);
+			if (checkId != 0) {
+				m.addAttribute("checkId", checkId);
+			} else {
+				m.addAttribute("dto", blackListService.searchId(id));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/searchId";
 	}
+	
+	@RequestMapping("/block")
+	public String block(BlackMemberDTO dto, Model m) {
+		Boolean result = blackListService.block(dto);
+		if (result) {
+			m.addAttribute("result", "추가완료");
+		} else {
+			m.addAttribute("result", "추가에 실패했습니다");
+		}
+		return "/admin/blockResult";
+	}
+	
 }

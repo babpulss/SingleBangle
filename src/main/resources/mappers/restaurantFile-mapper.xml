@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="RestaurantFile">
+	<insert id="insert" parameterType="recoder.single.bangle.restaurant.DTO.RestaurantFileDTO">
+		insert into restaurantFile values(restaurant_file_seq.nextval, #{rootSeq}, #{oriName}, #{sysName}, #{contents})
+	</insert>
+	
+	<select id="isFileExist" resultType="Integer">
+		select count(*) from restaurantFile where rootSeq = #{rootSeq}
+	</select>
+	
+	<select id="getFilesByPost" resultType="recoder.single.bangle.restaurant.DTO.RestaurantFileDTO">
+		select * from restaurantFile where rootSeq = #{rootSeq} order by seq
+	</select>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from restaurantFile where rootSeq = #{rootSeq}
+	</delete>
+</mapper>

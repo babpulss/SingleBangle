@@ -25,23 +25,16 @@ public class BlackListDAO {
 		return sst.delete("Admin.unblock", id);
 	}
 	
-	public int block(String id, String reason) {
-		Map<String, String> param = new HashMap<>();
-		param.put("id", id);
-		param.put("reason", reason);
-		return sst.insert("Admin.block", param);
+	public int block(BlackMemberDTO dto) {
+		return sst.insert("Admin.block", dto);
 	}
 
 	public BlackMemberDTO searchByBlockedId(String id) {
 		return sst.selectOne("Admin.searchByBlockedId", id);
 	}
-	
-	public MemberDTO searchID(String id) {
-		return sst.selectOne("Member.selectById", id);
-	}
 
-	public BlackMemberDTO checkId(String id) {
-		return sst.selectOne("Admin.checkId");
+	public int checkId(String id) {
+		Integer result = sst.selectOne("Admin.checkId", id);
+		return result == null ? 0 : result;
 	}
-
 }

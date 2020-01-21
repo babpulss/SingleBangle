@@ -116,7 +116,7 @@
             <br>
             <div id="idList">
             	<c:choose>
-					<c:when test="${fn:length(findIdResult) != 0}">
+					<c:when test="${findIdResult.size() > 0}">
 						<c:forEach items="${findIdResult}" var="id">
 							<b>${id}</b><br>						
 						</c:forEach>
