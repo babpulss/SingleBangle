@@ -157,32 +157,6 @@
                         <td class="info2"><b>${infoResult.id}</b></td>
                     </tr>
                     <tr>
-                        <td class="info1">비밀번호 확인 질문</td>
-                        <td class="info2">
-                            <select id="pwHint" name="pwHint" size="1" disabled>
-                                <option value="hint1">기억에 남는 추억의 장소는?</option>
-                                <option value="hint2">자신의 인생 좌우명은?</option>
-                                <option value="hint3">자신의 보물 1호는?</option>
-                                <option value="hint4">가장 기억에 남는 선생님 성함은?</option>
-                                <option value="hint5">타인이 모르는 자신만의 신체 비밀은?</option>
-                                <option value="hint6">추억하고 싶은 날짜는?</option>
-                                <option value="hint7">받았던 선물 중 기억에 남는 독특한 선물은?</option>
-                                <option value="hint8">유년시절 가장 생각나는 친구 이름은?</option>
-                                <option value="hint9">인상 깊게 읽은 책 이름은?</option>
-                                <option value="hint10">읽은 책 중에서 좋아하는 구절은?</option>
-                                <option value="hint11">자신이 두 번째로 존경하는 인물은?</option>
-                                <option value="hint12">친구들에게 공개하지 않은 어릴 적 별명은?</option>
-                                <option value="hint13">초등학교 때 기억에 남는 짝꿍 이름은?</option>
-                                <option value="hint14">다시 태어나면 되고 싶은 것은?</option>
-                                <option value="hint15">내가 좋아하는 캐릭터는?</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="info1">비밀번호 확인 답변</td>
-                        <td class="info2">${infoResult.pwAnswer}</td>
-                    </tr>
-                    <tr>
                         <td class="info1">이름</td>
                         <td class="info2">${infoResult.name} (${infoResult.getRealGender()})</td>
                     </tr>
@@ -215,8 +189,6 @@
         </div>
 
         <script>
-            // 선택했던 비밀번호 확인 질문 유지하기
-            $("#pwHint>option[value=${infoResult.pwHint}]").attr("selected", true);
 
             // 정보 수정 페이지로 이동
             $("#modifyBtn").on("click", function(){

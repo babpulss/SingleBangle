@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="findPw" resultType="Integer">
-		select count(*) from member where id = #{id} and pwHint = #{pwHint} and pwAnswer = #{pwAnswer} and email = #{email}
+		select count(*) from member where id = #{id} and email = #{email}
 	</select>
 	
 	<update id="updatePw">
