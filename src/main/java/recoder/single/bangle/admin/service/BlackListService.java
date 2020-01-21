@@ -31,7 +31,7 @@ public class BlackListService {
 		else return false;
 	}
 
-	public List<BlackMemberDTO> searchByBlockedId(String id) {
+	public BlackMemberDTO searchByBlockedId(String id) {
 		return blackListDAO.searchByBlockedId(id);
 	}
 
@@ -39,4 +39,10 @@ public class BlackListService {
 		MemberDTO dto = blackListDAO.searchID(id);
 		return dto.getId();
 	}
+
+	public String checkId(String id) throws Exception {
+		BlackMemberDTO dto = blackListDAO.checkId(id);
+		return dto.getId();
+	}
+
 }

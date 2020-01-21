@@ -24,7 +24,7 @@
 	</select>
 	
 	<!-- update는 resultType 명시 안해도 됨? 결과 값으로 '1'행이 업뎃되었다고 나올텐데... -->
-	<update id="updateTip" parameterType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+	<update id="updateTip">
 		update livingPoint set category=#{category}, title=#{title}, contents=#{contents} where seq=#{seq}
 	</update>
 	

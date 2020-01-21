@@ -61,7 +61,7 @@
 			location.href = "${pageContext.request.contextPath}/board/toBoardWrite.bo";
 		})
 		$("#btnToBack").on("click", function() {
-			location.href = "${pageContext.request.contextPath}/member/myPage";
+			location.href = "${pageContext.request.contextPath}/member/myPage.mem";
 		})
 	</script>
 </body>

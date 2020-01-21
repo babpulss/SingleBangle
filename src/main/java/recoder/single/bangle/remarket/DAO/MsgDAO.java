@@ -38,7 +38,9 @@ public class MsgDAO {
 	}
 	
 	public int notRead(String receiver) throws Exception{
-		return jdbc.selectOne("Msg.notRead", receiver);
+		int a =  jdbc.selectOne("Msg.notRead", receiver);
+		System.out.println(a);
+		return a;
 	}
 	
 	public int writeMsg(MsgDTO dto, String sender) throws Exception{
