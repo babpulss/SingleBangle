@@ -5,8 +5,8 @@
   
 <mapper namespace="Member">
 	<insert id="insert" parameterType="recoder.single.bangle.member.DTO.MemberDTO">
-		insert into member values (#{id}, #{pw}, #{pwHint}, #{pwAnswer}, #{name}, #{gender}, 
-									#{phone}, #{email}, #{postcode}, #{address1}, #{address2}, 'N', 'N')
+		insert into member values (#{id}, #{pw}, #{name}, #{gender}, #{phone}, #{email}, 
+									#{postcode}, #{address1}, #{address2}, 'N', 'N')
 	</insert>
 	
 	<select id="isIdExist" resultType="Integer">
@@ -34,8 +34,8 @@
 	</select>
 	
 	<update id="update" parameterType="recoder.single.bangle.member.DTO.MemberDTO">
-		update member set pw = #{pw}, pwHint = #{pwHint}, pwAnswer = #{pwAnswer}, phone = #{phone}, email = #{email}, 
-						postcode = #{postcode}, address1 = #{address1}, address2 = #{address2} where id = #{id}
+		update member set pw = #{pw}, phone = #{phone}, email = #{email}, postcode = #{postcode}, 
+							address1 = #{address1}, address2 = #{address2} where id = #{id}
 	</update>
 	
 	<select id="pwCheck" resultType="Integer">

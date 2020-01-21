@@ -213,7 +213,7 @@
                             <td class="info1">전화번호</td>
                             <td class="info2">
                                 <div class="info">
-                                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value=" ${infoResult.phone}">
+                                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value="${infoResult.phone}">
                                     <br>
                                     <span class="validCheck" id="phoneCheck"></span>
                                 </div>
@@ -223,7 +223,7 @@
                             <td class="info1">이메일</td>
                             <td class="info2">
                                 <div class="info">
-                                    <input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value=" ${infoResult.email}">
+                                    <input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value="${infoResult.email}">
                                     <button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
                                     <br>
                                     <span class="validCheck" id="emailCheck"></span>
@@ -234,7 +234,7 @@
                             <td class="info1">우편번호</td>
                             <td class="info2">
                                 <div class="info">
-                                    <input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value=" ${infoResult.postcode}">
+                                    <input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value="${infoResult.postcode}">
                                     <button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
                                 </div>
                             </td>
@@ -243,7 +243,7 @@
                             <td class="info1">기본주소</td>
                             <td class="info2">
                                 <div class="info">
-                                    <input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value=" ${infoResult.address1}">
+                                    <input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value="${infoResult.address1}">
                                 </div>
                             </td>
                         </tr>
@@ -251,7 +251,7 @@
                             <td class="info1">상세주소</td>
                             <td class="info2">
                                 <div class="info">
-                                    <input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value=" ${infoResult.address2}">
+                                    <input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value="${infoResult.address2}">
                                 </div>
                             </td>
                         </tr>
