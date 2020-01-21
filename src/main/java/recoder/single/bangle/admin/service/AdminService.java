@@ -19,4 +19,5 @@ public class AdminService {
 	public boolean reporting(String id, String reason, String url) {
 		return reportingService.addReporting(id, reason, url);
 	}
+	
 }

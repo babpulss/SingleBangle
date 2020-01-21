@@ -49,9 +49,9 @@ public class MarketService {
 	}
 
 	@Transactional("tx")
-	public MarketDTO updateDone(int seq) {
+	public MarketDTO updateSellDone(int seq) {
 		try {
-			int result = dao.updateDone(seq);
+			int result = dao.updateSellDone(seq);
 			System.out.println("성공이면 1 : " + result);
 			MarketDTO dto = dao.writeDetail(seq);
 			return dto;
@@ -131,7 +131,7 @@ public class MarketService {
 //	}
 
 	@Transactional("tx")
-	public void write(MarketDTO dto,String content, String writer, String place, String path) {
+	public void write(MarketDTO dto,String content, String writer, String place, String gender, String path) {
 		File filePath = new File(path);
 		String rootPath = session.getServletContext().getRealPath("files"); //경로지정
 		Pattern p = Pattern.compile("<img.+?src=\"(.+?)\".+?data-filename=\"(.+?)\".*?>");
@@ -160,7 +160,7 @@ public class MarketService {
 				list.add(file_dto);
 			}
 			System.out.println("글쓴이 : " + writer);
-			dao.insert(dto, content, writer, place);
+			dao.insert(dto, content, writer, place, gender);
 			int board_seq = dao.insertFile(writer);
 			System.out.println("맥스시퀀스 : " + board_seq);
 			for(MarketFileDTO tmp : list) {

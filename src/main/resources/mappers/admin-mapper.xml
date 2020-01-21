@@ -50,4 +50,8 @@
 		update blacklist set blocktime = blocktime - 1
 	</update>
 
+<!-- 	see blackList By ID -->
+	<select id="checkId" resultType="Integer">
+		select * from blacklist where id = #{id}
+	</select>
  </mapper>

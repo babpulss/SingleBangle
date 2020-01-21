@@ -223,7 +223,7 @@ nav ul, nav li {
 /* 우측 네비바 */
 #note {
 	position: relative;
-	right: 20vw;
+	right: 15vw;
 	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;

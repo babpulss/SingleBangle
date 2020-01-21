@@ -49,9 +49,9 @@ public class Admin {
 	@RequestMapping(value="/searchByBlockedId", produces="text/html; charset=UTF-8")
 	@ResponseBody
 	public String searchByBlockedId(String id) {
-		List<BlackMemberDTO> list = blackListService.searchByBlockedId(id);
+		BlackMemberDTO dto = blackListService.searchByBlockedId(id);
 		try { 
-			return new Gson().toJson(list);
+			return new Gson().toJson(dto);
 		} catch(Exception e) { e.printStackTrace(); }
 		return null;
 	}
@@ -74,13 +74,6 @@ public class Admin {
 	// 아이디 검색으로 블랙리스트 추가
 	@RequestMapping("/searchId")
 	public String searchId(String id, Model m) {
-		try {
-			String searchedId = blackListService.searchId(id);
-			if (searchedId != null)
-				m.addAttribute("id", searchedId);
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		}
 		return "admin/searchId";
 	}
 }

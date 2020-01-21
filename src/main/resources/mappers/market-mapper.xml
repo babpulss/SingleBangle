@@ -5,11 +5,11 @@
   
 <mapper namespace="Market">
 	<insert id="insert" parameterType="java.util.Map">
-		insert into market values(market_seq.nextval, #{title}, #{price}, #{content}, #{writer}, #{category}, #{place}, sysdate, 0, 'N')
+		insert into market values(market_seq.nextval, #{title}, #{price}, #{content}, #{writer}, #{category}, #{place}, sysdate, 0, 'N', #{gender})
 	</insert>
 	
-	<update id="updateDone">
-		update market set title=#{title}, price=#{price}, content=#{content}, category = #{category} where seq = #{seq} 
+	<update id="updateSellDone">
+		update market set done='Y' where seq = #{seq} 
 	</update>
 	
 	<select id="insertFile" resultType="Integer">

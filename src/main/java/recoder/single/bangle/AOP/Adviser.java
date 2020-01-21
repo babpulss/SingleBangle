@@ -35,8 +35,8 @@ public class Adviser {
 		String ip = req.getRemoteAddr();
 		Date d = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd hh:mm:ss");
-		logger.debug(url + " ~ " + path);
-		logger.debug(ip + " - " + sdf.format(d.getTime()));
+//		logger.debug(url + " ~ " + path);
+//		logger.debug(ip + " - " + sdf.format(d.getTime()));
 		try {
 			return pjp.proceed();
 		} catch(Throwable e) {
