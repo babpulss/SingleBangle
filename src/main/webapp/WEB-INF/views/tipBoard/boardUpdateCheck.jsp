@@ -11,17 +11,15 @@
 <body>
 		<c:choose>
 		<c:when test="${updateResult == 1 }">
-		<script>alert("게시글 수정 성공~!")</script>
+		<script>alert("게시글 수정 성공~!")
+		location.href="${pageContext.request.contextPath}/board/boardList.bo";
+		</script>
 		</c:when>
 		<c:otherwise>
-		<script>alert("게시글 수정 실패ㅠ.ㅠ")</script>
+		<script>alert("게시글 수정 실패ㅠ.ㅠ")
+		location.href="${pageContext.request.contextPath}/board/boardList.bo";
+		</script>
 		</c:otherwise>
 	</c:choose>
-	<button type="button" id="btnGoHome">홈으로 돌아가기</button>
-	<script>
-	$("#btnGoHome").on("click",function(){
-		location.href="${pageContext.request.contextPath}/home";
-	})
-	</script>
 </body>
 </html>

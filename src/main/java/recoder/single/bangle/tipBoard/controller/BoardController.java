@@ -113,10 +113,13 @@ public class BoardController {
 	
 	
 	@RequestMapping("/updateTip.bo")
-	public String updateTip(BoardDTO dtoB, Model model) {
+	public String updateTip(BoardDTO dtoB, FileDTO dtoF, Model model) {
 		System.out.println("updateTip.bo에 잘 도착!");
-		
-		int updateResult = boardService.updateTip(dtoB);
+		// 여기서 에러 생김!
+		String realPath = session.getServletContext().getRealPath("/files");
+		String writer = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		dtoB.setWriter(writer);
+		int updateResult = boardService.updateTip(realPath, dtoB, dtoF);
 		
 		System.out.println("Controller에서의 updateResult: "+updateResult);
 		
