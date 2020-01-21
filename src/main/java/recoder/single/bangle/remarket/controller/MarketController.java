@@ -64,8 +64,6 @@ public class MarketController {
 	@RequestMapping("/boardList.do") //게시글 전체 리스트
 	public String board(Model model, MarketDTO dto) {
 		try {
-//			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-//			model.addAttribute("loginInfo", loginInfo);
 			String navi = dao.getPageNavi(1);
 			int cpage=1;
 			String page = request.getParameter("cpage");
@@ -78,13 +76,12 @@ public class MarketController {
 			System.out.println(start + " : " + end);
 			model.addAttribute("navilist", navilist);
 			model.addAttribute("navi", navi);
-	
 			List<MarketFileDTO> fileList = file_dao.selectByPage(start, end);
 			List<MarketDTO> list = service.board();
-
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("list", list);
 			return "market/marketList";
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -164,7 +161,10 @@ public class MarketController {
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 			String writer = loginInfo.getId();
 			String gender = loginInfo.getGender();
-			String place = loginInfo.getAddress1();
+			String realPlace = loginInfo.getAddress1();
+			String[] placeSplit = realPlace.split(" ");
+			String place = placeSplit[0]+ " " + placeSplit[1] + " " + placeSplit[2];
+			System.out.println(place);
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();			
 			content.replace("<", "&lt");
