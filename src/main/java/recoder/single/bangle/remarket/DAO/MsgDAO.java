@@ -33,15 +33,13 @@ public class MsgDAO {
 		return jdbc.selectOne("Msg.msgDetail", seq);
 	}
 	
-//	public int viewCount(int seq) throws Exception{//얘 수정
-//		String sql = "update msgBox set viewCount =+ viewCount+1 where seq=?";
-//		return jdbc.update(sql, seq);
-//	}
+	public int updateRead(int seq) throws Exception{
+		return jdbc.update("Msg.updateRead", seq);
+	}
 	
-//	public int notReadMsg(String receiver) throws Exception{//수정하기~
-//		String sql = "select count(*) from msgBox where receiver = ? and viewCount < 1";
-//		return jdbc.queryForObject(sql, Integer.class, receiver);
-//	}
+	public int notRead(String receiver) throws Exception{
+		return jdbc.selectOne("Msg.notRead", receiver);
+	}
 	
 	public int writeMsg(MsgDTO dto, String sender) throws Exception{
 		Map<String, Object> param = new HashMap<>();

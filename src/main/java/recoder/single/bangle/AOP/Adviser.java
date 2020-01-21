@@ -6,15 +6,16 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import recoder.single.bangle.member.DTO.MemberDTO;
+import recoder.single.bangle.remarket.service.MsgService;
 
 @Component
 @Aspect
@@ -24,6 +25,11 @@ public class Adviser {
 	@Autowired
 	private HttpServletRequest req;
 	
+	@Autowired
+	private MsgService msgService;
+	
+	@Autowired
+	private HttpSession session;
 	
 	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
@@ -37,6 +43,13 @@ public class Adviser {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd hh:mm:ss");
 		logger.debug(url + " ~ " + path);
 		logger.debug(ip + " - " + sdf.format(d.getTime()));
+		
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		if(loginInfo != null) {
+			String receiver = loginInfo.getId();
+			int notRead = msgService.notRead(receiver);
+			session.setAttribute("notRead", notRead);
+		}
 		try {
 			return pjp.proceed();
 		} catch(Throwable e) {
