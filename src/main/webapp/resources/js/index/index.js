@@ -70,4 +70,8 @@ $(document).ready(function() {
 	});
 
 	$('*').mouse_wheel();
+	
+	$("#dropdown").on("click", () => {
+		$(".dropmenu").toggle("slow");
+	})
 });

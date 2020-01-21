@@ -45,15 +45,20 @@
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a
-					href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
-						class="fa fa-map-marker fa-2x"></i> <span class="nav-text sidebar">
+				<li id="dropdown" class="has-subnav sidebar"><i
+						class="fa fa-map-marker fa-2x"></i><span class="nav-text sidebar">
 							우리동네 </span>
-				</a></li>
+<!-- 							드롭다운 -->
+				<div class="dropmenu">
+				  <div>menu1</div>
+				  <div>menu2</div>
+				  <div>menu3</div>
+				</div>
+				</li>
 				<li class="has-subnav sidebar"><a href="#"> <i
 						class="fa fa-book fa-2x"></i> <span class="nav-text sidebar">
 							문화생활 </span>
-				</a></li>
+				</a> </li> 
 				<li class="has-subnav sidebar"><a href="#"> <i
 						class="fa fa-home fa-2x"></i> <span class="nav-text sidebar">
 							랜선집들이 </span>

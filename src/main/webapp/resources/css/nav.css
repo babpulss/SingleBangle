@@ -75,13 +75,12 @@
 	width: 250px;
 }
 
-.main-menu li>a {
+.main-menu ul li>a, .main-menu ul li div, .main-menu ul li span {
 	position: relative;
 	display: table;
 	border-collapse: collapse;
 	border-spacing: 0;
 	color: white;
-	font-family: arial;
 	font-size: 20px;
 	text-decoration: none;
 	transition: all .1s linear;
@@ -124,13 +123,11 @@ nav ul, nav li {
 	padding: 0;
 }
 
-.main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover,
+#dropdown:hover, .main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover,
 	.dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
 	.dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 	.dashboard-page nav.dashboard-menu ul li.active a {
-	color: #fff;
 	background-color: #5fa2db;
-	width: 120%;
 }
 
 ::-webkit-scrollbar {
@@ -275,6 +272,14 @@ nav ul, nav li {
 	cursor: pointer;
 	font-size: 20px;
 	color: #0085cb;
+}
+.dropmenu {
+	display: none;	
+	width: 100%;
+}
+.dropmenu * {
+	height: 40px;
+	text-align: center;
 }
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
