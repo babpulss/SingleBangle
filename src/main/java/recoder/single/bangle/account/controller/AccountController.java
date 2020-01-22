@@ -1,5 +1,6 @@
 package recoder.single.bangle.account.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -51,6 +52,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "error";
 		}
 		
 		return "accountBook/accountBook";
@@ -82,6 +84,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "error";
 		}		
 		
 		return "accountBook/detailAccountBook";
@@ -93,7 +96,6 @@ public class AccountController {
 		String userName = (String)session.getAttribute("userName");		
 		int price = Integer.parseInt(request.getParameter("price"));
 		AccountDTO dtos = new AccountDTO();
-		System.out.println(dto.getSpec());
 		if(dto.getSpec().equals("수입")) {
 			dto.setIncome(price);
 			dtos = new AccountDTO(0, id, userName, dto.getReportingDate(), null, dto.getDetails(), dto.getPayments(), dto.getSpec(), dto.getIncome(), 0, dto.getRemarks());
@@ -133,6 +135,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return "error";
 		}		
 		
 		return "accountBook/pdfAccountView";
@@ -144,8 +147,8 @@ public class AccountController {
 		pdfService.createPdf(req, resp, pdfValue);
 	}
 	
-	@RequestMapping("/deleteAccount")
-	public String deleteAccount() {
+	@RequestMapping("/deleteAccountByMonth")
+	public String deleteAccountMonth() {
 		String formedReportingDate = request.getParameter("formedReportingDate");
 		
 		int result = accService.deleteAccountByMonth(formedReportingDate);
@@ -154,5 +157,51 @@ public class AccountController {
 		}
 		
 		return "error";
+	}
+	
+	@RequestMapping("/deleteAccountBySeq.do")
+	public String deleteAccountSeq() {
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		System.out.println(seq);
+		return null;
+	}
+	
+	@RequestMapping("/modifyAccount")
+	public String modifyAccount(AccountDTO dto) {
+		dto.setId((String)session.getAttribute("id"));
+		dto.setUserName((String)session.getAttribute("userName"));
+		System.out.println("controller"+dto);
+		int result = accService.modifyAccountData(dto);
+		if(result>0) {
+			String formedDate = (String)session.getAttribute("formedDate");
+			int cashSum = 0;
+			int cardSum = 0;
+			int in = 0;
+			int out = 0;
+			String name;
+			try {
+				List<AccountDTO> list = accService.ListAllByFormedReportingDate(session,formedDate);
+				cashSum = accService.cashSummary(list);
+				cardSum = accService.cardSummary(list);
+				in = accService.incomeSummary(list);
+				out = accService.outcomeSummary(list);
+				name = accService.getUserName(list);
+				System.out.println(cashSum + " : " + cardSum);
+				request.setAttribute("name", name);
+				request.setAttribute("cashSum", cashSum);
+				request.setAttribute("cardSum", cardSum);
+				request.setAttribute("in", in);
+				request.setAttribute("out", out);
+				request.setAttribute("formedDate", formedDate);
+				request.setAttribute("list", list);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}		
+			
+			return "accountBook/detailAccountBook";
+		}else {
+			return "error";
+		}
 	}
 }

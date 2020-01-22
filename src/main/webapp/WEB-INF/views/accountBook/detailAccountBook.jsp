@@ -28,31 +28,32 @@
 	cursor: pointer;
 }
 </style>
+
 </head>
 <body>
 	<div class="container">
-		<div class="invoice row">
+		<div class="invoice row-fluid">
 			<div class="col-12">
 				<div class="card">
 					<div class="card-body p-0">
 						<div class="row p-5">
-							<div class="col-md-6">
+							<div class="col-md-8">
 								<h1>
 									<c:out value="${formedDate }" />
 									수입/지출 정보
 								</h1>
 							</div>
 
-							<div class="col-md-6 text-right" >
-								<button type="button"id="printInvoice" class="btn btn-info"style="margin-right:7px;">
-									Print
-								</button>
+							<div class="col-md-4 text-right">
+								<button type="button" id="printInvoice" class="btn btn-info"
+									style="margin-right: 7px;">Print</button>
 								<form id="pdf"
 									action="${pageContext.request.contextPath }/accountBook/accountPDF"
-									method="post" style="float:right;">
+									method="post" style="float: right;">
 									<input type="hidden" class="pdfValue btn btn-info"
-										name="pdfValue" value=""> <button type="button"
-										class="pdfBtn btn btn-info" value="PDF View" />PDF View</button>
+										name="pdfValue" value="">
+									<button type="button" class="pdfBtn btn btn-info"
+										value="PDF View">PDF View</button>
 								</form>
 
 							</div>
@@ -91,25 +92,36 @@
 									<thead>
 										<tr>
 											<th style="display: none"></th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:5%">No</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:30%">날짜</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:13%">용도</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">결제방식</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">입/출금</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">금액</th>
-											<th class="border-0 text-uppercase small font-weight-bold" style="width:12%">비고</th>
-											<th class="border-0 text-uppercase small font-weight-bold">선택</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 5%">No</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 23%">날짜</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 12%">용도</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 12%">결제방식</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 12%">입/출금</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 15%">금액</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="width: 12%">비고</th>
+											<th id="selecBtn"
+												class="border-0 text-uppercase small font-weight-bold	">선택</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${list }" var="list" varStatus="status">
 											<tr>
+
 												<td>${status.count }</td>
-												<td id="seq" style="display: none">${list.seq }</td>
-												<td><input type="text" value="${list.reportingDate }"
-													class="datepicker col-10"></td>
+												<td style="display: none"><input id="seqs" name="seqs"
+													value="${list.seq }"></td>
+												<td><input type="text" id="${list.seq }"
+													name="reportingDates" value="${list.reportingDate }" class="datepicker col-10"
+													placeholder="${list.reportingDate }" autocomplete="off"></td>
 												<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-													id="detailsSelect">
+													id="detailsSelects" name="details">
 														<option selected>${list.details}</option>
 														<option value="식비">식비</option>
 														<option value="문화 생활비">문화 생활비</option>
@@ -120,13 +132,13 @@
 														<option value="기타">기타</option>
 												</select></td>
 												<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-													id="paymentsSelect">
+													id="paymentsSelects" name="payments">
 														<option selected>${list.payments }</option>
 														<option value="카드">카드</option>
 														<option value="현금">현금</option>
 												</select></td>
 												<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-													id="specSelect">
+													id="specSelects" name="spec">
 														<option selected>${list.spec }</option>
 														<option value="수입">수입</option>
 														<option value="지출">지출</option>
@@ -134,19 +146,29 @@
 												<c:choose>
 
 													<c:when test="${list.income != 0 }">
-														<td style="color: dodgerblue"><fmt:formatNumber
-																value="${list.income}" pattern="###,###" />원</td>
+														<td style="color: dodgerblue"><input type="text"
+															style="width: 80%; color: dodgerblue;" class="incomes"id="incomes"
+															name="income"
+															value="<fmt:formatNumber value="${list.income}" pattern="###,###" />"
+															placeholder="<fmt:formatNumber value="${list.income}" pattern="###,###" />"
+															onkeyup="inputNumberFormat(this)">원</td>
 													</c:when>
 													<c:otherwise>
-														<td style="color: red"><fmt:formatNumber
-																value="${list.expense}" pattern="###,###" />원</td>
+														<td style="color: red"><input type="text"
+															style="width: 80%; color: red;" class="expenses"id="expenses"
+															name="expense"
+															value="<fmt:formatNumber value="${list.expense}" pattern="###,###" />"
+															placeholder="<fmt:formatNumber value="${list.expense}" pattern="###,###" />"
+															onkeyup="inputNumberFormat(this)">원</td>
 													</c:otherwise>
 												</c:choose>
-												<td><input type="text" class="remarks" name="remarks"value="${list.remarks}" style="border: 1px solid white;"></td>
-												<td class="modifyBtn"><input
-													type="button" class="btn btn-info"id="deleteBtn"value="수정">
-												<input
-													type="button" class="btn btn-dark"id="deleteBtn"value="삭제"></td>
+												<td><input type="text" class="remark"id="remark" name="remark"
+													value="${list.remarks}" style="border: 1px solid white;"></td>
+												<td><input type="button"
+													class="modifyBtn btn btn-light" disabled="disabled"
+													value="수정" name="${list.seq }"> <input type="button"
+													class="deleteBtn btn btn-danger" value="삭제"></td>
+
 											</tr>
 
 										</c:forEach>
@@ -182,36 +204,145 @@
 				</div>
 			</div>
 		</div>
-
+		<form id="modiFrm"action="${pageContext.request.contextPath }/accountBook/modifyAccount" method="post">
+			<input type="hidden" id="seq" name="seq">
+			<input type="hidden" id="reportingDate" name="reportingDate">
+			<input type="hidden" id="details" name="details">
+			<input type="hidden" id="payments" name="payments">
+			<input type="hidden" id="spec" name="spec">
+			<input type="hidden" id="income" name="income">
+			<input type="hidden" id="expense" name="expense">
+			<input type="hidden" id="remarks" name="remarks">
+		</form>
 		<div class="text-light mt-5 mb-5 text-center small">
-			by : <a class="text-light" target=""
-				href="#">Single Bangle</a>
+			by : <a class="text-light" target="" href="#">Single Bangle</a>
 		</div>
 	</div>
 
 	<script>
+		function inputNumberFormat(obj) {
+			obj.value = comma(uncomma(obj.value));
+		}
+		function comma(str) {
+			str = String(str);
+			return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+		}
+		function uncomma(str) {
+			str = String(str);
+			return str.replace(/[^\d]+/g, '');
+		}
+		$(".modifyBtn")
+				.on(
+						"click",
+						function() {
+							var seqs = $(this).parent().parent().children()
+									.children("#seqs").val();
+							var reportingDates = $(this).closest("tr").children().next().next().children("input").val();
+			
+							var detail = $(this).parent().parent().children()
+									.children("#detailsSelects").val();
+							var payment = $(this).parent().parent().children()
+									.children("#paymentsSelects").val();
+							var specs = $(this).parent().parent().children()
+									.children("#specSelects").val();
+							var income = 0;
+							var expense = 0;
+							if ($(this).parent().parent().children().children(
+									"#expenses").val() != 0 && specs == "수입") {
+								income = $(this).parent().parent().children()
+										.children("#expenses").val();								
+								expense = 0;
+							} else if($(this).parent().parent().children().children(
+							"#incomes").val() != 0 && specs == "지출"){
+								expense = $(this).parent().parent().children()
+								.children("#incomes").val();
+								income = 0;
+							}else if($(this).parent().parent().children().children(
+							"#expenses").val() != 0 && specs == "지출"){
+								expense = $(this).parent().parent().children()
+								.children("#expenses").val();
+								income = 0;
+							}else if($(this).parent().parent().children().children(
+							"#incomes").val() != 0 && specs == "수입"){
+								income = $(this).parent().parent().children()
+										.children("#incomes").val();
+								expense = 0;
+							}
+					
+							var incomes = uncomma(income);
+							var expenses = uncomma(expense);
+							var remark = $(this).parent().parent().children()
+									.children("#remark").val();
+							
+							console.log(seqs + " : " + reportingDates + " : "
+									+ detail + " : " + payment + " : "
+									+ specs + " : " + incomes + " : "
+									+ expenses + " : " + remark);
+							$("#seq").val(seqs);
+							$("#reportingDate").val(reportingDates);
+							$("#details").val(detail);
+							$("#payments").val(payment);
+							$("#spec").val(specs);
+							$("#income").val(incomes);
+							$("#expense").val(expenses);
+							$("#remarks").val(remark);
+							$("#modiFrm").submit();
+							console.log($("#seq").val()+$("#reportingDate").val()+$("#details").val()+$("#payments").val()+$("#spec").val()+$("#income").val()+$("#expense").val()+$("#remarks").val());
+
+						});
+		$(".deleteBtn")
+				.click(
+						function() {
+							$("#selectFrm")
+									.attr("action",
+											"${pageContext.request.contextPath}/accountBook/deleteAccountBySeq");
+							$("#selectFrm").submit();
+						});
+
 		$(".custom-select").on(
 				"change",
 				function() {
-					$("#modiBtn").css("visibility", "visible");
-					$(this).parent().parent().children(".modifyBtn").css(
-							"visibility", "visible");
+					$(this).parent().parent().children().children(".modifyBtn")
+							.attr("class", "modifyBtn btn btn-info")
+
+					$(this).parent().parent().children().children(".modifyBtn")
+							.removeAttr("disabled");
 
 				});
 		$(".datepicker").on(
 				"change",
 				function() {
-					$("#modiBtn").css("visibility", "visible");
-					$(this).parent().parent().children(".modifyBtn").css(
-							"visibility", "visible");
+					$(this).parent().parent().children().children(".modifyBtn")
+					.attr("class", "modifyBtn btn btn-info")
+					$(this).parent().parent().children().children(".modifyBtn")
+							.removeAttr("disabled");
 
 				});
-		$(".remarks").on("keydown",function(){
-			$("#modiBtn").css("visibility", "visible");
-			$(this).parent().parent().children(".modifyBtn").css(
-					"visibility", "visible");
-		})
+		$(".remark").on(
+				"keyup",
+				function() {
+					$(this).parent().parent().children().children(".modifyBtn")
+					.attr("class", "modifyBtn btn btn-info")
+					$(this).parent().parent().children().children(".modifyBtn")
+							.removeAttr("disabled");
 
+				});
+		$(".incomes").on(
+				"input",
+				function() {
+					$(this).parent().parent().children().children(".modifyBtn")
+					.attr("class", "modifyBtn btn btn-info")
+					$(this).parent().parent().children().children(".modifyBtn")
+							.removeAttr("disabled");
+				});
+		$(".expenses").on(
+				"input",
+				function() {
+					$(this).parent().parent().children().children(".modifyBtn")
+					.attr("class", "modifyBtn btn btn-info")
+					$(this).parent().parent().children().children(".modifyBtn")
+							.removeAttr("disabled");
+				});
 		$(".pdfBtn")
 				.on(
 						"click",
@@ -221,10 +352,10 @@
 
 		$(function() {
 			//input을 datepicker로 선언
-			$(".datepicker")
+			$('.datepicker')
 					.datepicker(
 							{
-								dateFormat : 'yyyy-MM-dd' //Input Display Format 변경
+								dateFormat : 'yy-mm-dd' //Input Display Format 변경
 								,
 								showOtherMonths : true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
 								,
@@ -236,10 +367,11 @@
 								,
 								showOn : "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
 								,
+								showAnim : "slide",
 								buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
 								,
 								buttonImageOnly : true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-								,
+								,				
 								buttonText : "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
 								,
 								yearSuffix : "년" //달력의 년도 부분 뒤에 붙는 텍스트
@@ -257,15 +389,11 @@
 								dayNames : [ '일요일', '월요일', '화요일', '수요일', '목요일',
 										'금요일', '토요일' ] //달력의 요일 부분 Tooltip 텍스트
 								,
-								minDate : "-1M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+								minDate : "-10M" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 								,
 								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
 							});
 
-		});
-		
-		$(".modifyBtn").on("click",function(){
-			$(this).attr("id","seq");
 		});
 	</script>
 </body>

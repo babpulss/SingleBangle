@@ -87,8 +87,8 @@
 									<option value="지출">지출</option>
 							</select></td>
 
-							<td><input type="number" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="15" onkeyup="characterCheck()" onkeydown="characterCheck()"oninput="numberMaxLength(this);"></td>
+							<td><input type="text" id="price" name="price"
+								placeholder="(ex. 10000)" maxlength="15" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
@@ -123,9 +123,9 @@
 							<td><a
 								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									id="detailBtn" class="btn btn-primary"value="상세보기"></a> <a href="${pageContext.request.contextPath }/accountBook/deleteAccount?formedReportingDate=${list.formedReportingDate}"><input
+									id="detailBtn" class="btn btn-primary"value="상세보기"></a> <a href="${pageContext.request.contextPath }/accountBook/deleteAccountByMonth?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									class="deleteBtn btn-danger"value="삭제"></a></td>
+									class="deleteBtn btn btn-danger"value="삭제"></a></td>
 						</tr>
 
 					</c:forEach>
@@ -150,14 +150,25 @@
 	</main>
 	</div>
 	<script>
+	function inputNumberFormat(obj) {
+		obj.value = comma(uncomma(obj.value));
+	}
+	function comma(str) {
+		str = String(str);
+		return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+	}
+	function uncomma(str) {
+		str = String(str);
+		return str.replace(/[^\d]+/g, '');
+	}
 	$(".deleteBtn").on("click",function(){
-		var formedReportingDate = $(this).attr("name");
-		console.log(formedReportingDate);
 		var result = confirm("삭제하시겠습니까?");
 		if(result){
 			alert("삭제되었습니다.");
+			return true;
 		}else{
 			alert("삭제가 취소되었습니다.");
+			return false;
 		}
 	});
 	function numberMaxLength(e){
@@ -236,14 +247,14 @@
 									+ formedReportingDate;
 						});
 		$("#addBtn").on("click", function() {
+				var price = uncomma($("#price").val());
+				console.log(price);
+				$("#price").val(price);
 				$("#addFrm").submit();
 		
 
 		});
-		function addComma(num) {
-			var regexp = /\B(?=(\d{3})+(?!\d))/g;
-			return num.toString().replace(regexp, ',');
-		}
+		
 	</script>
 </body>
 </html>

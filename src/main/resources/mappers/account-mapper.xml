@@ -19,5 +19,8 @@
   	<delete id="deleteAccountBySeq">
   		delete from account_book where seq = #{seq}
   	</delete>
+  	<update id="modifyAccount">
+  		update account_book set reportingDate=#{reportingDate},details=#{details},payments=#{payments},spec=#{spec},income=#{income},expense=#{expense},remarks=#{remarks} where seq=#{seq} and id=#{id} and username=#{userName}
+  	</update>
   </mapper>
   
