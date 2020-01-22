@@ -58,7 +58,7 @@ public class MailController {
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-			messageHelper.setFrom("recoder_account");
+			messageHelper.setFrom("recodersg@gmail.com");
 			messageHelper.setTo(email);
 			messageHelper.setSubject("[싱글방글] 회원가입을 위한 이메일 인증번호");
 			messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
@@ -113,7 +113,7 @@ public class MailController {
 			try {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-				messageHelper.setFrom("msg_account_jy");
+				messageHelper.setFrom("recodersg@gmail.com");
 				messageHelper.setTo(email);
 				messageHelper.setSubject("[싱글방글] 로그인을 위한 임시 비밀번호");
 				messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
