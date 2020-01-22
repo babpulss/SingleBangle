@@ -99,8 +99,8 @@ html, body {
 <div id="mainWrapper">
 <h1>신고리스트</h1>
 	<div class="list">
-		<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a>
-		<a href="${pageContext.request.contextPath}/admin/viewBlackList">블랙리스트 조회</a>
+		<button id="viewBlackList"> 블랙리스트 조회 </button>
+		<button id="viewReporting"> 신고접수 확인 조회 </button>
 	</div>
 	<!-- 	결과물 출력 섹션 -->
    <div id="board">
@@ -138,6 +138,12 @@ html, body {
 </div>
 
 		<script>
+	$("#viewBlackList").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
+	});
+	$("#viewReporting").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
 		$(".unblock").on("click", function() {
 			var conf = confirm("신고요청완료하시겠습니까?");
 			if (conf) {

@@ -90,13 +90,12 @@
 	<div id="mainWrapper">
 		<h1>블랙리스트</h1>
 		<div class="list">
-			<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a> <a
-				href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
-				확인 조회</a>
+			<button id="viewBlackList"> 블랙리스트 조회 </button>
+			<button id="viewReporting"> 신고접수 확인 조회 </button>
 			<div style="text-align: center">
 				<br> 회원 목록에서 아이디로 검색: <input type="text" id="searchId">
 				<button type="button" id="searchIdBtn">회원 찾기</button>
-			</div>
+			 </div>
 		</div>
 		<!-- 	결과물 출력 섹션 -->
 		<div id="board">
@@ -131,6 +130,12 @@
 	</div>
 
 	<script>
+	$("#viewBlackList").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
+	});
+	$("#viewReporting").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
 			var idArr = [
 				<c:forEach items="${list}" var="i">
 					"${i.id}",

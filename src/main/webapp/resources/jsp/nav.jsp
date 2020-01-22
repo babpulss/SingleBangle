@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://kit.fontawesome.com/20f9547eb6.js"></script>
 	<div class="wrapper">
 		<!-- 네비 바 -->
 		<div id="topbar">
@@ -37,40 +38,40 @@
 		<nav id="sidebar" class="main-menu sidebar">
 			<ul id="navBar" class="sidebar">
 				<li class="sidebar"><a href="#"> <i
-						class="fa fa-exclamation fa-3x"></i> <span
+	style="line-height: 50px" class="fa fa-exclamation"></i> <span
 						class="nav-text sidebar"> 공지사항 </span>
 				</a></li>
 				<li class="has-subnav sidebar"><a
 					href="${pageContext.request.contextPath}/board/boardList.bo"> <i
-						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
+						style="line-height: 50px" class="fa fa-archive"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li id="dropdown" class="has-subnav sidebar"><i
-						class="fa fa-map-marker fa-2x"></i><span class="nav-text sidebar">
+				<li class="has-subnav sidebar"><a
+					href="#"><i
+						style="line-height: 50px" class="fa fa-map-marker sidebar"></i> <span class="nav-text sidebar">
 							우리동네 </span>
-<!-- 							드롭다운 -->
-				<div class="dropmenu">
-				  <div>menu1</div>
-				  <div>menu2</div>
-				  <div>menu3</div>
+				</a>
+				<div class="submenu">
+					<a href="${pageContext.request.contextPath}/restaurant/rstList.rst"><div class="sidebar"><span id="submenuSpan"></span><i class="fas fa-utensils sidebar"></i> 혼밥 / 혼술</div></a>
+					<a href="${pageContext.request.contextPath}/hosp/hospList.hp"><div class="sidebar"><span id="submenuSpan"></span><i class="far fa-hospital sidebar"></i> 병원 검색</div></a>
 				</div>
 				</li>
 				<li class="has-subnav sidebar"><a href="#"> <i
-						class="fa fa-book fa-2x"></i> <span class="nav-text sidebar">
+						style="line-height: 50px" class="fa fa-book"></i> <span class="nav-text sidebar">
 							문화생활 </span>
 				</a> </li> 
 				<li class="has-subnav sidebar"><a href="#"> <i
-						class="fa fa-home fa-2x"></i> <span class="nav-text sidebar">
+						style="line-height: 50px" class="fa fa-home"></i> <span class="nav-text sidebar">
 							랜선집들이 </span>
 				</a></li>
 				<li><a
 					href="${pageContext.request.contextPath }/market/boardList.do">
-						<i class="fa fa-comments fa-2x"></i> <span class="nav-text">
+						<i style="line-height: 50px" class="fa fa-comments"></i> <span class="nav-text">
 							re마켓 </span>
 				</a></li>
 				<c:if test="${!empty loginInfo}">
 				<li class="has-subnav sidebar" id="account"><a href="${pageContext.request.contextPath }/accountBook/accountBook"> <i
-						class="fa fa-dollar fa-2x"></i> <span class="nav-text"> 가계부
+						style="line-height: 50px" class="fa fa-dollar fa-2x"></i> <span class="nav-text"> 가계부
 					</span>
 				</a></li>
 				</c:if>
