@@ -20,17 +20,6 @@
 		</layout>
 	</appender>
 	
-<!-- 	<appender name="jdbcAppender" class="org.apache.log4j.jdbc.JDBCAppender"> -->
-<!-- 		<param name="URL" value="jdbc:oracle:thin:@localhost:1521:xe"/> -->
-<!-- 		<param name="Driver" value="oracle.jdbc.OracleDriver"/> -->
-<!-- 		<param name="User" value="recoder"/> -->
-<!-- 		<param name="Password" value="recoder"/> -->
-<!-- 		<layout class="org.apache.log4j.PatternLayout"> -->
-<!-- 			<param name="ConversionPattern" -->
-<!-- 			value="insert into visitcount values(visitcount_seq.nextval, sysdate);"/> -->
-<!-- 		</layout> -->
-<!-- 	</appender> -->
-	
 	<!-- Application Loggers -->
 	<logger name="recoder.single.bangle">
 		<level value="debug" />

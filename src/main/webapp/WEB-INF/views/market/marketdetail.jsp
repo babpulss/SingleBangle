@@ -7,81 +7,215 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
+<link rel="stylesheet" href="/css/nav.css">
+<style>
+	  /* 메뉴 폰트 */
+        @font-face {
+            font-family: 'BMHANNAAir';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+                format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        html, body { margin: 0px; padding: 0px;}
+        * {
+             box-sizing: border-box; 
+            font-family: 'BMHANNAAir';
+        }
+        #board {
+            margin: 65px 110px 0 110px;
+        }
+        #bHeader {
+            background-color: #0085cb;
+            border-radius: 10px 10px 0 0;
+        }
+        .bRow {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .bRow * {
+            line-height: 50px;
+            text-align: center;
+        }
+        .bRow>span:first-child {
+            flex-basis: 10%;
+        }
+        .bRow>span:nth-child(2) {
+            flex-basis: 20%;
+        }
+        .bRow>span:nth-child(3) {
+            flex-basis: 50%;
+            text-align: left;
+        }
+        .bRow a {
+            text-decoration: none;
+        }
+        .bRow>span:nth-child(4) {
+            flex-basis: 10%;
+        }
+        .bRow>span:last-child {
+            flex-basis: 10%;
+        }
+        .bRow:last-child {
+            border-radius: 0 0 10px 10px;
+            background-color: #e05252;
+        }
+        #btns {
+            margin: 20px 110px 0 110px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #btns>button:first-child, #btns>div>button {
+            border: none;
+            width: 50px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        #btns>div>input {
+            width: 100px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        #btns>button:last-child {
+            border: none;
+            width: 80px;
+            height: 30px;
+            border-radius: 10px;
+        }
+        @media ( max-width: 600px ) {
+            #board {
+                margin: 65px 0 0 0;
+            }
+            #bHeader {
+                border-radius: 0;
+            }
+            .bRow>span:first-child {
+                display: none;
+            }
+            #btns {
+                margin: 20px 0 0 0;
+            }
+        }
+</style>
 </head>
 <body>
-	<div class="wrapper" style="width: 800px; border:1px solid black; margin: auto;">
+<jsp:include page="/resources/jsp/nav.jsp"/>
+ <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
+        <div id="bHeader" class="bRow" style="text-align: center; font-size: 20px;">
+            <span>${dto.title }</span>
+        </div>
 		<div id="contentBox">
-		<div>${dto.writer } ${dto.place }</div>
-		<div>${dto.title } ${dto.category }</div>
-		<div>${dto.price }원</div>
+		<div style="border-bottom: 1px solid #c4c4c4;">
+		<div style="font-weight: bold; font-size: 18px;"><br>상품정보</div>
+		<div> ${dto.category }</div>
+		<div>${dto.price }원<br></div><br>
+		</div>
+		<div style="border-bottom: 1px solid #c4c4c4;">
+		<div style="font-weight: bold; font-size: 18px;"><br>판매자정보</div>
+		<div>${dto.writer }</div>
+		<div>${dto.place }</div>
 		<div>
 		<c:choose>
-			<c:when test="${dto.writer == id && dto.done == 'N'}">
-				<button type="button" id="done_${dto.seq }" onclick="updateDone('${dto.seq}')">판매완료</button>
+			<c:when test="${dto.gender == 'F' }">
+				여성
+			</c:when>
+			<c:otherwise>
+				남성
+			</c:otherwise>
+		</c:choose>
+		</div><br>
+		</div><br>
+		<c:choose>
+			<c:when test="${dto.writer == loginInfo.id && dto.done == 'N'}">
+				<div><button type="button" id="updateSellDone_${dto.seq }" onclick="updateSellDone('${dto.seq}')">판매완료</button></div>
 			</c:when>
 		</c:choose>
 		<c:choose>
 			<c:when test="${dto.done == 'Y' }">
-				< < 판 매 완 료 > >
+				<div style="text-align: center; font-size: 25px;"> < < 판 매 완 료 > > </div>
 			</c:when>
 		</c:choose>
-		</div>
-		<div>${dto.content }</div>
+		<br>
+		<div style="">${dto.content }</div>
+		<br>
 		<c:choose>
-			<c:when test="${dto.writer == id}">
-				<div><button id="update">수정하기</button><button id="delete">삭제하기</button></div>
+			<c:when test="${dto.writer == loginInfo.id}">
+				<div><button id="update" type="button">수정하기</button>
+				<button id="delete" type="button">삭제하기</button>
+				<button id="back" type="button">돌아가기</button></div>
 			</c:when>
-			<c:otherwise>
-				<div><button id="msg">쪽지보내기</button><button id="report">신고하기</button></div>
-			</c:otherwise>
+			<c:when test="${loginInfo != null && dto.writer != loginInfo.id}">
+				<div><button id="msg" type="button">쪽지보내기</button>
+				<button id="report" type="button">신고하기</button>
+				<button id="back" type="button">돌아가기</button></div>
+			</c:when>
 		</c:choose>
-		<div><button id="back">돌아가기</button></div>
+		<br>
 		</div>
-		<div>댓글</div>
-		<div class="replybox">
+		<br>
+		<div style="text-align: center; font-size: 20px; border-bottom: 1px solid #c4c4c4">댓글<br></div><br>
+		<div class="replybox" style="margin: auto;">
 			<c:choose>
 				<c:when test="${list.size() == 0 }">
-					<div>댓글이 없습니다.</div>
+					<br><div>댓글이 없습니다.</div><br>
 				</c:when>
 				<c:otherwise>
-						<c:forEach items="${list }" var="list">
-<%-- 						<form action="${pageContext.request.contextPath }/marketReply/delete.do?seq=${list.seq}&boardSeq=${list.boardSeq}" method="post"> --%>
+						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left;">${list.writer }</div>
 								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
-								<input type="hidden" id="reTextProc_"+${list.seq }>
+								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
-									<c:when test="${list.writer == id }">
-										<button type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정하기</button>
+									<c:when test="${list.writer == loginInfo.id }">
+									<div style="float:left; width: 30%; text-align: center;">
+										<button style="border: none;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
 										<input type="hidden" id="boardSeqRe_${list.seq }" value="${list.boardSeq }">
-										<button id="deleteRe_${list.seq }" type="button" onclick="deleteRe('${list.seq}')">삭제하기</button>
-										<button type="button" id="updateDone_${list.seq }" style="display:none" onclick="updateDone('${list.seq}')">수정완료</button>
-									</c:when>
+										<button id="deleteRe_${list.seq }" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
+										<button type="button" id="updateDone_${list.seq }" style="display:none" onclick="updateDone('${list.seq}')">완료</button>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<div style="float:left; width: 30%;">&nbsp</div>
+								</c:otherwise>
 								</c:choose>
 								</div>
-<!-- 								</form> -->
 						</c:forEach>
 				</c:otherwise>
 			</c:choose>
+		<div style="text-align: center">${navi }</div>
+			<c:choose>
+				<c:when test="${loginInfo != null }">
+					<br>
+					<div style="width: 100%; text-align: center;">
+					<input type="text" id="recontent" name="recontent" style="width: 80%;">
+					<button type="button" id="reconfirm">확인</button>
+					</div>
+					<br>
+				</c:when>
+				<c:otherwise>
+					<br>
+					<div style="width: 800px; text-align: center;">
+					로그인 후 댓글 입력이 가능합니다.
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
-		<div>
-			<input type="text" id="recontent" name="recontent"><button type="button" id="reconfirm">확인</button>
 		</div>
-	</div>
-	
+
 	<script>
 	
 // 	$("#done").on("click", function(){
 // 		location.href="${pageContext.request.contextPath}/market/updateDone.do?seq=${dto.seq}"
 // 	});
 	
-	var updateDone = function(seq){
-		var updateDone = "#updateDone_"+seq;
+	var updateSellDone = function(seq){
+		var updateSellDone = "#updateSellDone_"+seq;
 		var doneYes = "#doneYes_"+seq;
-		$(updateDone).css("display","none");
+		$(updateSellDone).css("display","none");
 		$.ajax({
-			url: "${pageContext.request.contextPath}/market/updateDone.do?seq="+seq,
+			url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
 			type: "post",
 			data: {
 				seq : seq
@@ -117,6 +251,7 @@
 				}
 				$("#recontent").val("");
 				alert("댓글이 삭제되었습니다.");
+				window.location.reload();
 			}
 			
 		})
@@ -153,6 +288,7 @@
 					$(updateRe).css("display","block");
 					$(deleteRe).css("display","block");
 					$(updateOk).css("display","inline");
+					window.location.reload();
 				}
 			})
 			
@@ -172,7 +308,7 @@
 		
 		$("#msg").on("click",function(){
 			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.writer }";
-			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
+			window.open(url, "메세지", "width=400px, height=500px, location=no, status=no, scrollbars=no");
 		})
 		
 		$("#report").on("click",function(){
@@ -205,6 +341,7 @@
 						}
 						$("#recontent").val("");
 						alert("댓글이 등록되었습니다.");
+						window.location.reload();
 					},
 					error: function(data){
 						alert("댓글작성에 실패했습니다.");

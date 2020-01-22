@@ -2,6 +2,7 @@ package recoder.single.bangle.tipBoard.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.tipBoard.DTO.BoardDTO;
+import recoder.single.bangle.tipBoard.DTO.CommentDTO;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 import recoder.single.bangle.tipBoard.service.BoardService;
 
@@ -91,6 +95,8 @@ public class BoardController {
 			
 			int likeCheck = boardService.likeCheck(seq, id);
 			model.addAttribute("likeCheck", likeCheck);
+			int scrapCheck = boardService.scrapCheck(seq, id);
+			model.addAttribute("scrapCheck",scrapCheck);
 		}
 		BoardDTO dtoB = boardService.getDto(seq);
 		model.addAttribute("detailView",dtoB);	
@@ -107,10 +113,13 @@ public class BoardController {
 	
 	
 	@RequestMapping("/updateTip.bo")
-	public String updateTip(BoardDTO dtoB, Model model) {
+	public String updateTip(BoardDTO dtoB, FileDTO dtoF, Model model) {
 		System.out.println("updateTip.bo에 잘 도착!");
-		
-		int updateResult = boardService.updateTip(dtoB);
+		// 여기서 에러 생김!
+		String realPath = session.getServletContext().getRealPath("/files");
+		String writer = ((MemberDTO) session.getAttribute("loginInfo")).getId();
+		dtoB.setWriter(writer);
+		int updateResult = boardService.updateTip(realPath, dtoB, dtoF);
 		
 		System.out.println("Controller에서의 updateResult: "+updateResult);
 		
@@ -119,7 +128,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/deleteTip.bo")
-	public String deleteTip(int seq) {
+	public String deleteTip(int seq, Model model) {
 		System.out.println("deleteTip.bo에 잘 도착!");
 		int deleteResult = boardService.deleteTip(seq);
 		if(deleteResult>0) {
@@ -127,7 +136,8 @@ public class BoardController {
 		}else {
 			System.out.println("팁게시판 게시글 삭제 실패ㅠ");
 		}
-		return "redirect:,boardList.bo";
+		model.addAttribute("deleteResult",deleteResult);
+		return "tipBoard/deleteResult";
 	}
 	
 	@RequestMapping(value = "/like.bo", produces = "application/json; charset=UTF-8")
@@ -221,6 +231,71 @@ public class BoardController {
 		return "tipBoard/searchResult";
 	}
 	
-
+	@RequestMapping("/reportPage.bo")
+	public String reportPage(String url, Model model) {
+		System.out.println("신고하는 글의 url: " + url);
+		model.addAttribute("url",url);
+		return "tipBoard/reportPage";
+	}
+	
+	@RequestMapping("/reportProc.bo")
+	public String reportProc(String reason,String url, String reporter, Model model) {
+		ReportDTO dtoR = new ReportDTO(0,reporter,null,reason,url,null,null);
+		int reportResult = boardService.report(dtoR);
+		model.addAttribute("reportResult",reportResult);
+		return "tipBoard/reportResult";
+	}
+	
+	@RequestMapping(value = "/addComment.bo", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String addComment(CommentDTO dtoC) {
+		System.out.println("addComment.bo에 도착!");
+		System.out.println(dtoC.toString());
+		
+		int cmtResult = boardService.addComment(dtoC);
+		System.out.println("controller에서 댓글 입력 결과: "+cmtResult);
+		JsonObject obj = new JsonObject();
+		obj.addProperty("cmtResult", cmtResult);
+		return obj.toString();
+	}
+	
+	@RequestMapping(value = "/cmtList.bo", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String cmtList(int rootSeq){
+		System.out.println("cmtList.bo에 도착!");
+		
+		List<CommentDTO> cmtList = boardService.cmtList(rootSeq);
+		System.out.println("controller에서 cmtList: "+cmtList);
+		Gson g = new Gson();
+		String toJsonResult = g.toJson(cmtList);
+		
+		return toJsonResult;
+	}
+	
+	@RequestMapping("/replyDelete.bo")
+	public String replyDelete(int seq, Model model) {
+		//여기서 seq는 댓글의 seq이다.
+		System.out.println("replyDelete에 도착!");
+		System.out.println("댓글의 seq: "+seq);
+		int rootSeq = boardService.getRootSeq(seq);
+		System.out.println("댓글을 단 글의 seq: "+ rootSeq);
+		int deleteResult = boardService.cmtDelete(seq);
+		
+		model.addAttribute("rootSeq",rootSeq);
+		model.addAttribute("deleteResult",deleteResult);
+		return "tipBoard/cmtDelResult";
+	}
+	
+	@RequestMapping("/replyUpdate.bo")
+	public String replyUpdate(int seq, String contents, Model model) {
+		System.out.println("replyUpdate에 도착!");
+		int rootSeq = boardService.getRootSeq(seq);
+		System.out.println("댓글을 단 글의 seq: "+ rootSeq);
+		int cmtUpdateResult = boardService.cmtUpdate(seq, contents);
+		
+		model.addAttribute("rootSeq",rootSeq);
+		model.addAttribute("cmtUpdateResult",cmtUpdateResult);		
+		return "tipBoard/cmtUpdateResult";
+	}
 }
 

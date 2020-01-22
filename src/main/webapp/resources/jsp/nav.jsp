@@ -19,6 +19,12 @@
 						href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 				</c:when>
 				<c:otherwise>
+					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
+					<c:choose>
+						<c:when test="${notRead > 0 }">
+							<span style="position: relative; right: 370px; top: 10px; color: red;">new!</span>
+						</c:when>
+					</c:choose>
 					<span id="rightMyPage"><a
 						href="${pageContext.request.contextPath}/member/myPage.mem"
 						id="myPageBtn">My Page</a></span>
@@ -39,15 +45,20 @@
 						class="fa fa-archive fa-2x"></i> <span class="nav-text sidebar">
 							리빙포인트 </span>
 				</a></li>
-				<li class="has-subnav sidebar"><a
-					href="${pageContext.request.contextPath}/hosp/hospList.hp"> <i
-						class="fa fa-map-marker fa-2x"></i> <span class="nav-text sidebar">
+				<li id="dropdown" class="has-subnav sidebar"><i
+						class="fa fa-map-marker fa-2x"></i><span class="nav-text sidebar">
 							우리동네 </span>
-				</a></li>
+<!-- 							드롭다운 -->
+				<div class="dropmenu">
+				  <div>menu1</div>
+				  <div>menu2</div>
+				  <div>menu3</div>
+				</div>
+				</li>
 				<li class="has-subnav sidebar"><a href="#"> <i
 						class="fa fa-book fa-2x"></i> <span class="nav-text sidebar">
 							문화생활 </span>
-				</a></li>
+				</a> </li> 
 				<li class="has-subnav sidebar"><a href="#"> <i
 						class="fa fa-home fa-2x"></i> <span class="nav-text sidebar">
 							랜선집들이 </span>

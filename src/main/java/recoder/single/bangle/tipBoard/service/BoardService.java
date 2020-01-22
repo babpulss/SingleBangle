@@ -13,13 +13,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 
 import configuration.Configuration;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DAO.FileDAO;
 import recoder.single.bangle.tipBoard.DTO.BoardDTO;
+import recoder.single.bangle.tipBoard.DTO.CommentDTO;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
 @Service
@@ -139,11 +142,92 @@ public class BoardService {
 		return dto;
 	}
 
-	public int updateTip(BoardDTO dtoB) {
+	@Transactional("tx")
+	public int updateTip(String realPath, BoardDTO dtoB, FileDTO dtoF) {
 		int updateResult = 0;
 		try {
-			updateResult = boardDao.updateTip(dtoB);
-			System.out.println("서비스에서의 updateResult: "+updateResult);
+
+			//controller로부터 받은 realPath와 dto를 이용! realPath로 File형 file_path를 만듦! realPath에 해당하는 폴더 인스턴스 생성!
+			File file_path = new File(realPath);
+			// 근데 이 폴더가 없으면 만들어라!
+			if(!file_path.exists()) {
+				file_path.mkdir();
+			}
+			//정규식 만들기
+			Pattern p = Pattern.compile("<img.+?src=\"(data:.+?base64,)(.+?)\".+?data-filename=\\\"(.+?)\\\".*?>");
+
+			//dto에서 contents 내용 뽑아서 string에 넣기! 엄청 길다!
+			String contents = dtoB.getContents();
+			//		System.out.println("contents: "+contents);
+
+			//정규식과 contents의 내용을 매칭!
+			Matcher m = p.matcher(contents);
+
+			String oriName = null;
+			String sysName = null;
+			List<String> oriNameList = new ArrayList<>();
+			List<String> sysNameList = new ArrayList<>();
+			
+			try {	
+				//매칭된 내용을 뽑아내는 과정! (파일 업로드)
+				while(m.find()) {
+					oriName = m.group(3);
+					System.out.println("oriName: "+oriName);
+					
+					sysName = System.currentTimeMillis()+"_"+oriName;
+					System.out.println("sysName: "+sysName);
+					oriNameList.add(oriName);
+					sysNameList.add(sysName);			
+					
+					String imgString = m.group(2);
+					System.out.println("파일 이름: "+oriName);
+					System.out.println("이미지 데이터 값: "+imgString);
+					System.out.println("-----------------------");
+
+					//파일은 byte[] 
+					byte[] imgBytes = Base64Utils.decodeFromString(imgString);
+					FileOutputStream fos = new FileOutputStream(realPath+"/"+sysName);
+					DataOutputStream dos = new DataOutputStream(fos);
+					dos.write(imgBytes);
+					dos.flush();
+					dos.close();
+					
+					contents = contents.replaceFirst(Pattern.quote(m.group(1)), "");
+					contents = contents.replaceFirst(Pattern.quote(m.group(2)), "/files/"+sysName);
+					dtoB.setContents(contents);
+					System.out.println("새로운 contents 이름: " + contents);
+				}
+
+				//게시글 입력!
+				int resultB = boardDao.updateTip(dtoB);			 
+				if(resultB>0) {
+					System.out.println("게시글 수정 성공!");
+				}
+
+				//파일 입력! - fileDao의 method를 실행하는데, dto의 값을 넣어주기! => 까먹지 말기!
+				//근데 rootSeq를 가져오려면, getMaxSeq() 만들어야 함!!!! => 까먹지 말기!
+				//일단 게시글을 입력하고 바로 파일을 입력하니까, seq가 가장 큰 게시글의 seq값을 가져와서 그걸 rootSeq로 사용!
+				String writer = dtoB.getWriter();
+				int rootSeq = boardDao.getMaxSeq(writer);
+				
+				System.out.println("등록된 파일 개수 : " + oriNameList.size());
+				for(int i = 0; i < oriNameList.size(); i++) {				
+					int resultF = fileDao.insertFile(new FileDTO(0,rootSeq,sysNameList.get(i),oriNameList.get(i)));
+			
+					if(resultF>0) {
+						System.out.println("파일 수정 성공!");
+					}		
+				}
+
+				updateResult = resultB;
+
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return updateResult;
+//			
+//			updateResult = boardDao.updateTip(dtoB);
+//			System.out.println("서비스에서의 updateResult: "+updateResult);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -341,4 +425,36 @@ public class BoardService {
 		}
 		return deleteResult;
 	}
+	
+	public int report(ReportDTO dtoR) {
+		int reportResult = boardDao.report(dtoR);
+		System.out.println("service에서 신고하기 결과: "+reportResult);
+		return reportResult;
+	}
+	
+	public int addComment(CommentDTO dtoC) {
+		int cmtResult = boardDao.addComment(dtoC);
+		System.out.println("service에서 댓글쓰기 결과: "+cmtResult);
+		return cmtResult;
+	}
+	
+	public List<CommentDTO> cmtList(int rootSeq) {
+		List<CommentDTO> cmtList = boardDao.cmtList(rootSeq);
+		return cmtList;
+	}
+	
+	public int cmtDelete(int seq) {
+		int deleteResult = boardDao.cmtDelete(seq);
+		return deleteResult;
+	}
+	
+	public int getRootSeq(int seq) {
+		return boardDao.getRootSeq(seq);
+	}
+	
+	public int cmtUpdate(int seq, String contents) {
+		return boardDao.cmtUpdate(seq, contents);
+	}
 }
+
+

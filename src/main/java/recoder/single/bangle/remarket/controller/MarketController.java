@@ -77,13 +77,11 @@ public class MarketController {
 			model.addAttribute("navilist", navilist);
 			model.addAttribute("navi", navi);
 			List<MarketFileDTO> fileList = file_dao.selectByPage(start, end);
-
 			List<MarketDTO> list = service.board();
-			System.out.println("이미지사이즈 : " + fileList.size());
-
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("list", list);
 			return "market/marketList";
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			return null;
@@ -109,29 +107,37 @@ public class MarketController {
 		System.out.println("수정할 글 번호 : " + seq); //ok
 		MarketDTO dto = service.writedetail(seq);
 		model.addAttribute("dto", dto);
-		return "market/updateBoard";
+		return "market/updatemarket";
 	}
 
 	@RequestMapping("/updateProc.do")//게시글 업데이트
 	public String updateProc(MarketDTO dto, String path) {
 		System.out.println("업데이트프록 컨트롤러");
+		System.out.println(dto.getSeq());
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		String writer = loginInfo.getId();
 		path = session.getServletContext().getRealPath("files");
-		service.updateProc(dto, path);
-		return "home";//////////수정
+		System.out.println(dto.getContent());
+		String content = dto.getContent();
+		content.replace("<", "&lt");
+		content.replace(">", "&gt");
+		content.replace("&", "&amp");
+		service.updateProc(dto, content, writer, path);
+		return "redirect:/market/boardList.do";
 	}
 
 	@RequestMapping("/writeboard.do") //게시판에서 글쓰기버튼 클릭
 	public String writeBoard() {
 		System.out.println("writeboard.do 도착");
-		return "market/writeboard";
+		return "market/writemarket";
 	}
 
-	@RequestMapping("/updateDone")//판매완료누르기
+	@RequestMapping("/updateSellDone")//판매완료누르기
 	@ResponseBody
 	public String updateDone() {
 		int seq = Integer.parseInt(request.getParameter("seq"));
 		System.out.println("판매완료 보드 : " + seq);
-		MarketDTO dto = service.updateDone(seq);
+		MarketDTO dto = service.updateSellDone(seq);
 		Gson g = new Gson();
 		String json = g.toJson(dto);
 		System.out.println(json);
@@ -150,19 +156,22 @@ public class MarketController {
 //	}
 
 	@RequestMapping("/write.do") //writeboard에서 글쓰기 버튼 클릭
-	public String write(MarketDTO dto, Model model) {
+	public String write(Model model, MarketDTO dto) {
 		try {
-			String writer = (String)session.getAttribute("id");//ok
-			MemberDTO myInfo = (MemberDTO) session.getAttribute("myInfo");
-			String place = myInfo.getAddress1();
+			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+			String writer = loginInfo.getId();
+			String gender = loginInfo.getGender();
+			String realPlace = loginInfo.getAddress1();
+			String[] placeSplit = realPlace.split(" ");
+			String place = placeSplit[0]+ " " + placeSplit[1] + " " + placeSplit[2];
+			System.out.println(place);
 			String path = session.getServletContext().getRealPath("files");
-			String content = dto.getContent();
+			String content = dto.getContent();			
 			content.replace("<", "&lt");
 			content.replace(">", "&gt");
 			content.replace("&", "&amp");
-			service.write(dto, path);
+			service.write(dto, content, writer, place, gender, path);
 			List<MarketDTO> list = service.board();
-			ModelAndView mav = new ModelAndView();
 			model.addAttribute("list", list);
 			return "redirect:/market/boardList.do";
 		
@@ -236,14 +245,16 @@ public String search(Model model) {
 			}
 			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
 			int end = cpage * Configuration.recordCountPerPage;
+			System.out.println(start + " :: " + end + " ::" + title);
 			List<MarketDTO> navilist = dao.selectByPageUseTitle(title, start, end);
+			System.out.println("검색된 갯수 : " + navilist.size());
 			model.addAttribute("navilist", navilist);
-			
 			List<MarketFileDTO> fileList = new ArrayList<>();
+			
 			for(int i = 0; i < navilist.size(); i++) {
-				System.out.println(navilist.get(i).getSeq());
-				System.out.println(start + " : " + end);
+//				System.out.println(navilist.get(i).getSeq());
 				int board_seq = navilist.get(i).getSeq();
+				System.out.println("검색된시퀀스 : " + board_seq);
 				fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
 			}
 			model.addAttribute("fileList", fileList);
@@ -275,6 +286,7 @@ public String search(Model model) {
 				int board_seq = navilist.get(i).getSeq();
 				fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
 			}
+			
 			model.addAttribute("fileList", fileList);
 			
 			return "market/marketList";

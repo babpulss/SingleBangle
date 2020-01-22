@@ -17,7 +17,6 @@ public class MarketReplyDAO {
 	private SqlSessionTemplate jdbc;
 
 	public int insert(String recontent, String writer, int boardSeq) throws Exception{
-		System.out.println(recontent + " : " + writer + " : " + boardSeq);
 		Map<String, Object> param = new HashMap<>();
 		param.put("recontent", recontent);
 		param.put("writer", writer);
@@ -93,15 +92,15 @@ public class MarketReplyDAO {
 		StringBuilder sb = new StringBuilder(); 
 
 		if(needPrev) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(startNavi - 1)+"'> < </a>");
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+(startNavi - 1)+"'> < </a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+i+"'>"); 
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+i+"'>"); 
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(endNavi + 1) +"' > > </a>");
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+(endNavi + 1) +"' > > </a>");
 		}
 		return sb.toString();
 	}

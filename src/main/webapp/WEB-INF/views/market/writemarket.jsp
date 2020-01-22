@@ -35,11 +35,11 @@
 	<option>뷰티</option>
 	<option>스포츠/레저</option>
 	<option>게임/취미</option>
-	<option>기타</option>
+	<option>기타</option>	
 </select><br>
 <textarea style="display:none;" name="content" id="content"></textarea>
 <div id="summernote"></div>
-	 <button type="button" id="confirm")>제출</button>
+	 <button type="button" id="confirm">제출</button>
 	 </div>
 </form>
     <script>
@@ -60,11 +60,11 @@
       
       $("#confirm").on("click",function(){
     	  $("#content").val($(".note-editable").html());
-    	  var regex = /<img src/;
+    	  var regex = /<img.*/;
           var data = $("#content").val();
           var result = regex.exec(data);
     	  if($("#content").val() == "" || result == null){
-    	  	alert("내용을 모두 입력해주세요.<br>(이미지는 반드시 한장 이상 첨부해야합니다.)");
+    	  	alert("내용을 모두 입력해주세요.(이미지는 반드시 한장 이상 첨부해야합니다.)");
     	  	return;
     	  }else {
     		 $("#frm").submit();

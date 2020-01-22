@@ -16,11 +16,17 @@ public class MarketFileDAO {
 	@Autowired
 	private SqlSessionTemplate jdbc;
 	
-	public int insert(MarketFileDTO dto) throws Exception {
-		return jdbc.insert("MarketFile.insert", dto);
+	public int insert(MarketFileDTO dto, int board_seq) throws Exception {
+		System.out.println("ori : " + dto.getOri_name() + "sys :" + dto.getSys_name());
+		Map<String, Object> param = new HashMap<>();
+		param.put("board_seq", board_seq);
+		param.put("ori_name", dto.getOri_name());
+		param.put("sys_name", dto.getSys_name());
+		return jdbc.insert("MarketFile.insert", param);
 	}
 	
 	public int update(MarketFileDTO dto) {
+		System.out.println(dto.getBoard_seq() + " : " + dto.getSeq() + " : " + dto.getOri_name() + " : " + dto.getSys_name());
 		return jdbc.update("MarketFile.update", dto);
 	}
 	
@@ -68,7 +74,7 @@ public class MarketFileDAO {
 		return jdbc.selectOne("MarketFile.selectByPageUseTitle", param);
 	}
 	
-	public String searchReview(int board_seq) {
+	public MarketFileDTO searchReview(int board_seq) {
 		System.out.println(board_seq);
 		return jdbc.selectOne("MarketFile.searchReview", board_seq);
 

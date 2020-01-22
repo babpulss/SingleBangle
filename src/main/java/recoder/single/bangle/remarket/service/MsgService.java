@@ -25,9 +25,9 @@ public class MsgService {
 	private HttpServletRequest request;
 
 	@Transactional("tx")
-	public void writeMsg(String sender, String receiver, String title, String contents) {
+	public void writeMsg(MsgDTO dto, String sender) {
 		try {
-			dao.writeMsg(sender, receiver, title, contents);
+			dao.writeMsg(dto, sender);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -45,11 +45,21 @@ public class MsgService {
 		}
 	}
 	
+	public int notRead(String receiver){
+		try {
+			int notRead = dao.notRead(receiver);
+			return notRead;
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	@Transactional("tx")
 	public MsgDTO msgDetail(int seq) {
 		try {
-			dao.viewCount(seq);
 			MsgDTO dto = dao.msgDetail(seq);
+			dao.updateRead(seq);
 			return dto;
 		}catch(Exception e) {
 			e.printStackTrace();

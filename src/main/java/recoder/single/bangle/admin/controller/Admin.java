@@ -3,6 +3,7 @@ package recoder.single.bangle.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class Admin {
 	@Autowired
 	private ReportingService reportingService;
 	
+	@Autowired
+	private HttpSession session;
+
 	@RequestMapping("")
 	public String adminIndex() {
 		return "admin/adminIndex";
@@ -44,18 +48,18 @@ public class Admin {
 	public String unblock(String id, HttpServletResponse res) {
 		return String.valueOf(blackListService.unblock(id));
 	}
-	
+
 	// 아이디로 블랙리스트 조회
 	@RequestMapping(value="/searchByBlockedId", produces="text/html; charset=UTF-8")
 	@ResponseBody
 	public String searchByBlockedId(String id) {
-		List<BlackMemberDTO> list = blackListService.searchByBlockedId(id);
+		BlackMemberDTO dto = blackListService.searchByBlockedId(id);
 		try { 
-			return new Gson().toJson(list);
+			return new Gson().toJson(dto);
 		} catch(Exception e) { e.printStackTrace(); }
 		return null;
 	}
-	
+
 	// 신고접수리스트 보기
 	@RequestMapping("/viewReporting")
 	public String viewReporting(Model m) {
@@ -63,18 +67,39 @@ public class Admin {
 		m.addAttribute("list", list);
 		return "admin/hasReported";
 	}
-	
+
 	// 신고접수 완료
 	@RequestMapping("/confirmReporting")
 	@ResponseBody
 	public String confirmReporting(int seq) {
 		return String.valueOf(reportingService.confirmReporting(seq)); 
 	}
-	
+
 	// 아이디 검색으로 블랙리스트 추가
 	@RequestMapping("/searchId")
-	public String searchId(String id) {
-		// 아이디 조회할 서비스를 호출
+	public String searchId(String id, Model m) {
+		try {
+			int checkId = blackListService.checkId(id);
+			if (checkId != 0) {
+				m.addAttribute("checkId", checkId);
+			} else {
+				m.addAttribute("dto", blackListService.searchId(id));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "admin/searchId";
 	}
+	
+	@RequestMapping("/block")
+	public String block(BlackMemberDTO dto, Model m) {
+		Boolean result = blackListService.block(dto);
+		if (result) {
+			m.addAttribute("result", "추가완료");
+		} else {
+			m.addAttribute("result", "추가에 실패했습니다");
+		}
+		return "/admin/blockResult";
+	}
+	
 }

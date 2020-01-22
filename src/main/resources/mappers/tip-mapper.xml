@@ -24,7 +24,7 @@
 	</select>
 	
 	<!-- update는 resultType 명시 안해도 됨? 결과 값으로 '1'행이 업뎃되었다고 나올텐데... -->
-	<update id="updateTip" parameterType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+	<update id="updateTip">
 		update livingPoint set category=#{category}, title=#{title}, contents=#{contents} where seq=#{seq}
 	</update>
 	
@@ -107,6 +107,32 @@
 	<select id="searchBoth" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
 		select * from livingPoint where title like '%'||#{value}||'%' or contents like '%'||#{value}||'%'
 	</select>
+	
+<!-- 신고하기 -->
+	<insert id="report">
+		insert into hasReported values(hasReported_seq.nextval, #{id}, sysdate, #{reason}, #{reportedUrl}, default, sysdate)
+	</insert>
+
+<!-- 댓글 -->
+	<insert id="addComment">
+		insert into livingComment values (comment_seq.nextval, #{rootSeq}, #{writer}, #{contents}, sysdate)
+	</insert>
+	
+	<select id="cmtList" resultType="recoder.single.bangle.tipBoard.DTO.CommentDTO">
+		select * from livingComment where rootSeq = #{rootSeq}
+	</select>
+
+	<delete id="cmtDelete">
+		delete from livingComment where seq = #{value}
+	</delete>
+
+	<select id="getRootSeq" resultType="Integer">
+		select rootSeq from livingComment where seq = #{value}
+	</select>
+	
+	<update id="cmtUpdate">
+		update livingComment set contents = #{contents} where seq = #{seq}
+	</update>
 </mapper>
 
 

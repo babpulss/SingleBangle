@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="Msg">
+	<select id="selectAllMsg" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
+		select * from msgBox where receiver=#{receiver}
+	</select>
+	
+	<select id="msgDetail" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
+		select * from msgBox where seq = #{seq}
+	</select>
+	
+	<insert id="writeMsg" parameterType="java.util.Map">
+		insert into msgBox values(msgbox_seq.nextval, #{sender}, #{receiver}, #{title}, #{contents}, 0)
+	</insert>
+	
+	<update id="updateRead">
+		update msgbox set read='Y' where seq=#{seq}
+	</update>
+	
+	<select id="notRead" resultType="Integer">
+		select count(*) from msgbox where receiver=#{receiver} and read = 'N'
+	</select>
+</mapper>

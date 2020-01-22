@@ -58,7 +58,7 @@ public class MailController {
 		try {
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-			messageHelper.setFrom("msg_account_jy");
+			messageHelper.setFrom("recodersg@gmail.com");
 			messageHelper.setTo(email);
 			messageHelper.setSubject("[싱글방글] 회원가입을 위한 이메일 인증번호");
 			messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
@@ -78,8 +78,8 @@ public class MailController {
 
 	// 임시 비밀번호 발급
 	@RequestMapping("/findPwResult.email")
-	public String findPwResult(String id, String pwHint, String pwAnswer, String email, Model model) {
-		int findPwResult = memSvc.findPwResult(id, pwHint, pwAnswer, email);
+	public String findPwResult(String id, String email, Model model) {
+		int findPwResult = memSvc.findPwResult(id, email);
 		if(findPwResult > 0) {
 			System.out.println("이메일 전송 시작!");
 
@@ -113,7 +113,7 @@ public class MailController {
 			try {
 				MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
-				messageHelper.setFrom("msg_account_jy");
+				messageHelper.setFrom("recodersg@gmail.com");
 				messageHelper.setTo(email);
 				messageHelper.setSubject("[싱글방글] 로그인을 위한 임시 비밀번호");
 				messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
