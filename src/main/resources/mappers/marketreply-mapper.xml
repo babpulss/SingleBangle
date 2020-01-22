@@ -25,7 +25,7 @@
 	</update>
 	
 	<select id="selectByPage" resultType="recoder.single.bangle.remarket.DTO.MarketReplyDTO">
-		select * from(select marketreply.*, row_number() over (order by seq desc)rown from marketreply)"
+		select * from(select marketreply.*, row_number() over (order by seq)rown from marketreply where boardSeq=#{boardSeq})"
 						+ "where rown between #{start} and #{end}
 	</select>
 	

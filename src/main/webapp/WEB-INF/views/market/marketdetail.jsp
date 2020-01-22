@@ -159,7 +159,7 @@
 		<div class="replybox" style="margin: auto;">
 			<c:choose>
 				<c:when test="${list.size() == 0 }">
-					<br><div>댓글이 없습니다.</div><br>
+					<br><div style="text-align: center;">댓글이 없습니다.</div><br>
 				</c:when>
 				<c:otherwise>
 						<c:forEach items="${renavilist }" var="list">
@@ -312,7 +312,8 @@
 		})
 		
 		$("#report").on("click",function(){
-			location.href="${pageContext.request.contextPath}/market/report.do?url=${realUrl}";
+			var url = "${pageContext.request.contextPath}/market/report.do?url=${realUrl}&seq=${dto.seq}";
+			window.open(url, "신고하기", "width=500px, height=400px, location=no, status=no, scrollbars=no");
 		})
 		
 		$("#reconfirm").on("click", function(){

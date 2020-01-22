@@ -32,6 +32,7 @@ import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
 import recoder.single.bangle.remarket.service.MarketReplyService;
 import recoder.single.bangle.remarket.service.MarketService;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 
 @Controller
 @RequestMapping("/market")
@@ -74,8 +75,10 @@ public class MarketController {
 			int end = cpage * Configuration.recordCountPerPage;
 			List<MarketDTO> navilist = dao.selectByPage(start, end);
 			System.out.println(start + " : " + end);
+			System.out.println("navilist.size() : " + navilist.size());
 			model.addAttribute("navilist", navilist);
 			model.addAttribute("navi", navi);
+			
 			List<MarketFileDTO> fileList = file_dao.selectByPage(start, end);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("fileList", fileList);
@@ -143,17 +146,29 @@ public class MarketController {
 		System.out.println(json);
 		return "json";
 	}
+	
+	@RequestMapping("/report.do")//신고하기 누르기
+	public String report(Model model) {
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		String id = loginInfo.getId();
+		int seq = Integer.parseInt(request.getParameter("seq"));
+		String reportedUrl = request.getParameter("url");
+		System.out.println(reportedUrl);
+		model.addAttribute("id", id);
+		model.addAttribute("seq", seq);
+		model.addAttribute("reportedUrl", reportedUrl);
+		return "market/reportPage";
+	}
 
-//	@RequestMapping("/reportProc.do")
-//	public String reportProc(Model model) {
-//		String url = request.getParameter("url");
-//		String reason = request.getParameter("report");
-//		//		int seq = Integer.parseInt(request.getParameter("seq"));
-//		String id = (String) session.getAttribute("id");
-//		System.out.println("신고자 : " + id + " 링크 : " + url + " 신고사유 : " + reason);
-//		service.report(id, url, reason);
-//		return "home";
-//	}
+	@RequestMapping("/reportProc.do")//신고사유 받아오기
+	public String reportProc(Model model, ReportDTO dto) {
+		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+		String id = loginInfo.getId();
+		String reason = request.getParameter("reason");
+		String reportedUrl = request.getParameter("reportedUrl");
+		service.reportProc(id, dto);
+		return "redirect:/";
+	}
 
 	@RequestMapping("/write.do") //writeboard에서 글쓰기 버튼 클릭
 	public String write(Model model, MarketDTO dto) {
@@ -209,8 +224,7 @@ public String writedetail(Model model, @RequestParam(value="cpage", required=fal
 
 		int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
 		int end = cpage * Configuration.recordCountPerPage;
-		
-		List<MarketReplyDTO> renavilist = rdao.selectByPage(start, end);
+		List<MarketReplyDTO> renavilist = rdao.selectByPage(start, end, boardSeq);
 		System.out.println(start + " : " + end);
 		System.out.println("renavilist" + renavilist.size());
 		model.addAttribute("renavilist", renavilist);

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import configuration.Configuration;
 import recoder.single.bangle.remarket.DTO.MarketDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 
 @Repository
 public class MarketDAO {
@@ -58,6 +59,15 @@ public class MarketDAO {
 
 	public MarketDTO writeDetail(int seq) throws Exception{ //게시글상세
 		return jdbc.selectOne("Market.writeDetail", seq);
+	}
+	
+	public void reportProc(String id, ReportDTO dto) throws Exception{
+		Map<String, Object> param = new HashMap<>();
+		param.put("id", id);
+		param.put("reason", dto.getReason());
+		param.put("reportedUrl", dto.getReportedUrl());
+		System.out.println(id + " : " + dto.getReason() + " : " + dto.getReportedUrl());
+		jdbc.insert("Market.reportProc", dto);
 	}
 
 	public List<MarketDTO> search(String title, String category) throws Exception{
@@ -142,7 +152,6 @@ public class MarketDAO {
 		public List<MarketDTO> selectByPageUseTitle(String title, int start, int end) throws Exception{
 			title = "%" + title + "%";
 			Map<String, Object> param = new HashMap<>();
-			
 			param.put("title", title);
 			param.put("start", start);
 			param.put("end", end);

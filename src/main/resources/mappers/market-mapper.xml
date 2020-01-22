@@ -76,4 +76,8 @@
 		select count(*) from market where category=#{category} and title=#{title}
 	</select>
 	
+	<insert id="reportProc" parameterType="java.util.Map">
+		insert into hasreported values (hasReported_seq.nextval, #{id}, sysdate, #{reason}, #{reportedUrl}, 'N', null)
+	</insert>
+	
 </mapper>
