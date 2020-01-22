@@ -20,6 +20,7 @@ import recoder.single.bangle.remarket.DAO.MarketDAO;
 import recoder.single.bangle.remarket.DAO.MarketFileDAO;
 import recoder.single.bangle.remarket.DTO.MarketDTO;
 import recoder.single.bangle.remarket.DTO.MarketFileDTO;
+import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 
 @Service
 public class MarketService {
@@ -204,9 +205,7 @@ public class MarketService {
 	@Transactional("tx")
 	public List<MarketDTO> searchNoCategory(String title) {
 		try {
-
 			List<MarketDTO> list = dao.searchNoCategory(title);
-
 			return list;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -228,14 +227,12 @@ public class MarketService {
 	}
 
 	@Transactional("tx")
-	public MarketDTO report(int seq) {
+	public void reportProc(String id, ReportDTO dto) {
 		try {
-			MarketDTO dto = dao.writeDetail(seq);
-			return dto;
+			dao.reportProc(id, dto);
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("신고하기 에러");
-			return null;
 		}
 	}
 }
