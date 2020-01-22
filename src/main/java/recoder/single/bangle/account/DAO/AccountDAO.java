@@ -18,7 +18,7 @@ public class AccountDAO {
 	
 	public List<AccountDTO> getMyAccountAll(String id){
 		List<AccountDTO> list = accountJdbc.selectList("account.selectAccountAll",id);
-		System.out.println(list.get(0));
+		
 		return list;
 	}
 	
@@ -28,12 +28,21 @@ public class AccountDAO {
 		param.put("formedDate", formedDate);
 		List<AccountDTO> list = accountJdbc.selectList("account.ListAllByFormedReportingDate", param);
 		
-		System.out.println(list.get(0));
+		
 		return list;
 	}
 	
 	public int insertData(AccountDTO dto) {
 		
 		return accountJdbc.insert("account.insertAccountData", dto);
+	}
+	
+	public int deleteAccountByMonth(String formedReportingDate) {
+		return accountJdbc.delete("account.deleteAccountByMonth", formedReportingDate);
+	}
+	
+	public int modifyAccountUpdate(AccountDTO dto) {
+		System.out.println(dto);
+		return accountJdbc.update("account.modifyAccount", dto);
 	}
 }
