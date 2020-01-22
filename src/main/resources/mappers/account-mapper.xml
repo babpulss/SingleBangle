@@ -13,5 +13,14 @@
   	<insert id="insertAccountData">
   		insert into account_book values (ACCOUNT_BOOK_SEQ.nextval,#{id},#{userName},#{reportingDate},#{details},#{payments},#{spec},#{income},#{expense},#{remarks})
   	</insert>
+  	<delete id="deleteAccountByMonth">
+  		delete from account_book where substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) = #{formedReportingDate}
+  	</delete>
+  	<delete id="deleteAccountBySeq">
+  		delete from account_book where seq = #{seq}
+  	</delete>
+  	<update id="modifyAccount">
+  		update account_book set reportingDate=#{reportingDate},details=#{details},payments=#{payments},spec=#{spec},income=#{income},expense=#{expense},remarks=#{remarks} where seq=#{seq} and id=#{id} and username=#{userName}
+  	</update>
   </mapper>
   
