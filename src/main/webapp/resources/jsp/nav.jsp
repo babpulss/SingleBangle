@@ -75,6 +75,12 @@
 					</span>
 				</a></li>
 				</c:if>
+				<c:if test="${loginInfo.adminChecks eq \"Y\"}">
+				<li class="has-subnav sidebar" id="account"><a href="${pageContext.request.contextPath }/admin"> <i
+						style="line-height: 50px" class="fa fa-user-cog fa-2x"></i> <span class="nav-text"> 관리자 페이지 
+					</span>
+				</a></li>
+				</c:if>
 			</ul>
 		</nav>
 
