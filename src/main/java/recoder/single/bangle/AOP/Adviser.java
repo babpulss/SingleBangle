@@ -62,7 +62,6 @@ public class Adviser {
 			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())")
 	public void beford(JoinPoint jp) {
 		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		System.out.println(loginInfo);
 		if(loginInfo != null) {
 			String receiver = loginInfo.getId();
 			int notRead = msgService.notRead(receiver);
