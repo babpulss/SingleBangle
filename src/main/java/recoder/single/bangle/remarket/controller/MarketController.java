@@ -179,12 +179,9 @@ public class MarketController {
 			String realPlace = loginInfo.getAddress1();
 			String[] placeSplit = realPlace.split(" ");
 			String place = placeSplit[0]+ " " + placeSplit[1] + " " + placeSplit[2];
-			System.out.println(place);
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();			
-			content.replace("<", "&lt");
-			content.replace(">", "&gt");
-			content.replace("&", "&amp");
+			content = content.replaceAll("<script", "&lt;script");
 			service.write(dto, content, writer, place, gender, path);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("list", list);

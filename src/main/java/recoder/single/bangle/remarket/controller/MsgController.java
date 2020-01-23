@@ -42,9 +42,13 @@ public class MsgController {
 		String receiver = dto.getReceiver();
 		String title = dto.getTitle();
 		String contents = dto.getContents();
+		System.out.println("1 : " + contents);
+		title = title.replaceAll("<script", "&lt;script");
+		contents = contents.replaceAll("<script", "&lt;script");
+		System.out.println(contents);
 		//내용 전부 들어옴ㅇㅇ
 		try {
-			service.writeMsg(dto, sender);
+			service.writeMsg(dto, title, contents, sender);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
