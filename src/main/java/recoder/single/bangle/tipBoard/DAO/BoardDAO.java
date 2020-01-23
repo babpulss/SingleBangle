@@ -1,5 +1,8 @@
 package recoder.single.bangle.tipBoard.DAO;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,13 +25,10 @@ public class BoardDAO {
 	
 	public int write(BoardDTO dto) throws Exception{
 		System.out.println(dto);
+	
 		return sst.update("Tip.insert", dto);
 	}
-	
-	public List<BoardDTO> boardList() throws Exception{
-		return sst.selectList("Tip.selectAll");
-	}
-	
+
 	public BoardDTO getDto(int seq) throws Exception{
 		System.out.println("seq: "+seq);
 		return sst.selectOne("Tip.selectOne", seq);
@@ -95,6 +95,10 @@ public class BoardDAO {
 			return sst.insert("Tip.scrap",dtoS);
 		}
 		
+		public int deleteScrap(int seq) {
+			return sst.delete("Tip.deleteScrap", seq);
+		}
+		
 		public int scrapCheck(int seq, String id) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("seq", seq);
@@ -125,8 +129,33 @@ public class BoardDAO {
 			return sst.selectList("Tip.selectByPage", param);
 		}
 		
-		public List<BoardDTO> searchTitle(String title){
-			return sst.selectList("Tip.searchTitle", title);
+		public List<BoardDTO> selectByPageTitle(int startNum, int endNum, String input){
+			Map<String, Object> param = new HashMap<>();
+			param.put("startNum", startNum);
+			param.put("endNum", endNum);
+			param.put("input", input);
+			
+			return sst.selectList("Tip.selectByPageTitle", param);
+		}
+		
+		public List<BoardDTO> selectByPageContents(int startNum, int endNum, String input){
+			Map<String, Object> param = new HashMap<>();
+			param.put("startNum", startNum);
+			param.put("endNum", endNum);
+			param.put("input", input);
+			return sst.selectList("Tip.selectByPageContents", param);
+		}
+		
+		public List<BoardDTO> selectByPageBoth(int startNum, int endNum, String input){
+			Map<String, Object> param = new HashMap<>();
+			param.put("startNum", startNum);
+			param.put("endNum", endNum);
+			param.put("input", input);
+			return sst.selectList("Tip.selectByPageBoth", param);
+		}
+		
+		public int searchTitleCount(String title){
+			return sst.selectOne("Tip.searchTitleCount", title);
 		}
 		
 		public List<BoardDTO> searchContents(String contents){
@@ -153,6 +182,10 @@ public class BoardDAO {
 			return sst.delete("Tip.cmtDelete", seq);
 		}
 		
+		public int commentDelete(int seq) {
+			return sst.delete("Tip.commentDelete", seq);
+		}
+		
 		public int getRootSeq(int seq) {
 			return sst.selectOne("Tip.getRootSeq", seq);
 		}
@@ -163,4 +196,5 @@ public class BoardDAO {
 			param.put("contents", contents);
 			return sst.update("Tip.cmtUpdate",param );
 		}
+		
 }

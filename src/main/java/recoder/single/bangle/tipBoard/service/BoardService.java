@@ -121,15 +121,16 @@ public class BoardService {
 		return writeResult;
 	}
 
-	public List<BoardDTO> boardList(){
-		List<BoardDTO> list = null;
-		try {
-			list = boardDao.boardList();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+//	public List<BoardDTO> boardList(){
+//		List<BoardDTO> list = null;
+//		try {
+//			list = boardDao.boardList();
+//			System.out.println("보드list: "+list);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 
 	public BoardDTO getDto(int seq) {
 		BoardDTO dto = null;
@@ -303,6 +304,11 @@ public class BoardService {
 		return scrap;
 	}
 	
+	public int deleteScrap(int seq) {
+		int delScrapResult = boardDao.deleteScrap(seq);
+		return delScrapResult;
+	}
+	
 	public int scrapCheck(int seq, String id) {
 		int scrapCheck = 0;
 		try {
@@ -335,15 +341,14 @@ public class BoardService {
 		
 	public String getNavi(int currentPage) {
 										// currentPage = 현재 페이지 번호
-		int recordTotalCount = 0;	 	// 전체 게시물 개수
+		int recordTotalCount = 0;	 // recordTotalCount : 전체 게시물 개수
 		try {
-			recordTotalCount = boardDao.tipCount();
+			recordTotalCount = boardDao.tipCount();	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		int recordCountPerPage = 10; // 한 페이지에 보여줄 글의 갯수
-		int naviCountPerPage = 10; //한 페이지에서 몇개의 네비게이터를 보여줄 것인 지 설정 / 현재 내가 4에 있으면 네비게이터에서는 1부터 10까지 볼 수 있음
+		// Configuration.recordCountPerPage: 한 페이지에서 몇개의 네비게이터를 보여줄 것인 지 설정 / 현재 내가 4에 있으면 네비게이터에서는 1부터 10까지 볼 수 있음
 		int pageTotalCount = 0;//총 몇개의 페이지인지
 
 		if(recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
@@ -358,8 +363,8 @@ public class BoardService {
 			currentPage = pageTotalCount;
 		}
 
-		int startNavi = ((currentPage-1) / naviCountPerPage) * naviCountPerPage + 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
-		int endNavi = startNavi + naviCountPerPage - 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
+		int startNavi = ((currentPage-1) / Configuration.recordCountPerPage) * Configuration.recordCountPerPage + 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int endNavi = startNavi + Configuration.recordCountPerPage - 1; //현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
 
 		if(endNavi > pageTotalCount) { //페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
 			endNavi = pageTotalCount;
@@ -377,32 +382,231 @@ public class BoardService {
 		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
 
 		if(needPrev) {
-			sb.append("<a href='boardList.bo?currentPage="+(startNavi - 1)+"'> < </a>");
+			sb.append("<a class='pageNavi' href='boardList.bo?currentPage="+(startNavi - 1)+"'> < </a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='boardList.bo?currentPage="+i+"'>"); //cpage = currentpage
+			sb.append("<a class='pageNavi' href='boardList.bo?currentPage="+i+"'>"); //cpage = currentpage
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext) {
-			sb.append("<a href='boardList.bo?currentPage="+(endNavi + 1) +"' > > </a>");
+			sb.append("<a class='pageNavi' href='boardList.bo?currentPage="+(endNavi + 1) +"' > > </a>");
+		}
+		return sb.toString();
+	}
+
+	public String getSearchNaviTitle(int currentPage, String searchInput, String tipCategory) { 
+		// currentPage = 현재 페이지 번호
+		int recordTotalCount = 0; // recordTotalCount : 전체 게시물 개수
+		try {
+			recordTotalCount = boardDao.searchTitleCount(searchInput);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Configuration.recordCountPerPage: 한 페이지에서 몇개의 네비게이터를 보여줄 것인 지 설정 / 현재 내가 4에 있으면 네비게이터에서는 1부터 10까지 볼 수 있음
+		int pageTotalCount = 0;// 총 몇개의 페이지인지
+
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때
+																		// 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+
+		if (currentPage <= 1) { // 페이지값을 1 이하 숫자로 하는 경우
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) { // 마지막 페이지값보다 높은 페이지값을 요청하는 경우
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = ((currentPage - 1) / Configuration.recordCountPerPage) * Configuration.recordCountPerPage + 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int endNavi = startNavi + Configuration.recordCountPerPage - 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
+
+		if (endNavi > pageTotalCount) { // 페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; // < 표시가 필요한지
+		boolean needNext = true; // > 표시가 필요한지
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
+
+		if (needPrev) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (startNavi - 1) + "'> < </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + i + "'>"); // cpage = currentpage
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if (needNext) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (endNavi + 1) + "' > > </a>");
 		}
 		return sb.toString();
 	}
 	
-		public List<BoardDTO> selectByPage(int currentPage){
-			
-			int recordCountPerPage = 10; // 한 페이지 게시물 수
+	public String getSearchNaviContents(int currentPage, String searchInput, String tipCategory) { 
+		// currentPage = 현재 페이지 번호
+		int recordTotalCount = 0; // recordTotalCount : 전체 게시물 개수
+		try {
+			List<BoardDTO> tmp = boardDao.searchContents(searchInput);
+			recordTotalCount = tmp.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//Configuration.naviCountPerPage:  한 페이지에서 몇개의 네비게이터를 보여줄 것인 지 설정 / 현재 내가 4에 있으면 네비게이터에서는 1부터 10까지 볼 수 있음
+		int pageTotalCount = 0;// 총 몇개의 페이지인지
 
-			int endNum = recordCountPerPage * currentPage; 
-			int startNum = endNum - (recordCountPerPage - 1);
-			System.out.println("service에서 start랑 end: "+startNum+":"+endNum);
-			List<BoardDTO> selectByPage = boardDao.selectByPage(startNum, endNum);
-			return selectByPage;
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때
+																		// 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
 		}
 
-	public List<BoardDTO> searchTitle(String title) {
-		List<BoardDTO> searchTitle = boardDao.searchTitle(title);
+		if (currentPage <= 1) { // 페이지값을 1 이하 숫자로 하는 경우
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) { // 마지막 페이지값보다 높은 페이지값을 요청하는 경우
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = ((currentPage - 1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int endNavi = startNavi + Configuration.naviCountPerPage - 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
+
+		if (endNavi > pageTotalCount) { // 페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; // < 표시가 필요한지
+		boolean needNext = true; // > 표시가 필요한지
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
+
+		if (needPrev) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (startNavi - 1) + "'> < </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + i + "'>"); // cpage = currentpage
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if (needNext) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (endNavi + 1) + "' > > </a>");
+		}
+		return sb.toString();
+	}
+	
+	public String getSearchNaviBoth(int currentPage, String searchInput, String tipCategory) { 
+		// currentPage = 현재 페이지 번호
+		int recordTotalCount = 0; // recordTotalCount : 전체 게시물 개수
+		try {
+			List<BoardDTO> tmp = boardDao.searchBoth(searchInput);
+			recordTotalCount = tmp.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		int pageTotalCount = 0;// 총 몇개의 페이지인지
+
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때
+																		// 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+
+		if (currentPage <= 1) { // 페이지값을 1 이하 숫자로 하는 경우
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) { // 마지막 페이지값보다 높은 페이지값을 요청하는 경우
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = ((currentPage - 1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int endNavi = startNavi + Configuration.naviCountPerPage - 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
+
+		if (endNavi > pageTotalCount) { // 페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; // < 표시가 필요한지
+		boolean needNext = true; // > 표시가 필요한지
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
+
+		if (needPrev) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (startNavi - 1) + "'> < </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + i + "'>"); // cpage = currentpage
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if (needNext) {
+			sb.append("<a class='pageNavi' href='tipSearch.bo?tipCategory="+tipCategory+"&searchInput="+searchInput+"&currentPage=" + (endNavi + 1) + "' > > </a>");
+		}
+		return sb.toString();
+	}
+	
+	public List<BoardDTO> selectByPage(int currentPage) {
+
+		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
+		int endNum = Configuration.recordCountPerPage * currentPage;
+		
+		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
+		List<BoardDTO> selectByPage = boardDao.selectByPage(startNum, endNum);
+		return selectByPage;
+		}
+
+	public List<BoardDTO> selectByPageTitle(int currentPage, String input){
+		
+		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
+		int endNum = Configuration.recordCountPerPage * currentPage;
+
+		//	int startNum = endNum - (recordCountPerPage - 1); 필동오빠가 왜 이렇게 했는지 모르지만 일단 해보겠음...
+		
+		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
+		return boardDao.selectByPageTitle(startNum, endNum, input);
+	}	
+	
+	public List<BoardDTO> selectByPageContents(int currentPage, String input){
+
+		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
+		int endNum = Configuration.recordCountPerPage * currentPage;
+		
+		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
+		return boardDao.selectByPageContents(startNum, endNum, input);
+	}
+
+	public List<BoardDTO> selectByPageBoth(int currentPage, String input){
+
+		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
+		int endNum = Configuration.recordCountPerPage * currentPage;
+		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
+		return boardDao.selectByPageContents(startNum, endNum, input);
+	}
+	
+	public int searchTitleCount(String title) {
+		int searchTitle = boardDao.searchTitleCount(title);
 		return searchTitle;
 	}
 
@@ -448,6 +652,10 @@ public class BoardService {
 		return deleteResult;
 	}
 	
+	public int commentDelete(int seq) {
+		return boardDao.commentDelete(seq);
+	}
+	
 	public int getRootSeq(int seq) {
 		return boardDao.getRootSeq(seq);
 	}
@@ -455,6 +663,7 @@ public class BoardService {
 	public int cmtUpdate(int seq, String contents) {
 		return boardDao.cmtUpdate(seq, contents);
 	}
+
 }
 
 
