@@ -290,7 +290,7 @@
                         <div class="col-12 contentsArea">
                             <label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>
                             <div class="contentsTmp" contenteditable="true"></div>
-                            <textarea class="contents" name="contents" placeholder=" 내용" hidden></textarea>
+                            <textarea class="contents" name="contents" placeholder=" 내용" value="" hidden></textarea>
                         </div>
                     </div>
                 </div>
@@ -540,6 +540,9 @@
                 
                 for(var i = 0; i < boxLength; i++){
                     $($(".contents")[i]).val($($(".contentsTmp")[i]).html());
+                    if($($(".contentsTmp")[i]).html() == ""){
+                    	$($(".contents")[i]).val(" ");
+                    }
                 }
                 
                 return confirm("글을 작성하시겠습니까?");
