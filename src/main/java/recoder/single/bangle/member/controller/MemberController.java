@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.member.service.MemberService;
+import recoder.single.bangle.remarket.DTO.MsgDTO;
+import recoder.single.bangle.remarket.service.MsgService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 
@@ -29,6 +31,8 @@ public class MemberController {
 	@Autowired
 	private BoardDAO boardDao;
 	
+	@Autowired
+	private MsgService msgService;
 	
 	
 	@RequestMapping("/signUp.mem")

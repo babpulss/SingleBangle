@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import recoder.single.bangle.admin.DAO.BlackListDAO;
 import recoder.single.bangle.admin.DTO.BlackMemberDTO;
+import recoder.single.bangle.member.DAO.MemberDAO;
 import recoder.single.bangle.member.DTO.MemberDTO;
 
 @Service
@@ -14,6 +15,9 @@ public class BlackListService {
 	
 	@Autowired
 	private BlackListDAO blackListDAO;
+	
+	@Autowired
+	private MemberDAO memberDAO;
 
 	public List<BlackMemberDTO> getBlackList() {
 		return blackListDAO.getBlackList();
@@ -25,8 +29,8 @@ public class BlackListService {
 		else return false;
 	}
 	
-	public boolean block(String id, String reason) {
-		int result = blackListDAO.block(id, reason);
+	public boolean block(BlackMemberDTO dto) {
+		int result = blackListDAO.block(dto);
 		if (result > 0) return true;
 		else return false;
 	}
@@ -34,15 +38,13 @@ public class BlackListService {
 	public BlackMemberDTO searchByBlockedId(String id) {
 		return blackListDAO.searchByBlockedId(id);
 	}
-
-	public String searchId(String id) throws Exception {
-		MemberDTO dto = blackListDAO.searchID(id);
-		return dto.getId();
+	
+	public MemberDTO searchId(String id) throws Exception {
+		return  memberDAO.selectById(id);
 	}
 
-	public String checkId(String id) throws Exception {
-		BlackMemberDTO dto = blackListDAO.checkId(id);
-		return dto.getId();
+	public int checkId(String id) {
+		return blackListDAO.checkId(id);
+		
 	}
-
 }

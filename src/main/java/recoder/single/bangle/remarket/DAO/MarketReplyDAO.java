@@ -44,14 +44,15 @@ public class MarketReplyDAO {
 	}
 
 	//댓글페이징//
-	public List<MarketReplyDTO> selectByPage(int start, int end) throws Exception{
+	public List<MarketReplyDTO> selectByPage(int start, int end, int boardSeq) throws Exception{
 		Map<String, Object> param = new HashMap<>();
 		param.put("start", start);
 		param.put("end", end);
+		param.put("boardSeq", boardSeq);
 		return jdbc.selectList("MarketReply.selectByPage", param);
 	}
 
-	public int getArticleCount(int boardSeq) throws Exception{ //게시판 내의 총 글 수
+	public int getArticleCount(int boardSeq) throws Exception{
 		return jdbc.selectOne("MarketReply.getArticleCount", boardSeq);
 	}
 
@@ -92,15 +93,15 @@ public class MarketReplyDAO {
 		StringBuilder sb = new StringBuilder(); 
 
 		if(needPrev) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(startNavi - 1)+"'> < </a>");
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+(startNavi - 1)+"'> < </a>");
 		}
 		for(int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+i+"'>"); 
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+i+"'>"); 
 			sb.append(i + " ");
 			sb.append("</a>");
 		}
 		if(needNext) {
-			sb.append("<a href='writedetail.do?seq="+boardSeq+"&cpage="+(endNavi + 1) +"' > > </a>");
+			sb.append("<a href='marketDetail.do?seq="+boardSeq+"&cpage="+(endNavi + 1) +"' > > </a>");
 		}
 		return sb.toString();
 	}

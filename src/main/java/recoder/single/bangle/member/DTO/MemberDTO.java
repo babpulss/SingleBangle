@@ -3,8 +3,6 @@ package recoder.single.bangle.member.DTO;
 public class MemberDTO {
 	private String id;
 	private String pw;
-	private String pwHint;
-	private String pwAnswer;
 	private String name;
 	private String gender;
 	private String phone;
@@ -14,19 +12,17 @@ public class MemberDTO {
 	private String address2;
 	private String adminCheck;
 	private String blackCheck;
-	
-	
-	
+
+
+
 	public MemberDTO() {
 		super();
 	}
-	public MemberDTO(String id, String pw, String pwHint, String pwAnswer, String name, String gender, String phone,
-			String email, String postcode, String address1, String address2, String adminCheck, String blackCheck) {
+	public MemberDTO(String id, String pw, String name, String gender, String phone, String email, String postcode,
+			String address1, String address2, String adminCheck, String blackCheck) {
 		super();
 		this.id = id;
 		this.pw = pw;
-		this.pwHint = pwHint;
-		this.pwAnswer = pwAnswer;
 		this.name = name;
 		this.gender = gender;
 		this.phone = phone;
@@ -37,8 +33,6 @@ public class MemberDTO {
 		this.adminCheck = adminCheck;
 		this.blackCheck = blackCheck;
 	}
-	
-	
 	
 	public String getId() {
 		return id;
@@ -51,18 +45,6 @@ public class MemberDTO {
 	}
 	public void setPw(String pw) {
 		this.pw = pw;
-	}
-	public String getPwHint() {
-		return pwHint;
-	}
-	public void setPwHint(String pwHint) {
-		this.pwHint = pwHint;
-	}
-	public String getPwAnswer() {
-		return pwAnswer;
-	}
-	public void setPwAnswer(String pwAnswer) {
-		this.pwAnswer = pwAnswer;
 	}
 	public String getName() {
 		return name;
@@ -130,10 +112,9 @@ public class MemberDTO {
 	
 	@Override
 	public String toString() {
-		return "MemberDTO [id=" + id + ", pw=" + pw + ", pwHint=" + pwHint + ", pwAnswer=" + pwAnswer + ", name=" + name
-				+ ", gender=" + gender + ", phone=" + phone + ", email=" + email + ", postcode=" + postcode
-				+ ", address1=" + address1 + ", address2=" + address2 + ", adminCheck=" + adminCheck + ", blackCheck="
-				+ blackCheck + "]";
+		return "MemberDTO [id=" + id + ", pw=" + pw + ", name=" + name + ", gender=" + gender + ", phone=" + phone
+				+ ", email=" + email + ", postcode=" + postcode + ", address1=" + address1 + ", address2=" + address2
+				+ ", adminCheck=" + adminCheck + ", blackCheck=" + blackCheck + "]";
 	}
 	
 }

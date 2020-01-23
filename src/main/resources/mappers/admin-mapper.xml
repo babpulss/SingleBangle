@@ -50,8 +50,14 @@
 		update blacklist set blocktime = blocktime - 1
 	</update>
 
-<!-- 	see blackList By ID -->
+<!-- 	check blockTime -->
+	<delete id="checkBlockTime">
+		delete from blacklist where blocktime &lt;= 0
+	</delete>
+	
+<!-- 	checkId -->
 	<select id="checkId" resultType="Integer">
-		select * from blacklist where id = #{id}
+		select * from blacklist where id = #{value}
 	</select>
+	
  </mapper>

@@ -14,44 +14,7 @@
 <link rel="stylesheet" href="/css/nav.css">
 <style>
 /* 메뉴 폰트 */
-*
-
-
-:not
-
- 
-
-(
-.rightSidebar
-
- 
-
-)
-{
-box-sizing
-
-
-:
-
- 
-
-border-box
-
-
-;
-font-family
-
-
-:
-
- 
-
-'
-BMHANNAAir
-
-
-';
-}
+* :not ( .rightSidebar ) { box-sizing : border-box ; font-family : ' BMHANNAAir '; }
 #bHeader {
 	background-color: #0085cb;
 	border-radius: 10px 10px 0 0;
@@ -91,7 +54,6 @@ BMHANNAAir
 
 .bRow:last-child {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
 }
 
 #input {
@@ -102,6 +64,57 @@ BMHANNAAir
 
 .bRow button {
 	line-height: 25px;
+}
+#mainWrapper {
+	margin-top: 80px;
+	font-family: 'BMHANNAAir';
+}
+
+#viewDashBoard, #viewReporting {
+	width: 200px;
+	height: 40px;
+	border: 1px solid black;
+	position: relative;	
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+#viewDashBoard>a, #viewReporting>a {
+	position: relative;
+	z-index: 2;
+	text-decoration: none;
+	line-height: 40px;
+	color: black;
+}
+#view1 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	right: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#viewDashBoard:hover #view1{
+	right: 0;
+}
+#viewReporting:hover #view2{
+	left: 0;
+}
+#viewDashBoard:hover>a, #viewReporting:hover>a {
+	transition: .5s ease;
+	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
 }
 
 @media ( max-width : 650px ) {
@@ -120,22 +133,33 @@ BMHANNAAir
 	#searchById {
 		display: none;
 	}
+	#btns {
+		margin: 0;
+		transition: all 2s ease-in-out;
+	}
 }
 </style>
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div id="mainWrapper">
-		<h1>블랙리스트</h1>
 		<div class="list">
-			<a href="${pageContext.request.contextPath}/admin">대쉬 보드</a> <a
-				href="${pageContext.request.contextPath}/admin/viewReporting">신고접수
-				확인 조회</a>
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div id="view1"> </div>
+					<a href="#">대쉬보드 조회</a>
+				 </div>
+				<div id="viewReporting">
+					<div id="view2"></div>
+					<a href="#">신고접수 확인 조회</a>
+				 </div>
+			 </div>
 			<div style="text-align: center">
 				<br> 회원 목록에서 아이디로 검색: <input type="text" id="searchId">
 				<button type="button" id="searchIdBtn">회원 찾기</button>
-			</div>
+			 </div>
 		</div>
+		<h1>블랙리스트</h1>
 		<!-- 	결과물 출력 섹션 -->
 		<div id="board">
 			<div id="bHeader" class="bRow">
@@ -147,14 +171,16 @@ BMHANNAAir
 			</div>
 			<c:choose>
 				<c:when test="${!empty list}">
-					<c:forEach items="${list}" var="i">
-						<div class="bRow" id="bContents">
+				<div id="bContents">
+				<c:forEach items="${list}" var="i">
+				<div class="bRow">
 							<span>${i.id}</span> <span>${i.addedDate}</span> <span>${i.reason}
 							</span> <span>${i.blockTime}시간 남음 </span> <span>
 								<button class="unblock" name="${i.id}">차단 해제</button>
 							</span>
-						</div>
+				</div>
 					</c:forEach>
+					</div>
 				</c:when>
 				<c:otherwise>
 					<div class="bRow" style="display: flex; justify-content: center">
@@ -163,10 +189,16 @@ BMHANNAAir
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="bRow" style="height: 50px"></div>
+		<div class="bRow" style="height: 50px; background-color:#e05252;"></div>
 	</div>
 
 	<script>
+	$("#viewDashBoard").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin";
+	});
+	$("#viewReporting").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
 			var idArr = [
 				<c:forEach items="${list}" var="i">
 					"${i.id}",
@@ -188,17 +220,16 @@ BMHANNAAir
 					dataType: "json",
 					data: {id: id}
 				}).done(res => {
-					var btn = '<button class="unblock" name='"' + " + res.id + '">차단 해제</button>'
-					var element = '<span>' + res.id + '</span>' +
+					$("#bContents").children().remove();
+					var btn = '<button class="unblock" name=" + ' + res.id + '">차단 해제</button>'
+					var element = '<div class="bRow"><span>' + res.id + '</span>' +
 					'<span>' + res.addedDate + '</span>' +
 					'<span>' + res.reason + '</span>' +
 					'<span>' + res.blockTime + '</span>' +
-					'<span>' + btn + '</span>';
+					'<span>' + btn + '</span></div>';
 					
 					$("#bContents").append(element);
-					});
-				}).fail(() => console.log("failed")
-				)
+				})
 			}
 		});
 	$("#searchIdBtn").click(() => {

@@ -113,7 +113,7 @@
 				<div class="bRow">게시글이 없습니다.</div>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="${list }" var="list" varStatus="i">
+				<c:forEach items="${navilist }" var="list" varStatus="i">
 					<div class="bRow" style="text-align: center">
  					<div style="width: 40%; height: 100%; float: left"><a href="marketDetail.do?seq=${list.seq}">
 					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index].sys_name}"></a></div>
@@ -127,9 +127,10 @@
 	
 		<div class="bRow" style="height:20px"></div>
 	</div>
-         <div id="btns">
-        <button type="button">목록</button>
-        <div>
+	<br><div style="text-align: center">${navi }</div>
+       <br><div id="btns">
+        <div style="float:left; width: 10%; text-align: right;"><button type="button">목록</button></div>
+        <div style="float:left; width: 50%; text-align: center;">
           	<form action="search.do" method="post">
 			<select name="category">
 			<option>전체</option>
@@ -149,8 +150,11 @@
         </div>
         <c:choose>
         	<c:when test="${loginInfo != null}">
-        		<button type="button" id="write">글쓰기</button>
+        		<div style="float:left; width: 10%;"><button type="button" id="write">글쓰기</button></div>
         	</c:when>
+        	<c:otherwise>
+        		<div style="float:left; width: 10%;">&nbsp</div>
+        	</c:otherwise>
         </c:choose>
         
    </div>

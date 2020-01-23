@@ -6,19 +6,19 @@ public class MsgDTO {
 	private String receiver;
 	private String title;
 	private String contents;
-	private int viewCount;
+	private String read;
 	public MsgDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MsgDTO(int seq, String sender, String receiver, String title, String contents, int viewCount) {
+	public MsgDTO(int seq, String sender, String receiver, String title, String contents, String read) {
 		super();
 		this.seq = seq;
 		this.sender = sender;
 		this.receiver = receiver;
 		this.title = title;
 		this.contents = contents;
-		this.viewCount = viewCount;
+		this.read = read;
 	}
 	public int getSeq() {
 		return seq;
@@ -50,10 +50,11 @@ public class MsgDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public int getViewCount() {
-		return viewCount;
+	public String getRead() {
+		return read;
 	}
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setRead(String read) {
+		this.read = read;
 	}
+
 }

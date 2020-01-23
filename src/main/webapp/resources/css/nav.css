@@ -75,13 +75,12 @@
 	width: 250px;
 }
 
-.main-menu li>a {
+.main-menu ul li>a, .main-menu ul li div, .main-menu ul li span {
 	position: relative;
 	display: table;
 	border-collapse: collapse;
 	border-spacing: 0;
 	color: white;
-	font-family: arial;
 	font-size: 20px;
 	text-decoration: none;
 	transition: all .1s linear;
@@ -109,7 +108,31 @@
 	left: 0;
 	bottom: 0;
 }
+.submenu {
+	width: 100%;
+	cursor: pointer;
+}
 
+#submenuSpan {
+	display: inline-block;
+	width: 50px;
+}
+
+.submenu div {
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+}
+.submenu a {
+	width: 100%;
+	text-decoration: none;
+	color: white;
+}
+.submenu *:hover {
+	background-color: #4396de;
+	height: 100%;
+}
+.submenu 
 a:hover, a:focus {
 	text-decoration: none;
 }
@@ -124,13 +147,11 @@ nav ul, nav li {
 	padding: 0;
 }
 
-.main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover,
+#dropdown:hover, .main-menu li:hover>a, nav.main-menu li.active>a, .dropdown-menu>li>a:hover,
 	.dropdown-menu>li>a:focus, .dropdown-menu>.active>a, .dropdown-menu>.active>a:hover,
 	.dropdown-menu>.active>a:focus, .no-touch .dashboard-page nav.dashboard-menu ul li:hover a,
 	.dashboard-page nav.dashboard-menu ul li.active a {
-	color: #fff;
 	background-color: #5fa2db;
-	width: 120%;
 }
 
 ::-webkit-scrollbar {
@@ -152,7 +173,7 @@ nav ul, nav li {
 	top: 0px;
 	height: 60px;
 	background-color: white;
-	z-index: 3;
+	z-index: 4;
 	box-shadow: -5px 0px 10px 0 black;
 }
 /* 좌측 네비바 */
@@ -169,7 +190,7 @@ nav ul, nav li {
 	color: white;
 	font-size: 50px;
 	overflow-x: auto;
-	z-index: 2;
+	z-index: 3;
 }
 
 #sidebar ul {
@@ -276,6 +297,14 @@ nav ul, nav li {
 	font-size: 20px;
 	color: #0085cb;
 }
+.dropmenu {
+	display: none;	
+	width: 100%;
+}
+.dropmenu * {
+	height: 40px;
+	text-align: center;
+}
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
 	color: #0085cb;
@@ -333,7 +362,7 @@ nav ul, nav li {
 	overflow-x: auto;
 	font-size: 20px;
 	background-color: #f5f5f5;
-	z-index: 2;
+	z-index: 3;
 	text-align: center;
 }
 
