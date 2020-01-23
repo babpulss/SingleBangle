@@ -16,7 +16,19 @@
 	<!-- 메인 메뉴 -->
 	<div id="mainWrapper">
 		<div id="firstRow">
-			<span>SINGLE BANGLE</span><br> <span>싱글이</span><br> <span>방글할때까지</span>
+			<span>SINGLE BANGLE</span>
+			<div id="typing-txt">
+				<ul>
+					<li>싱글이</li>
+					<li>방글할 때까지</li>
+				</ul>
+			</div>
+			<div class="typing">
+				<ul>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
 		</div>
 		<div id="secondRow">
 			<div>

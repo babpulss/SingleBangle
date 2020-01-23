@@ -10,10 +10,12 @@
 /* 첫번째 행 */
 #firstRow {
 	height: 100px;
+	position: relative;
+	z-index: 1;
 }
 
 #firstRow>span {
-	margin-left: 100px;
+/* 	margin-left: 100px; */
 	font-family: 'yg-jalnan';
 }
 
@@ -28,6 +30,30 @@
 	z-index: 1;
 	cursor: default;
 }
+
+#typing-txt{
+	display: none;
+}
+
+#firstRow ul{
+	list-style:none;
+}
+.typing * {
+	font-size: 75px;
+}
+.typing ul li.on {  
+  display: inline-block; 
+  animation-name: cursor; 
+  animation-duration: 1s; 
+  animation-iteration-count: infinite; 
+} 
+
+@keyframes cursor{ 
+  0%{border-right: 1px solid #fff} 
+  50%{border-right: 1px solid #000} 
+  100%{border-right: 1px solid #fff} 
+}
+
 /* 두번째 행 */
 #secondRow img {
 	width: 100%;
