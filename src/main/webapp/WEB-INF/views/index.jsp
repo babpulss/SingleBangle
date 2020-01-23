@@ -48,7 +48,7 @@
 				</div>
 				<div class="imgDiv">
 					<img src="/img/index/cate_account.png">
-					<div class="indexText">나만의 가계부를 PDF로...</div>
+					<div class="indexText">나만의 가계부를 PDF로</div>
 				</div>
 			</div>
 		</div>

@@ -9,6 +9,7 @@
 <title>신고접수 관리 페이지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="/css/nav.css">
 <style>
 /* 메뉴 폰트 */
 @font-face {
@@ -80,6 +81,58 @@ html, body {
 	background-color: #e05252;
 }
 
+#mainWrapper {
+	margin-top: 80px;
+	font-family: 'BMHANNAAir';
+}
+
+#viewDashBoard, #viewBlackList {
+	width: 200px;
+	height: 40px;
+	border: 1px solid black;
+	position: relative;	
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+#viewDashBoard>a, #viewBlackList>a {
+	position: relative;
+	z-index: 2;
+	text-decoration: none;
+	line-height: 40px;
+	color: black;
+}
+#view1 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	right: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#viewDashBoard:hover #view1{
+	right: 0;
+}
+#viewBlackList:hover #view2{
+	left: 0;
+}
+#viewDashBoard:hover>a, #viewBlackList:hover>a {
+	transition: .5s ease;
+	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
+}
+
 @media ( max-width : 600px ) {
 	#board {
 		margin: 65px 0 0 0;
@@ -90,59 +143,64 @@ html, body {
 	.bRow>span:first-child {
 		display: none;
 	}
+	#btns {
+		margin: 0;
+		transition: all 2s ease-in-out;
+	}
 }
 </style>
-<link rel="stylesheet" href="/css/nav.css">
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-<div id="mainWrapper">
-<h1>신고리스트</h1>
-	<div class="list">
-		<button id="viewBlackList"> 블랙리스트 조회 </button>
-		<button id="viewReporting"> 신고접수 확인 조회 </button>
-	</div>
-	<!-- 	결과물 출력 섹션 -->
-   <div id="board">
-		<div id="bHeader" class="bRow">
-			<span>아이디</span> 
-			<span>신고 접수 날짜</span> 
-			<span>신고 사유</span> 
-			<span>신고 URL</span> 
-			<span>접수 완료 여부</span> 
+	<div id="mainWrapper">
+		<div class="list">
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div id="view1"> </div>
+					<a href="#">대쉬보드 조회</a>
+				 </div>
+				<div id="viewBlackList">
+					<div id="view2"></div>
+					<a href="#">블랙리스트 조회</a>
+				 </div>
+			 </div>
 		</div>
-		<c:choose>
-			<c:when test="${!empty list}">
-				<c:forEach items="${list}" var="i">
+		<h1>신고리스트</h1>
+		<!-- 	결과물 출력 섹션 -->
+		<div id="board">
+			<div id="bHeader" class="bRow">
+				<span>아이디</span> <span>신고 접수 날짜</span> <span>신고 사유</span> <span>신고
+					URL</span> <span>접수 완료 여부</span>
+			</div>
+			<c:choose>
+				<c:when test="${!empty list}">
+					<c:forEach items="${list}" var="i">
+						<div class="bRow">
+							<span>${i.id}</span> <span>${i.reportingDate}</span> <span>${i.reason}</span>
+							<span> <a href="${i.reportedUrl}" target="_blank">URL로
+									이동(${i.reportedUrl})</a>
+							</span> <span>
+								<button class="unblock" name="${i.seq}">접수 완료</button>
+							</span>
+						</div>
+					</c:forEach>
+				</c:when>
+				<c:otherwise>
 					<div class="bRow">
-						<span>${i.id}</span> 
-						<span>${i.reportingDate}</span> 
-						<span>${i.reason}</span>
-						<span>
-							<a href="${i.reportedUrl}" target="_blank">URL로 이동(${i.reportedUrl})</a>
-						</span>
-						<span>
-							<button class="unblock" name="${i.seq}">접수 완료</button>
-						</span>
+						<span>게시물이 없습니다</span>
 					</div>
-				</c:forEach>
-			</c:when>
-			<c:otherwise>
-				<div class="bRow">
-					<span>게시물이 없습니다</span>
-				</div>
-			</c:otherwise>
-		</c:choose>
-		<div class="bRow" style="height: 50px"></div>
+				</c:otherwise>
+			</c:choose>
+			<div class="bRow" style="height: 50px"></div>
+		</div>
 	</div>
-</div>
 
-		<script>
+	<script>
+	$("#viewDashBoard").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin";
+	});
 	$("#viewBlackList").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
-	});
-	$("#viewReporting").on("click", function() {
-		location.href="${pageContext.request.contextPath}/admin/viewReporting";
 	});
 		$(".unblock").on("click", function() {
 			var conf = confirm("신고요청완료하시겠습니까?");

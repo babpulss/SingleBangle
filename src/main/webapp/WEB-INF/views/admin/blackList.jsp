@@ -65,6 +65,57 @@
 .bRow button {
 	line-height: 25px;
 }
+#mainWrapper {
+	margin-top: 80px;
+	font-family: 'BMHANNAAir';
+}
+
+#viewDashBoard, #viewReporting {
+	width: 200px;
+	height: 40px;
+	border: 1px solid black;
+	position: relative;	
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+#viewDashBoard>a, #viewReporting>a {
+	position: relative;
+	z-index: 2;
+	text-decoration: none;
+	line-height: 40px;
+	color: black;
+}
+#view1 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	right: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#viewDashBoard:hover #view1{
+	right: 0;
+}
+#viewReporting:hover #view2{
+	left: 0;
+}
+#viewDashBoard:hover>a, #viewReporting:hover>a {
+	transition: .5s ease;
+	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
+}
 
 @media ( max-width : 650px ) {
 	#board {
@@ -82,21 +133,33 @@
 	#searchById {
 		display: none;
 	}
+	#btns {
+		margin: 0;
+		transition: all 2s ease-in-out;
+	}
 }
 </style>
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div id="mainWrapper">
-		<h1>블랙리스트</h1>
 		<div class="list">
-			<button id="viewBlackList"> 블랙리스트 조회 </button>
-			<button id="viewReporting"> 신고접수 확인 조회 </button>
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div id="view1"> </div>
+					<a href="#">대쉬보드 조회</a>
+				 </div>
+				<div id="viewReporting">
+					<div id="view2"></div>
+					<a href="#">신고접수 확인 조회</a>
+				 </div>
+			 </div>
 			<div style="text-align: center">
 				<br> 회원 목록에서 아이디로 검색: <input type="text" id="searchId">
 				<button type="button" id="searchIdBtn">회원 찾기</button>
 			 </div>
 		</div>
+		<h1>블랙리스트</h1>
 		<!-- 	결과물 출력 섹션 -->
 		<div id="board">
 			<div id="bHeader" class="bRow">
@@ -130,8 +193,8 @@
 	</div>
 
 	<script>
-	$("#viewBlackList").on("click", function() {
-		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
+	$("#viewDashBoard").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin";
 	});
 	$("#viewReporting").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewReporting";
