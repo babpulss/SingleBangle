@@ -17,15 +17,62 @@
 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" 
 			integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" 
 			crossorigin="anonymous"></script>
-	
+		
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
+		
 		<title>혼밥/혼술 글 작성</title>
         <style>
+        	/* 지도에 적용되는 CSS */
+        	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+            .map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+            .map_wrap {width:100%;height:500px;}
+            #menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+            .bg_white {background:#fff;}
+            #menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+            #menu_wrap .option{text-align: center;}
+            #menu_wrap .option p {margin:10px 0;}  
+            #menu_wrap .option button {margin-left:5px;}
+            #placesList li {list-style: none;}
+            #placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+            #placesList .item span {display: block;margin-top:4px;}
+            #placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+            #placesList .item .info{padding:10px 0 10px 55px;}
+            #placesList .info .gray {color:#8a8a8a;}
+            #placesList .info .jibun {padding-left:26px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+            #placesList .info .tel {color:#009900;}
+            #placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+            #placesList .item .marker_1 {background-position: 0 -10px;}
+            #placesList .item .marker_2 {background-position: 0 -56px;}
+            #placesList .item .marker_3 {background-position: 0 -102px}
+            #placesList .item .marker_4 {background-position: 0 -148px;}
+            #placesList .item .marker_5 {background-position: 0 -194px;}
+            #placesList .item .marker_6 {background-position: 0 -240px;}
+            #placesList .item .marker_7 {background-position: 0 -286px;}
+            #placesList .item .marker_8 {background-position: 0 -332px;}
+            #placesList .item .marker_9 {background-position: 0 -378px;}
+            #placesList .item .marker_10 {background-position: 0 -423px;}
+            #placesList .item .marker_11 {background-position: 0 -470px;}
+            #placesList .item .marker_12 {background-position: 0 -516px;}
+            #placesList .item .marker_13 {background-position: 0 -562px;}
+            #placesList .item .marker_14 {background-position: 0 -608px;}
+            #placesList .item .marker_15 {background-position: 0 -654px;}
+            #pagination {margin:10px auto;text-align: center;}
+            #pagination a {display:inline-block;margin-right:10px;}
+            #pagination .on {font-weight: bold; cursor: default;color:#777;}
+        	
+        	
+        	        	
+        	/* 작성 폼에 적용되는 CSS */
             *{
                 box-sizing: border-box;
             }
-            #frmContainer, #btnContainer{
+            #frmContainer, #addContainer, #submitContainer{
                 width: 500px;
                 margin: auto;
+            }
+            #mapContainer{
+            	width: 800px;
+            	margin: auto;
             }
             
             #titleArea{
@@ -96,7 +143,7 @@
                 margin-bottom: 0px;
             }
             .contentsTmp{
-                border: 1px solid #dadada;
+                border-top: 1px solid #dadada;
                 background-color: #f7f7f7;
                 width: 100%;
                 height: 100px;
@@ -124,6 +171,69 @@
                 background-color: #cceeff;
             }
             
+            #mapBox{
+            	border: 1px solid #b2b2b2;
+            }
+            #mapSearchArea{
+            	text-align: center;
+            }
+            #mapSearchLabel{
+            	border: 2px dashed #0085cb;
+                border-radius: 5px;
+                cursor: pointer;
+                color: #0085cb;
+                background-color: white;
+                width: 200px;
+                line-height: 50px;
+                margin-bottom: 25px;
+            }
+            #mapSearchLabel:hover{
+            	background-color: #cceeff;
+            }
+            #searchBtn{
+            	/* width: 60px;
+            	height: 20px; */
+            }
+            
+            #mapArea{
+            	border-top: 1px dashed #b2b2b2;
+            	border-bottom: 1px dashed #b2b2b2;
+            	margin-bottom: 30px;
+            }
+            
+            #placeArea{
+            	padding: 0px;
+            }
+            #placeLabel{
+            	font-size: 12px;
+            	margin-bottom: 0px;
+            }
+            #placeInfoBox{
+            	display: none;
+            	border-top: 1px solid #dadada;
+            	background-color: #f7f7f7;
+            	width: 100%;
+            }
+            #placeInfo{
+            	margin: auto;
+            }
+            .placeKey{
+            	width: 120px;
+            	height: 40px;
+            	background-color: #e0e0e0;
+            	margin-bottom: 5px;
+            	padding-right: 10px;
+            	text-align: right;
+            }
+            .placeVal{
+            	min-width: 400px;
+            	padding-left: 10px;
+            }
+            .placeInput{
+            	border: none;
+            	background-color: #f7f7f7;
+            }
+            
             #submitArea{
                 text-align: center;
             }
@@ -133,7 +243,9 @@
                 cursor: pointer;
                 color: white;
                 background-color: #0085cb;
-                width: 100px;
+            }
+            .submitBtns{
+            	width: 100px;
                 height: 40px;
                 font-size: 16px;
             }
@@ -184,7 +296,7 @@
                 </div>
             </div>
 
-            <div id="btnContainer">
+            <div id="addContainer">
                 <div class="container" id="addBox">
                     <div class="row">
                         <div class="col-12" id="addArea">
@@ -193,16 +305,84 @@
                     </div>
                 </div>
                 <hr>
+            </div>
+            
+            <div id="mapContainer">
+            	<div class="container" id="mapBox">
+                    <br>
+                    <div class="row">
+                    	<div class="col-12" id="mapSearchArea">
+                    		<label for="keyword" id="mapSearchLabel">혼밥/혼술집 위치 검색</label>
+                    	</div>
+                        <div class="col-12 map_wrap" id="mapArea">
+                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 
+				            <div id="menu_wrap" class="bg_white">
+				                <div class="option">
+				                    <div>
+										키워드 : <input type="text" id="keyword" size="15" placeholder=" 검색어 입력 "> 
+										<button type="button" id="searchBtn">검색하기</button> 
+				                    </div>
+				                </div>
+				                <hr>
+				                <ul id="placesList"></ul>
+				                <div id="pagination"></div>
+				            </div>
+                        </div>
+                        <div class="col-12" id="placeArea">
+	                        <label id="placeLabel"><b>혼밥/혼술집 위치를 등록하세요. (필수 입력)</b></label>
+	                        <div id="placeInfoBox">
+		                        <table id="placeInfo">
+									<tbody>
+		                        		<tr>
+		                        			<td class="placeKey">장소명</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="placeName" readonly></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">지번 주소</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="jibunAddr" readonly></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">도로명 주소</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="roadAddr" readonly></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">전화번호</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="placePhone" readonly></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">상세정보</td>
+		                        			<td class="placeVal" id="placeUrlTmp"></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">x좌표</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="xPos" readonly></td>
+		                        		</tr>
+		                        		<tr>
+		                        			<td class="placeKey">y좌표</td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="yPos" readonly></td>
+										</tr>
+									</tbody>
+								</table>
+								<input type="text" class="placeInput" id="placeUrl" hidden>
+							</div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <hr>
+            </div>
+
+			<div id="submitContainer">
                 <div class="container" id="submitBox">
                     <div class="row">
                         <div class="col-12" id="submitArea">
-                            <input type="submit" class="btns" id="submitBtn" value="작성">
-                            <button type="button" class="btns" id="cancelBtn">취소</button>
+                            <input type="submit" class="btns submitBtns" id="submitBtn" value="작성">
+                            <button type="button" class="btns submitBtns" id="cancelBtn">취소</button>
                         </div>
                     </div>
                 </div>
-            </div>
+			</div>
         </form>
         <br><br><br>
 
@@ -212,7 +392,6 @@
                 var labelNum = $(".filesLabel").index(this);
                 console.log("라벨 번호 : " + labelNum);
                 $($(".files")[labelNum]).click();
-//                $($(this).parent().children(".files")[labelNum]).click();
             })
 
 
@@ -336,10 +515,11 @@
             
             
             
-            // 사진을 등록했는지 검사하는 함수
+            // 제목, 사진, 주소를 등록했는지 검사하는 함수
             function validCheck(){
                 var title = $("#title").val();
             	var boxLength = $(".writeBox").length;
+            	var place = $("#placeName").val();
                 
                 if(title == ""){
                 	alert("제목을 입력하세요.");
@@ -351,6 +531,11 @@
                         alert("입력하지 않은 사진란이 있습니다.");
                         return false;
                     }
+                }
+                
+                if(place == ""){
+                	alert("주소를 등록하세요.");
+                	return false;
                 }
                 
                 for(var i = 0; i < boxLength; i++){
@@ -367,6 +552,273 @@
                 	location.href="${pageContext.request.contextPath}/restaurant/rstList.rst";
                 }
             })
+            
+            
+            
+            //////////////////////////////////////////////////
+            //////////////////////////////////////////////////
+            // 지도 관련 JS
+            
+            
+            
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+                mapOption = {
+                    center: new kakao.maps.LatLng(37.568101, 126.983053), // 지도의 중심좌표
+                    level: 4 // 지도의 확대 레벨
+                };  
+
+            // 지도 생성
+            var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+            // 장소 검색 객체 생성
+            var ps = new kakao.maps.services.Places();
+
+            // 마커를 담을 배열
+            var markers = [];
+
+            // 검색 결과 목록이나 마커를 클릭했을 때 장소명을 표출할 인포윈도우 생성
+            var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+            
+         	// '검색하기' 버튼을 클릭하면 검색 요청 함수 실행
+            $("#searchBtn").on("click", searchPlaces);
+
+            // 키워드 검색을 요청하는 함수
+            function searchPlaces() {
+            	$("#placeInfoBox").css("display", "none");
+            	$("#placeName").val("");
+            	$("#jibunAddr").val("");
+            	$("#roadAddr").val("");
+            	$("#placePhone").val("");
+            	$("#placeUrl").val("");
+            	$("#placeUrlTmp").html("");
+            	$("#xPos").val("");
+            	$("#yPos").val("");
+            	
+                var keyword = document.getElementById('keyword').value;
+
+                if (!keyword.replace(/^\s+|\s+$/g, '')) {
+                    alert('키워드를 입력해주세요!');
+                    return false;
+                }
+
+                // 장소검색 객체를 통해 키워드로 장소검색을 요청
+                ps.keywordSearch(keyword, placesSearchCB); 
+            }
+
+            // 장소검색이 완료됐을 때 호출되는 콜백함수
+            function placesSearchCB(data, status, pagination) {
+                if (status === kakao.maps.services.Status.OK) {
+
+                    // 정상적으로 검색이 완료됐으면  검색 목록과 마커를 표출
+                    displayPlaces(data);
+
+                    // 페이지 번호를 표출
+                    displayPagination(pagination);
+
+                } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+
+                    alert('검색 결과가 존재하지 않습니다.');
+                    return;
+
+                } else if (status === kakao.maps.services.Status.ERROR) {
+
+                    alert('검색 결과 중 오류가 발생했습니다.');
+                    return;
+
+                }
+            }
+
+            // 검색 결과 목록과 마커를 표출하는 함수
+            function displayPlaces(places) {
+
+                var listEl = document.getElementById('placesList'), 
+                    menuEl = document.getElementById('menu_wrap'),
+                    fragment = document.createDocumentFragment(), 
+                    bounds = new kakao.maps.LatLngBounds(), 
+                    listStr = '';
+
+                // 검색 결과 목록에 추가된 항목들을 제거
+                removeAllChildNods(listEl);
+
+                // 지도에 표시되고 있는 마커를 제거
+                removeMarker();
+
+                for ( var i=0; i<places.length; i++ ) {
+
+                    // 마커를 생성하고 지도에 표시
+                    var placePosition = new kakao.maps.LatLng(places[i].y, places[i].x),
+                        marker = addMarker(placePosition, i), 
+                        itemEl = getListItem(i, places[i]); // 검색 결과 항목 Element를 생성
+
+                    // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해 LatLngBounds 객체에 좌표를 추가
+                    bounds.extend(placePosition);
+
+                    // 마커와 검색결과 항목에 
+                    // mouseover 했을 때 해당 장소에 인포윈도우에 장소명을 표시, 
+                    // mouseout 했을 때 인포윈도우를 닫음, 
+                    // click 했을 때 상세정보를 출력
+                    (function(marker, place) {
+                        kakao.maps.event.addListener(marker, 'mouseover', function() {
+                            displayInfowindow(marker, place);
+                        });
+
+                        kakao.maps.event.addListener(marker, 'mouseout', function() {
+                            infowindow.close();
+                        });
+
+                        kakao.maps.event.addListener(marker, 'click', function(){
+                            printInfowindow(marker, place);
+                        })
+                        
+                        itemEl.onmouseover = function () {
+                            displayInfowindow(marker, place);
+                        };
+
+                        itemEl.onmouseout = function () {
+                            infowindow.close();
+                        };
+                        
+                        itemEl.onclick = function () {
+                            printInfowindow(marker, place);
+                        }
+                    })(marker, places[i]);
+
+                    fragment.appendChild(itemEl);
+                }
+
+                // 검색결과 항목들을 검색결과 목록 Elemnet에 추가
+                listEl.appendChild(fragment);
+                menuEl.scrollTop = 0;
+
+                // 검색된 장소 위치를 기준으로 지도 범위를 재설정
+                map.setBounds(bounds);
+            }
+
+            // 검색결과 항목을 Element로 반환하는 함수
+            function getListItem(index, places) {
+
+                var el = document.createElement('li'),
+                    itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
+                    '<div class="info"><h5>' + places.place_name + '</h5>';
+
+                if (places.road_address_name) {
+                    itemStr += '<span class="road gray">' + places.road_address_name + '</span>' +
+                        '<span class="jibun gray">' +  places.address_name  + '</span>';
+                } else {
+                    itemStr += '<span>' +  places.address_name  + '</span>'; 
+                }
+
+                itemStr += '<span class="tel">' + places.phone  + '</span></div>';           
+
+                el.innerHTML = itemStr;
+                el.className = 'item';
+
+                return el;
+            }
+
+            // 마커를 생성하고 지도 위에 마커를 표시하는 함수
+            function addMarker(position, idx, title) {
+                var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png', // 마커 이미지 url, 스프라이트 이미지를 사용
+                    imageSize = new kakao.maps.Size(36, 37),  // 마커 이미지의 크기
+                    imgOptions =  {
+                        spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+                        spriteOrigin : new kakao.maps.Point(0, (idx*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+                        offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+                    },
+                    markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+                    marker = new kakao.maps.Marker({
+                        position: position, // 마커의 위치
+                        image: markerImage 
+                    });
+
+                marker.setMap(map); // 지도 위에 마커를 표출
+                markers.push(marker);  // 배열에 생성된 마커를 추가
+
+                return marker;
+            }
+
+            // 지도 위에 표시되고 있는 마커를 모두 제거
+            function removeMarker() {
+                for ( var i = 0; i < markers.length; i++ ) {
+                    markers[i].setMap(null);
+                }   
+                markers = [];
+            }
+
+            // 검색결과 목록 하단에 페이지번호를 표시는 함수
+            function displayPagination(pagination) {
+                var paginationEl = document.getElementById('pagination'),
+                    fragment = document.createDocumentFragment(),
+                    i; 
+
+                // 기존에 추가된 페이지번호를 삭제
+                while (paginationEl.hasChildNodes()) {
+                    paginationEl.removeChild (paginationEl.lastChild);
+                }
+
+                for (i=1; i<=pagination.last; i++) {
+                    var el = document.createElement('a');
+                    el.href = "#";
+                    el.innerHTML = i;
+
+                    if (i===pagination.current) {
+                        el.className = 'on';
+                    } else {
+                        el.onclick = (function(i) {
+                            return function() {
+                                pagination.gotoPage(i);
+                            }
+                        })(i);
+                    }
+
+                    fragment.appendChild(el);
+                }
+                paginationEl.appendChild(fragment);
+            }
+
+            // 검색결과 목록 또는 마커에 마우스를 올렸을 때 인포윈도우에 장소명을 표시
+            function displayInfowindow(marker, place) {
+                var content = '<div style="padding:5px;z-index:1;">' + place.place_name + '</div>';
+
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            }
+
+            // 검색결과 목록의 자식 Element를 제거하는 함수
+            function removeAllChildNods(el) {   
+                while (el.hasChildNodes()) {
+                    el.removeChild (el.lastChild);
+                }
+            }
+            
+         	// 검색결과 목록 또는 마커를 클릭했을 때 정보를 출력
+            function printInfowindow(marker, place) {
+                console.log(place);
+                
+                $("#placeInfoBox").css("display", "block");
+                $("#placeName").val(place.place_name);
+                $("#jibunAddr").val(place.address_name);
+                $("#roadAddr").val(place.road_address_name);
+                $("#placePhone").val(place.phone);
+                $("#placeUrl").val(place.place_url);
+                $("#placeUrlTmp").html("<a href='" + place.place_url + "' target='_blank'>식당 상세정보</a>");
+                $("#xPos").val(place.x);
+                $("#yPos").val(place.y);
+            }
+            
+         	
+         	
+         	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+			var mapTypeControl = new kakao.maps.MapTypeControl();
+
+			// 지도 타입 컨트롤을 지도에 표시
+			// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미함
+			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+			
+			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성
+			var zoomControl = new kakao.maps.ZoomControl();
+			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+            
         </script>
     </body>
 </html>

@@ -9,6 +9,13 @@ public class RestaurantDTO {
 	private int seq;
 	private String writer;
 	private String title;
+	private String placeName;
+	private String jibunAddr;
+	private String roadAddr;
+	private String placePhone;
+	private String placeUrl;
+	private String xPos;
+	private String yPos;
 	private Timestamp writeDate;
 	private int viewCount;
 	private String approvalCheck;
@@ -21,11 +28,20 @@ public class RestaurantDTO {
 	public RestaurantDTO() {
 		super();
 	}
-	public RestaurantDTO(int seq, String writer, String title, Timestamp writeDate, int viewCount, String approvalCheck) {
+	public RestaurantDTO(int seq, String writer, String title, String placeName, String jibunAddr, String roadAddr,
+			String placePhone, String placeUrl, String xPos, String yPos, Timestamp writeDate, int viewCount,
+			String approvalCheck) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
 		this.title = title;
+		this.placeName = placeName;
+		this.jibunAddr = jibunAddr;
+		this.roadAddr = roadAddr;
+		this.placePhone = placePhone;
+		this.placeUrl = placeUrl;
+		this.xPos = xPos;
+		this.yPos = yPos;
 		this.writeDate = writeDate;
 		this.viewCount = viewCount;
 		this.approvalCheck = approvalCheck;
@@ -48,6 +64,48 @@ public class RestaurantDTO {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	public String getPlaceName() {
+		return placeName;
+	}
+	public void setPlaceName(String placeName) {
+		this.placeName = placeName;
+	}
+	public String getJibunAddr() {
+		return jibunAddr;
+	}
+	public void setJibunAddr(String jibunAddr) {
+		this.jibunAddr = jibunAddr;
+	}
+	public String getRoadAddr() {
+		return roadAddr;
+	}
+	public void setRoadAddr(String roadAddr) {
+		this.roadAddr = roadAddr;
+	}
+	public String getPlacePhone() {
+		return placePhone;
+	}
+	public void setPlacePhone(String placePhone) {
+		this.placePhone = placePhone;
+	}
+	public String getPlaceUrl() {
+		return placeUrl;
+	}
+	public void setPlaceUrl(String placeUrl) {
+		this.placeUrl = placeUrl;
+	}
+	public String getxPos() {
+		return xPos;
+	}
+	public void setxPos(String xPos) {
+		this.xPos = xPos;
+	}
+	public String getyPos() {
+		return yPos;
+	}
+	public void setyPos(String yPos) {
+		this.yPos = yPos;
 	}
 	public Timestamp getWriteDate() {
 		return writeDate;

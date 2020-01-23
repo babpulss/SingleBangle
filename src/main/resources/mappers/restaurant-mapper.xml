@@ -9,7 +9,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
-		insert into restaurant values (restaurant_seq.nextval, #{writer}, #{title}, sysdate, 0, 'N')
+		insert into restaurant values (restaurant_seq.nextval, #{writer}, #{title}, #{placeName}, #{jibunAddr}, #{roadAddr}, 
+										#{placePhone}, #{placeUrl}, #{xPos}, #{yPos}, sysdate, 'N')
 	</insert>
 	
 	<select id="getMaxSeq" resultType="Integer">
