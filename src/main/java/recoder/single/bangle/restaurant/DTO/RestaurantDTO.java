@@ -17,7 +17,6 @@ public class RestaurantDTO {
 	private String xPos;
 	private String yPos;
 	private Timestamp writeDate;
-	private int viewCount;
 	private String approvalCheck;
 	
 	private MultipartFile[] files;
@@ -29,8 +28,7 @@ public class RestaurantDTO {
 		super();
 	}
 	public RestaurantDTO(int seq, String writer, String title, String placeName, String jibunAddr, String roadAddr,
-			String placePhone, String placeUrl, String xPos, String yPos, Timestamp writeDate, int viewCount,
-			String approvalCheck) {
+			String placePhone, String placeUrl, String xPos, String yPos, Timestamp writeDate, String approvalCheck) {
 		super();
 		this.seq = seq;
 		this.writer = writer;
@@ -43,7 +41,6 @@ public class RestaurantDTO {
 		this.xPos = xPos;
 		this.yPos = yPos;
 		this.writeDate = writeDate;
-		this.viewCount = viewCount;
 		this.approvalCheck = approvalCheck;
 	}
 	
@@ -112,12 +109,6 @@ public class RestaurantDTO {
 	}
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
-	}
-	public int getViewCount() {
-		return viewCount;
-	}
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
 	}
 	public String getApprovalCheck() {
 		return approvalCheck;
