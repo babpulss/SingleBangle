@@ -1,6 +1,8 @@
 package recoder.single.bangle.tipBoard.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class BoardDTO {
 	private int seq;
@@ -12,13 +14,14 @@ public class BoardDTO {
 	private int viewCount;
 	private int scrapCount;
 	private int likeCount;
+	private int countSeq;
 	
 	public BoardDTO() {
 		super();
 	}
 
 	public BoardDTO(int seq, int category, String writer, String title, String contents, Timestamp writeDate,
-			int viewCount, int scrapCount, int likeCount) {
+			int viewCount, int scrapCount, int likeCount, int countSeq) {
 		super();
 		this.seq = seq;
 		this.category = category;
@@ -29,6 +32,7 @@ public class BoardDTO {
 		this.viewCount = viewCount;
 		this.scrapCount = scrapCount;
 		this.likeCount = likeCount;
+		this.countSeq = countSeq;
 	}
 
 	public int getSeq() {
@@ -74,11 +78,11 @@ public class BoardDTO {
 	public Timestamp getWriteDate() {
 		return writeDate;
 	}
-
+	
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
 	}
-
+	
 	public int getViewCount() {
 		return viewCount;
 	}
@@ -102,12 +106,25 @@ public class BoardDTO {
 	public void setLikeCount(int likeCount) {
 		this.likeCount = likeCount;
 	}
+	
+	public int getCountSeq() {
+		return countSeq;
+	}
+	
+	public void setCountSeq(int countSeq) {
+		this.countSeq = countSeq;
+	}
+	
+	public String getFormedDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(this.writeDate);
+	}
 
 	@Override
 	public String toString() {
 		return "BoardDTO [seq=" + seq + ", category=" + category + ", writer=" + writer + ", title=" + title
 				+ ", contents=" + contents + ", writeDate=" + writeDate + ", viewCount=" + viewCount + ", scrapCount="
-				+ scrapCount + ", likeCount=" + likeCount + "]";
+				+ scrapCount + ", likeCount=" + likeCount + ", countSeq=" + countSeq + "]";
 	}
-	
+
 }
