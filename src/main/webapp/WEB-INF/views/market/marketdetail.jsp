@@ -129,7 +129,8 @@
 		</div><br>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id && dto.done == 'N'}">
-				<div><button type="button" id="updateSellDone_${dto.seq }" onclick="updateSellDone('${dto.seq}')">판매완료</button></div>
+				<div>
+				<button type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;" id="updateSellDone_${dto.seq }" onclick="updateSellDone('${dto.seq}')">판매완료</button></div>
 			</c:when>
 		</c:choose>
 		<c:choose>
@@ -142,14 +143,14 @@
 		<br>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id}">
-				<div><button id="update" type="button">수정하기</button>
-				<button id="delete" type="button">삭제하기</button>
-				<button id="back" type="button">돌아가기</button></div>
+				<div><button id="update" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">수정하기</button>
+				<button id="delete" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">삭제하기</button>
+				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button></div>
 			</c:when>
 			<c:when test="${loginInfo != null && dto.writer != loginInfo.id}">
-				<div><button id="msg" type="button">쪽지보내기</button>
-				<button id="report" type="button">신고하기</button>
-				<button id="back" type="button">돌아가기</button></div>
+				<div><button id="msg" type="button" style="border: none; width: 60px; height: 30px; border-radius: 10px;">쪽지보내기</button>
+				<button id="report" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">신고하기</button>
+				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button></div>
 			</c:when>
 		</c:choose>
 		<br>
@@ -170,10 +171,10 @@
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
 									<div style="float:left; width: 30%; text-align: center;">
-										<button style="border: none;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
+										<button style="border: none; width: 50px; height: 30px; border-radius: 10px;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
 										<input type="hidden" id="boardSeqRe_${list.seq }" value="${list.boardSeq }">
-										<button id="deleteRe_${list.seq }" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
-										<button type="button" id="updateDone_${list.seq }" style="display:none" onclick="updateDone('${list.seq}')">완료</button>
+										<button id="deleteRe_${list.seq }" style="border: none; width: 50px; height: 30px; border-radius: 10px;" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
+										<button type="button" style="border: none; display:none; width: 50px; height: 30px; border-radius: 10px;" id="updateDone_${list.seq }" onclick="updateDone('${list.seq}')">완료</button>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -189,8 +190,8 @@
 				<c:when test="${loginInfo != null }">
 					<br>
 					<div style="width: 100%; text-align: center;">
-					<input type="text" id="recontent" name="recontent" style="width: 80%;">
-					<button type="button" id="reconfirm">확인</button>
+					<textarea style="resize: none; vertical-align: middle; width: 85%; height: 50px;" id="recontent" name="recontent"></textarea>
+					<button type="button" id="reconfirm" style="border: none; width: 50px; height: 30px; border-radius: 10px;">확인</button>
 					</div>
 					<br>
 				</c:when>
@@ -299,7 +300,9 @@
 		})
 		
 		$("#delete").on("click",function(){
+			alert("글이 성공적으로 삭제되었습니다.");
 			location.href="${pageContext.request.contextPath}/market/delete.do?seq=${dto.seq}";
+
 		})
 	
 		$("#update").on("click",function(){

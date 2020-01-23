@@ -271,7 +271,7 @@ public String search(Model model) {
 			model.addAttribute("fileList", fileList);
 
 			return "market/marketList";
-		}else if(title == "") { //카테고리로 검색하기
+		}else if(title == "" || title == null) { //카테고리로 검색하기
 			System.out.println("카테고리로 검색하기");
 			List<MarketDTO> list = service.searchNoTitle(category);
 			System.out.println("타이틀검색 갯수 : " + list.size());
