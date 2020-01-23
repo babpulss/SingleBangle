@@ -11,7 +11,7 @@
 
 <!-- select는 resultType을 꼭 명시해주기! parameterType은 안 써도 되지만...ㅎ -->
 	<select id="selectAll" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
-		select * from livingPoint
+		select livingPoint.*, (select count(*) from livingComment where rootseq = livingPoint.seq) countSeq from livingPoint
 	</select>
 
 	<select id="selectOne" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
@@ -68,6 +68,10 @@
 	<insert id="scrap">
 		insert into livingScrap values(scrap_seq.nextval,#{rootSeq},#{category},#{title},#{id},sysdate)
 	</insert>
+<!-- 	게시글 번호로 스크랩 지우기 -->
+	<delete id="deleteScrap">
+		delete from livingScrap where rootSeq = #{value}
+	</delete>
 	
 <!-- 	게시글 스크랩 수 구하기 -->
 	<select id="scrapCount" resultType="Integer">
@@ -92,12 +96,27 @@
 	</select>
 	
 	<select id="selectByPage" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
-		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint) where rown between #{startNum} and #{endNum}
+		select livingPoint.*,(select count(*) from livingComment where rootseq = livingPoint.seq) countSeq from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint) livingPoint where rown between #{startNum} and #{endNum}
+	</select>
+
+<!-- 페이지를 10개씩 	 -->
+
+	<select id="selectByPageTitle" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where title like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
+	</select>
+
+	
+	<select id="selectByPageContents" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where contents like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
+	</select>
+	
+	<select id="selectByPageBoth" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
+		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where title like '%'||#{input}||'%' or contents like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
 	</select>
 	
 <!-- 상세검색  -->
-	<select id="searchTitle" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
-		select * from livingPoint where title like '%'||#{value}||'%'
+	<select id="searchTitleCount" resultType="Integer">
+		select count(*) from livingPoint where title like '%'||#{value}||'%'
 	</select>
 
 	<select id="searchContents" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
@@ -121,9 +140,13 @@
 	<select id="cmtList" resultType="recoder.single.bangle.tipBoard.DTO.CommentDTO">
 		select * from livingComment where rootSeq = #{rootSeq}
 	</select>
-
+<!-- 그냥 바로 댓글 지우기 mapper -->
 	<delete id="cmtDelete">
 		delete from livingComment where seq = #{value}
+	</delete>
+<!-- 글을 지우면 댓글도 지우는 mapper -->
+	<delete id="commentDelete">
+		delete from livingComment where rootSeq = #{value}
 	</delete>
 
 	<select id="getRootSeq" resultType="Integer">
@@ -133,6 +156,7 @@
 	<update id="cmtUpdate">
 		update livingComment set contents = #{contents} where seq = #{seq}
 	</update>
+
 </mapper>
 
 

@@ -179,12 +179,9 @@ public class MarketController {
 			String realPlace = loginInfo.getAddress1();
 			String[] placeSplit = realPlace.split(" ");
 			String place = placeSplit[0]+ " " + placeSplit[1] + " " + placeSplit[2];
-			System.out.println(place);
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();			
-			content.replace("<", "&lt");
-			content.replace(">", "&gt");
-			content.replace("&", "&amp");
+			content = content.replaceAll("<script", "&lt;script");
 			service.write(dto, content, writer, place, gender, path);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("list", list);
@@ -274,7 +271,7 @@ public String search(Model model) {
 			model.addAttribute("fileList", fileList);
 
 			return "market/marketList";
-		}else if(title == "") { //카테고리로 검색하기
+		}else if(title == "" || title == null) { //카테고리로 검색하기
 			System.out.println("카테고리로 검색하기");
 			List<MarketDTO> list = service.searchNoTitle(category);
 			System.out.println("타이틀검색 갯수 : " + list.size());
