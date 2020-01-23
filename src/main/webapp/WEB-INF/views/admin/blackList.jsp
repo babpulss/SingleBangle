@@ -73,8 +73,7 @@
 #viewDashBoard, #viewReporting {
 	width: 200px;
 	height: 40px;
-	margin-left: 10px;
-	border: 2px solid black;
+	border: 1px solid black;
 	position: relative;	
 	overflow: hidden;
 	cursor: pointer;
@@ -86,7 +85,6 @@
 	text-decoration: none;
 	line-height: 40px;
 	color: black;
-	
 }
 #view1 {
 	position:absolute;
@@ -96,12 +94,27 @@
 	background-color: black;
 	transition: all .5s ease;
 }
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
 #viewDashBoard:hover #view1{
 	right: 0;
 }
-#viewDashBoard:hover>a{
-	transition-duration: 1s ease;
+#viewReporting:hover #view2{
+	left: 0;
+}
+#viewDashBoard:hover>a, #viewReporting:hover>a {
+	transition: .5s ease;
 	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
 }
 
 @media ( max-width : 650px ) {
@@ -120,6 +133,10 @@
 	#searchById {
 		display: none;
 	}
+	#btns {
+		margin: 0;
+		transition: all 2s ease-in-out;
+	}
 }
 </style>
 </head>
@@ -127,14 +144,15 @@
 	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div id="mainWrapper">
 		<div class="list">
-			<div id="viewDashBoard">
-				<div id="view1"> </div>
-				<a href="#">대쉬보드 조회</a>
-			 </div>
-			<div id="viewReporting">
-				<div id="view2">
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div id="view1"> </div>
+					<a href="#">대쉬보드 조회</a>
+				 </div>
+				<div id="viewReporting">
+					<div id="view2"></div>
 					<a href="#">신고접수 확인 조회</a>
-				</div>
+				 </div>
 			 </div>
 			<div style="text-align: center">
 				<br> 회원 목록에서 아이디로 검색: <input type="text" id="searchId">

@@ -14,14 +14,77 @@
 	margin-top: 80px;
 	font-family: 'BMHANNAAir';
 }
+
+#viewBlackList, #viewReporting {
+	width: 200px;
+	height: 40px;
+	border: 1px solid black;
+	position: relative;	
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+#viewBlackList>a, #viewReporting>a {
+	position: relative;
+	z-index: 2;
+	text-decoration: none;
+	line-height: 40px;
+	color: black;
+}
+#view1 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	right: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#viewBlackList:hover #view1{
+	right: 0;
+}
+#viewReporting:hover #view2{
+	left: 0;
+}
+#viewBlackList:hover>a, #viewReporting:hover>a {
+	transition: .5s ease;
+	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
+}
+@media ( max-width : 600px ) {
+	#btns {
+		margin: 0;
+	}
+	#btns * {
+		transition: all 2s ease-in-out;
+	}
+}
 </style>
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <div id="mainWrapper">
 <div class="list">
-	<button id="viewBlackList"> 블랙리스트 조회 </button>
-	<button id="viewReporting"> 신고접수 확인 조회 </button>
+			<div id="btns">
+				<div id="viewBlackList">
+					<div id="view1"> </div>
+					<a href="#">블랙리스트 조회</a>
+				 </div>
+				<div id="viewReporting">
+					<div id="view2"></div>
+					<a href="#">신고접수 확인 조회</a>
+				 </div>
+			 </div>
 </div>
 	<h1>대쉬보드</h1>
 	<!-- 	결과물 출력 섹션 -->

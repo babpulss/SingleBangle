@@ -86,6 +86,53 @@ html, body {
 	font-family: 'BMHANNAAir';
 }
 
+#viewDashBoard, #viewBlackList {
+	width: 200px;
+	height: 40px;
+	border: 1px solid black;
+	position: relative;	
+	overflow: hidden;
+	cursor: pointer;
+	text-align: center;
+}
+#viewDashBoard>a, #viewBlackList>a {
+	position: relative;
+	z-index: 2;
+	text-decoration: none;
+	line-height: 40px;
+	color: black;
+}
+#view1 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	right: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#view2 {
+	position:absolute;
+	width: 200px;
+	height: 40px;
+	left: -200px;	
+	background-color: black;
+	transition: all .5s ease;
+}
+#viewDashBoard:hover #view1{
+	right: 0;
+}
+#viewBlackList:hover #view2{
+	left: 0;
+}
+#viewDashBoard:hover>a, #viewBlackList:hover>a {
+	transition: .5s ease;
+	color: red;
+}
+#btns {
+	display: flex;
+	margin-left: 10px;
+}
+
 @media ( max-width : 600px ) {
 	#board {
 		margin: 65px 0 0 0;
@@ -96,6 +143,10 @@ html, body {
 	.bRow>span:first-child {
 		display: none;
 	}
+	#btns {
+		margin: 0;
+		transition: all 2s ease-in-out;
+	}
 }
 </style>
 </head>
@@ -103,8 +154,16 @@ html, body {
 <jsp:include page="/resources/jsp/nav.jsp"/>
 	<div id="mainWrapper">
 		<div class="list">
-			<button id="viewDashBoard">대쉬보드 조회</button>
-			<button id="viewBlackList">블랙리스트 조회</button>
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div id="view1"> </div>
+					<a href="#">대쉬보드 조회</a>
+				 </div>
+				<div id="viewBlackList">
+					<div id="view2"></div>
+					<a href="#">블랙리스트 조회</a>
+				 </div>
+			 </div>
 		</div>
 		<h1>신고리스트</h1>
 		<!-- 	결과물 출력 섹션 -->
