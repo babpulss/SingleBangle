@@ -28,10 +28,6 @@ public class RestaurantDAO {
 		return sst.selectOne("Restaurant.getMaxSeq", writer);
 	}
 	
-	public int updateViewCount(int seq) throws Exception {
-		return sst.update("Restaurant.updateViewCount", seq);
-	}
-	
 	public RestaurantDTO selectBySeq(int seq) throws Exception {
 		return sst.selectOne("Restaurant.selectBySeq", seq);
 	}

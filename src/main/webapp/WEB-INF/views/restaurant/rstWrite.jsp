@@ -290,7 +290,7 @@
                         <div class="col-12 contentsArea">
                             <label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>
                             <div class="contentsTmp" contenteditable="true"></div>
-                            <textarea class="contents" name="contents" placeholder=" 내용" hidden></textarea>
+                            <textarea class="contents" name="contents" placeholder=" 내용" value="" hidden></textarea>
                         </div>
                     </div>
                 </div>
@@ -336,19 +336,19 @@
 									<tbody>
 		                        		<tr>
 		                        			<td class="placeKey">장소명</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="placeName" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="placeName" name="placeName" readonly></td>
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">지번 주소</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="jibunAddr" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="jibunAddr" name="jibunAddr" readonly></td>
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">도로명 주소</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="roadAddr" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="roadAddr" name="roadAddr" readonly></td>
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">전화번호</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="placePhone" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="placePhone" name="placePhone" readonly></td>
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">상세정보</td>
@@ -356,15 +356,15 @@
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">x좌표</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="xPos" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="xPos" name="xPos" readonly></td>
 		                        		</tr>
 		                        		<tr>
 		                        			<td class="placeKey">y좌표</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="yPos" readonly></td>
+		                        			<td class="placeVal"><input type="text" class="placeInput" id="yPos" name="yPos" readonly></td>
 										</tr>
 									</tbody>
 								</table>
-								<input type="text" class="placeInput" id="placeUrl" hidden>
+								<input type="text" class="placeInput" id="placeUrl" name="placeUrl" hidden>
 							</div>
                         </div>
                         <br>
@@ -540,6 +540,9 @@
                 
                 for(var i = 0; i < boxLength; i++){
                     $($(".contents")[i]).val($($(".contentsTmp")[i]).html());
+                    if($($(".contentsTmp")[i]).html() == ""){
+                    	$($(".contents")[i]).val(" ");
+                    }
                 }
                 
                 return confirm("글을 작성하시겠습니까?");

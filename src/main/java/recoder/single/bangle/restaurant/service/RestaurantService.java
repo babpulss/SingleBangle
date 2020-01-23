@@ -69,7 +69,6 @@ public class RestaurantService {
 	public RestaurantDTO rstDetail(int seq) {
 		RestaurantDTO dto = null;
 		try {
-			rstDao.updateViewCount(seq);
 			dto = rstDao.selectBySeq(seq);
 		} catch (Exception e) {
 			e.printStackTrace();

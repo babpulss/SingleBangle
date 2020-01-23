@@ -123,7 +123,7 @@
 		                <span><a href="${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=${dto.seq}">${dto.title}</a></span>
 		                <span>${dto.writer}</span>
 		                <span>${dto.getFormedDate1()}</span>
-		                <span>${dto.viewCount}</span>
+		                <span></span>
 		            </div>
 	            </c:forEach>
 	            
