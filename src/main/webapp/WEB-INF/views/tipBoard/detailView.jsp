@@ -232,8 +232,9 @@ $(function(){
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 	
 	<script>	
+// 	currentPage 찾는법은~?
 	$("#goBoardList").on("click",function(){
-		location.href = "${pageContext.request.contextPath}/board/boardList.bo";
+		history.back();	
 	});
 	
 	$("#updateTip").on("click",function(){
