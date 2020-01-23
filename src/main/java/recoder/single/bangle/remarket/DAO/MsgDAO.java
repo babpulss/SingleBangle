@@ -43,12 +43,12 @@ public class MsgDAO {
 		return a;
 	}
 	
-	public int writeMsg(MsgDTO dto, String sender) throws Exception{
+	public int writeMsg(MsgDTO dto, String title, String contents, String sender) throws Exception{
 		Map<String, Object> param = new HashMap<>();
 		param.put("sender", sender);
 		param.put("receiver", dto.getReceiver());
 		param.put("title", dto.getTitle());
-		param.put("contents", dto.getContents());
+		param.put("contents", contents);
 		return jdbc.insert("Msg.writeMsg", param);
 	}
 

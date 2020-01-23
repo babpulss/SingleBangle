@@ -162,7 +162,7 @@ public class MarketDAO {
 			return jdbc.selectOne("Market.getArticleCountUseTitle", title);
 		}
 		
-		public String getPageNaviUseTitle(int currentPage, String title) throws Exception { 
+		public String getPageNaviUseTitle(int currentPage, String title) throws Exception {
 			int recordTotalCount = this.getArticleCountUseTitle(title);
 			int recordCountPerPage = 10;
 			int naviCountPerPage = 10;
@@ -199,15 +199,15 @@ public class MarketDAO {
 			StringBuilder sb = new StringBuilder(); 
 
 			if(needPrev) {
-				sb.append("<a href='search.do?category=전체&title like"+title+"&cpage="+(startNavi - 1)+"'> < </a>");
+				sb.append("<a href='search.do?category=전체&title="+title+"&cpage="+(startNavi - 1)+"'> < </a>");
 			}
 			for(int i = startNavi; i <= endNavi; i++) {
-				sb.append("<a href='search.do?category=전체&title like"+title+"&cpage="+i+"'>"); //cpage = currentpage
+				sb.append("<a href='search.do?category=전체&title="+title+"&cpage="+i+"'>"); //cpage = currentpage
 				sb.append(i + " ");
 				sb.append("</a>");
 			}
 			if(needNext) {
-				sb.append("<a href='search.do?category=전체&title like "+title+"&cpage="+(endNavi + 1) +"' > > </a>");
+				sb.append("<a href='search.do?category=전체&title="+title+"&cpage="+(endNavi + 1) +"' > > </a>");
 			}
 			return sb.toString();
 		}
