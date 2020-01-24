@@ -35,7 +35,7 @@
             align-items: center;
         }
         .bRow * {
-            line-height: 50px;
+            line-height: 20px;
             text-align: center;
         }
         .bRow>span:first-child {
@@ -117,7 +117,7 @@
 					<div class="bRow" style="text-align: center">
  					<div style="width: 40%; height: 100%; float: left"><a href="marketDetail.do?seq=${list.seq}">
 					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index].sys_name}"></a></div>
-					<div style="float:left;">${list.title }
+					<div style="float:left; width: 40%; text-align: center">${list.title }
 					<br>${list.place }
 					<br>${list.price }원</div>
 					</div>
@@ -131,7 +131,7 @@
        <br><div id="btns">
         <div style="float:left; width: 10%; text-align: right;"><button type="button">목록</button></div>
         <div style="float:left; width: 50%; text-align: center;">
-          	<form action="search.do" method="post">
+          	<form action="search.do" method="get">
 			<select name="category">
 			<option>전체</option>
 			<option>디지털/가전</option>
