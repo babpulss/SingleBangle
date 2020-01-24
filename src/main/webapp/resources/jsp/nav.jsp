@@ -26,9 +26,6 @@
 							<span style="position: relative; right: 280px; top: 13px; font-size: 10px; color: red;">new!</span>
 						</c:when>
 					</c:choose>
-					<span id="rightMyPage"><a
-						href="${pageContext.request.contextPath}/member/myPage.mem"
-						id="myPageBtn">My Page</a></span>
 					<span id="rightLogout"><a
 						href="${pageContext.request.contextPath}/member/logout.mem"
 						id="logoutBtn">Logout</a></span>
@@ -72,6 +69,12 @@
 				<c:if test="${!empty loginInfo}">
 				<li class="has-subnav sidebar" id="account"><a href="${pageContext.request.contextPath }/accountBook/accountBook"> <i
 						style="line-height: 50px" class="fa fa-dollar fa-2x"></i> <span class="nav-text"> 가계부
+					</span>
+				</a></li>
+				</c:if>
+				<c:if test="${!empty loginInfo}">
+				<li class="has-subnav sidebar" id="myPageBtn"><a href="${pageContext.request.contextPath }/member/myPage.mem"> <i
+						style="line-height: 50px" class="fa fa-portrait fa-2x"></i> <span class="nav-text">마이 페이지 
 					</span>
 				</a></li>
 				</c:if>
