@@ -567,6 +567,68 @@ public class BoardService {
 		return sb.toString();
 	}
 	
+	public String getCmtNavi(int currentPage, int seq) { 
+		// 위의 seq는 rootSeq(게시글 번호)
+		// currentPage = 현재 페이지 번호
+
+		int recordTotalCount = boardDao.cmtCount(seq);   	// recordTotalCount : 해당 게시글의 전체 댓글 개수
+		
+		int pageTotalCount = 0;// 총 몇개의 페이지인지
+
+		if (recordTotalCount % Configuration.recordCountPerPage > 0) { // recordTotalCount를 recordCountPerPage로 나누었을때
+																		// 나머지가 0보다 크다면(즉, 나머지가 생긴다면)
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage + 1;
+		} else {
+			pageTotalCount = recordTotalCount / Configuration.recordCountPerPage;
+		}
+
+		if (currentPage <= 1) { // 페이지값을 1 이하 숫자로 하는 경우
+			currentPage = 1;
+		} else if (currentPage > pageTotalCount) { // 마지막 페이지값보다 높은 페이지값을 요청하는 경우
+			currentPage = pageTotalCount;
+		}
+
+		int startNavi = ((currentPage - 1) / Configuration.naviCountPerPage) * Configuration.naviCountPerPage + 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 시작 값
+		int endNavi = startNavi + Configuration.naviCountPerPage - 1; // 현재 페이지 위치에서 볼 수 있는 네비게이터의 마지막 값.
+
+		if (endNavi > pageTotalCount) { // 페이지 끝 값이 비정상적일때/ 총 15페이지가 있을때 15페이지를 선택하면 보여지는 네비는 11-20이 아니라 11-15여야함
+			endNavi = pageTotalCount;
+		}
+		boolean needPrev = true; // < 표시가 필요한지
+		boolean needNext = true; // > 표시가 필요한지
+
+		if (startNavi == 1) {
+			needPrev = false;
+		}
+		if (endNavi == pageTotalCount) {
+			needNext = false;
+		}
+
+		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
+
+		if (needPrev) {
+			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + (startNavi - 1) + "'> < </a>");
+		}
+		for (int i = startNavi; i <= endNavi; i++) {
+			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + i + "'>"); // cpage = currentpage
+			sb.append(i + " ");
+			sb.append("</a>");
+		}
+		if (needNext) {
+			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + (endNavi + 1) + "' > > </a>");
+		}
+		return sb.toString();
+	}
+	
+	public List<CommentDTO> selectByPageCmt(int currentPage, int seq){
+
+		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
+		int endNum = Configuration.recordCountPerPage * currentPage;
+		
+		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
+		return boardDao.selectByPageCmt(startNum, endNum, seq);	
+	}
+	
 	public List<BoardDTO> selectByPage(int currentPage) {
 
 		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
@@ -581,8 +643,6 @@ public class BoardService {
 		
 		int startNum = currentPage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage - 1); 
 		int endNum = Configuration.recordCountPerPage * currentPage;
-
-		//	int startNum = endNum - (recordCountPerPage - 1); 필동오빠가 왜 이렇게 했는지 모르지만 일단 해보겠음...
 		
 		System.out.println("service에서 start랑 end: " + startNum + ":" + endNum);
 		return boardDao.selectByPageTitle(startNum, endNum, input);

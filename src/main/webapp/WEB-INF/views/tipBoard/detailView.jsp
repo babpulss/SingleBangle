@@ -60,44 +60,54 @@ $(function(){
 </head>
 <body>
 <!-- 이제 여기서 ${detailView} 내용 꺼내기! -->
-<div id="container">
-	<div id="tipBoardView">
-	<div class="row">
-		<div class="col-3">[${detailView.category}]</div>
-		<div class="col-9">${detailView.title }</div>
-	</div>
-	<div class="row">
-		<div class="col-3">${detailView.writeDate }</div>
-		<div class="col-3">${detailView.writer}</div>
-		<div class="col-3"></div>
-		<div class="col-3">조회수: ${detailView.viewCount }</div>
-	</div>
-	<div class="row">
-		<div class="col-8"></div>
-		<div class="col-2">스크랩 수: <span id="scrapCount">${detailView.scrapCount }</span></div>
-		<div class="col-2">좋아요 수: <span id="likeCount">${detailView.likeCount}</span></div>
-	</div>
-	<div class="row">
-		<div class="col-12" style="height:800px">${detailView.contents }</div>
-	</div>
-	<div class="row">
-		<div class="col-4">
-<!-- 		로그인하지 않으면 스크랩 버튼이 안 보임!! -->
-		<c:choose>
-			<c:when test="${loginInfo == null}"></c:when>
-			<c:otherwise>
-				<c:choose>
-					<c:when test="${scrapCheck == 0}">
-				<button type="button" id="btnScrap" style="border:0px;outline:0px;background-color:transparent;">
-				<img id="scrapImage" src="/img/tipBoard/star.png" style="width:30px;height:30px;"></button>
-					</c:when>
-					<c:otherwise>
-				<button type="button" id="btnScrap" style="border:0px;outline:0px;background-color:transparent;">
-				<img id="scrapImage" src="/img/tipBoard/coloredStar.png" style="width:30px;height:30px;"></button>
-					</c:otherwise>
-				</c:choose>
-<!-- 	ajax를 이 위치에서 쓰는 이유는?ㅜ.ㅜ			 -->
-				<script>
+	<div id="container">
+		<div id="tipBoardView">
+			<div class="row">
+				<div class="col-3">[${detailView.category}]</div>
+				<div class="col-9">${detailView.title }</div>
+			</div>
+			<div class="row">
+				<div class="col-3">${detailView.writeDate }</div>
+				<div class="col-3">${detailView.writer}</div>
+				<div class="col-3"></div>
+				<div class="col-3">조회수: ${detailView.viewCount }</div>
+			</div>
+			<div class="row">
+				<div class="col-8"></div>
+				<div class="col-2">
+					스크랩 수: <span id="scrapCount">${detailView.scrapCount }</span>
+				</div>
+				<div class="col-2">
+					좋아요 수: <span id="likeCount">${detailView.likeCount}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12" style="height: 800px">${detailView.contents }</div>
+			</div>
+			<div class="row">
+				<div class="col-4">
+					<!-- 		로그인하지 않으면 스크랩 버튼이 안 보임!! -->
+					<c:choose>
+						<c:when test="${loginInfo == null}"></c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${scrapCheck == 0}">
+									<button type="button" id="btnScrap"
+										style="border: 0px; outline: 0px; background-color: transparent;">
+										<img id="scrapImage" src="/img/tipBoard/star.png"
+											style="width: 30px; height: 30px;">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" id="btnScrap"
+										style="border: 0px; outline: 0px; background-color: transparent;">
+										<img id="scrapImage" src="/img/tipBoard/coloredStar.png"
+											style="width: 30px; height: 30px;">
+									</button>
+								</c:otherwise>
+							</c:choose>
+							<!-- 	ajax를 이 위치에서 쓰는 이유는?ㅜ.ㅜ			 -->
+							<script>
 				$("#btnScrap").on("click",function(){
 					var scrapSeq = ${detailView.seq};
 					var scrapCategory = ${detailView.category};
@@ -124,26 +134,33 @@ $(function(){
 					})
 				})
 				</script>
-			</c:otherwise>
-		</c:choose>
-		</div>
-		
-		<div class="col-4">
-<!-- 		로그인하지 않으면 좋아요 버튼이 안 보임!!!!  -->
-		<c:choose>
-		<c:when test="${loginInfo == null}"></c:when>
-		<c:otherwise>
-			<c:choose>
-				<c:when test="${likeCheck == 1}">
-					<button type="button" id="btnLike" style="border:0px;outline:0px;background-color:transparent;">
-					<img id="heartImage" src="/img/tipBoard/coloredHeart.png" style="width:30px;height:30px;"></button>
-				</c:when>
-				<c:otherwise><button type="button" id="btnLike" style="border:0px;outline:0px;background-color:transparent;">
-					<img id="heartImage" src="/img/tipBoard/heart.png" style="width:30px;height:30px;"></button>
-				</c:otherwise>
-			</c:choose>
-			
-			<script>
+						</c:otherwise>
+					</c:choose>
+				</div>
+
+				<div class="col-4">
+					<!-- 		로그인하지 않으면 좋아요 버튼이 안 보임!!!!  -->
+					<c:choose>
+						<c:when test="${loginInfo == null}"></c:when>
+						<c:otherwise>
+							<c:choose>
+								<c:when test="${likeCheck == 1}">
+									<button type="button" id="btnLike"
+										style="border: 0px; outline: 0px; background-color: transparent;">
+										<img id="heartImage" src="/img/tipBoard/coloredHeart.png"
+											style="width: 30px; height: 30px;">
+									</button>
+								</c:when>
+								<c:otherwise>
+									<button type="button" id="btnLike"
+										style="border: 0px; outline: 0px; background-color: transparent;">
+										<img id="heartImage" src="/img/tipBoard/heart.png"
+											style="width: 30px; height: 30px;">
+									</button>
+								</c:otherwise>
+							</c:choose>
+
+							<script>
 			//게시글 들어가서 좋아요 버튼 누름
 			$("#btnLike").on("click",function(){
 				//게시글의 seq와 접속한 id 값을 뽑아냄
@@ -170,63 +187,75 @@ $(function(){
 					})
 			});
 			</script>
-		</c:otherwise>
-	</c:choose>
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<div class="col-4">
+					<a id="kakao-link-btn" href="javascript:;"> <img
+						src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png" />
+					</a>
+				</div>
+			</div>
+			<c:choose>
+				<c:when test="${loginInfo.id == detailView.writer}">
+					<div class="row">
+						<div class="col-8"></div>
+						<div class="col-2">
+							<button id="updateTip">글 수정</button>
+						</div>
+						<div class="col-2">
+							<button id="deleteTip">글 삭제</button>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise></c:otherwise>
+			</c:choose>
+			<div class="row">
+				<div class="col-10">
+					<button id="goBoardList">목록으로</button>
+				</div>
+				<div class="col-2">
+					<c:choose>
+						<c:when test="${loginInfo == null}"></c:when>
+						<c:otherwise>
+							<input type="button" value="신고하기"
+								onclick="window.open('../board/reportPage.bo?url=${pageContext.request.contextPath}/board/detailView.bo?seq=${detailView.seq}','신고하기','width=500px, height=500px')">
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</div>
 		</div>
-		<div class="col-4"><a id="kakao-link-btn" href="javascript:;">
-<img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
-</a></div>
-	</div>
-	<c:choose>
-	<c:when test="${loginInfo.id == detailView.writer}">
-	<div class="row">
-		<div class="col-8"></div>
-		<div class="col-2"><button id="updateTip">글 수정</button></div>
-		<div class="col-2"><button id="deleteTip">글 삭제</button></div>
-	</div>
-	</c:when>
-	<c:otherwise></c:otherwise>
-	</c:choose>
-	<div class="row">
-	<div class="col-10"><button id="goBoardList">목록으로</button></div>
-	<div class="col-2">
-	<c:choose>
-		<c:when test="${loginInfo == null}"></c:when>
-		<c:otherwise><input type="button" value="신고하기" onclick="window.open('../board/reportPage.bo?url=${pageContext.request.contextPath}/board/detailView.bo?seq=${detailView.seq}','신고하기','width=500px, height=500px')"></c:otherwise>
-	</c:choose>
-	</div>
-	</div>
-	</div>
-
+		
 		<div id="replyBox">
 			<form id="cmtForm" name="cmtForm" method="post">
-				<br>
-				<br>
+				<br> <br>
+			
+				<div class="row">
+					<div class="col-10">
+						<textarea style="width: 800px" rows="3" cols="30" id="cmtWrite" placeholder="댓글은 로그인 후 이용가능합니다."></textarea>
+					</div>
+					<div class="col-2">
+						<button type="button" onclick="fn_Cmt()">확인</button>
+					</div>
+				</div>
+				
 				<div class="row">
 					<div col-12>
-						<span><strong>Comments</strong></span>  [<span id="cmtCount">0</span>]
+						<span><strong>Comments</strong></span> [<span id="cmtCount">0</span>]
 					</div>
 				</div>
-				<div class="row">
+				<div class="row">	
 					<div class="col-12">
-						<textarea style="width: 800px" rows="3" cols="30" id="cmtWrite"></textarea>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-12">
-					<button type="button" onclick="fn_Cmt()">댓글달기</button>
+						<div id="cmtListForm"></div>
 					</div>
 				</div>
 				<input type="hidden" id="seqB" name="seqB" value="${detailView.seq }">
 			</form>
-			
-			<div>
-				<div id="cmtListForm"></div>
-				</form>
-			</div>
+			<div id="paging" style="text-align:center;">${getNavi} </div>
 		</div>
+		
 	</div>
-<!-- 	script 겹쳐서 이미지 불러오는 데 에러생김! 그래서 아래로 내려주고, image 먼저 로딩되고 bootstrap 실행되도록 함! -->
+	<!-- 	script 겹쳐서 이미지 불러오는 데 에러생김! 그래서 아래로 내려주고, image 먼저 로딩되고 bootstrap 실행되도록 함! -->
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -288,10 +317,10 @@ $(function(){
 							
 				if(data[i].writer != id){
 					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-7'>"+data[i].contents
-					+"</div><div class='col-3'>"+data[i].writeDate+"</div></div>");			
+					+"</div><div class='col-3'>"+data[i].formedDate+"</div></div>");			
 				}else{
 					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-5 cmtContents'>"+data[i].contents
-							+"</div><div class='col-3'>"+data[i].writeDate
+							+"</div><div class='col-3'>"+data[i].formedDate
 							+"</div><div class='col-2'><a class='replyUpdate' seq="+data[i].seq+">수정</a> <a class='replyDelete' href='${pageContext.request.contextPath}/board/replyDelete.bo?seq=" 
 							+ data[i].seq + "&contents="+data[i].contents+"'>삭제</a> <a class='reUpdate' seq=" + data[i].seq + " hidden>확인</a> <a class='reCancel' seq="+data[i].seq+" hidden>취소</a></div>");
 				}		
