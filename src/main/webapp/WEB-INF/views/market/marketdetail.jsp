@@ -139,7 +139,7 @@
 			</c:when>
 		</c:choose>
 		<br>
-		<div style="">${dto.content }</div>
+		<div>${dto.content }</div>
 		<br>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id}">
