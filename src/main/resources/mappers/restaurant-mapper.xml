@@ -8,6 +8,14 @@
 		select * from restaurant order by seq desc
 	</select>
 	
+	<select id="selectN" resultType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
+		select * from restaurant where approvalCheck = 'N' order by seq desc
+	</select>
+	
+	<select id="selectY" resultType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
+		select * from restaurant where approvalCheck = 'Y' order by seq desc
+	</select>
+	
 	<insert id="insert" parameterType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
 		insert into restaurant values (restaurant_seq.nextval, #{writer}, #{title}, #{placeName}, #{jibunAddr}, #{roadAddr}, 
 										#{placePhone}, #{placeUrl}, #{xPos}, #{yPos}, sysdate, 'N')

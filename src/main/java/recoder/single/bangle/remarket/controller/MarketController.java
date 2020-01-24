@@ -21,7 +21,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 
-import configuration.Configuration;
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DAO.MarketDAO;
 import recoder.single.bangle.remarket.DAO.MarketFileDAO;
@@ -33,6 +32,7 @@ import recoder.single.bangle.remarket.service.MarketReplyService;
 import recoder.single.bangle.remarket.service.MarketService;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
 import recoder.single.bangle.tipBoard.DTO.ReportDTO;
+import utils.Configuration;
 
 @Controller
 @RequestMapping("/market")

@@ -16,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.Base64Utils;
 
-import configuration.Configuration;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DAO.FileDAO;
 import recoder.single.bangle.tipBoard.DTO.BoardDTO;
@@ -24,6 +23,7 @@ import recoder.single.bangle.tipBoard.DTO.CommentDTO;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
 import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
+import utils.Configuration;
 
 @Service
 public class BoardService {
