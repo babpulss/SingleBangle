@@ -18,15 +18,6 @@
 			body {
 				background-color: #f5f5f5;
 			}
-			
-			#logo{
-				width: 800px;
-                margin: auto;
-				text-align: center;
-			}
-			#logo img{
-				height: 180px;
-			}
         
         	#searchBox{
         		margin: auto;
