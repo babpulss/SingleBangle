@@ -9,16 +9,13 @@
 	</select>
 	
 	<insert id="insert" parameterType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
-		insert into restaurant values (restaurant_seq.nextval, #{writer}, #{title}, sysdate, 0, 'N')
+		insert into restaurant values (restaurant_seq.nextval, #{writer}, #{title}, #{placeName}, #{jibunAddr}, #{roadAddr}, 
+										#{placePhone}, #{placeUrl}, #{xPos}, #{yPos}, sysdate, 'N')
 	</insert>
 	
 	<select id="getMaxSeq" resultType="Integer">
 		select max(seq) from restaurant where writer = #{writer}
 	</select>
-	
-	<update id="updateViewCount" parameterType="Integer">
-		update restaurant set viewCount = viewCount + 1 where seq = #{seq}
-	</update>
 	
 	<select id="selectBySeq" resultType="recoder.single.bangle.restaurant.DTO.RestaurantDTO">
 		select * from restaurant where seq = #{seq}

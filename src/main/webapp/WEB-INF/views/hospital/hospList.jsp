@@ -68,7 +68,7 @@
             }
             .hospVal{
             	min-width: 400px;
-            	padding-left: 15px;
+            	padding-left: 10px;
             }
             #hospUrl a{
             	color: #0085cb;
@@ -263,8 +263,10 @@
 			var zoomControl = new kakao.maps.ZoomControl();
 			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
             
+			
             //////////////////////////////////////////////////
 
+            
             // 시도 코드 입력으로 시군구 코드 가져오기
             $("#sidoCd").on("change", function(){
                 var sidoCd = $("#sidoCd").val();

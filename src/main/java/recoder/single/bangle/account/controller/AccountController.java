@@ -1,20 +1,22 @@
 package recoder.single.bangle.account.controller;
 
-import java.sql.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.text.View;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import recoder.single.bangle.account.DTO.AccountDTO;
 import recoder.single.bangle.account.service.AccountService;
 import recoder.single.bangle.account.service.PdfService;
+import recoder.single.bangle.member.DTO.MemberDTO;
 
 @RequestMapping("/accountBook")
 @Controller
@@ -41,12 +43,14 @@ public class AccountController {
 //	가계부 월별 리스트
 	@RequestMapping("/accountBook")
 	public String account() {
+		MemberDTO dto = (MemberDTO)session.getAttribute("loginInfo");
+		String id = dto.getId();
+		String name = dto.getName();
 		
-		session.setAttribute("id", "shinikho");		
 		try {
 			List<AccountDTO> list = accService.monthListById(session);
-			session.setAttribute("userName",list.get(0).getUserName());
-			System.out.println(session.getAttribute("userName"));
+			session.setAttribute("userName",name);
+			session.setAttribute("id",id);
 			request.setAttribute("list", list);
 			
 		} catch (Exception e) {
@@ -92,8 +96,9 @@ public class AccountController {
 	
 	@RequestMapping("/Account.add")
 	public String insertAccount(AccountDTO dto) {
-		String id = (String)session.getAttribute("id");
-		String userName = (String)session.getAttribute("userName");		
+		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
+		String id = memberdto.getId();
+		String userName = memberdto.getName();		
 		int price = Integer.parseInt(request.getParameter("price"));
 		AccountDTO dtos = new AccountDTO();
 		if(dto.getSpec().equals("수입")) {
@@ -168,8 +173,9 @@ public class AccountController {
 	
 	@RequestMapping("/modifyAccount")
 	public String modifyAccount(AccountDTO dto) {
-		dto.setId((String)session.getAttribute("id"));
-		dto.setUserName((String)session.getAttribute("userName"));
+		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
+		dto.setId(memberdto.getId());
+		dto.setUserName(memberdto.getName());
 		System.out.println("controller"+dto);
 		int result = accService.modifyAccountData(dto);
 		if(result>0) {
@@ -204,4 +210,11 @@ public class AccountController {
 			return "error";
 		}
 	}
+	
+	@RequestMapping("/excelDownload")
+	public View excelDownload(HttpServletRequest req, HttpServletResponse resp, Model model,AccountDTO dto) {
+		
+		return null;
+	}
+	
 }
