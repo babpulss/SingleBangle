@@ -20,6 +20,14 @@ public class RestaurantDAO {
 		return sst.selectList("Restaurant.selectAll");
 	}
 	
+	public List<RestaurantDTO> selectN() throws Exception {
+		return sst.selectList("Restaurant.selectN");
+	}
+	
+	public List<RestaurantDTO> selectY() throws Exception {
+		return sst.selectList("Restaurant.selectY");
+	}
+	
 	public int insert(RestaurantDTO dto) throws Exception {
 		return sst.insert("Restaurant.insert", dto);
 	}

@@ -1,4 +1,4 @@
-package configuration;
+package utils;
 
 public class Configuration {
 	public static int recordCountPerPage = 10;

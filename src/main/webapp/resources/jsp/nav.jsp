@@ -52,7 +52,7 @@
 							우리동네 </span>
 				</a>
 				<div class="submenu">
-					<a href="${pageContext.request.contextPath}/restaurant/rstList.rst"><div class="sidebar"><span id="submenuSpan"></span><i class="fas fa-utensils sidebar"></i> 혼밥 / 혼술</div></a>
+					<a href="${pageContext.request.contextPath}/restaurant/rstListY.rst"><div class="sidebar"><span id="submenuSpan"></span><i class="fas fa-utensils sidebar"></i> 혼밥 / 혼술</div></a>
 					<a href="${pageContext.request.contextPath}/hosp/hospList.hp"><div class="sidebar"><span id="submenuSpan"></span><i class="far fa-hospital sidebar"></i> 병원 검색</div></a>
 				</div>
 				</li>
