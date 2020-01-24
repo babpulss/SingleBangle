@@ -12,6 +12,29 @@
 
         <link rel="stylesheet" href="/css/nav.css">
         <style>
+        	*{
+				box-sizing: border-box;
+			}
+			body {
+				background-color: #f5f5f5;
+			}
+        	
+        	#writeBox{
+        		margin: auto;
+        		text-align: center;
+        		min-width: 700px;
+        	}
+        	#writeBtn{
+        		border: none;
+            	border-radius: 5px;
+            	width: 80px;
+            	height: 40px;
+            	font-size: 16px;
+            	cursor: pointer;
+            	color: white;
+            	background-color: #0085cb;
+        	}
+        	
 			#placeInfoBox{
             	display: none;
             	width: 80%;
@@ -43,7 +66,10 @@
 
         <br><br><br>
         <div id="mainWrapper">
-
+			<div id="writeBox">
+				<button type="button" id="writeBtn">글쓰기</button>
+			</div>
+			
             <br><hr><br>
             <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
             <br><hr><br>
@@ -71,6 +97,12 @@
         <br><br><br>
 
 		<script>
+			$("#writeBtn").on("click", function(){
+	    		location.href="${pageContext.request.contextPath}/restaurant/rstWrite.rst";
+	    	})
+			
+	    	
+	    	
 			var container = document.getElementById('map');  // 지도를 담을 영역의 DOM 레퍼런스
 	        var options = {
 	            center: new kakao.maps.LatLng(37.568101, 126.983053),  // 지도의 중심좌표

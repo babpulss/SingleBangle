@@ -131,14 +131,11 @@
 	                <input type="text" placeholder="search">
 	                <button type="button" id="searchBtn">검색</button>
 	            </div>
-	            <button type="button" id="writeBtn">글쓰기</button>
+	            <button type="button" id="writeBtn" style="color:white; background-color:white;">글쓰기</button>
 	        </div>
 		</div>
 	
         <script>
-        	$("#writeBtn").on("click", function(){
-        		location.href="${pageContext.request.contextPath}/restaurant/rstWrite.rst";
-        	})
         </script>
     </body>
 </html>
