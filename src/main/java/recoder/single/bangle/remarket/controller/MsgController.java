@@ -10,11 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import configuration.Configuration;
+import utils.Configuration;
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DAO.MsgDAO;
 import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
+import utils.Configuration;
 
 @Controller
 @RequestMapping("/msg")

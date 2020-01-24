@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import configuration.Configuration;
+import utils.Configuration;
 import recoder.single.bangle.remarket.DTO.MarketDTO;
 import recoder.single.bangle.remarket.DTO.MsgDTO;
 
