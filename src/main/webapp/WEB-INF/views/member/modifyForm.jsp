@@ -9,7 +9,8 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
         <title>정보 수정</title>
-
+        
+        <link rel="stylesheet" href="/css/nav.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -131,138 +132,139 @@
                 </script>
             </c:when>
         </c:choose>
+        
+        <jsp:include page="/resources/jsp/nav.jsp"/>
 
-        <div id="logo">
-            <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
-        </div>
-        <br>
-        <div id="myPageContainer">
-            <div id="myPageHeader">
-                <div id="myPageTitle"><b>정보 수정</b></div>
-                <div id="myPageNotice">아이디와 이름 정보는 수정하실 수 없습니다.</div>
-            </div>
-            <br><br><br>
-            <div id="menuContainer">
-                <a href="${pageContext.request.contextPath}/member/myInfo.mem" class="myMenu" id="myInfo">
-                    <div class="menuIcon">
-                        <img src="/img/member/info_unchecked.png" alt="">
-                    </div>
-                    <div class="menuText">
-                        <b>내 정보</b>
-                    </div>
-                </a>
-                <a href="${pageContext.request.contextPath}/member/modifyInfo.mem" class="myMenu" id="modifyInfo">
-                    <div class="menuIcon">
-                        <img src="/img/member/modify_checked.png" alt="">
-                    </div>
-                    <div class="menuText">
-                        <b>정보 수정</b>
-                    </div>
-                </a>
-                <a href="${pageContext.request.contextPath}/member/myScrap.mem?currentPage=1" class="myMenu" id="myScrap">
-                    <div class="menuIcon">
-                        <img src="/img/member/bookmark01_unchecked.png" alt="">
-                    </div>
-                    <div class="menuText">
-                        <b>스크랩</b>
-                    </div>
-                </a>
-                <a href="${pageContext.request.contextPath}/member/withdraw.mem" class="myMenu" id="withdraw">
-                    <div class="menuIcon">
-                        <img src="/img/member/withdraw_unchecked.png" alt="">
-                    </div>
-                    <div class="menuText">
-                        <b>회원 탈퇴</b>
-                    </div>
-                </a>
-            </div>
-            <br><br><br>
-            <form action="${pageContext.request.contextPath}/member/modifyInfoProc.mem" method="post" id="signupFrm"
-                  onsubmit="return validCheck()">
-                <table id="allInfo">
-                    <tbody>
-                        <tr>
-                            <td class="info1">아이디</td>
-                            <td class="info2"><b>${infoResult.id}</b></td>
-                        </tr>
-                        <tr>
-                            <td class="info1">비밀번호</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="password" class="infoVal" id="pw" name="pw" placeholder=" 8~20자 이내 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*) ">
-                                    <br>
-                                    <span class="validCheck" id="pwCheck"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">비밀번호 확인</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="password" class="infoVal" id="pwre" name="pwre" placeholder=" 비밀번호 확인 ">
-                                    <br>
-                                    <span class="validCheck" id="pwreCheck"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">이름</td>
-                            <td class="info2">${infoResult.name} (${infoResult.getRealGender()})</td>
-                        </tr>
-                        <tr>
-                            <td class="info1">전화번호</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value="${infoResult.phone}">
-                                    <br>
-                                    <span class="validCheck" id="phoneCheck"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">이메일</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value="${infoResult.email}">
-                                    <button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
-                                    <br>
-                                    <span class="validCheck" id="emailCheck"></span>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">우편번호</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value="${infoResult.postcode}">
-                                    <button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">기본주소</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value="${infoResult.address1}">
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="info1">상세주소</td>
-                            <td class="info2">
-                                <div class="info">
-                                    <input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value="${infoResult.address2}">
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div id="submitContainer">
-                    <input type="submit" class="btns submitBtns" id="modifyBtn" value="수정 완료">
-                    <button type="button" class="btns submitBtns" id="cancelBtn">수정 취소</button>
-                </div>
-            </form>
+		<div id="mainWrapper">
+	        <br><br><br>
+	        <div id="myPageContainer">
+	            <div id="myPageHeader">
+	                <div id="myPageTitle"><b>정보 수정</b></div>
+	                <div id="myPageNotice">아이디와 이름 정보는 수정하실 수 없습니다.</div>
+	            </div>
+	            <br><br><br>
+	            <div id="menuContainer">
+	                <a href="${pageContext.request.contextPath}/member/myInfo.mem" class="myMenu" id="myInfo">
+	                    <div class="menuIcon">
+	                        <img src="/img/member/info_unchecked.png" alt="">
+	                    </div>
+	                    <div class="menuText">
+	                        <b>내 정보</b>
+	                    </div>
+	                </a>
+	                <a href="${pageContext.request.contextPath}/member/modifyInfo.mem" class="myMenu" id="modifyInfo">
+	                    <div class="menuIcon">
+	                        <img src="/img/member/modify_checked.png" alt="">
+	                    </div>
+	                    <div class="menuText">
+	                        <b>정보 수정</b>
+	                    </div>
+	                </a>
+	                <a href="${pageContext.request.contextPath}/member/myScrap.mem?currentPage=1" class="myMenu" id="myScrap">
+	                    <div class="menuIcon">
+	                        <img src="/img/member/bookmark01_unchecked.png" alt="">
+	                    </div>
+	                    <div class="menuText">
+	                        <b>스크랩</b>
+	                    </div>
+	                </a>
+	                <a href="${pageContext.request.contextPath}/member/withdraw.mem" class="myMenu" id="withdraw">
+	                    <div class="menuIcon">
+	                        <img src="/img/member/withdraw_unchecked.png" alt="">
+	                    </div>
+	                    <div class="menuText">
+	                        <b>회원 탈퇴</b>
+	                    </div>
+	                </a>
+	            </div>
+	            <br><br><br>
+	            <form action="${pageContext.request.contextPath}/member/modifyInfoProc.mem" method="post" id="signupFrm"
+	                  onsubmit="return validCheck()">
+	                <table id="allInfo">
+	                    <tbody>
+	                        <tr>
+	                            <td class="info1">아이디</td>
+	                            <td class="info2"><b>${infoResult.id}</b></td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">비밀번호</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="password" class="infoVal" id="pw" name="pw" placeholder=" 8~20자 이내 영문, 숫자, 특수문자(!,@,#,$,%,^,&,*) ">
+	                                    <br>
+	                                    <span class="validCheck" id="pwCheck"></span>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">비밀번호 확인</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="password" class="infoVal" id="pwre" name="pwre" placeholder=" 비밀번호 확인 ">
+	                                    <br>
+	                                    <span class="validCheck" id="pwreCheck"></span>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">이름</td>
+	                            <td class="info2">${infoResult.name} (${infoResult.getRealGender()})</td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">전화번호</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" -없이 숫자만 입력 " value="${infoResult.phone}">
+	                                    <br>
+	                                    <span class="validCheck" id="phoneCheck"></span>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">이메일</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="text" class="infoVal" id="email" name="email" placeholder=" 이메일 인증 필수 " value="${infoResult.email}">
+	                                    <button type="button" class="btns infoBtns" id="emailBtn">이메일 인증</button>
+	                                    <br>
+	                                    <span class="validCheck" id="emailCheck"></span>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">우편번호</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="text" class="infoVal" id="postcode" name="postcode" placeholder=" 필수 입력 " readonly value="${infoResult.postcode}">
+	                                    <button type="button" class="btns infoBtns" id="postcodeBtn" onclick="findPostcode()">우편번호 찾기</button>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">기본주소</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="text" class="infoVal" id="address1" name="address1" placeholder=" 필수 입력 " readonly value="${infoResult.address1}">
+	                                </div>
+	                            </td>
+	                        </tr>
+	                        <tr>
+	                            <td class="info1">상세주소</td>
+	                            <td class="info2">
+	                                <div class="info">
+	                                    <input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " value="${infoResult.address2}">
+	                                </div>
+	                            </td>
+	                        </tr>
+	                    </tbody>
+	                </table>
+	
+	                <div id="submitContainer">
+	                    <input type="submit" class="btns submitBtns" id="modifyBtn" value="수정 완료">
+	                    <button type="button" class="btns submitBtns" id="cancelBtn">수정 취소</button>
+	                </div>
+	            </form>
+	        </div>
         </div>
 
         <script>

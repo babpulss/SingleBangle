@@ -266,7 +266,7 @@
             console.log("사진 개수 : " + ${filesList.size()});    
 
             $("#backBtn").on("click", function(){
-                history.back();
+            	location.href="${pageContext.request.contextPath}/restaurant/rstListY.rst";
             })
 
 
