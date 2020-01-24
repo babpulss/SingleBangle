@@ -9,16 +9,20 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<link rel="stylesheet" href="/resources/css/accountCSS/accountCSS.css" />
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script src="/resources/js/accountJS/accountJS.js"></script>
+<link rel="stylesheet"
+	href="/resources/css/accountCSS/accountCSS.css" />
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/css/nav.css"/>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -28,12 +32,51 @@
 .hasDatepicker {
 	cursor: pointer;
 }
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 1px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 </style>
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <div id="mainWrapper">
-	<main class="container-fluid pt-5">
+	<main class="container pt-5">
 	<div class="card mb-5">
 
 		<div class="card-header">
@@ -57,7 +100,7 @@
 							<th class="border-0 text-uppercase small font-weight-bold">금액</th>
 							<th class="border-0 text-uppercase small font-weight-bold">비고</th>
 							<th class="border-0 text-uppercase small font-weight-bold"
-								id="modiBtn" style="display: none">선택</th>
+								id="modiBtn">선택</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,14 +135,14 @@
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
-							<td class="plusBtn"><button type="button" class="btn btn-secondary" id="addBtn"
-								>적용</button></td>
+							<td class="plusBtn"><button type="button" class="button" id="addBtn" style="vertical-align:middle;"
+								><span>적용 </span></button></td>
 						</tr>
 					</tbody>
 				</table>
 			</form>
-			<table
-				class="table table-bordered table-sm m-0 table table-condensed table-hover">
+			<table id="accountTable"
+				class="table 	table-sm m-0 table table-condensed table-hover">
 				<thead>
 					<tr>
 						<th>날짜</th>
@@ -110,9 +153,9 @@
 					</tr>
 				</thead>
 
-				<tbody id="monthDataBody">
+				<tbody>
 					<c:forEach items="${list }" var="list">
-						<tr class="monthData">
+						<tr>
 							<td class="formedDate">${list.formedReportingDate}</td>
 							<td class="income"><fmt:formatNumber value="${list.income}"
 									pattern="###,###,###원" /></td>
@@ -123,29 +166,18 @@
 							<td><a
 								href="${pageContext.request.contextPath }/accountBook/detailAccount?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									id="detailBtn" class="btn btn-primary"value="상세보기"></a> <a href="${pageContext.request.contextPath }/accountBook/deleteAccountByMonth?formedReportingDate=${list.formedReportingDate}"><input
+									id="detailBtn" class="btn btn-light"value="상세보기"></a> <a href="${pageContext.request.contextPath }/accountBook/deleteAccountByMonth?formedReportingDate=${list.formedReportingDate}"><input
 									type="button" name="${list.formedReportingDate}"
-									class="deleteBtn btn btn-danger"value="삭제"></a></td>
+									class="deleteBtn btn btn-dark"value="삭제"></a></td>
 						</tr>
 
 					</c:forEach>
 				</tbody>
+				<tfoot>
+				</tfoot>
 			</table>
 		</div>
-		<div class="card-footer p-0">
-			<nav aria-label="...">
-				<ul class="pagination justify-content-end mt-3 mr-3">
-					<li class="page-item disabled"><span class="page-link">Previous</span>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item active"><span class="page-link">2<span
-							class="sr-only">(current)</span>
-					</span></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-			</nav>
-		</div>
+		
 	</div>
 	</main>
 	</div>
@@ -254,7 +286,12 @@
 		
 
 		});
+		$(function(){
+		$("#accountTable").DataTable();
 		
+		})
+			
+	
 	</script>
 </body>
 </html>

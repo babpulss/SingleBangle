@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import recoder.single.bangle.account.DAO.AccountDAO;
 import recoder.single.bangle.account.DTO.AccountDTO;
+import recoder.single.bangle.member.DTO.MemberDTO;
 
 @Service
 public class AccountService {
@@ -18,7 +19,8 @@ public class AccountService {
 
 	// 월별 수입/지출 
 	public List<AccountDTO> monthListById(HttpSession session) throws Exception {
-		String id = (String) session.getAttribute("id");
+		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
+		String id = memberdto.getId();
 		
 		return dao.getMyAccountAll(id);
 	
