@@ -98,7 +98,7 @@
                         <b>정보 수정</b>
                     </div>
                 </a>
-                <a href="${pageContext.request.contextPath}/member/myScrap.mem?id=${loginInfo.id}" class="myMenu" id="myScrap">
+                <a href="${pageContext.request.contextPath}/member/myScrap.mem?currentPage=1" class="myMenu" id="myScrap">
                     <div class="menuIcon">
                         <img src="/img/member/bookmark01_checked.png" alt="">
                     </div>
@@ -132,6 +132,7 @@
 	                    <div class="col-2">${dto.scrapDate}</div>
 	                </div>
 	            </c:forEach>
+					<div>${pagination}</div>
 	        </div>
 	        <button id="toMyPage">돌아가기</button>
         </div>

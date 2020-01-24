@@ -44,7 +44,7 @@
 .typing ul li.on {  
   display: inline-block; 
   animation-name: cursor; 
-  animation-duration: 1s; 
+  animation-duration: .5s; 
   animation-iteration-count: infinite; 
 } 
 

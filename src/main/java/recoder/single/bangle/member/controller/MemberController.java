@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
@@ -17,6 +18,7 @@ import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
+import recoder.single.bangle.tipBoard.service.BoardService;
 
 @Controller
 @RequestMapping("/member")
@@ -162,10 +164,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myScrap.mem")
-	public String myScrap(String id, Model model) {
+	public String myScrap(@RequestParam(value="currentPage")String currentPage_, Model model) {
 		List<ScrapDTO> myScrapList = new ArrayList<>();
+		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
 		try {
-			myScrapList = boardDao.myScrap(id);
+			int currentPage;
+			if (currentPage_ == null) currentPage = 1;
+			else currentPage = Integer.parseInt(currentPage_);
+
+			int totalScraps = boardDao.myScrapCount(id);
+			int totalPage = totalScraps / 10 + 1;
+
+			if (currentPage <= 0) currentPage = 1;
+			else if (currentPage > totalPage) currentPage = totalPage;
+
+			myScrapList = boardDao.myScrap(id, currentPage);
+			String pagination = memSvc.myScrapPagination(totalScraps, currentPage);
+			model.addAttribute("pagination", pagination);
+
 			model.addAttribute("myScrapList", myScrapList);
 		} catch (Exception e) {
 			e.printStackTrace();
