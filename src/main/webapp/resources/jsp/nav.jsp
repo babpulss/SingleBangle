@@ -45,7 +45,7 @@
 				</a></li>
 				<li class="has-subnav sidebar"><a
 					href="#"><i
-						style="line-height: 50px;cursor: s-resize;" class="fa fa-map-marker sidebar"></i> <span class="nav-text sidebar">
+						style="line-height: 50px; cursor: default" class="fa fa-map-marker sidebar"></i> <span style="cursor: default;" class="nav-text sidebar">
 							우리동네 </span>
 				</a>
 				<div class="submenu">
