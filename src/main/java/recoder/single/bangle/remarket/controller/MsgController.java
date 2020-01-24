@@ -10,7 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import configuration.Configuration;
 import recoder.single.bangle.member.DTO.MemberDTO;
+import recoder.single.bangle.remarket.DAO.MsgDAO;
 import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
 
@@ -26,6 +28,9 @@ public class MsgController {
 
 	@Autowired
 	private HttpServletRequest request;
+	
+	@Autowired
+	private MsgDAO dao;
 	
 	@RequestMapping("/writeMsg.do")
 	public String writeMsg(Model model) {
@@ -58,9 +63,18 @@ public class MsgController {
 	@RequestMapping("/msgList.do")//메세지 리스트 확인하기
 	public String msgList(Model model) {
 		try {
-			System.out.println("메세지 리스트 확인하기");
 			String receiver = (String)request.getParameter("receiver");
-			List<MsgDTO> list = service.msgList(receiver);
+			String navi = dao.getPageNavi(1, receiver);
+			int cpage=1;
+			String page = request.getParameter("cpage");
+			if(page != null) {
+				cpage = Integer.parseInt(page);
+			}
+			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
+			int end = cpage * Configuration.recordCountPerPage;
+			List<MsgDTO> list = dao.selectByPage(start, end, receiver);
+//			List<MsgDTO> list = service.msgList(receiver);
+			model.addAttribute("navi", navi);
 			model.addAttribute("list", list);
 			return "msg/msgbox";
 		}catch(Exception e) {
