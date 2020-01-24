@@ -238,7 +238,7 @@
 	                                    </tr>
 	                                    <tr>
 	                                        <td class="placeKey">상세정보</td>
-	                                        <td class="placeVal" id="placeUrlTmp"><a href="${dto.placeUrl}" target="_blank">상세정보</a></td>
+	                                        <td class="placeVal" id="placeUrl"><a href="${dto.placeUrl}" target="_blank">식당 상세정보</a></td>
 	                                    </tr>
 	                                </tbody>
 	                            </table>

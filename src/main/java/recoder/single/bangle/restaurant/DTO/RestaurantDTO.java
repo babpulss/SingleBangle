@@ -19,6 +19,7 @@ public class RestaurantDTO {
 	private Timestamp writeDate;
 	private String approvalCheck;
 	
+	private String formedDate1;
 	private MultipartFile[] files;
 	private String[] contents;
 	
@@ -133,6 +134,9 @@ public class RestaurantDTO {
 	public String getFormedDate1() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		return sdf.format(this.writeDate);
+	}
+	public void setFormedDate1(String formedDate1) {
+		this.formedDate1 = formedDate1;
 	}
 	public String getFormedDate2() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
