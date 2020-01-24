@@ -146,7 +146,7 @@ public class MemberService {
 				continue;
 			}
 			sb.append("<a href='/member/myScrap.mem?currentPage=" + i + "'>");
-			sb.append(i);
+			sb.append(" " + i + " ");
 			sb.append("</a>");
 		}
 		if (lastCount != totalPage) {

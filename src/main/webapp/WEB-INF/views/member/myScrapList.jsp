@@ -68,6 +68,9 @@
             .menuText{
                 font-size: 16px;
             }
+            .pagination {
+            	text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -132,7 +135,7 @@
 	                    <div class="col-2">${dto.scrapDate}</div>
 	                </div>
 	            </c:forEach>
-					<div>${pagination}</div>
+					<div class="pagination">${pagination}</div>
 	        </div>
 	        <button id="toMyPage">돌아가기</button>
         </div>
