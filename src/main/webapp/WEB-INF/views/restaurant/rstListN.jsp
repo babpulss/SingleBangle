@@ -8,6 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
         <title>혼밥/혼술</title>
         
         <link rel="stylesheet" href="/css/nav.css">
@@ -55,11 +56,8 @@
             .bRow a {
                 text-decoration: none;
             }
-            .bRow>span:nth-child(4) {
-                flex-basis: 10%;
-            }
             .bRow>span:last-child {
-                flex-basis: 10%;
+                flex-basis: 20%;
             }
             .bRow:last-child {
                 border-radius: 0 0 10px 10px;
@@ -114,7 +112,6 @@
 	                <span>제목</span>
 	                <span>작성자</span>
 	                <span>작성일</span>
-	                <span>조회수</span>
 	            </div>
 	            
 	            <c:forEach items="${list}" var="dto">
@@ -123,7 +120,6 @@
 		                <span><a href="${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=${dto.seq}">${dto.title}</a></span>
 		                <span>${dto.writer}</span>
 		                <span>${dto.getFormedDate1()}</span>
-		                <span></span>
 		            </div>
 	            </c:forEach>
 	            

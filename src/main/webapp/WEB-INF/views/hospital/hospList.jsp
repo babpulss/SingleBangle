@@ -156,8 +156,9 @@
 	                </tbody>
 	            </table>
 	        </div>
-	        <br><br><br>
 		</div>
+		<br><br><br>
+		
         <script>
             //////////////////////////////////////////////////
 
@@ -209,10 +210,11 @@
 
 
             // 배열에 추가된 마커를 지도에서 삭제하는 함수
-            function hideMarkers() {
+            function removeMarkers() {
                 for (var i = 0; i < markers.length; i++) {
                     markers[i].setMap(null);
                 }
+                markers = [];  // 새로운 검색 결과를 담기 위해 마커 배열 초기화
             }
 
             
@@ -238,13 +240,14 @@
             		$("#hospAddr").html(hospData.addr);
             		$("#hospTel").html(hospData.telNo);
             		if(hospData.url != ""){
-	            		$("#hospUrl").html('<a href=' + hospData.url + ' target="_blank">' + hospData.url + '</a>');            			
+	            		$("#hospUrl").html('<a href=' + hospData.url + ' target="_blank">' + hospData.url + '</a>');
             		}
             		else{
             			$("#hospUrl").html("웹 사이트를 제공하지 않는 병원입니다.");
             		}
             		
             		$("#hospInfoBox").css("display", "block");
+            		$("#hospUrl")[0].scrollIntoView();
             	};
             }
             
@@ -403,8 +406,7 @@
                     dataType:"json"
                 }).done(function(data){
                     console.log(data);  // 서버로부터 받은 병원 목록 출력해주기
-                    hideMarkers();  // 새로운 검색 결과를 다시 표시하기 위해 지도에 표시되어있는 마커 제거하기
-                    markers.length = 0;  // 새로운 검색 결과를 담기 위해 마커 배열 초기화
+                    removeMarkers();  // 새로운 검색 결과를 다시 표시하기 위해 지도에 표시되어있는 마커 제거하기
 
                     // 병원 상세정보 창 비우기
                     $("#hospName").html("");

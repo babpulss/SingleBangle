@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.restaurant.DTO.RestaurantDTO;
 import recoder.single.bangle.restaurant.DTO.RestaurantFileDTO;
@@ -30,7 +32,7 @@ public class RestaurantController {
 	public String rstListN(Model model){
 		List<RestaurantDTO> list = rstSvc.rstListN();
 		model.addAttribute("list", list);
-		System.out.println("승인된 혼밥/혼술 글의 개수 : " + list.size());
+		System.out.println("승인대기 중인 혼밥/혼술 글의 개수 : " + list.size());
 		System.out.println();
 		
 		return "restaurant/rstListN";
@@ -39,9 +41,17 @@ public class RestaurantController {
 	@RequestMapping("/rstListY.rst")
 	public String rstListY(Model model){
 		List<RestaurantDTO> list = rstSvc.rstListY();
+		for(int i = 0; i < list.size(); i++) {
+			String formedDate = list.get(i).getFormedDate1();
+			list.get(i).setFormedDate1(formedDate);
+		}
 		model.addAttribute("list", list);
 		System.out.println("승인된 혼밥/혼술 글의 개수 : " + list.size());
 		System.out.println();
+		
+		Gson g = new Gson();
+		String toJsonResult = g.toJson(list);
+		model.addAttribute("jsonResult", toJsonResult);
 		
 		return "restaurant/rstListY";
 	}
