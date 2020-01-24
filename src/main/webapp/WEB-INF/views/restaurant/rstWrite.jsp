@@ -21,6 +21,8 @@
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
 		
 		<title>혼밥/혼술 글 작성</title>
+		
+		<link rel="stylesheet" href="/css/nav.css">
         <style>
         	/* 지도에 적용되는 CSS */
         	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -264,127 +266,131 @@
             </c:when>
 		</c:choose>
     
-        <br><br><br>
-        <form action="${pageContext.request.contextPath}/restaurant/rstWriteProc.rst" method="post" id="frm" enctype="multipart/form-data" onsubmit="return validCheck()">
-           
-            <div id="frmContainer">
-                <div class="container" id="titleBox">
-                    <div class="row">
-                        <div class="col-12" id="titleArea">
-                            <input type="text" id="title" name="title" placeholder=" 제목" >
-                        </div>
-                    </div>
-                </div>
-                <br>
-
-                <div class="container writeBox">
-                    <br>
-                    <div class="row">
-                        <div class="col-12 filesArea">
-                            <label class="filesLabel">사진 선택</label>
-                            <input type="file" class="files" name="files" hidden>
-                        </div>
-                        <div class="col-12 imgArea">
-                            <img src="" alt="" class="imgs">
-                        </div>
-                        <div class="col-12 contentsArea">
-                            <label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>
-                            <div class="contentsTmp" contenteditable="true"></div>
-                            <textarea class="contents" name="contents" placeholder=" 내용" value="" hidden></textarea>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="addContainer">
-                <div class="container" id="addBox">
-                    <div class="row">
-                        <div class="col-12" id="addArea">
-                            <button type="button" id="addBtn">추가 입력</button>
-                        </div>
-                    </div>
-                </div>
-                <hr>
-            </div>
-            
-            <div id="mapContainer">
-            	<div class="container" id="mapBox">
-                    <br>
-                    <div class="row">
-                    	<div class="col-12" id="mapSearchArea">
-                    		<label for="keyword" id="mapSearchLabel">혼밥/혼술집 위치 검색</label>
-                    	</div>
-                        <div class="col-12 map_wrap" id="mapArea">
-                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-				            <div id="menu_wrap" class="bg_white">
-				                <div class="option">
-				                    <div>
-										키워드 : <input type="text" id="keyword" size="15" placeholder=" 검색어 입력 "> 
-										<button type="button" id="searchBtn">검색하기</button> 
-				                    </div>
-				                </div>
-				                <hr>
-				                <ul id="placesList"></ul>
-				                <div id="pagination"></div>
-				            </div>
-                        </div>
-                        <div class="col-12" id="placeArea">
-	                        <label id="placeLabel"><b>혼밥/혼술집 위치를 등록하세요. (필수 입력)</b></label>
-	                        <div id="placeInfoBox">
-		                        <table id="placeInfo">
-									<tbody>
-		                        		<tr>
-		                        			<td class="placeKey">장소명</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="placeName" name="placeName" readonly></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">지번 주소</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="jibunAddr" name="jibunAddr" readonly></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">도로명 주소</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="roadAddr" name="roadAddr" readonly></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">전화번호</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="placePhone" name="placePhone" readonly></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">상세정보</td>
-		                        			<td class="placeVal" id="placeUrlTmp"></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">x좌표</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="xPos" name="xPos" readonly></td>
-		                        		</tr>
-		                        		<tr>
-		                        			<td class="placeKey">y좌표</td>
-		                        			<td class="placeVal"><input type="text" class="placeInput" id="yPos" name="yPos" readonly></td>
-										</tr>
-									</tbody>
-								</table>
-								<input type="text" class="placeInput" id="placeUrl" name="placeUrl" hidden>
-							</div>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-                <hr>
-            </div>
-
-			<div id="submitContainer">
-                <div class="container" id="submitBox">
-                    <div class="row">
-                        <div class="col-12" id="submitArea">
-                            <input type="submit" class="btns submitBtns" id="submitBtn" value="작성">
-                            <button type="button" class="btns submitBtns" id="cancelBtn">취소</button>
-                        </div>
-                    </div>
-                </div>
-			</div>
-        </form>
-        <br><br><br>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
+    	
+    	<br><br><br>
+    	<div id="mainWrapper">
+	        <form action="${pageContext.request.contextPath}/restaurant/rstWriteProc.rst" method="post" id="frm" enctype="multipart/form-data" onsubmit="return validCheck()">
+	           
+	            <div id="frmContainer">
+	                <div class="container" id="titleBox">
+	                    <div class="row">
+	                        <div class="col-12" id="titleArea">
+	                            <input type="text" id="title" name="title" placeholder=" 제목" >
+	                        </div>
+	                    </div>
+	                </div>
+	                <br>
+	
+	                <div class="container writeBox">
+	                    <br>
+	                    <div class="row">
+	                        <div class="col-12 filesArea">
+	                            <label class="filesLabel">사진 선택</label>
+	                            <input type="file" class="files" name="files" hidden>
+	                        </div>
+	                        <div class="col-12 imgArea">
+	                            <img src="" alt="" class="imgs">
+	                        </div>
+	                        <div class="col-12 contentsArea">
+	                            <label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>
+	                            <div class="contentsTmp" contenteditable="true"></div>
+	                            <textarea class="contents" name="contents" placeholder=" 내용" hidden></textarea>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	
+	            <div id="addContainer">
+	                <div class="container" id="addBox">
+	                    <div class="row">
+	                        <div class="col-12" id="addArea">
+	                            <button type="button" id="addBtn">추가 입력</button>
+	                        </div>
+	                    </div>
+	                </div>
+	                <hr>
+	            </div>
+	            
+	            <div id="mapContainer">
+	            	<div class="container" id="mapBox">
+	                    <br>
+	                    <div class="row">
+	                    	<div class="col-12" id="mapSearchArea">
+	                    		<label for="keyword" id="mapSearchLabel">혼밥/혼술집 위치 검색</label>
+	                    	</div>
+	                        <div class="col-12 map_wrap" id="mapArea">
+	                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+	
+					            <div id="menu_wrap" class="bg_white">
+					                <div class="option">
+					                    <div>
+											키워드 : <input type="text" id="keyword" size="15" placeholder=" 검색어 입력 "> 
+											<button type="button" id="searchBtn">검색하기</button> 
+					                    </div>
+					                </div>
+					                <hr>
+					                <ul id="placesList"></ul>
+					                <div id="pagination"></div>
+					            </div>
+	                        </div>
+	                        <div class="col-12" id="placeArea">
+		                        <label id="placeLabel"><b>혼밥/혼술집 위치를 등록하세요. (필수 입력)</b></label>
+		                        <div id="placeInfoBox">
+			                        <table id="placeInfo">
+										<tbody>
+			                        		<tr>
+			                        			<td class="placeKey">장소명</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="placeName" name="placeName" readonly></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">지번 주소</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="jibunAddr" name="jibunAddr" readonly></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">도로명 주소</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="roadAddr" name="roadAddr" readonly></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">전화번호</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="placePhone" name="placePhone" readonly></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">상세정보</td>
+			                        			<td class="placeVal" id="placeUrlTmp"></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">x좌표</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="xPos" name="xPos" readonly></td>
+			                        		</tr>
+			                        		<tr>
+			                        			<td class="placeKey">y좌표</td>
+			                        			<td class="placeVal"><input type="text" class="placeInput" id="yPos" name="yPos" readonly></td>
+											</tr>
+										</tbody>
+									</table>
+									<input type="text" class="placeInput" id="placeUrl" name="placeUrl" hidden>
+								</div>
+	                        </div>
+	                        <br>
+	                    </div>
+	                </div>
+	                <hr>
+	            </div>
+	
+				<div id="submitContainer">
+	                <div class="container" id="submitBox">
+	                    <div class="row">
+	                        <div class="col-12" id="submitArea">
+	                            <input type="submit" class="btns submitBtns" id="submitBtn" value="작성">
+	                            <button type="button" class="btns submitBtns" id="cancelBtn">취소</button>
+	                        </div>
+	                    </div>
+	                </div>
+				</div>
+	        </form>
+    	</div>
+		<br><br><br>
 
         <script>
             // 라벨을 클릭하면 숨겨진 input[type="file"]이 클릭되게 하는 함수
@@ -523,18 +529,21 @@
                 
                 if(title == ""){
                 	alert("제목을 입력하세요.");
+                	$("#title").focus();
                 	return false;
                 }
                 
                 for(var i = 0; i < boxLength; i++){
                     if($($(".imgs")[i]).attr("src") == ""){
                         alert("입력하지 않은 사진란이 있습니다.");
+                        $(".filesArea")[i].scrollIntoView();
                         return false;
                     }
                 }
                 
                 if(place == ""){
                 	alert("주소를 등록하세요.");
+                	$("#keyword").focus();
                 	return false;
                 }
                 

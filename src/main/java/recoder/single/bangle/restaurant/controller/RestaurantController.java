@@ -26,14 +26,24 @@ public class RestaurantController {
 	
 	
 	
-	@RequestMapping("/rstList.rst")
-	public String rstList(Model model){
-		List<RestaurantDTO> list = rstSvc.rstList();
+	@RequestMapping("/rstListN.rst")
+	public String rstListN(Model model){
+		List<RestaurantDTO> list = rstSvc.rstListN();
 		model.addAttribute("list", list);
-		System.out.println("혼밥/혼술 게시판에 있는 글의 개수 : " + list.size());
+		System.out.println("승인된 혼밥/혼술 글의 개수 : " + list.size());
 		System.out.println();
 		
-		return "restaurant/rstList";
+		return "restaurant/rstListN";
+	}
+	
+	@RequestMapping("/rstListY.rst")
+	public String rstListY(Model model){
+		List<RestaurantDTO> list = rstSvc.rstListY();
+		model.addAttribute("list", list);
+		System.out.println("승인된 혼밥/혼술 글의 개수 : " + list.size());
+		System.out.println();
+		
+		return "restaurant/rstListY";
 	}
 	
 	@RequestMapping("/rstWrite.rst")
