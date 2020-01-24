@@ -332,7 +332,7 @@ public class BoardService {
 	public List<ScrapDTO> myScrap(String id){
 		List<ScrapDTO> myScrapList = new ArrayList<>();
 		try {
-			myScrapList = boardDao.myScrap(id);
+			myScrapList = boardDao.myScrap(id); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

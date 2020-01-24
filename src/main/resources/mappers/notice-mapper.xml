@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="Notice">
-  	<select id="getNotices" resultType="recoder.sinlge.bangle.Notice.NoticeDTO">
+  	<select id="getNotices" resultType="recoder.single.bangle.notice.NoticeDTO">
   		select * from notice
   	</select>
   	
-  	<select id="readNotice" resultType="recoder.sinlge.bangle.Notice.NoticeDTO">
+  	<select id="readNotice" resultType="recoder.single.bangle.notice.NoticeDTO">
   		select * from notice where seq = #{seq}
   	</select>
   	

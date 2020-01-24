@@ -1,49 +1,49 @@
-package recoder.single.bangle.Notice;
+package recoder.single.bangle.notice;
 
 import java.util.List;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/notice")
+
 @Controller
-public class Notice {
+@RequestMapping("/notice")
+public class NoticeController {
 
 	@Autowired
-	private SqlSessionTemplate sst;
+	private NoticeDAO dao;
 	
 	@RequestMapping("")
 	public String toNotice(Model m) {
-		List<NoticeDTO> list = sst.selectList("Notice.getNotices");
+		List<NoticeDTO> list = dao.toNotice();
 		m.addAttribute("list", list);
-		return "notice";
+		return "notice/notice";
 	}
 
 	@RequestMapping("/readNotice")
 	public String update(int seq, Model m) {
-		NoticeDTO dto = sst.selectOne("Notice.readNotice");
+		NoticeDTO dto = dao.update(seq);
 		m.addAttribute("dto", dto);
-		return "notice";
+		return "notice/detailNoticeView";
 	}
 
 	@RequestMapping("/postNotice")
 	public String postNotice(NoticeDTO dto) {
-		sst.insert("Notice.postNotice", dto);
-		return "notice";
+		dao.postNotice(dto);
+		return "notice/notice";
 	}
 
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeDTO dto) {
-		sst.update("Notice.updateNotice", dto);
+		dao.updateNotice(dto);
 		return "notice";
 	}
 	
 	@RequestMapping("/deleteNotice")
 	public String deleteNotice(NoticeDTO dto) {
-		sst.delete("Notice.deleteNotice", dto);
-		return "notice";
+		dao.deleteNotice(dto);
+		return "notice/notice";
 	}
 }

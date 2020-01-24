@@ -1,4 +1,4 @@
-package recoder.single.bangle.Notice;
+package recoder.single.bangle.notice;
 
 import java.sql.Timestamp;
 

@@ -105,15 +105,14 @@
         <div id="bHeader">
         	<h1>공지 사항</h1>
         </div>
+        <c:forEach items="${list}" var="i">
         <div class="bRow">
-            <span>운영자</span>
-            <span><a href="#">싱글방글을 오픈하였습니다</a></span>
-            <span>2018.01.01</span>
+            <span>${i.seq}</span>
+            <span><a href="/notice/readNotice?seq=${i.seq}">${i.title}</a></span>
+            <span>${i.writeDate}</span>
         </div>
+        </c:forEach>
         <div class="bRow" style="height:20px"></div>
    </div> 
-   <div id="btns">
-        <button type="button">목록</button>
-   </div>
 </body>
 </html>
