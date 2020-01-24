@@ -370,6 +370,10 @@
 						function() {
 							location.href = "${pageContext.request.contextPath}/accountBook/ListViewForPDF";
 						});
+		
+		$("#printInvoice").on("click",function(){
+			location.href="${pageContext.request.contextPath}/accountBook/excelDownload";
+		});
 
 		$(function() {
 			//input을 datepicker로 선언

@@ -1,16 +1,26 @@
 package recoder.single.bangle.account.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.text.View;
 
+import org.apache.poi.hssf.usermodel.HSSFDataFormat; // 데이터 포맷
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;	// 워크북 
+import org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined; // 컬러
+import org.apache.poi.ss.usermodel.BorderStyle;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import recoder.single.bangle.account.DTO.AccountDTO;
@@ -32,8 +42,6 @@ public class AccountController {
 	
 	@Autowired
 	AccountService accService;
-	
-
 	
 	@RequestMapping("/account")
 	public String accountIndex() {
@@ -212,9 +220,141 @@ public class AccountController {
 	}
 	
 	@RequestMapping("/excelDownload")
-	public View excelDownload(HttpServletRequest req, HttpServletResponse resp, Model model,AccountDTO dto) {
-		
-		return null;
+	public void excelDownload(HttpServletRequest req, HttpServletResponse resp) {
+		String formedDate = (String)session.getAttribute("formedDate");
+		session.setAttribute("formedDate", formedDate);
+		try {
+			List<AccountDTO> list = accService.ListAllByFormedReportingDate(session,formedDate);
+			
+			// 워크북 생성
+			Workbook wb = new HSSFWorkbook();
+			Sheet sheet = wb.createSheet(formedDate+" 가계부");
+			Row row = null;
+			Cell cell = null;
+			int rowNo = 0;
+			int incomeSum=0;
+			int expenseSum=0;
+			
+			// 테이블 헤더용 스타일
+			CellStyle headStyle = wb.createCellStyle();
+			// 가는 경계선을 가집니다.
+			headStyle.setBorderTop(BorderStyle.THIN);
+			headStyle.setBorderBottom(BorderStyle.THIN);
+			headStyle.setBorderLeft(BorderStyle.THIN);
+			headStyle.setBorderRight(BorderStyle.THIN);
+			// 배경색은 노란색입니다.
+			headStyle.setFillForegroundColor(HSSFColorPredefined.YELLOW.getIndex());
+			headStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+			// 데이터는 가운데 정렬합니다.
+			headStyle.setAlignment(HorizontalAlignment.CENTER);
+			
+			// 데이터용 경계 스타일
+			CellStyle bodyStyle = wb.createCellStyle();
+			bodyStyle.setBorderTop(BorderStyle.THIN);
+			bodyStyle.setBorderBottom(BorderStyle.THIN);
+			bodyStyle.setBorderLeft(BorderStyle.THIN);
+			bodyStyle.setBorderRight(BorderStyle.THIN);
+			bodyStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("#,##0"));
+			
+			CellStyle footStyle = wb.createCellStyle();
+			footStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("#,##0"));
+			
+			// 헤더 생성
+			row = sheet.createRow(rowNo++);
+			
+			int columnIndex = 0;
+		    while (columnIndex < 7) {
+		    	
+		    	if(columnIndex == 0) {
+		    		sheet.setColumnWidth(columnIndex, 3000);
+		    	} else if (columnIndex == 1) {
+		    		sheet.setColumnWidth(columnIndex, 4000);
+		    	} else if (columnIndex == 2) {
+		    		sheet.setColumnWidth(columnIndex, 3000);
+		    	} else if (columnIndex == 3) {
+		    		sheet.setColumnWidth(columnIndex, 3000);
+		    	} else if (columnIndex == 4) {
+		    		sheet.setColumnWidth(columnIndex, 4000);
+		    	} else if (columnIndex == 5) {
+		    		sheet.setColumnWidth(columnIndex, 4000);
+		    	} else if (columnIndex == 6) {
+		    		sheet.setColumnWidth(columnIndex, 6000);
+		    	}
+		    	columnIndex++;
+		    }
+			cell = row.createCell(0);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("날짜");
+			cell = row.createCell(1);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("용도");
+			cell = row.createCell(2);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("결제방식");
+			cell = row.createCell(3);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("입금/출금");
+			cell = row.createCell(4);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("수입");
+			cell = row.createCell(5);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("지출");
+			cell = row.createCell(6);
+			cell.setCellStyle(headStyle);
+			cell.setCellValue("비고");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			
+			for(AccountDTO dto : list) {
+				dto.getReportingDate();
+				row = sheet.createRow(rowNo++);
+				cell = row.createCell(0);
+				cell.setCellStyle(bodyStyle);							
+				cell.setCellValue(format.format(dto.getReportingDate()));
+				cell = row.createCell(1);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getDetails());
+				cell = row.createCell(2);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getPayments());
+				cell = row.createCell(3);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getSpec());
+				cell = row.createCell(4);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getIncome());
+				cell = row.createCell(5);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getExpense());
+				cell = row.createCell(6);
+				cell.setCellStyle(bodyStyle);
+				cell.setCellValue(dto.getRemarks());
+				incomeSum += dto.getIncome();
+				expenseSum += dto.getExpense();
+			}
+			row = sheet.createRow(rowNo++);
+			cell = row.createCell(0);
+			cell = row.createCell(1);
+			cell = row.createCell(2);
+			cell = row.createCell(3);
+			cell.setCellValue("총 합계");
+			cell = row.createCell(4);
+			cell.setCellStyle(footStyle);
+			cell.setCellValue(incomeSum);
+			cell = row.createCell(5);
+			cell.setCellStyle(footStyle);
+			cell.setCellValue(expenseSum);
+			cell = row.createCell(6);
+			
+			// 엑셀 출력
+			resp.setContentType("application/vnd.ms-excel");
+			resp.setHeader("Content-Disposition", "attachment;filename="+formedDate+".xls");
+			
+			wb.write(resp.getOutputStream());
+			wb.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
 }
