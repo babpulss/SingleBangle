@@ -181,6 +181,28 @@
                 if (status === kakao.maps.services.Status.OK) {
                     var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
                     map.setCenter(coords);
+                    
+                 	// 마커가 표시될 위치
+                    var userMarkerPosition  = new kakao.maps.LatLng(result[0].y, result[0].x); 
+                    
+                 	// 마커 이미지의 주소
+                    var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                 	
+                 	// 마커 이미지의 크기
+                 	var imageSize = new kakao.maps.Size(24, 35);
+                 	
+                 	// 마커 이미지 생성
+                 	var userMarkerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+
+                    // 마커 생성
+                    var userMarker = new kakao.maps.Marker({
+                        position: userMarkerPosition,
+                        image: userMarkerImage
+                    });
+
+                    // 마커가 지도 위에 표시되도록 설정
+                    userMarker.setMap(map);
+                    
                 } else{
                     alert("로그인하셔야 근처 혼밥/혼술집을 보실 수 있습니다.")
                 }

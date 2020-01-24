@@ -9,6 +9,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <title>마이 페이지</title>
 
+        <link rel="stylesheet" href="/css/nav.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -18,7 +19,7 @@
             }
 
             #logo{
-            	width: 800px;
+                width: 800px;
                 margin: auto;
                 text-align: center;
             }
@@ -71,53 +72,53 @@
                     location.href="${pageContext.request.contextPath}/member/login.mem";
                 </script>		
             </c:when>
-            <c:otherwise>
-                <div id="logo">
-                    <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
-                </div>
-                <br>
-                <div id="myPageContainer">
-                    <div id="myPageHeader">
-                        <div id="myPageTitle"><b>마이 페이지</b></div>
-                        <div id="myPageNotice"><b>${loginInfo.id}</b>님의 정보를 관리할 수 있습니다.</div>
-                    </div>
-                    <br><br><br>
-                    <div id="menuContainer">
-                        <a href="${pageContext.request.contextPath}/member/myInfo.mem" class="myMenu" id="myInfo">
-                            <div class="menuIcon">
-                                <img src="/img/member/info_unchecked.png" alt="">
-                            </div>
-                            <div class="menuText">
-                                <b>내 정보</b>
-                            </div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/member/modifyInfo.mem" class="myMenu" id="modifyInfo">
-                            <div class="menuIcon">
-                                <img src="/img/member/modify_unchecked.png" alt="">
-                            </div>
-                            <div class="menuText">
-                                <b>정보 수정</b>
-                            </div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/member/myScrap.mem?currentPage=1" class="myMenu" id="myScrap">
-                            <div class="menuIcon">
-                                <img src="/img/member/bookmark01_unchecked.png" alt="">
-                            </div>
-                            <div class="menuText">
-                                <b>스크랩</b>
-                            </div>
-                        </a>
-                        <a href="${pageContext.request.contextPath}/member/withdraw.mem" class="myMenu" id="withdraw">
-                            <div class="menuIcon">
-                                <img src="/img/member/withdraw_unchecked.png" alt="">
-                            </div>
-                            <div class="menuText">
-                                <b>회원 탈퇴</b>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </c:otherwise>
         </c:choose>
+
+        <jsp:include page="/resources/jsp/nav.jsp"/>
+
+        <div id="mainWrapper">
+            <br><br><br>
+            <div id="myPageContainer">
+                <div id="myPageHeader">
+                    <div id="myPageTitle"><b>마이 페이지</b></div>
+                    <div id="myPageNotice"><b>${loginInfo.id}</b>님의 정보를 관리할 수 있습니다.</div>
+                </div>
+                <br><br><br>
+                <div id="menuContainer">
+                    <a href="${pageContext.request.contextPath}/member/myInfo.mem" class="myMenu" id="myInfo">
+                        <div class="menuIcon">
+                            <img src="/img/member/info_unchecked.png" alt="">
+                        </div>
+                        <div class="menuText">
+                            <b>내 정보</b>
+                        </div>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/member/modifyInfo.mem" class="myMenu" id="modifyInfo">
+                        <div class="menuIcon">
+                            <img src="/img/member/modify_unchecked.png" alt="">
+                        </div>
+                        <div class="menuText">
+                            <b>정보 수정</b>
+                        </div>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/member/myScrap.mem?currentPage=1" class="myMenu" id="myScrap">
+                        <div class="menuIcon">
+                            <img src="/img/member/bookmark01_unchecked.png" alt="">
+                        </div>
+                        <div class="menuText">
+                            <b>스크랩</b>
+                        </div>
+                    </a>
+                    <a href="${pageContext.request.contextPath}/member/withdraw.mem" class="myMenu" id="withdraw">
+                        <div class="menuIcon">
+                            <img src="/img/member/withdraw_unchecked.png" alt="">
+                        </div>
+                        <div class="menuText">
+                            <b>회원 탈퇴</b>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
