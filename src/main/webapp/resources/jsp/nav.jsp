@@ -34,7 +34,7 @@
 		</div>
 		<nav id="sidebar" class="main-menu sidebar">
 			<ul id="navBar" class="sidebar">
-				<li class="sidebar"><a href="#"> <i
+				<li class="sidebar"><a href="/notice"> <i
 	style="line-height: 50px" class="fa fa-exclamation"></i> <span
 						class="nav-text sidebar"> 공지사항 </span>
 				</a></li>
@@ -45,7 +45,7 @@
 				</a></li>
 				<li class="has-subnav sidebar"><a
 					href="#"><i
-						style="line-height: 50px" class="fa fa-map-marker sidebar"></i> <span class="nav-text sidebar">
+						style="line-height: 50px;cursor: s-resize;" class="fa fa-map-marker sidebar"></i> <span class="nav-text sidebar">
 							우리동네 </span>
 				</a>
 				<div class="submenu">

@@ -387,6 +387,7 @@ nav ul, nav li {
 /* 메인 화면 래퍼 */
 #mainWrapper {
 	margin: 65px 110px 0 110px;
+	font-family: 'BMHANNAAir';
 }
 
 /* 모바일 환경 */

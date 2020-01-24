@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="Notice">
+  	<select id="getNotices" resultType="recoder.sinlge.bangle.Notice.NoticeDTO">
+  		select * from notice
+  	</select>
+  	
+  	<select id="readNotice" resultType="recoder.sinlge.bangle.Notice.NoticeDTO">
+  		select * from notice where seq = #{seq}
+  	</select>
+  	
+  	<insert id="postNotice">
+  		insert into notice values(notice_seq.nextval, #{title}, #{contents}, sysdate)
+  	</insert>
+  	
+  	<update id="updateNotice">
+  		update notice set title = #{title}, contents = #{contents} where seq = #{seq}
+  	</update>
+  	
+  	<delete id="deleteNotice">
+  		delete from notice where seq = #{seq}
+  	</delete>
+  </mapper>

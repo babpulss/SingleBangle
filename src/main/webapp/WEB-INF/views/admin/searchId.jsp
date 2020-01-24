@@ -42,6 +42,13 @@
   </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${empty loginInfo}">
+	<script>
+		location.href= "/";
+	</script>
+</c:when>
+<c:otherwise>
 	<c:choose>
 	<c:when test="${!empty checkId}">
 		이미 리스트에 동록된 회원입니다.<br>
@@ -111,5 +118,8 @@
 			}
 		})
 	</script>
+
+</c:otherwise>
+</c:choose>
 </body>
 </html>

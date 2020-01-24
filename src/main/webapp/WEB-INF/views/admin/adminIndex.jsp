@@ -12,7 +12,6 @@
 <style>
 #mainWrapper {
 	margin-top: 80px;
-	font-family: 'BMHANNAAir';
 }
 
 #viewBlackList, #viewReporting {
@@ -73,6 +72,13 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+<c:choose>
+<c:when test="${empty loginInfo}">
+	<script>
+		location.href= "/";
+	</script>
+</c:when>
+<c:otherwise>
 <div id="mainWrapper">
 <div class="list">
 			<div id="btns">
@@ -100,5 +106,8 @@
 		location.href="${pageContext.request.contextPath}/admin/viewReporting";
 	});
 </script>
+
+</c:otherwise>
+</c:choose>
 </body>
 </html>
