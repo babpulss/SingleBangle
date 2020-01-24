@@ -154,7 +154,7 @@
 			<option>기타</option>
 			</select>
 			<input type="text" placeholder="search" name="title">
-            <button>검색</button>
+            <button style="border: none; width: 60px; height: 30px; border-radius: 10px;">검색</button>
             </form>
         </div>
         <c:choose>

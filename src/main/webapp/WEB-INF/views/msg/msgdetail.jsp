@@ -30,9 +30,9 @@
         #bHeader {
             background-color: #0085cb;
             border-radius: 10px 10px 0 0;
-            height: 50px;
+        	line-height: 50px;
         }
-        .bRow {
+        .bRow {	
             display: flex;
             justify-content: flex-start;
             align-items: center;

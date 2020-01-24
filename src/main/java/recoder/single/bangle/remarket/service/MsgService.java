@@ -48,6 +48,7 @@ public class MsgService {
 	public int notRead(String receiver){
 		try {
 			int notRead = dao.notRead(receiver);
+			System.out.println("안읽은 메세지 갯수 : " + notRead);
 			return notRead;
 		}catch(Exception e) {
 			e.printStackTrace();

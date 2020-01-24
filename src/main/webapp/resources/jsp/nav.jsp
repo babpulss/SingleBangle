@@ -23,7 +23,7 @@
 					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
 					<c:choose>
 						<c:when test="${notRead > 0 }">
-							<span style="position: relative; right: 370px; top: 10px; color: red;">new!</span>
+							<span style="position: relative; right: 280px; top: 13px; font-size: 10px; color: red;">new!</span>
 						</c:when>
 					</c:choose>
 					<span id="rightMyPage"><a

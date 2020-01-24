@@ -108,7 +108,6 @@
 <jsp:include page="/resources/jsp/nav.jsp"/>
 
 <div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
-<div style="text-align: center;">✉</div>
 <div id="bHeader" class="bRow">
             <div style="width:50%; float:left">보낸사람</div>
             <div style="width:50%; float:left">제목</div>
