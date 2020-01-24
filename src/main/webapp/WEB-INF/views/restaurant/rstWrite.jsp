@@ -561,7 +561,7 @@
                 var cancelConfirm = confirm("글 작성을 취소하시겠습니까?");
                 
                 if(cancelConfirm == true){
-                	location.href="${pageContext.request.contextPath}/restaurant/rstList.rst";
+                	location.href="${pageContext.request.contextPath}/restaurant/rstListY.rst";
                 }
             })
             
