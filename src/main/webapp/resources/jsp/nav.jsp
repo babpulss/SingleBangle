@@ -94,25 +94,29 @@
 				<b>싱글방글 로그인</b>
 			</div>
 			<br>
-
-			<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
-				<ul class="rightSidebar">
-					<li class="rightSidebar"><input type="text"
-						class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
-					</li>
-					<li class="rightSidebar"><input type="password"
-						class="rightSidebar loginVal" id="pw" name="pw"
-						placeholder=" PASSWORD"><br></li>
-					<li class="rightSidebar" id="loginBtnBox">
-						<button class="loginBtns" id="loginBtn">Login</button>
-					</li>
-					<li class="rightSidebar" id="joinBox">
-						<a href="${pageContext.request.contextPath}/member/findId.mem">아이디 찾기</a> | 
-						<a href="${pageContext.request.contextPath}/member/findPw.mem">비밀번호 찾기</a> | 
-						<a href="${pageContext.request.contextPath}/member/signUp.mem">회원가입</a>
-					</li>
-				</ul>
-			</form>
+			
+			<c:choose>
+				<c:when test="${loginInfo==null}">
+				<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
+					<ul class="rightSidebar">
+						<li class="rightSidebar"><input type="text"
+							class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
+						</li>
+						<li class="rightSidebar"><input type="password"
+							class="rightSidebar loginVal" id="pw" name="pw"
+							placeholder=" PASSWORD"><br></li>
+						<li class="rightSidebar" id="loginBtnBox">
+							<button class="loginBtns" id="loginBtn">Login</button>
+						</li>
+						<li class="rightSidebar" id="joinBox">
+							<a href="${pageContext.request.contextPath}/member/findId.mem">아이디 찾기</a> | 
+							<a href="${pageContext.request.contextPath}/member/findPw.mem">비밀번호 찾기</a> | 
+							<a href="${pageContext.request.contextPath}/member/signUp.mem">회원가입</a>
+						</li>
+					</ul>
+				</form>
+				</c:when>
+			</c:choose>
 		</div>
 	</div>
 	<script>
