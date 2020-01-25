@@ -23,12 +23,9 @@
 					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
 					<c:choose>
 						<c:when test="${notRead > 0 }">
-							<span style="position: relative; right: 370px; top: 10px; color: red;">new!</span>
+							<span class="blinkEle"style="position: fixed; z-index:500 ;right: 280px; top: 13px; font-size: 10px; color: red;">new!</span>
 						</c:when>
 					</c:choose>
-					<span id="rightMyPage"><a
-						href="${pageContext.request.contextPath}/member/myPage.mem"
-						id="myPageBtn">My Page</a></span>
 					<span id="rightLogout"><a
 						href="${pageContext.request.contextPath}/member/logout.mem"
 						id="logoutBtn">Logout</a></span>
@@ -37,7 +34,7 @@
 		</div>
 		<nav id="sidebar" class="main-menu sidebar">
 			<ul id="navBar" class="sidebar">
-				<li class="sidebar"><a href="#"> <i
+				<li class="sidebar"><a href="/notice"> <i
 	style="line-height: 50px" class="fa fa-exclamation"></i> <span
 						class="nav-text sidebar"> 공지사항 </span>
 				</a></li>
@@ -48,11 +45,11 @@
 				</a></li>
 				<li class="has-subnav sidebar"><a
 					href="#"><i
-						style="line-height: 50px" class="fa fa-map-marker sidebar"></i> <span class="nav-text sidebar">
+						style="line-height: 50px; cursor: default" class="fa fa-map-marker sidebar"></i> <span style="cursor: default;" class="nav-text sidebar">
 							우리동네 </span>
 				</a>
 				<div class="submenu">
-					<a href="${pageContext.request.contextPath}/restaurant/rstList.rst"><div class="sidebar"><span id="submenuSpan"></span><i class="fas fa-utensils sidebar"></i> 혼밥 / 혼술</div></a>
+					<a href="${pageContext.request.contextPath}/restaurant/rstListY.rst"><div class="sidebar"><span id="submenuSpan"></span><i class="fas fa-utensils sidebar"></i> 혼밥 / 혼술</div></a>
 					<a href="${pageContext.request.contextPath}/hosp/hospList.hp"><div class="sidebar"><span id="submenuSpan"></span><i class="far fa-hospital sidebar"></i> 병원 검색</div></a>
 				</div>
 				</li>
@@ -75,6 +72,12 @@
 					</span>
 				</a></li>
 				</c:if>
+				<c:if test="${!empty loginInfo}">
+				<li class="has-subnav sidebar" id="myPageBtn"><a href="${pageContext.request.contextPath }/member/myPage.mem"> <i
+						style="line-height: 50px" class="fa fa-portrait fa-2x"></i> <span class="nav-text">마이 페이지 
+					</span>
+				</a></li>
+				</c:if>
 				<c:if test="${loginInfo.adminCheck eq \"Y\"}">
 				<li class="has-subnav sidebar" id="account"><a href="${pageContext.request.contextPath }/admin"> <i
 						style="line-height: 50px" class="fa fa-user-cog fa-2x"></i> <span class="nav-text"> 관리자 페이지 
@@ -91,25 +94,34 @@
 				<b>싱글방글 로그인</b>
 			</div>
 			<br>
-
-			<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
-				<ul class="rightSidebar">
-					<li class="rightSidebar"><input type="text"
-						class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
-					</li>
-					<li class="rightSidebar"><input type="password"
-						class="rightSidebar loginVal" id="pw" name="pw"
-						placeholder=" PASSWORD"><br></li>
-					<li class="rightSidebar" id="loginBtnBox">
-						<button class="loginBtns" id="loginBtn">Login</button>
-					</li>
-					<li class="rightSidebar" id="joinBox">
-						<a href="${pageContext.request.contextPath}/member/findId.mem">아이디 찾기</a> | 
-						<a href="${pageContext.request.contextPath}/member/findPw.mem">비밀번호 찾기</a> | 
-						<a href="${pageContext.request.contextPath}/member/signUp.mem">회원가입</a>
-					</li>
-				</ul>
-			</form>
+			
+			<c:choose>
+				<c:when test="${loginInfo==null}">
+				<form action="${pageContext.request.contextPath}/member/loginProc.mem" method="post">
+					<ul class="rightSidebar">
+						<li class="rightSidebar"><input type="text"
+							class="rightSidebar loginVal" id="id" name="id" placeholder=" ID"><br>
+						</li>
+						<li class="rightSidebar"><input type="password"
+							class="rightSidebar loginVal" id="pw" name="pw"
+							placeholder=" PASSWORD"><br></li>
+						<li class="rightSidebar" id="loginBtnBox">
+							<button class="loginBtns" id="loginBtn">Login</button>
+						</li>
+						<li class="rightSidebar" id="joinBox">
+							<a href="${pageContext.request.contextPath}/member/findId.mem">아이디 찾기</a> | 
+							<a href="${pageContext.request.contextPath}/member/findPw.mem">비밀번호 찾기</a> | 
+							<a href="${pageContext.request.contextPath}/member/signUp.mem">회원가입</a>
+						</li>
+					</ul>
+				</form>
+				</c:when>
+			</c:choose>
 		</div>
 	</div>
+	<script>
+	setInterval(function(){
+		  $(".blinkEle").toggle();
+		}, 250);
+	</script>
 <script src="/js/index/index.js"></script>

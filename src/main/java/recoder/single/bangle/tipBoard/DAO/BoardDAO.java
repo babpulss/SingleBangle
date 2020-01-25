@@ -114,8 +114,18 @@ public class BoardDAO {
 			return sst.update("Tip.scrapPlus",seq);
 		}
 		
-		public List<ScrapDTO> myScrap(String id) throws Exception{
-			return sst.selectList("Tip.myScrap",id);
+		public List<ScrapDTO> myScrap(String id, int currentPage) throws Exception{
+			Map<String, Object> map = new HashMap<>();
+			int end = currentPage * 10;
+			int start = end - 9; 
+			map.put("id", id);
+			map.put("currentPage", currentPage);
+			map.put("start", start);
+			map.put("end", end);
+			return sst.selectList("Tip.myScrap",map);
+		}
+		public int myScrapCount(String id) throws Exception{
+			return sst.selectOne("Tip.myScrapCount",id);
 		}
 		
 		public int tipCount() throws Exception{

@@ -23,10 +23,20 @@ public class RestaurantService {
 
 
 
-	public List<RestaurantDTO> rstList() {
+	public List<RestaurantDTO> rstListN() {
 		List<RestaurantDTO> list = null;
 		try {
-			list = rstDao.selectAll();
+			list = rstDao.selectN();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	} 
+	
+	public List<RestaurantDTO> rstListY() {
+		List<RestaurantDTO> list = null;
+		try {
+			list = rstDao.selectY();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

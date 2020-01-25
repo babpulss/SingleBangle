@@ -1,10 +1,7 @@
 package recoder.single.bangle.account.service;
 
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
-import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
 
@@ -36,15 +33,6 @@ public class PdfService {
 
 	public void createPdf(HttpServletRequest req,HttpServletResponse resp,String pdfValue){
 		
-		
-//	     URL oracle = new URL("http://localhost/");
-//	      BufferedReader in = new BufferedReader(
-//	            new InputStreamReader(oracle.openStream()));
-//
-//	      String inputLine;
-//	      while ((inputLine = in.readLine()) != null)
-//	         System.out.println(inputLine);
-//	      in.close();
 	   
 		System.out.println("도착");
 		Document document = new Document(PageSize.A4, 50, 50, 50,50);
@@ -70,28 +58,11 @@ public class PdfService {
 			HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
 			htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
 			
-//			Image image1 = Image.getInstance("//파일//경로//입력");
-//
-//			image1.scaleToFit(1200, 800);
-//
-//			image1.setAbsolutePosition(10, 60);
-//
-//		
-//
-//			Image image2 = Image.getInstance("//파일//경로//입력");
-//
-//			image2.scaleToFit(50,50);
-//
-//			image2.setAbsolutePosition(400, 200);
-//
-//			document.add(image1);
-//
-//			document.add(image2);
 			
 			PdfWriterPipeline pdf = new PdfWriterPipeline(document, writer);
 			HtmlPipeline html = new HtmlPipeline(htmlContext, pdf);
 			CssResolverPipeline css = new CssResolverPipeline(cssResolver, html);
-			//System.out.println(pdfValue);
+			
 			XMLWorker worker = new XMLWorker(css, true);
 			XMLParser xmlParser = new XMLParser(worker,Charset.forName("UTF-8"));
 			

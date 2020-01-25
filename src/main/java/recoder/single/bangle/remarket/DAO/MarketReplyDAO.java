@@ -8,8 +8,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import configuration.Configuration;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
+import utils.Configuration;
 
 @Repository
 public class MarketReplyDAO {

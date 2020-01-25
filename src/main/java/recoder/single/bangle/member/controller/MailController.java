@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import recoder.single.bangle.member.service.MemberService;
+import utils.EncryptionUtils;
 
 @Controller
 @RequestMapping("/email")
@@ -107,7 +108,7 @@ public class MailController {
 			String AuthenticationKey = temp.toString();
 			System.out.println("임시 비밀번호 : " + AuthenticationKey);
 			
-			memSvc.updatePw(id, AuthenticationKey);
+			memSvc.updatePw(id, EncryptionUtils.encrypt(AuthenticationKey));
 
 			MimeMessage message = mailSender.createMimeMessage();
 			try {

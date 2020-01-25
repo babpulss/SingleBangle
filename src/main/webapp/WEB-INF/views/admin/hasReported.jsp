@@ -151,6 +151,13 @@ html, body {
 </style>
 </head>
 <body>
+<c:choose>
+<c:when test="${empty loginInfo}">
+	<script>
+		location.href= "/";
+	</script>
+</c:when>
+<c:otherwise>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 	<div id="mainWrapper">
 		<div class="list">
@@ -218,5 +225,8 @@ html, body {
 			}
 		});
 	</script>
+
+</c:otherwise>
+</c:choose>
 </body>
 </html>

@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 
 import recoder.single.bangle.member.DAO.MemberDAO;
 import recoder.single.bangle.member.DTO.MemberDTO;
+import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 
 @Service
 public class MemberService {
 	
 	@Autowired
 	private MemberDAO dao;
-	
 	
 	
 	public int signUp(MemberDTO dto) {
@@ -114,5 +114,48 @@ public class MemberService {
 			e.printStackTrace();
 		}
 		return deleteResult;
+	}
+	
+	
+	// 마이스크랩 페이지네이션
+	public String myScrapPagination(int totalScraps, int currentPage) {
+		int countPerPage = 10;
+		int articlesPerPage = 10;
+		int totalPage;
+		if (totalScraps % articlesPerPage == 0)
+			totalPage = totalScraps / articlesPerPage;
+		else 
+			totalPage = totalScraps / articlesPerPage + 1;
+		
+		int startCount = (currentPage - 1) / countPerPage * countPerPage + 1;
+		int lastCount = startCount + countPerPage - 1;
+		if (lastCount > totalPage)
+			lastCount = totalPage;
+		
+		StringBuilder sb = new StringBuilder();
+
+		if (startCount != 1) {
+			sb.append("<a href='/member/myScrap.mem?currentPage=");
+			sb.append(startCount - 1 + "'>");
+			sb.append(" < ");
+			sb.append("</a>");
+		}
+		for (int i = startCount; i < lastCount + 1; i++) {
+			if (i == currentPage) {
+				sb.append(" " + i + " ");
+				continue;
+			}
+			sb.append("<a href='/member/myScrap.mem?currentPage=" + i + "'>");
+			sb.append(" " + i + " ");
+			sb.append("</a>");
+		}
+		if (lastCount != totalPage) {
+			sb.append("<a href='/member/myScrap.mem?currentPage=");
+			sb.append(lastCount + 1 + "'>");
+			sb.append(" > ");
+			sb.append("</a>");
+		}
+		
+		return sb.toString();
 	}
 }

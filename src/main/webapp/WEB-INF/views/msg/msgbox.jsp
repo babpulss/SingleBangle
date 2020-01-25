@@ -60,10 +60,12 @@
         }
         .bRow>span:last-child {
             flex-basis: 10%;
+            text-align: center;
         }
         .bRow:last-child {
             border-radius: 0 0 10px 10px;
             background-color: #e05252;
+            
         }
         #btns {
             margin: 20px 110px 0 110px;
@@ -106,14 +108,13 @@
 <jsp:include page="/resources/jsp/nav.jsp"/>
 
 <div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
-<div style="text-align: center;">✉</div>
 <div id="bHeader" class="bRow">
             <div style="width:50%; float:left">보낸사람</div>
             <div style="width:50%; float:left">제목</div>
         </div>
 <c:choose>
 	<c:when test="${list.size() == 0 }">
-		<div class="bRow">쪽지함이 비어있습니다.</div>
+		<div class="bRow" style="text-align: center">쪽지함이 비어있습니다.</div>
 	</c:when>
 	<c:otherwise>
 	<c:forEach items="${list }" var="list">
@@ -125,8 +126,7 @@
 	</c:forEach>
 	</c:otherwise>
 </c:choose>
-
- <div class="bRow" style="height:20px"></div>
+ <div class="bRow"><div style="margin: auto">${navi }</div></div>
 </div>
 </body>
 </html>

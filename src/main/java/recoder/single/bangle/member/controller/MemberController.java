@@ -9,14 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.member.service.MemberService;
-import recoder.single.bangle.remarket.DTO.MsgDTO;
 import recoder.single.bangle.remarket.service.MsgService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
+import utils.EncryptionUtils;
 
 @Controller
 @RequestMapping("/member")
@@ -35,6 +36,7 @@ public class MemberController {
 	private MsgService msgService;
 	
 	
+	
 	@RequestMapping("/signUp.mem")
 	public String signUp() {
 		return "member/signUpForm";
@@ -42,6 +44,9 @@ public class MemberController {
 	
 	@RequestMapping("/signUpProc.mem")
 	public String signUpProc(MemberDTO dto, Model model) {
+		String pw = dto.getPw();
+		dto.setPw(EncryptionUtils.encrypt(pw));
+		
 		int signUpResult = memSvc.signUp(dto);
 		model.addAttribute("signUpResult", signUpResult);
 		
@@ -64,7 +69,7 @@ public class MemberController {
 	
 	@RequestMapping("/loginProc.mem")
 	public String loginProc(String id, String pw, Model model) {
-		int loginResult = memSvc.login(id, pw);
+		int loginResult = memSvc.login(id, EncryptionUtils.encrypt(pw));
 		if(loginResult > 0) {
 			MemberDTO dto = memSvc.getInfo(id);
 			session.setAttribute("loginInfo", dto);
@@ -114,7 +119,7 @@ public class MemberController {
 	@RequestMapping("/modifyInfoForm.mem")
 	public String modifyInfoForm(String pw, Model model) {
 		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
-		int pwCheckResult = memSvc.pwCheck(id, pw);
+		int pwCheckResult = memSvc.pwCheck(id, EncryptionUtils.encrypt(pw));
 		model.addAttribute("pwCheckResult", pwCheckResult);
 		
 		if(pwCheckResult > 0) {
@@ -128,6 +133,9 @@ public class MemberController {
 	@RequestMapping("/modifyInfoProc.mem")
 	public String modifyInfoProc(MemberDTO dto, Model model) {
 		dto.setId(((MemberDTO)session.getAttribute("loginInfo")).getId());
+		String pw = dto.getPw();
+		dto.setPw(EncryptionUtils.encrypt(pw));
+		
 		int updateResult = memSvc.modifyInfoProc(dto);
 		model.addAttribute("updateResult", updateResult);
 		
@@ -149,7 +157,7 @@ public class MemberController {
 	@RequestMapping("/withdrawProc.mem")
 	public String withdrawProc(String pw, Model model) {
 		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
-		int pwCheckResult = memSvc.pwCheck(id, pw);
+		int pwCheckResult = memSvc.pwCheck(id, EncryptionUtils.encrypt(pw));
 		
 		int deleteResult = 0;
 		if(pwCheckResult > 0) {
@@ -162,10 +170,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/myScrap.mem")
-	public String myScrap(String id, Model model) {
+	public String myScrap(@RequestParam(value="currentPage")String currentPage_, Model model) {
 		List<ScrapDTO> myScrapList = new ArrayList<>();
+		String id = ((MemberDTO) session.getAttribute("loginInfo")).getId();
 		try {
-			myScrapList = boardDao.myScrap(id);
+			int currentPage;
+			if (currentPage_ == null) currentPage = 1;
+			else currentPage = Integer.parseInt(currentPage_);
+
+			int totalScraps = boardDao.myScrapCount(id);
+			int totalPage = totalScraps / 10 + 1;
+
+			if (currentPage <= 0) currentPage = 1;
+			else if (currentPage > totalPage) currentPage = totalPage;
+
+			myScrapList = boardDao.myScrap(id, currentPage);
+			String pagination = memSvc.myScrapPagination(totalScraps, currentPage);
+			model.addAttribute("pagination", pagination);
+
 			model.addAttribute("myScrapList", myScrapList);
 		} catch (Exception e) {
 			e.printStackTrace();

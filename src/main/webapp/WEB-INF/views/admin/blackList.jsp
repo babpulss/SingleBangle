@@ -142,6 +142,13 @@
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
+<c:choose>
+<c:when test="${empty loginInfo}">
+	<script>
+		location.href= "/";
+	</script>
+</c:when>
+<c:otherwise>
 	<div id="mainWrapper">
 		<div class="list">
 			<div id="btns">
@@ -255,5 +262,8 @@
 		
 		
 	</script>
+
+</c:otherwise>
+</c:choose>
 </body>
 </html>

@@ -29,7 +29,7 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.12.1</version>
 		</dependency>
-		
+
 		<!-- JavaMail -->
 		<dependency>
 			<groupId>javax.mail</groupId>
@@ -246,6 +246,32 @@
 			<groupId>com.itextpdf.tool</groupId>
 			<artifactId>xmlworker</artifactId>
 			<version>5.5.13</version>
+		</dependency>
+
+		<!-- EXCEL -->
+
+		<!-- excel xls -->
+
+		<dependency>
+
+			<groupId>org.apache.poi</groupId>
+
+			<artifactId>poi</artifactId>
+
+			<version>3.13</version>
+
+		</dependency>
+
+		<!-- excel xlsx -->
+
+		<dependency>
+
+			<groupId>org.apache.poi</groupId>
+
+			<artifactId>poi</artifactId>
+
+			<version>3.17</version>
+
 		</dependency>
 
 	</dependencies>

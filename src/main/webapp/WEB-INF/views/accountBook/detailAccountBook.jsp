@@ -8,16 +8,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="/resources/css/accountCSS/detailAccountCSS.css" />
 <script src="/resources/js/accountJS/accountJS.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/css/nav.css" />
+<script
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
+<link rel="stylesheet"
+	href="/resources/css/accountCSS/detailAccountCSS.css" />
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
@@ -46,7 +54,7 @@
 
 							<div class="col-md-4 text-right">
 								<button type="button" id="printInvoice" class="btn btn-info"
-									style="margin-right: 7px;">Print</button>
+									style="margin-right: 7px;">Excel</button>
 								<form id="pdf"
 									action="${pageContext.request.contextPath }/accountBook/accountPDF"
 									method="post" style="float: right;">
@@ -70,7 +78,7 @@
 							</div>
 
 							<div class="col-md-6 text-right">
-								<p class="font-weight-bold mb-4">Payment Details</p>
+								<p class="font-weight-bold mb-4">Payment Details(지출)</p>
 								<p class="mb-1">
 									<span class="text-muted">카드 : </span>
 									<fmt:formatNumber value="${cardSum}" pattern="###,###원" />
@@ -88,12 +96,15 @@
 
 						<div class="row p-5">
 							<div class="col-md-12">
-								<table class="table">
+								<table id="detailTable"
+									class="table table-condensed table-hover">
 									<thead>
 										<tr>
-											<th style="display: none"></th>
+
 											<th class="border-0 text-uppercase small font-weight-bold"
 												style="width: 5%">No</th>
+											<th class="border-0 text-uppercase small font-weight-bold"
+												style="display:none"></th>
 											<th class="border-0 text-uppercase small font-weight-bold"
 												style="width: 23%">날짜</th>
 											<th class="border-0 text-uppercase small font-weight-bold"
@@ -115,10 +126,11 @@
 											<tr>
 
 												<td>${status.count }</td>
-												<td style="display: none"><input id="seqs" name="seqs"
-													value="${list.seq }"></td>
+												<td style="display: none"><input type="hidden"
+													id="seqs" name="seqs" value="${list.seq }"></td>
 												<td><input type="text" id="${list.seq }"
-													name="reportingDates" value="${list.reportingDate }" class="datepicker col-10"
+													name="reportingDates" value="${list.reportingDate }"
+													class="datepicker col-10"
 													placeholder="${list.reportingDate }" autocomplete="off"></td>
 												<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 													id="detailsSelects" name="details">
@@ -147,27 +159,28 @@
 
 													<c:when test="${list.income != 0 }">
 														<td style="color: dodgerblue"><input type="text"
-															style="width: 80%; color: dodgerblue;" class="incomes"id="incomes"
-															name="income"
+															style="width: 80%; color: dodgerblue;" class="incomes"
+															id="incomes" name="income"
 															value="<fmt:formatNumber value="${list.income}" pattern="###,###" />"
 															placeholder="<fmt:formatNumber value="${list.income}" pattern="###,###" />"
 															onkeyup="inputNumberFormat(this)">원</td>
 													</c:when>
 													<c:otherwise>
 														<td style="color: red"><input type="text"
-															style="width: 80%; color: red;" class="expenses"id="expenses"
-															name="expense"
+															style="width: 80%; color: red;" class="expenses"
+															id="expenses" name="expense"
 															value="<fmt:formatNumber value="${list.expense}" pattern="###,###" />"
 															placeholder="<fmt:formatNumber value="${list.expense}" pattern="###,###" />"
 															onkeyup="inputNumberFormat(this)">원</td>
 													</c:otherwise>
 												</c:choose>
-												<td><input type="text" class="remark"id="remark" name="remark"
-													value="${list.remarks}" style="border: 1px solid white;"></td>
+												<td><input type="text" class="remark" id="remark"
+													name="remark" value="${list.remarks}"
+													style="border: 1px solid white;"></td>
 												<td><input type="button"
 													class="modifyBtn btn btn-light" disabled="disabled"
-													value="수정" name="${list.seq }"> <input type="button"
-													class="deleteBtn btn btn-danger" value="삭제"></td>
+													value="수정" name="${list.seq }"> <input
+													type="button" class="deleteBtn btn btn-danger" value="삭제"></td>
 
 											</tr>
 
@@ -204,15 +217,17 @@
 				</div>
 			</div>
 		</div>
-		<form id="modiFrm"action="${pageContext.request.contextPath }/accountBook/modifyAccount" method="post">
-			<input type="hidden" id="seq" name="seq">
-			<input type="hidden" id="reportingDate" name="reportingDate">
-			<input type="hidden" id="details" name="details">
-			<input type="hidden" id="payments" name="payments">
-			<input type="hidden" id="spec" name="spec">
-			<input type="hidden" id="income" name="income">
-			<input type="hidden" id="expense" name="expense">
-			<input type="hidden" id="remarks" name="remarks">
+		<form id="modiFrm"
+			action="${pageContext.request.contextPath }/accountBook/modifyAccount"
+			method="post">
+			<input type="hidden" id="seq" name="seq"> <input
+				type="hidden" id="reportingDate" name="reportingDate"> <input
+				type="hidden" id="details" name="details"> <input
+				type="hidden" id="payments" name="payments"> <input
+				type="hidden" id="spec" name="spec"> <input type="hidden"
+				id="income" name="income"> <input type="hidden" id="expense"
+				name="expense"> <input type="hidden" id="remarks"
+				name="remarks">
 		</form>
 		<div class="text-light mt-5 mb-5 text-center small">
 			by : <a class="text-light" target="" href="#">Single Bangle</a>
@@ -231,65 +246,71 @@
 			str = String(str);
 			return str.replace(/[^\d]+/g, '');
 		}
-		$(".modifyBtn")
-				.on(
-						"click",
-						function() {
-							var seqs = $(this).parent().parent().children()
-									.children("#seqs").val();
-							var reportingDates = $(this).closest("tr").children().next().next().children("input").val();
-			
-							var detail = $(this).parent().parent().children()
-									.children("#detailsSelects").val();
-							var payment = $(this).parent().parent().children()
-									.children("#paymentsSelects").val();
-							var specs = $(this).parent().parent().children()
-									.children("#specSelects").val();
-							var income = 0;
-							var expense = 0;
-							if ($(this).parent().parent().children().children(
-									"#expenses").val() != 0 && specs == "수입") {
-								income = $(this).parent().parent().children()
-										.children("#expenses").val();								
-								expense = 0;
-							} else if($(this).parent().parent().children().children(
-							"#incomes").val() != 0 && specs == "지출"){
-								expense = $(this).parent().parent().children()
-								.children("#incomes").val();
-								income = 0;
-							}else if($(this).parent().parent().children().children(
-							"#expenses").val() != 0 && specs == "지출"){
-								expense = $(this).parent().parent().children()
-								.children("#expenses").val();
-								income = 0;
-							}else if($(this).parent().parent().children().children(
-							"#incomes").val() != 0 && specs == "수입"){
-								income = $(this).parent().parent().children()
-										.children("#incomes").val();
-								expense = 0;
-							}
-					
-							var incomes = uncomma(income);
-							var expenses = uncomma(expense);
-							var remark = $(this).parent().parent().children()
-									.children("#remark").val();
-							
-							console.log(seqs + " : " + reportingDates + " : "
-									+ detail + " : " + payment + " : "
-									+ specs + " : " + incomes + " : "
-									+ expenses + " : " + remark);
-							$("#seq").val(seqs);
-							$("#reportingDate").val(reportingDates);
-							$("#details").val(detail);
-							$("#payments").val(payment);
-							$("#spec").val(specs);
-							$("#income").val(incomes);
-							$("#expense").val(expenses);
-							$("#remarks").val(remark);
-							$("#modiFrm").submit();
-							console.log($("#seq").val()+$("#reportingDate").val()+$("#details").val()+$("#payments").val()+$("#spec").val()+$("#income").val()+$("#expense").val()+$("#remarks").val());
+		$(".modifyBtn").on(
+				"click",
+				function() {
+					var seqs = $(this).parent().parent().children().children(
+							"#seqs").val();
+					var reportingDates = $(this).closest("tr").children()
+							.next().next().children("input").val();
 
-						});
+					var detail = $(this).parent().parent().children().children(
+							"#detailsSelects").val();
+					var payment = $(this).parent().parent().children()
+							.children("#paymentsSelects").val();
+					var specs = $(this).parent().parent().children().children(
+							"#specSelects").val();
+					var income = 0;
+					var expense = 0;
+					if ($(this).parent().parent().children().children(
+							"#expenses").val() != 0
+							&& specs == "수입") {
+						income = $(this).parent().parent().children().children(
+								"#expenses").val();
+						expense = 0;
+					} else if ($(this).parent().parent().children().children(
+							"#incomes").val() != 0
+							&& specs == "지출") {
+						expense = $(this).parent().parent().children()
+								.children("#incomes").val();
+						income = 0;
+					} else if ($(this).parent().parent().children().children(
+							"#expenses").val() != 0
+							&& specs == "지출") {
+						expense = $(this).parent().parent().children()
+								.children("#expenses").val();
+						income = 0;
+					} else if ($(this).parent().parent().children().children(
+							"#incomes").val() != 0
+							&& specs == "수입") {
+						income = $(this).parent().parent().children().children(
+								"#incomes").val();
+						expense = 0;
+					}
+
+					var incomes = uncomma(income);
+					var expenses = uncomma(expense);
+					var remark = $(this).parent().parent().children().children(
+							"#remark").val();
+
+					console.log(seqs + " : " + reportingDates + " : " + detail
+							+ " : " + payment + " : " + specs + " : " + incomes
+							+ " : " + expenses + " : " + remark);
+					$("#seq").val(seqs);
+					$("#reportingDate").val(reportingDates);
+					$("#details").val(detail);
+					$("#payments").val(payment);
+					$("#spec").val(specs);
+					$("#income").val(incomes);
+					$("#expense").val(expenses);
+					$("#remarks").val(remark);
+					$("#modiFrm").submit();
+					console.log($("#seq").val() + $("#reportingDate").val()
+							+ $("#details").val() + $("#payments").val()
+							+ $("#spec").val() + $("#income").val()
+							+ $("#expense").val() + $("#remarks").val());
+
+				});
 		$(".deleteBtn")
 				.click(
 						function() {
@@ -313,7 +334,7 @@
 				"change",
 				function() {
 					$(this).parent().parent().children().children(".modifyBtn")
-					.attr("class", "modifyBtn btn btn-info")
+							.attr("class", "modifyBtn btn btn-info")
 					$(this).parent().parent().children().children(".modifyBtn")
 							.removeAttr("disabled");
 
@@ -322,7 +343,7 @@
 				"keyup",
 				function() {
 					$(this).parent().parent().children().children(".modifyBtn")
-					.attr("class", "modifyBtn btn btn-info")
+							.attr("class", "modifyBtn btn btn-info")
 					$(this).parent().parent().children().children(".modifyBtn")
 							.removeAttr("disabled");
 
@@ -331,7 +352,7 @@
 				"input",
 				function() {
 					$(this).parent().parent().children().children(".modifyBtn")
-					.attr("class", "modifyBtn btn btn-info")
+							.attr("class", "modifyBtn btn btn-info")
 					$(this).parent().parent().children().children(".modifyBtn")
 							.removeAttr("disabled");
 				});
@@ -339,7 +360,7 @@
 				"input",
 				function() {
 					$(this).parent().parent().children().children(".modifyBtn")
-					.attr("class", "modifyBtn btn btn-info")
+							.attr("class", "modifyBtn btn btn-info")
 					$(this).parent().parent().children().children(".modifyBtn")
 							.removeAttr("disabled");
 				});
@@ -349,6 +370,10 @@
 						function() {
 							location.href = "${pageContext.request.contextPath}/accountBook/ListViewForPDF";
 						});
+		
+		$("#printInvoice").on("click",function(){
+			location.href="${pageContext.request.contextPath}/accountBook/excelDownload";
+		});
 
 		$(function() {
 			//input을 datepicker로 선언
@@ -371,7 +396,7 @@
 								buttonImage : "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
 								,
 								buttonImageOnly : true //기본 버튼의 회색 부분을 없애고, 이미지만 보이게 함
-								,				
+								,
 								buttonText : "선택" //버튼에 마우스 갖다 댔을 때 표시되는 텍스트                
 								,
 								yearSuffix : "년" //달력의 년도 부분 뒤에 붙는 텍스트
@@ -394,6 +419,11 @@
 								maxDate : "+1M" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)                
 							});
 
+		});
+		$(function() {
+			$("#detailTable").DataTable({
+
+			});
 		});
 	</script>
 </body>

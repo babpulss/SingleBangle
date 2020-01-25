@@ -117,7 +117,16 @@
 					<div class="bRow" style="text-align: center">
  					<div style="width: 40%; height: 100%; float: left"><a href="marketDetail.do?seq=${list.seq}">
 					<img style="width: 250px; height: 100px; text-align: center;" src ="/files/${fileList[i.index].sys_name}"></a></div>
-					<div style="float:left; width: 40%; text-align: center">${list.title }
+					<div style="float:left; width: 40%; text-align: center">
+					<c:choose>
+						<c:when test="${list.done == 'Y'}">
+							[판매종료]	
+						</c:when>
+						<c:otherwise>
+							[판매중]
+						</c:otherwise>
+					</c:choose>
+					${list.title }
 					<br>${list.place }
 					<br>${list.price }원</div>
 					</div>
@@ -145,7 +154,7 @@
 			<option>기타</option>
 			</select>
 			<input type="text" placeholder="search" name="title">
-            <button>검색</button>
+            <button style="border: none; width: 60px; height: 30px; border-radius: 10px;">검색</button>
             </form>
         </div>
         <c:choose>

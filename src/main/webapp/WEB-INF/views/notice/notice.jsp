@@ -1,16 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Single Bangle</title>
-<link rel="stylesheet" href="/css/nav.css"/>
-<link rel="stylesheet" href="/css/index/index.css"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>공지 사항</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<style>
-	 /* 메뉴 폰트 */
+<link rel="stylesheet" href="/css/nav.css"/>
+    <style>
+        /* 메뉴 폰트 */
         @font-face {
             font-family: 'BMHANNAAir';
             src:
@@ -25,14 +25,18 @@
             font-family: 'BMHANNAAir';
         }
         #board {
-            margin: 65px 110px 0 110px;
+            margin: 80px 110px 0 110px;
         }
         #bHeader {
             background-color: #0085cb;
             border-radius: 10px 10px 0 0;
-        	line-height: 50px;
+            height: 40px;
         }
-        .bRow {	
+        #bHeader * {
+            text-align: center;
+            line-height: 40px;
+        }
+        .bRow {
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -42,20 +46,13 @@
             text-align: center;
         }
         .bRow>span:first-child {
-            flex-basis: 10%;
-        }
-        .bRow>span:nth-child(2) {
             flex-basis: 20%;
         }
-        .bRow>span:nth-child(3) {
-            flex-basis: 50%;
-            text-align: left;
+        .bRow>span:nth-child(2) {
+            flex-basis: 60%;
         }
         .bRow a {
             text-decoration: none;
-        }
-        .bRow>span:nth-child(4) {
-            flex-basis: 10%;
         }
         .bRow>span:last-child {
             flex-basis: 10%;
@@ -67,7 +64,7 @@
         #btns {
             margin: 20px 110px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
         }
         #btns>button:first-child, #btns>div>button {
             border: none;
@@ -100,37 +97,27 @@
                 margin: 20px 0 0 0;
             }
         }
-</style>
+    </style>
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-	<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
-		<form action="${pageContext.request.contextPath }/msg/msgList.do">
-		<input type="hidden" name="receiver" value="${dto.receiver }">
-		<div id="bHeader" class="bRow">&nbsp</div>
-		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">보낸사람 </div><div style="width: 60%; float: left">${dto.sender }</div>
-		</div>
-		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">제목 </div><div style="width: 60%; float: left">${dto.title }</div>
-		</div>
-		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left">${dto.contents }</div>
-		</div>
-		<div class="bRow">
-		<div style="width: 50%; float: left">
-		<button type="button" style="border: none; background-color: transparent; font-size: 15px;" id="msg">답장하기</button>
-		</div><div style="width: 50%; float: left">
-		<a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${dto.receiver}">뒤로가기</a></div>
-		</div>
-		</form>
-	</div>
-	<script>
-		$("#msg").on("click",function(){
-			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }";
-			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
-		})
-		
-	</script>
+   <div id="board">
+        <div id="bHeader">
+        	<h1>공지 사항</h1>
+        </div>
+        <c:forEach items="${list}" var="i">
+        <div class="bRow">
+            <span>${i.seq}</span>
+            <span><a href="/notice/readNotice?seq=${i.seq}">${i.title}</a></span>
+            <span>${i.writeDate}</span>
+        </div>
+        </c:forEach>
+        <div class="bRow" style="height:20px"></div>
+   </div> 
+   <c:if test="${loginInfo.adminCheck == \"Y\"}">
+   <div id="btns">
+		<button type="button" onclick="location.href='/notice/writeNotice'">글쓰기</button>
+   </div>
+   </c:if>
 </body>
 </html>
