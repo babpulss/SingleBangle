@@ -67,5 +67,17 @@ public class MsgService {
 			System.out.println("메세지 상세보기 서비스 오류");
 			return null;
 		}
+	};
+	
+	@Transactional("tx")
+	public int deleteMsg(int seq) {
+		try {
+			int deleteMsg = dao.deleteMsg(seq);
+			return deleteMsg;
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("메세지 삭제 오류");
+			return 0;
+		}
 	}
 }
