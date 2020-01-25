@@ -94,14 +94,14 @@ $(function(){
 								<c:when test="${scrapCheck == 0}">
 									<button type="button" id="btnScrap"
 										style="border: 0px; outline: 0px; background-color: transparent;">
-										<img id="scrapImage" src="/img/tipBoard/star.png"
+										<img id="scrapImage" src="/img/tipBoard/bookMark.png"
 											style="width: 30px; height: 30px;">
 									</button>
 								</c:when>
 								<c:otherwise>
 									<button type="button" id="btnScrap"
 										style="border: 0px; outline: 0px; background-color: transparent;">
-										<img id="scrapImage" src="/img/tipBoard/coloredStar.png"
+										<img id="scrapImage" src="/img/tipBoard/coloredBookMark.png"
 											style="width: 30px; height: 30px;">
 									</button>
 								</c:otherwise>
@@ -126,7 +126,7 @@ $(function(){
 						if(data.scrapCheckResult != 0){
 							alert("이미 스크랩된 게시글입니다.");
 						}else if(data.scrapCheckResult == 0){
-							$("#scrapImage").attr('src','/img/tipBoard/coloredStar.png');
+							$("#scrapImage").attr('src','/img/tipBoard/coloredBookMark.png');
 							alert("스크랩 성공! 마이페이지에서 확인하세요!");
 						}
 					}).fail(function(data){
@@ -251,7 +251,7 @@ $(function(){
 				</div>
 				<input type="hidden" id="seqB" name="seqB" value="${detailView.seq }">
 			</form>
-			<div id="paging" style="text-align:center;">${getNavi} </div>
+			<div id="paging" style="text-align:center;"> </div>
 		</div>
 		
 	</div>
@@ -288,6 +288,7 @@ $(function(){
 		}).done(function(data){
 			if(data.cmtResult == 1){
 				alert("댓글이 성공적으로 입력되었습니다.");
+				
 				getCommentList();
 				$("#cmtWrite").val("");
 			}else{
@@ -298,19 +299,33 @@ $(function(){
 		})
 	}
 	
-	function getCommentList(){
-		var rootSeq = ${detailView.seq};
+
+	function getCommentList(page){
+// 		var rootSeq = ${detailView.seq};
 // 		var writer = "${detailView.writer}";
 		var id = "${loginInfo.id}";
 		
 		$.ajax({
 			type:"post",
 			url:"cmtList.bo",
-			data:{rootSeq:rootSeq},
+			data:{
+				rootSeq: ${detailView.seq},
+				currentPage: page
+				},
 			dataType: "json"
 		}).done(function(data){
-			$("#cmtListForm").html("");
-			$("#cmtCount").html(data.length);
+			console.log(data);
+			console.log(data.cmtList);
+			console.log(data.getNavi);
+			$("#cmtListForm").empty();
+			$("#cmtCount").html(data.cmtCount);
+			$("#paging").html(data.getNavi)
+			var data = JSON.parse(data.cmtList);
+			
+// 			$.each(cmtList, function(i ,j) {
+// 				console.log(j.seq);
+// 				console.log(j.contents);
+// 			});
 			
 			for(var i = 0; i <data.length; i++){
 				console.log(data[i].contents);
@@ -329,6 +344,13 @@ $(function(){
 			alert("비동기 실패ㅠ")
 		})
 	}
+	
+	$("#paging").on("click", ".pageNavi", function() {
+		var pageNum = $(this).html();
+		$("#cmtListForm").html("");
+		getCommentList(pageNum);
+	});
+	
 	
 	//<![CDATA[
     // // 사용할 앱의 JavaScript 키를 설정해 주세요.

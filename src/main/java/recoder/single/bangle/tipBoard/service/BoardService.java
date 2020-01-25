@@ -607,15 +607,16 @@ public class BoardService {
 		StringBuilder sb = new StringBuilder(); // += 연산자 대신 사용(가독성을 위해)
 
 		if (needPrev) {
-			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + (startNavi - 1) + "'> < </a>");
+			sb.append("<span class='pageNavi' name='detailView.bo?seq=" + seq + "&currentPage=" + (startNavi - 1) + "'> < </span>");
 		}
 		for (int i = startNavi; i <= endNavi; i++) {
-			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + i + "'>"); // cpage = currentpage
+			sb.append("<span class='pageNavi' name='detailView.bo?seq=" + seq + "&currentPage=" + i + "'>"); // cpage = currentpage
 			sb.append(i + " ");
-			sb.append("</a>");
+			sb.append("</span>");
 		}
 		if (needNext) {
-			sb.append("<a class='pageNavi' href='detailView.bo?seq=" + seq + "&currentPage=" + (endNavi + 1) + "' > > </a>");
+			sb.append("<span class='pageNavi' name='detailView.bo?seq=" + seq + "&currentPage=" + (endNavi + 1) + "' > > </span>");
+		
 		}
 		return sb.toString();
 	}

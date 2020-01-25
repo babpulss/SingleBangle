@@ -114,7 +114,7 @@
 	</select>
 	
 	<select id="selectByPageCmt" resultType="recoder.single.bangle.tipBoard.DTO.CommentDTO">
-		select * from (select livingComment.*, row_number() over(order by seq desc) as rown from livingComment where rootSeq = #{seq}) where rown between #{startNum} and #{endNum}
+		select * from (select livingComment.*, row_number() over(order by seq desc) as rown from livingComment where rootSeq = #{seq}) where rown between #{startNum} and #{endNum} order by writeDate desc
 	</select>
 	
 <!-- 상세검색  -->

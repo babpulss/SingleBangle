@@ -2,18 +2,17 @@ package recoder.single.bangle.tipBoard.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
@@ -309,20 +308,23 @@ public class BoardController {
 		if (currentPage_ == null)
 			currentPage = 1;
 		else
-			currentPage = Integer.parseInt(currentPage_);
+			currentPage = Integer.parseInt(currentPage_ = currentPage_.trim());
 		
 		System.out.println("cmtList.bo에 도착!");
 		
-		//List<CommentDTO> cmtList = boardService.cmtList(rootSeq);
+
+		List<CommentDTO> cmtFullList = boardService.cmtList(rootSeq);
+		int cmtCount = cmtFullList.size();
 		// 댓글창에서 getFormedDate 사용! getter뿐 아니라 setter도 만들어주기!
 	
 		List<CommentDTO> cmtList = boardService.selectByPageCmt(currentPage, rootSeq);
+
 		String getNavi = boardService.getCmtNavi(currentPage, rootSeq);
 		
-//		for(int i=0; i<cmtList.size();i++) {
-//			String formedDate = cmtList.get(i).getFormedDate();
-//			cmtList.get(i).setFormedDate(formedDate);
-//		}
+		for(int i=0; i<cmtList.size();i++) {
+			String formedDate = cmtList.get(i).getFormedDate();
+			cmtList.get(i).setFormedDate(formedDate);
+		}
 		
 //		모델에 담지 말고, 
 //		model.addAttribute("cmtList", cmtList);
@@ -335,6 +337,7 @@ public class BoardController {
 		
 		JsonObject obj = new JsonObject();
 		
+		obj.addProperty("cmtCount", cmtCount);
 		obj.addProperty("cmtList", toJsonResult);
 		obj.addProperty("getNavi", getNavi);
 

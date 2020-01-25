@@ -127,7 +127,7 @@ public class BoardDAO {
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
 			param.put("seq", seq);
-			return sst.selectList("Tip.selectByPage", param);
+			return sst.selectList("Tip.selectByPageCmt", param);
 		}
 		
 		public List<BoardDTO> selectByPage(int startNum, int endNum){
