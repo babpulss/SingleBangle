@@ -1,6 +1,7 @@
 package recoder.single.bangle.notice;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class NoticeDTO {
 
@@ -34,8 +35,8 @@ public class NoticeDTO {
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	public Timestamp getWriteDate() {
-		return writeDate;
+	public String getWriteDate() {
+		return new SimpleDateFormat("yy년 MM월 dd일").format(this.writeDate);
 	}
 	public void setWriteDate(Timestamp writeDate) {
 		this.writeDate = writeDate;
