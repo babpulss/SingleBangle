@@ -5,7 +5,7 @@
   
   <mapper namespace="Notice">
   	<select id="getNotices" resultType="recoder.single.bangle.notice.NoticeDTO">
-  		select * from notice
+  		select * from notice order by writeDate desc
   	</select>
   	
   	<select id="readNotice" resultType="recoder.single.bangle.notice.NoticeDTO">

@@ -64,7 +64,7 @@
         #btns {
             margin: 20px 110px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
         }
         #btns>button:first-child, #btns>div>button {
             border: none;
@@ -114,5 +114,10 @@
         </c:forEach>
         <div class="bRow" style="height:20px"></div>
    </div> 
+   <c:if test="${loginInfo.adminCheck == \"Y\"}">
+   <div id="btns">
+		<button type="button" onclick="location.href='/notice/writeNotice'">글쓰기</button>
+   </div>
+   </c:if>
 </body>
 </html>
