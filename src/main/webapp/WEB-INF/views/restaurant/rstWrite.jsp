@@ -325,7 +325,7 @@
 					            <div id="menu_wrap" class="bg_white">
 					                <div class="option">
 					                    <div>
-											키워드 : <input type="text" id="keyword" size="15" placeholder=" 검색어 입력 "> 
+											키워드 : <input type="text" id="keyword" size="14" placeholder=" 검색어 입력 "> 
 											<button type="button" id="searchBtn">검색하기</button> 
 					                    </div>
 					                </div>

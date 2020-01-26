@@ -154,7 +154,7 @@
 	                </div>
 	                <br>
 	                <div id="inputPw">
-	                    <form action="${pageContext.request.contextPath}/member/withdrawProc.mem" method="post">
+	                    <form action="${pageContext.request.contextPath}/member/withdrawProc.mem" method="post" onsubmit="return withdrawCheck()">
 	                        <input type="password" id="pw" name="pw" placeholder=" 비밀번호 ">
 	                        <br><br>
 	                        <input type="submit" id="submitBtn" value="탈퇴하기">
@@ -164,5 +164,11 @@
 	        </div>
 		</div>
 		<br><br><br>
+		
+		<script>
+			function withdrawCheck(){
+				return confirm("탈퇴 후에는 더 이상 해당 아이디를 사용하실 수 없습니다.\n정말로 탈퇴 신청을 하시겠습니까?");
+			}
+		</script>
     </body>
 </html>

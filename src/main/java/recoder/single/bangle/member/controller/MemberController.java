@@ -18,6 +18,7 @@ import recoder.single.bangle.remarket.service.MsgService;
 import recoder.single.bangle.tipBoard.DAO.BoardDAO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 import utils.EncryptionUtils;
+import utils.XSSprotect;
 
 @Controller
 @RequestMapping("/member")
@@ -46,6 +47,9 @@ public class MemberController {
 	public String signUpProc(MemberDTO dto, Model model) {
 		String pw = dto.getPw();
 		dto.setPw(EncryptionUtils.encrypt(pw));
+		
+		String address2 = dto.getAddress2();
+		dto.setAddress2(XSSprotect.replaceParameter(address2));
 		
 		int signUpResult = memSvc.signUp(dto);
 		model.addAttribute("signUpResult", signUpResult);
