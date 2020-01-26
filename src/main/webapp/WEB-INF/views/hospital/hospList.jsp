@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
-        <title>병원 목록</title>
+        <title>병원 검색</title>
         
         <link rel="stylesheet" href="/css/nav.css">
         <style>
@@ -18,17 +18,39 @@
 			body {
 				background-color: #f5f5f5;
 			}
-        
+        	
+        	#hospHeader{
+                width: 80%;
+                min-width: 600px;
+                height: 80px;
+                line-height: 40px;
+                margin: auto;
+            }
+            #hospTitle{
+                font-size: 32px;
+            }
+            #hospNotice{
+                font-size: 12px;
+                border-bottom: 1px solid black;
+            }
+            
+            #hospContainer{
+            	border: 1px solid #b2b2b2;
+            	width: 80%;
+            	min-width: 600px;
+            	margin: auto;
+            }
+        	
         	#searchBox{
-        		margin: auto;
+        		width: 100%;
         		text-align: center;
-        		min-width: 700px;
+        		margin: auto;
         	}        
             .addrSelect{
             	border: 1px solid #dadada;
-            	width: 140px;
+            	width: 120px;
                 height: 40px;
-                font-size: 16px;
+                font-size: 14px;
             }
             #searchHosp{
             	border: none;
@@ -41,15 +63,27 @@
             	background-color: #0085cb;
             }
             
-            #hospInfoBox{
+            #map{
+            	border-top: 1px dashed #b2b2b2;
+            	border-bottom: 1px dashed #b2b2b2;
+            	margin-bottom: 30px;
+            }
+            
+            #hospArea{
             	display: none;
-            	width: 80%;
-            	margin: auto;
+            	width: 100%;
+            	text-align: center;
+            }
+            #hospLabel{
+            	font-size: 20px;
+            }
+            #hospInfoBox{
+            	border-top: 1px solid #dadada;
+            	background-color: #f7f7f7;
             }
             #hospInfo{
             	margin: auto;
             }
-            
             .hospKey{
             	width: 120px;
             	height: 40px;
@@ -58,8 +92,9 @@
             	text-align: right;
             }
             .hospVal{
-            	min-width: 400px;
+            	min-width: 360px;
             	padding-left: 10px;
+            	text-align: left;
             }
             #hospUrl a{
             	color: #0085cb;
@@ -72,81 +107,97 @@
     
     	<br><br><br>
     	<div id="mainWrapper">
-			<div id="searchBox">
-		        <select class="addrSelect" id="sidoCd" name="sidoCd">
-		            <option value="0">시/도 선택</option>
-		            <option value="110000">서울</option>
-		            <option value="210000">부산</option>
-		            <option value="220000">인천</option>
-		            <option value="230000">대구</option>
-		            <option value="240000">광주</option>
-		            <option value="250000">대전</option>
-		            <option value="260000">울산</option>
-		            <option value="310000">경기</option>
-		            <option value="320000">강원</option>
-		            <option value="330000">충북</option>
-		            <option value="340000">충남</option>
-		            <option value="350000">전북</option>
-		            <option value="360000">전남</option>
-		            <option value="370000">경북</option>
-		            <option value="380000">경남</option>
-		            <option value="390000">제주</option>
-		            <option value="410000">세종</option>
-		        </select>
-		
-		        <select class="addrSelect" id="sgguCd" name="sgguCd">
-		            <option value="0">시/군/구 선택</option>
-		        </select>
-		
-		        <select class="addrSelect" id="emdongNm" name="emdongNm">
-		            <option value="0">읍/면/동 선택</option>
-		        </select>
-		
-		        <select class="addrSelect" id="hospType" name="hospType">
-		            <option value="0">병원 종류 선택</option>
-		            <option value="치과">치과</option>
-		            <option value="안과">안과</option>
-		            <option value="이비인후과">이비인후과</option>
-		            <option value="내과">내과</option>
-		            <option value="외과">외과</option>
-		            <option value="신경과">신경과</option>
-		            <option value="신경외과">신경외과</option>
-		            <option value="정형외과">정형외과</option>
-		            <option value="피부과">피부과</option>
-		            <option value="성형외과">성형외과</option>
-		            <option value="산부인과">산부인과</option>
-		            <option value="비뇨기과">비뇨기과</option>
-		        </select>
-		
-		        <button type="button" id="searchHosp">검색</button>
+    		<div id="hospHeader">
+    			<div id="hospTitle">
+    				<b>병원 검색</b>
+    			</div>
+    			<div id="hospNotice">
+    				회원님 주변의 <b>병원</b>을 검색하실 수 있습니다.
+    			</div>
+    		</div>
+    		<br><br><br>
+    		
+    		<div id="hospContainer">
+    			<br>
+				<div id="searchBox">
+			        <select class="addrSelect" id="sidoCd" name="sidoCd">
+			            <option value="0">시/도 선택</option>
+			            <option value="110000">서울</option>
+			            <option value="210000">부산</option>
+			            <option value="220000">인천</option>
+			            <option value="230000">대구</option>
+			            <option value="240000">광주</option>
+			            <option value="250000">대전</option>
+			            <option value="260000">울산</option>
+			            <option value="310000">경기</option>
+			            <option value="320000">강원</option>
+			            <option value="330000">충북</option>
+			            <option value="340000">충남</option>
+			            <option value="350000">전북</option>
+			            <option value="360000">전남</option>
+			            <option value="370000">경북</option>
+			            <option value="380000">경남</option>
+			            <option value="390000">제주</option>
+			            <option value="410000">세종</option>
+			        </select>
+			
+			        <select class="addrSelect" id="sgguCd" name="sgguCd">
+			            <option value="0">시/군/구 선택</option>
+			        </select>
+			
+			        <select class="addrSelect" id="emdongNm" name="emdongNm">
+			            <option value="0">읍/면/동 선택</option>
+			        </select>
+			
+			        <select class="addrSelect" id="hospType" name="hospType">
+			            <option value="0">병원 종류 선택</option>
+			            <option value="치과">치과</option>
+			            <option value="안과">안과</option>
+			            <option value="이비인후과">이비인후과</option>
+			            <option value="내과">내과</option>
+			            <option value="외과">외과</option>
+			            <option value="신경과">신경과</option>
+			            <option value="신경외과">신경외과</option>
+			            <option value="정형외과">정형외과</option>
+			            <option value="피부과">피부과</option>
+			            <option value="성형외과">성형외과</option>
+			            <option value="산부인과">산부인과</option>
+			            <option value="비뇨기과">비뇨기과</option>
+			        </select>
+			
+			        <button type="button" id="searchHosp">검색</button>
+		        </div>
+				<br>
+		        
+		        <div id="map" style="width:100%; height:700px;"></div>
+		        
+		        <div id="hospArea">
+		        	<label id=hospLabel><b>선택하신 병원의 상세정보입니다.</b></label>
+		        	<div id=hospInfoBox>
+			            <table id="hospInfo">
+			            	<tbody>
+				                <tr>
+				                    <td class="hospKey">병원명</td>
+				                    <td class="hospVal" id="hospName"></td>
+				                </tr>
+				                <tr>
+				                    <td class="hospKey">주소</td>
+				                    <td class="hospVal" id="hospAddr"></td>
+				                </tr>
+				                <tr>
+				                    <td class="hospKey">전화번호</td>
+				                    <td class="hospVal" id="hospTel"></td>
+				                </tr>
+				                <tr>
+				                    <td class="hospKey">홈페이지</td>
+				                    <td class="hospVal" id="hospUrl"></td>
+				                </tr>
+			                </tbody>
+			            </table>
+		            </div>
+		        </div>
 	        </div>
 	        
-			<br><hr><br>
-	        <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
-	        <br><hr><br>
-	        
-	        <div id="hospInfoBox">
-	            <table id="hospInfo">
-	            	<tbody>
-		                <tr>
-		                    <td class="hospKey">병원명</td>
-		                    <td class="hospVal" id="hospName"></td>
-		                </tr>
-		                <tr>
-		                    <td class="hospKey">주소</td>
-		                    <td class="hospVal" id="hospAddr"></td>
-		                </tr>
-		                <tr>
-		                    <td class="hospKey">전화번호</td>
-		                    <td class="hospVal" id="hospTel"></td>
-		                </tr>
-		                <tr>
-		                    <td class="hospKey">홈페이지</td>
-		                    <td class="hospVal" id="hospUrl"></td>
-		                </tr>
-	                </tbody>
-	            </table>
-	        </div>
 		</div>
 		<br><br><br>
 		
@@ -237,7 +288,7 @@
             			$("#hospUrl").html("웹 사이트를 제공하지 않는 병원입니다.");
             		}
             		
-            		$("#hospInfoBox").css("display", "block");
+            		$("#hospArea").css("display", "block");
             		$("#hospUrl")[0].scrollIntoView();
             	};
             }
@@ -361,7 +412,7 @@
 
             // 시도 코드, 시군구 코드, 읍면동, 병원 종류로 병원 목록 검색하기
             $("#searchHosp").on("click", function(){
-            	$("#hospInfoBox").css("display", "none");
+            	$("#hospArea").css("display", "none");
             	
                 var sidoCd = $("#sidoCd").val();
                 if($("#sidoCd").val() == "0"){

@@ -18,21 +18,12 @@
                 background-color: #f5f5f5;
             }
 
-            #logo{
-                width: 800px;
-                margin: auto;
-                text-align: center;
-            }
-            #logo img{
-                height: 180px;
-            }
-
             #myPageContainer{
-                width: 800px;
+                width: 500px;
                 margin: auto;
             }
             #myPageHeader{
-                width: 800px;
+                width: 500px;
                 height: 80px;
                 line-height: 40px;
                 margin: auto;
@@ -46,7 +37,7 @@
             }
 
             #menuContainer{
-                width: 800px;
+                width: 500px;
                 text-align: center;
                 margin: auto;
             }
@@ -76,8 +67,8 @@
 
         <jsp:include page="/resources/jsp/nav.jsp"/>
 
+		<br><br><br>
         <div id="mainWrapper">
-            <br><br><br>
             <div id="myPageContainer">
                 <div id="myPageHeader">
                     <div id="myPageTitle"><b>마이 페이지</b></div>
@@ -120,5 +111,6 @@
                 </div>
             </div>
         </div>
+        <br><br><br>
     </body>
 </html>
