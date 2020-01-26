@@ -140,6 +140,9 @@ public class MemberController {
 		String pw = dto.getPw();
 		dto.setPw(EncryptionUtils.encrypt(pw));
 		
+		String address2 = dto.getAddress2();
+		dto.setAddress2(XSSprotect.replaceParameter(address2));
+		
 		int updateResult = memSvc.modifyInfoProc(dto);
 		model.addAttribute("updateResult", updateResult);
 		
