@@ -97,12 +97,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<div id="mainWrapper">
 		<form id="frm" action="/notice/postNotice" method="post">
 			<div id="bHeader"></div>
@@ -141,6 +136,11 @@
         history.back();
     })
   </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
 </body>

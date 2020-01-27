@@ -42,6 +42,13 @@ public class NoticeController {
 		return "notice/resultAlert";
 	}
 
+	@RequestMapping("/tryUpdateNotice")
+	public String tryUpdateNotice(int seq, Model m) {
+		NoticeDTO dto = sst.selectOne("Notice.readNotice", seq);
+		m.addAttribute("dto", dto);
+		return "notice/updateNotice";
+	}
+
 	@RequestMapping("/updateNotice")
 	public String updateNotice(NoticeDTO dto, Model m) {
 		int result = sst.update("Notice.updateNotice", dto);

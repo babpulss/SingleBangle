@@ -179,12 +179,7 @@ html, body {
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<br>
 	<br>
 	<br>
@@ -242,6 +237,11 @@ html, body {
 		location.href="${pageContext.request.contextPath}/admin";
 	});
         </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
 </body>

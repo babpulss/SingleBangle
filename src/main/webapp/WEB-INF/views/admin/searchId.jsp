@@ -42,6 +42,7 @@
   </style>
 </head>
 <body>
+<c:if test="${loginInfo.adminCheck eq \"Y\"}">
 <c:choose>
 <c:when test="${empty loginInfo}">
 	<script>
@@ -121,5 +122,6 @@
 
 </c:otherwise>
 </c:choose>
+</c:if>
 </body>
 </html>
