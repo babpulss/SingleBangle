@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>Insert title here</title>
+<title>re마켓</title>
 <style>
 	 @font-face {
             font-family: 'BMHANNAAir';
