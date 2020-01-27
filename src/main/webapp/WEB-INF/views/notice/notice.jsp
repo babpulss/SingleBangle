@@ -114,7 +114,7 @@
         </c:forEach>
         <div class="bRow" style="height:20px"></div>
    </div> 
-   <c:if test="${loginInfo.adminCheck == \"Y\"}">
+   <c:if test="${loginInfo.adminCheck eq \"Y\"}">
    <div id="btns">
 		<button type="button" onclick="location.href='/notice/writeNotice'">글쓰기</button>
    </div>

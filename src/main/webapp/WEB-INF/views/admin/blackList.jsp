@@ -146,7 +146,7 @@
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 <c:choose>
-<c:when test="${empty loginInfo}">
+<c:when test="${loginInfo.adminCheck eq \"N\"}">
 	<script>
 		location.href= "/";
 	</script>

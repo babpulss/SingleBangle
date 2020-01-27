@@ -155,7 +155,7 @@ html, body {
 </head>
 <body>
 <c:choose>
-<c:when test="${empty loginInfo}">
+<c:when test="${loginInfo.adminCheck eq \"N\"}">
 	<script>
 		location.href= "/";
 	</script>
