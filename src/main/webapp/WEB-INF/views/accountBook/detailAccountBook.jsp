@@ -260,34 +260,19 @@
 							.children("#paymentsSelects").val();
 					var specs = $(this).parent().parent().children().children(
 							"#specSelects").val();
-					var income = 0;
-					var expense = 0;
+					var income = $(this).parent().parent().children().children("#incomes").val();
+					var expense = $(this).parent().parent().children().children("#expenses").val();
 					if ($(this).parent().parent().children().children(
-							"#expenses").val() != 0
-							&& specs == "수입") {
-						income = $(this).parent().parent().children().children(
+							"#expenses").val() != 0) {
+						expense = $(this).parent().parent().children().children(
 								"#expenses").val();
-						expense = 0;
+						income = 0;
 					} else if ($(this).parent().parent().children().children(
-							"#incomes").val() != 0
-							&& specs == "지출") {
-						expense = $(this).parent().parent().children()
+							"#incomes").val() != 0) {
+						income = $(this).parent().parent().children()
 								.children("#incomes").val();
-						income = 0;
-					} else if ($(this).parent().parent().children().children(
-							"#expenses").val() != 0
-							&& specs == "지출") {
-						expense = $(this).parent().parent().children()
-								.children("#expenses").val();
-						income = 0;
-					} else if ($(this).parent().parent().children().children(
-							"#incomes").val() != 0
-							&& specs == "수입") {
-						income = $(this).parent().parent().children().children(
-								"#incomes").val();
 						expense = 0;
-					}
-
+					} 
 					var incomes = uncomma(income);
 					var expenses = uncomma(expense);
 					var remark = $(this).parent().parent().children().children(

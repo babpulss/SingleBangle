@@ -14,25 +14,16 @@
             *{
                 box-sizing: border-box;
             }
-            body {
+            body{
                 background-color: #f5f5f5;
             }
 
-            #logo{
-            	width: 800px;
-                margin: auto;
-                text-align: center;
-            }
-            #logo img{
-                height: 180px;
-            }
-
             #myPageContainer{
-                width: 800px;
+                width: 500px;
                 margin: auto;
             }
             #myPageHeader{
-                width: 800px;
+                width: 500px;
                 height: 80px;
                 line-height: 40px;
                 margin: auto;
@@ -46,7 +37,7 @@
             }
 
             #menuContainer{
-                width: 800px;
+                width: 500px;
                 text-align: center;
                 margin: auto;
             }
@@ -73,13 +64,13 @@
                 height: 40px;
             }
             .info1{
-                width: 160px;
+                width: 120px;
                 background-color: #e0e0e0;
                 padding-right: 10px;
                 text-align: right;
             }
             .info2{
-                min-width: 400px;
+                min-width: 360px;
                 padding-left: 15px;
             }
             #pwHint {
@@ -108,8 +99,8 @@
     <body>
     	<jsp:include page="/resources/jsp/nav.jsp"/>
     	
+		<br><br><br>
     	<div id="mainWrapper">
-	        <br><br><br>
 	        <div id="myPageContainer">
 	            <div id="myPageHeader">
 	                <div id="myPageTitle"><b>내 정보</b></div>
@@ -189,6 +180,7 @@
 	            </div>
 	        </div>
 		</div>
+		<br><br><br>
 
         <script>
             // 정보 수정 페이지로 이동

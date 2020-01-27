@@ -20,10 +20,13 @@
 						href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 				</c:when>
 				<c:otherwise>
-					<span id="note"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">✉</a></span>
+					<span id="note" style="position: relative; right: 170px; top: 5px;">
+					<a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">
+					<img style="width: 20px; height: 20px;" src="/img/msg/msg.png">
+					</a></span>
 					<c:choose>
 						<c:when test="${notRead > 0 }">
-							<span class="blinkEle"style="position: fixed; z-index:500 ;right: 280px; top: 13px; font-size: 10px; color: red;">new!</span>
+							<span class="blinkEle"style="position: fixed; z-index:500 ;right: 150px; top: 13px; font-size: 10px; color: red;">new!</span>
 						</c:when>
 					</c:choose>
 					<span id="rightLogout"><a

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>title</title>
+<title>${dto.title}</title>
 <script
   src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
@@ -45,20 +45,20 @@
 }
 
 #content {
-	border: 1px solid #e05252;
+	border: 1px solid #dce3e8;
 	padding: 10px 10px 10px 10px;
 }
 
 #bFooter {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
+	background-color: #dce3e8;
 	height: 20px;
 }
 
 #btns {
 	margin: 20px 110px 0 110px;
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
 }
 
 #btns>button:first-child, #btns>div>button {
@@ -103,6 +103,8 @@
 	</div>
    <div id="btns">
         <button type="button" onclick="history.back()">목록</button>
+        <button type="button">수정</button>
+        <button type="button" onclick="location.href='/notice/deleteNotice?seq=${dto.seq}">삭제</button>
    </div>
 </body>
 </html>
