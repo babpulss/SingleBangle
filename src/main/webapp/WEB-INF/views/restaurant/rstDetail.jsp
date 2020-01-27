@@ -162,6 +162,9 @@
             #backBtn{
                 /* background-color: #e05252; */
             }
+            #deleteBtn{
+            	background-color: #e05252;
+            }
         </style>
     </head>
     <body>
@@ -255,6 +258,32 @@
 	                <div class="row">
 	                    <div class="col-12" id="btnArea">
 	                        <button type="button" class="btns" id="backBtn">돌아가기</button>
+	                        
+	                        <c:choose>
+					            <c:when test="${loginInfo.adminCheck=='Y'}">
+			                        <button type="button" class="btns" id="approvalBtn">승인</button>
+			                        <button type="button" class="btns" id="deleteBtn">삭제</button>
+			                        
+			                        <script>
+			                        	$("#approvalBtn").on("click", function(){
+			                        		var approvalConfirm = confirm("해당 글을 승인하시겠습니까?");
+			                        		
+			                        		if(approvalConfirm == true){
+			                        			location.href="${pageContext.request.contextPath}/restaurant/rstApproval.rst?seq=${dto.seq}";
+			                        		}
+			                        	})
+			                        	
+			                        	$("#deleteBtn").on("click", function(){
+			                        		var deleteConfirm = confirm("해당 글을 삭제하시겠습니까?");
+			                        		
+			                        		if(deleteConfirm == true){
+			                        			location.href="${pageContext.request.contextPath}/restaurant/rstDelete.rst?seq=${dto.seq}";
+			                        		}
+			                        	})
+			                        </script>
+					            </c:when>
+					        </c:choose>
+					        
 	                    </div>
 	                </div>
 	            </div>

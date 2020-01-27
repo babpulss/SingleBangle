@@ -29,34 +29,34 @@ public class MailController {
 	// 회원가입 이메일 인증
 	@RequestMapping("emailConfirm.email")
 	public String emailConfirm(String email, Model model) {
-		System.out.println("이메일 전송 시작!");
-
-		// 이메일 인증번호 생성
-		StringBuffer temp = new StringBuffer();
-		Random rnd = new Random();
-
-		for (int i = 0; i < 10; i++) {
-			int rIndex = rnd.nextInt(3);
-			switch (rIndex) {
-			case 0:
-				// a-z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 97));
-				break;
-			case 1:
-				// A-Z
-				temp.append((char) ((int) (rnd.nextInt(26)) + 65));
-				break;
-			case 2:
-				// 0-9
-				temp.append((rnd.nextInt(10)));
-				break;
-			}
-		}
-		String AuthenticationKey = temp.toString();
-		System.out.println("이메일 인증번호 : " + AuthenticationKey);
-
-		MimeMessage message = mailSender.createMimeMessage();
 		try {
+			System.out.println("이메일 전송 시작!");
+
+			// 이메일 인증번호 생성
+			StringBuffer temp = new StringBuffer();
+			Random rnd = new Random();
+
+			for (int i = 0; i < 10; i++) {
+				int rIndex = rnd.nextInt(3);
+				switch (rIndex) {
+				case 0:
+					// a-z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 97));
+					break;
+				case 1:
+					// A-Z
+					temp.append((char) ((int) (rnd.nextInt(26)) + 65));
+					break;
+				case 2:
+					// 0-9
+					temp.append((rnd.nextInt(10)));
+					break;
+				}
+			}
+			String AuthenticationKey = temp.toString();
+			System.out.println("이메일 인증번호 : " + AuthenticationKey);
+
+			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
 
 			messageHelper.setFrom("recodersg@gmail.com");
@@ -71,10 +71,13 @@ public class MailController {
 
 			System.out.println("이메일 전송 완료!");
 			System.out.println();
+
+			return "member/emailCheck";
+
 		} catch(Exception e) {
 			e.printStackTrace();
+			return "error";
 		}
-		return "member/emailCheck";
 	}
 
 	// 임시 비밀번호 발급
@@ -118,8 +121,8 @@ public class MailController {
 				messageHelper.setTo(email);
 				messageHelper.setSubject("[싱글방글] 로그인을 위한 임시 비밀번호");
 				messageHelper.setText("안녕하세요! 싱글방글에서 알려드립니다.\n"
-									+ "싱글방글 로그인을 위한 임시 비밀번호를 알려드립니다.\n"
-									+ "- 임시 비밀번호 : [" + AuthenticationKey + "]");
+						+ "싱글방글 로그인을 위한 임시 비밀번호를 알려드립니다.\n"
+						+ "- 임시 비밀번호 : [" + AuthenticationKey + "]");
 
 				mailSender.send(message);
 				model.addAttribute("emailKey", AuthenticationKey);

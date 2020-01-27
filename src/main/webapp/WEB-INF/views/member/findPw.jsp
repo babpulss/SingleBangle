@@ -109,6 +109,15 @@
         </style>
     </head>
     <body>
+    	<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+    	
         <div id="findWayContainer">
             <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
                 <div class="findWayIcon"><img src="/img/member/id_unchecked.png"></div>

@@ -102,6 +102,15 @@
         </style>
     </head>
     <body>
+    	<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+    	
     	<jsp:include page="/resources/jsp/nav.jsp"/>
     	
 		<br><br><br>

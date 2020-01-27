@@ -155,12 +155,7 @@ html, body {
 </head>
 <body>
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 <jsp:include page="/resources/jsp/nav.jsp"/>
 	<div id="mainWrapper">
 		<div class="list">
@@ -236,6 +231,11 @@ html, body {
 		});
 	</script>
 
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
 </body>

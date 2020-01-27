@@ -18,7 +18,6 @@
 }
 
 #bTitles {
-	border-bottom: 1px dotted black;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding-bottom: 20px;
@@ -105,11 +104,11 @@
         <button type="button" onclick="history.back()">목록</button>
         <c:if test="${loginInfo.adminCheck eq \"Y\"}">
         <button id="modify" type="button">수정</button>
-        <button type="button" onclick="location.href='/notice/deleteNotice?seq=${dto.seq}">삭제</button>
+        <button type="button" onclick="location.href='/notice/deleteNotice?seq=${dto.seq}'">삭제</button>
         <script>
 			$("#modify").on('click', function() {
-				location.href="/notice/updateNotice"
-			})
+				location.href="/notice/tryUpdateNotice?seq=${dto.seq}";
+			});
         </script>
         </c:if>
    </div>

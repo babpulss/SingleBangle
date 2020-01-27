@@ -37,9 +37,17 @@ public class NoticeController {
 
 	@RequestMapping("/postNotice")
 	public String postNotice(NoticeDTO dto, Model m) {
+		System.out.println(dto);
 		int result = sst.insert("Notice.postNotice", dto);
 		m.addAttribute("result", result);
 		return "notice/resultAlert";
+	}
+
+	@RequestMapping("/tryUpdateNotice")
+	public String tryUpdateNotice(int seq, Model m) {
+		NoticeDTO dto = sst.selectOne("Notice.readNotice", seq);
+		m.addAttribute("dto", dto);
+		return "notice/updateNotice";
 	}
 
 	@RequestMapping("/updateNotice")
