@@ -133,7 +133,7 @@
         $("#contents").val(content);
     });
     $("#toList").click(() => {
-        history.back();
+    	location.href="/notice";
     })
   </script>
 </c:when>
