@@ -72,8 +72,13 @@ public class AccountController {
 //	가계부 상세리스트
 	@RequestMapping("/detailAccount")
 	public String detailAccount(HttpServletRequest req) {
-		String formedDate = (String)req.getParameter("formedReportingDate");
-		session.setAttribute("formedDate", formedDate);
+		String formedDate;
+		if(req.getParameter("formedReportingDate")!=null) {
+			formedDate = (String)req.getParameter("formedReportingDate");
+			session.setAttribute("formedDate", formedDate);			
+		}else {
+			formedDate = (String)session.getAttribute("formedDate");
+		}
 		int cashSum = 0;
 		int cardSum = 0;
 		int in = 0;
@@ -174,9 +179,13 @@ public class AccountController {
 	
 	@RequestMapping("/deleteAccountBySeq.do")
 	public String deleteAccountSeq() {
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		System.out.println(seq);
-		return null;
+		int seq = Integer.parseInt(request.getParameter("deleteSeq"));
+		int result = accService.deleteAccountBySeq(seq);
+		if(result > 0) {
+		return "redirect:detailAccount";
+		}else {
+			return "error";
+		}
 	}
 	
 	@RequestMapping("/modifyAccount")
@@ -352,7 +361,8 @@ public class AccountController {
 			cell.setCellStyle(footStyle);
 			cell.setCellValue(expenseSum);
 			cell = row.createCell(6);
-			
+			cell.setCellStyle(footStyle);
+			cell.setCellValue(incomeSum-expenseSum);
 			// 엑셀 출력
 			resp.setContentType("application/vnd.ms-excel");
 			resp.setHeader("Content-Disposition", "attachment;filename="+formedDate+".xls");
