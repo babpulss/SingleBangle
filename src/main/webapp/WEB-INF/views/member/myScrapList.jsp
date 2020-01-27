@@ -19,21 +19,12 @@
                 background-color: #f5f5f5;
             }
 
-            #logo{
-            	width: 800px;
-                margin: auto;
-                text-align: center;
-            }
-            #logo img{
-                height: 180px;
-            }
-
             #myPageContainer{
-                width: 800px;
+                width: 500px;
                 margin: auto;
             }
             #myPageHeader{
-                width: 800px;
+                width: 500px;
                 height: 80px;
                 line-height: 40px;
                 margin: auto;
@@ -47,7 +38,7 @@
             }
 
             #menuContainer{
-                width: 800px;
+                width: 500px;
                 text-align: center;
                 margin: auto;
             }
@@ -70,6 +61,12 @@
             .menuText{
                 font-size: 16px;
             }
+            
+            #scrapContainer{
+            	width: 80%;
+            	min-width: 500px;
+            	margin: auto;
+            }
             .pagination {
             	text-align: center;
             }
@@ -78,8 +75,8 @@
     <body>
     	<jsp:include page="/resources/jsp/nav.jsp"/>
     	
+	    <br><br><br>
     	<div id="mainWrapper">
-	        <br><br><br>
 	        <div id="myPageContainer">
 	            <div id="myPageHeader">
 	                <div id="myPageTitle"><b>스크랩 목록</b></div>
@@ -120,7 +117,10 @@
 	                    </div>
 	                </a>
 	            </div>
-	            <br><br><br>
+	        </div>
+	        
+	        <br><br><br>
+	        <div id="scrapContainer">
 		        <h3>My Scrap List</h3>
 		        <div id="scrapBox">
 		            <div class="row">
@@ -137,11 +137,12 @@
 		                    <div class="col-2">${dto.scrapDate}</div>
 		                </div>
 		            </c:forEach>
-						<div class="pagination">${pagination}</div>
+					<div class="pagination">${pagination}</div>
 		        </div>
 		        <button id="toMyPage">돌아가기</button>
 	        </div>
 		</div>
+		<br><br><br>
         
         <script>
             $("#toMyPage").on("click",function(){
