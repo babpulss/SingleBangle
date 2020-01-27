@@ -10,7 +10,7 @@
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript"
                 src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
-        <title>혼밥/혼술</title>
+        <title>혼밥 / 혼술 (비승인 목록)</title>
 
         <link rel="stylesheet" href="/css/nav.css">
         <style>
@@ -77,7 +77,7 @@
 
             .bRow:last-child {
                 border-radius: 0 0 10px 10px;
-                background-color: #e05252;
+                background-color: #dce3e8;
             }
 
             #btns {
