@@ -160,54 +160,50 @@
                 color: red;
             }
 
-            @media ( max-width : 600px ) {
-                #board {
-                    margin: 65px 0 0 0;
-                }
-                #bHeader {
-                    border-radius: 0;
-                }
-                .bRow>span:first-child {
-                    display: none;
-                }
-                #btns {
-                    margin: 20px 0 0 0;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <jsp:include page="/resources/jsp/nav.jsp" />
-        
-        <c:choose>
-            <c:when test="${loginInfo.adminCheck eq \"N\"}">
-                <script>
-                    location.href= "/";
-                </script>
-            </c:when>
-            <c:otherwise>
-                <br><br><br>
-                <div id="mainWrapper">
-                    <div class="list">
-                        <div id="btns">
-                            <div id="viewDashBoard">
-                                <div class="view1"></div>
-                                <a href="#">대쉬보드 조회</a>
-                            </div>
-                            <div id="viewBlackList">
-                                <div id="view2"></div>
-                                <a href="#">블랙리스트 조회</a>
-                            </div>
-                            <div id="viewReporting">
-                                <div class="view1"></div>
-                                <a href="#">신고접수 확인 조회</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="board">
-                        <div id="bHeader" class="bRow">
-                            <span>번호</span> <span>제목</span> <span>작성자</span> <span>작성일</span>
-                        </div>
+@media ( max-width : 600px ) {
+	#board {
+		margin: 65px 0 0 0;
+	}
+	#bHeader {
+		border-radius: 0;
+	}
+	.bRow>span:first-child {
+		display: none;
+	}
+	#btns {
+		margin: 20px 0 0 0;
+	}
+}
+</style>
+</head>
+<body>
+	<jsp:include page="/resources/jsp/nav.jsp" />
+<c:choose>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
+	<br>
+	<br>
+	<br>
+	<div id="mainWrapper">
+		<div class="list">
+			<div id="btns">
+				<div id="viewDashBoard">
+					<div class="view1"></div>
+					<a href="#">대쉬보드 조회</a>
+				</div>
+				<div id="viewBlackList">
+					<div id="view2"></div>
+					<a href="#">블랙리스트 조회</a>
+				</div>
+				<div id="viewReporting">
+					<div class="view1"></div>
+					<a href="#">신고접수 확인 조회</a>
+				</div>
+			</div>
+		</div>
+		<div id="board">
+			<div id="bHeader" class="bRow">
+				<span>번호</span> <span>제목</span> <span>작성자</span> <span>작성일</span>
+			</div>
 
                         <c:forEach items="${list}" var="dto">
                             <div class="bRow">
@@ -230,18 +226,23 @@
                     </div>
                 </div>
 
-                <script>
-                    $("#viewBlackList").on("click", function() {
-                        location.href="${pageContext.request.contextPath}/admin/viewBlackList";
-                    });
-                    $("#viewReporting").on("click", function() {
-                        location.href="${pageContext.request.contextPath}/admin/viewReporting";
-                    });
-                    $("#viewDashBoard").on("click", function() {
-                        location.href="${pageContext.request.contextPath}/admin";
-                    });
-                </script>
-            </c:otherwise>
-        </c:choose>
-    </body>
+	<script>
+	$("#viewBlackList").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
+	});
+	$("#viewReporting").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
+	$("#viewDashBoard").on("click", function() {
+		location.href="${pageContext.request.contextPath}/admin";
+	});
+        </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
+</c:otherwise>
+</c:choose>
+</body>
 </html>

@@ -17,7 +17,7 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
-<title>post Notice</title>
+<title>수정 - ${dto.title}</title>
 <link rel="stylesheet" href="/css/nav.css">
 <style>
 #bHeader {
@@ -96,8 +96,10 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+<c:choose>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<div id="mainWrapper">
-		<form id="frm" action="/notice/postNotice" method="post">
+		<form id="frm" action="/notice/updateNotice" method="post">
 			<div id="bHeader"></div>
 			<div id="bTitles">
 				<div>
@@ -106,9 +108,10 @@
 			</div>
 			<div id="summernote"></div>
 			<input type="hidden" id="contents" name="contents">
+			<input type="hidden" name="seq" value="${dto.seq}">
 			<div id="btns">
 				<button type="button" id="toList">목록</button>
-				<button>수정 완료</button>
+				<button>수정완료</button>
 			</div>
 			<div id="bFooter"></div>
 		</form>
@@ -128,12 +131,17 @@
             alert('editor content is empty');
             return false;
         }
-
-        $("#contents").val(content);
     });
     $("#toList").click(() => {
-    	location.href="/notice";
+        history.back();
     })
   </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
+</c:otherwise>
+</c:choose>
 </body>
 </html>
