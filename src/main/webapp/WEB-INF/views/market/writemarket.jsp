@@ -118,10 +118,9 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <form action="write.do" method="post" id="frm" enctype="multipart/form-data" id="boardfrm">
-<div style="width: 700px; position: relative; top: 80px; margin: auto;">
-<input style="width: 100%; border: none; border-bottom: 1px solid black;" type="text" name="title" id="title" placeholder="제목을 입력하세요" required="required"><br>
-<br>
-<input style="width: 30%; border: none; border-bottom: 1px solid black;" type="text" name="price" id="price" placeholder="가격을 입력하세요" required="required" onfocusout="numberWithCommas(this.value)">원
+<div style="width: 700px; margin: auto; position: relative; top: 80px;">
+<input style="width: 100%;" type="text" name="title" id="title" placeholder="제목을 입력하세요" required="required"><br>
+<input style="width: 30%;" type="text" name="price" id="price" placeholder="가격을 입력하세요" required="required">원
 <select name="category">
 	<option>디지털/가전</option>
 	<option>가구/인테리어</option>
@@ -136,23 +135,32 @@
 <textarea style="display:none;" name="content" id="content"></textarea>
 <div id="summernote"></div>
 	 <div style="text-align: right;">
-	 <button type="button" id="confirm" style="border: none; width: 50px; height: 30px; border-radius: 10px;">제출</button></div>
+	 <button type="button" id="confirm">제출</button></div>
 	 </div>
 </form>
+
     <script>
       $('#summernote').summernote({
     	  height: 500,
     	  placeholder: "내용을 입력하세요"
       })
       
-      
+      $("#price").on("focusout",function(){
+    	  var regex = /^[0-9]*$/;
+          var data = $("#price").val();
+          var result = regex.exec(data);
+    	  if($("#price").val() == "" || result == null){
+    		  $("#price").val("");
+    	  	alert("가격은 숫자만 입력이 가능합니다.");
+    	  }
+      })
       
       $("#confirm").on("click",function(){
     	  $("#content").val($(".note-editable").html());
     	  var regex = /<img.*/;
           var data = $("#content").val();
           var result = regex.exec(data);
-    	  if($("#content").val() == "" || result == null){
+    	  if($("#content").val() == "" || result == null || $("#price").val()=="" || $("#title").val() == ""){
     	  	alert("내용을 모두 입력해주세요. \n (이미지는 반드시 한장 이상 첨부해야합니다.)");
     	  	return;
     	  }else {
@@ -160,12 +168,6 @@
     	  }
     		  
       })
-      
-      function numberWithCommas(x) {
- 	  x = x.replace(/[^0-9]/g,'');  
-      x = x.replace(/,/g,'');          
-      $("#price").val(x.replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-}
     </script>
 </body>
 </html>
