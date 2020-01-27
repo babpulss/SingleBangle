@@ -61,7 +61,7 @@
 	justify-content: space-between;
 }
 
-#btns>button:first-child, #btns>div>button {
+#btns>button, #btns>div>button {
 	border: none;
 	width: 50px;
 	height: 30px;
@@ -103,8 +103,15 @@
 	</div>
    <div id="btns">
         <button type="button" onclick="history.back()">목록</button>
-        <button type="button">수정</button>
+        <c:if test="${loginInfo.adminCheck eq \"Y\"}">
+        <button id="modify" type="button">수정</button>
         <button type="button" onclick="location.href='/notice/deleteNotice?seq=${dto.seq}">삭제</button>
+        <script>
+			$("#modify").on('click', function() {
+				location.href="/notice/updateNotice"
+			})
+        </script>
+        </c:if>
    </div>
 </body>
 </html>

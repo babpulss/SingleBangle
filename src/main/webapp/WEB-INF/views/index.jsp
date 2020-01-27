@@ -7,21 +7,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Single Bangle</title>
-<link rel="stylesheet" href="/css/nav.css"/>
-<link rel="stylesheet" href="/css/index/index.css"/>
+<link rel="stylesheet" href="/css/nav.css" />
+<link rel="stylesheet" href="/css/index/index.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
-<jsp:include page="/resources/jsp/nav.jsp"/>
+	<jsp:include page="/resources/jsp/nav.jsp" />
 	<!-- 메인 메뉴 -->
 	<div id="mainWrapper">
 		<div id="firstRow">
 			<span>SINGLE BANGLE</span>
-			<div id="typing-txt">
+			<div class="typing-txt1">
 				<ul>
 					<li>싱글이</li>
+					<li></li>
+					<li></li>
+				</ul>
+			</div>
+			<div class="typing-txt2">
+				<ul>
 					<li>방글할 때까지</li>
-					<li>SingleBangle<li>
+					<li>Bangle 할 때까지</li>
+					<li>Single Bangle</li>
 				</ul>
 			</div>
 			<div class="typing">
@@ -68,20 +75,21 @@
 		</div>
 		<div id="fourthRow">
 			<div class="pic1">
-			<h1>혼족이란?</h1><br>
-			혼자 밥을 먹거나 여가생활과 쇼핑을 즐기며, 여행도 홀로 떠나는 등<br>
-			혼자만의 활동을 즐기고 다른 사람과 섞이지 않고 취미를 즐기는 사람을 일컫는 말
+				<h1>혼족이란?</h1>
+				<br> 혼자 밥을 먹거나 여가생활과 쇼핑을 즐기며, 여행도 홀로 떠나는 등<br> 혼자만의 활동을
+				즐기고 다른 사람과 섞이지 않고 취미를 즐기는 사람을 일컫는 말
 			</div>
 			<div>
-				<h2>나를 위한 최고의 선택</h2><br> 
-				누군가는 말합니다. 혼자라 외롭지 않냐고.<br> 
-				그러나, 혼자가 주는 큰 가치, 합리적 라이프스타일<br> 
-				나를 위한 최고의 선택을 하기에 더 행복합니다.<br>
-				싱글방글은 혼자인 당신을 위한 최고의 선물입니다.<br>
+				<h2>나를 위한 최고의 선택</h2>
+				<br> 누군가는 말합니다. 혼자라 외롭지 않냐고.<br> 그러나, 혼자가 주는 큰 가치, 합리적
+				라이프스타일<br> 나를 위한 최고의 선택을 하기에 더 행복합니다.<br> 싱글방글은 혼자인 당신을 위한
+				최고의 선물입니다.<br>
 			</div>
 			<div class="pic2"></div>
 			<div class="pic3"></div>
-			<div> 혼자 살 수 밖에 없고,<br> 혼자 살 수 있게 되었고,<br> 혼자 살고 싶다.<br> </div>
+			<div>
+				혼자 살 수 밖에 없고,<br> 혼자 살 수 있게 되었고,<br> 혼자 살고 싶다.<br>
+			</div>
 		</div>
 		<div id="footer">
 			<div id="footer1">
