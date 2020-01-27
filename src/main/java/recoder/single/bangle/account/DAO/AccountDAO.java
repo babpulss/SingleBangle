@@ -45,4 +45,9 @@ public class AccountDAO {
 		System.out.println(dto);
 		return accountJdbc.update("account.modifyAccount", dto);
 	}
+	
+	public int deleteAccountBySeq(int seq) {
+		System.out.println("seq : "+seq);
+		return accountJdbc.delete("account.deleteAccountBySeq", seq);
+	}
 }

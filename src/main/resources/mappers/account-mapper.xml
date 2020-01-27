@@ -16,7 +16,7 @@
   	<delete id="deleteAccountByMonth">
   		delete from account_book where substr(to_char(reportingDate,'yyyy"년"MM"월"dd"일"'),1,8) = #{formedReportingDate}
   	</delete>
-  	<delete id="deleteAccountBySeq">
+  	<delete id="deleteAccountBySeq" parameterType="Integer">
   		delete from account_book where seq = #{seq}
   	</delete>
   	<update id="modifyAccount">

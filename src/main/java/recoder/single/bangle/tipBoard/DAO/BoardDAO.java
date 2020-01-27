@@ -132,6 +132,14 @@ public class BoardDAO {
 			return sst.selectOne("Tip.tipCount");
 		}
 		
+		public List<CommentDTO> selectByPageCmt(int startNum, int endNum, int seq){
+			Map<String, Object> param = new HashMap<>();
+			param.put("startNum", startNum);
+			param.put("endNum", endNum);
+			param.put("seq", seq);
+			return sst.selectList("Tip.selectByPageCmt", param);
+		}
+		
 		public List<BoardDTO> selectByPage(int startNum, int endNum){
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
@@ -194,6 +202,11 @@ public class BoardDAO {
 		
 		public int commentDelete(int seq) {
 			return sst.delete("Tip.commentDelete", seq);
+		}
+		
+		public int cmtCount(int seq) {
+			//여기서 seq는 게시글의 seq이므로 rootSeq이다.
+			return sst.selectOne("Tip.cmtCount", seq);
 		}
 		
 		public int getRootSeq(int seq) {

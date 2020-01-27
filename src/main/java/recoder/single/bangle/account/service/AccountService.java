@@ -104,7 +104,13 @@ public class AccountService {
 		return dao.deleteAccountByMonth(formedReportingDate);
 	}
 	
+	// 상세페이지 데이터 업데이트
 	public int modifyAccountData(AccountDTO dto) {
 		return dao.modifyAccountUpdate(dto);
+	}
+	
+	// 상세페이지 seq기준 삭제
+	public int deleteAccountBySeq(int seq) {
+		return dao.deleteAccountBySeq(seq);
 	}
 }

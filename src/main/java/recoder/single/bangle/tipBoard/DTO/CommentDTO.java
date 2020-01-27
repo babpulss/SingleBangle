@@ -1,6 +1,7 @@
 package recoder.single.bangle.tipBoard.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class CommentDTO {
 	private int seq;
@@ -8,6 +9,8 @@ public class CommentDTO {
 	private String writer;
 	private String contents;
 	private Timestamp writeDate;
+	
+	private String formedDate;
 	
 	public CommentDTO() {
 		super();
@@ -62,6 +65,15 @@ public class CommentDTO {
 		this.writeDate = writeDate;
 	}
 
+	public String getFormedDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm");
+		return sdf.format(this.writeDate);
+	}
+	
+	public void setFormedDate(String formedDate) {
+		this.formedDate = formedDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "CommentDTO [seq=" + seq + ", rootSeq=" + rootSeq + ", writer=" + writer + ", contents=" + contents
