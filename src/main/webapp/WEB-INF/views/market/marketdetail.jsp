@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>re마켓</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
 <style>
@@ -142,7 +142,7 @@
 		<div>${dto.content }</div>
 		<br>
 		<c:choose>
-			<c:when test="${dto.writer == loginInfo.id}">
+			<c:when test="${dto.writer == loginInfo.id }">
 				<div><button id="update" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">수정하기</button>
 				<button id="delete" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">삭제하기</button>
 				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button></div>
@@ -150,7 +150,12 @@
 			<c:when test="${loginInfo != null && dto.writer != loginInfo.id}">
 				<div><button id="msg" type="button" style="border: none; width: 60px; height: 30px; border-radius: 10px;">쪽지보내기</button>
 				<button id="report" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">신고하기</button>
-				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button></div>
+				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button>
+				<c:choose>
+					<c:when test="${loginInfo.adminCheck == 'Y' }">
+					<button id="delete" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">삭제하기</button></div>
+					</c:when>
+				</c:choose>
 			</c:when>
 		</c:choose>
 		<br>
