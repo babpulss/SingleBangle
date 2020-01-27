@@ -115,7 +115,7 @@ public class MsgController {
 			return "msg/sendmsgbox";
 		}catch(Exception e) {
 			e.printStackTrace();
-			return null;
+			return "redirect:/error";
 		}
 	}
 	
@@ -124,10 +124,12 @@ public class MsgController {
 		try {
 			MsgDTO dto = service.msgDetail(seq);
 			model.addAttribute("dto", dto);
+			return "msg/msgdetail";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/error";
 		}
-		return "msg/msgdetail";
+		
 	}
 	
 	@RequestMapping("/sendMsgDetail.do")//메세지상세
@@ -135,10 +137,12 @@ public class MsgController {
 		try {
 			MsgDTO dto = service.msgDetail(seq);
 			model.addAttribute("dto", dto);
+			return "msg/sendmsgdetail";
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/error";
 		}
-		return "msg/sendmsgdetail";
+
 	}
 
 	@RequestMapping("/replyMsg.do")

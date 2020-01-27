@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Single Bangle</title>
+<title>re마켓</title>
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
