@@ -241,23 +241,10 @@ nav ul, nav li {
 .changeNav .bar3 {
 	transform: rotate(45deg) translate(-8px, -8px);
 }
+
+
+
 /* 우측 네비바 */
-#note {
-	position: relative;
-	right: 15vw;
-	line-height: 60px;
-	cursor: pointer;
-	font-size: 20px;
-	color: #0085cb;
-}
-
-#note>a {
-	text-decoration: none;
-}
-#note>a:visited {
-	color: #0085cb;
-}
-
 #rightLogin {
 	position: absolute;
 	right: 8vw;
@@ -276,13 +263,9 @@ nav ul, nav li {
 	color: #0085cb;
 }
 
-#rightJoin a {
-	color: #0085cb;
-}
-
-#rightMyPage {
-	position: absolute;
-	right: 10vw;
+#note {
+	position: relative;
+	right: 15vw;
 	line-height: 60px;
 	cursor: pointer;
 	font-size: 20px;
@@ -297,6 +280,7 @@ nav ul, nav li {
 	font-size: 20px;
 	color: #0085cb;
 }
+
 .dropmenu {
 	display: none;	
 	width: 100%;
@@ -305,6 +289,9 @@ nav ul, nav li {
 	height: 40px;
 	text-align: center;
 }
+
+
+
 /* 우측 네비바 작동버튼 */
 #rightLogin:hover {
 	color: #0085cb;
@@ -327,10 +314,11 @@ nav ul, nav li {
 	color: #0085cb;
 }
 
-#rightMyPage:hover {
-	color: #e80e0e;
-	text-shadow: 10px 10px #b2b2b2;
-	transform: translate(-5px, -5px);
+#note>a {
+	text-decoration: none;
+}
+#note>a:visited {
+	color: #0085cb;
 }
 
 #rightLogout:hover {
@@ -339,15 +327,18 @@ nav ul, nav li {
 	transform: translate(-5px, -5px);
 }
 
-#rightMyPage>a, #rightLogout>a {
+#rightLogout>a {
 	text-decoration: none;
 	color: #0085cb;
 }
 
-#rightMyPage>a:visited, #rightLogout>a:visited {
+#rightLogout>a:visited {
 	color: #0085cb;
 }
 
+
+
+/* 로그인 모달 창 */
 #rightSidebar {
 	border: 1px solid black;
 	border-radius: 5px;
@@ -411,6 +402,7 @@ nav ul, nav li {
 /* 메인 화면 래퍼 */
 #mainWrapper {
 	margin: 65px 110px 0 110px;
+	font-family: 'BMHANNAAir';
 }
 
 /* 모바일 환경 */

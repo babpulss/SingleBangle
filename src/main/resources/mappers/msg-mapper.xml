@@ -5,7 +5,7 @@
   
 <mapper namespace="Msg">
 	<select id="selectAllMsg" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
-		select * from msgBox where receiver=#{receiver}
+		select * from msgBox where receiver=#{receiver} order by 1 desc
 	</select>
 	
 	<select id="msgDetail" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
@@ -13,8 +13,12 @@
 	</select>
 	
 	<insert id="writeMsg" parameterType="java.util.Map">
-		insert into msgBox values(msgbox_seq.nextval, #{sender}, #{receiver}, #{title}, #{contents}, 0)
+		insert into msgBox values(msgbox_seq.nextval, #{sender}, #{receiver}, #{title}, #{contents}, 'N')
 	</insert>
+	
+	<delete id="deleteMsg">
+		delete from msgbox where seq = #{seq}
+	</delete>
 	
 	<update id="updateRead">
 		update msgbox set read='Y' where seq=#{seq}
@@ -22,5 +26,21 @@
 	
 	<select id="notRead" resultType="Integer">
 		select count(*) from msgbox where receiver=#{receiver} and read = 'N'
+	</select>
+	
+	<select id="selectByPage" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
+		select * from(select msgbox.*, row_number() over (order by seq desc)rown from msgbox where receiver=#{receiver}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getArticleCount" resultType="Integer">
+		select count(*) from msgbox where receiver=#{receiver}
+	</select>
+	
+	<select id="selectBySendPage" resultType="recoder.single.bangle.remarket.DTO.MsgDTO">
+		select * from(select msgbox.*, row_number() over (order by seq desc)rown from msgbox where sender=#{sender}) where rown between #{start} and #{end}
+	</select>
+	
+	<select id="getSendArticleCount" resultType="Integer">
+		select count(*) from msgbox where sender=#{sender}
 	</select>
 </mapper>

@@ -15,9 +15,10 @@
 		<tr><td>제목 : <input type="text" id="title" name="title"></tr>
 		<tr><td>내용
 		<tr><td>
-		<textarea style="resize:none;" id="contents" name="contents" rows="20px" cols="50px"></textarea>
+		<textarea style="resize:none;" id="contents" name="contents" rows="20px" cols="60px"></textarea>
 		</tr>
-		<tr><td><button id="send" type="button">보내기</button></tr>
+		<tr style="text-align: right"><td>
+		<button id="send" type="button">보내기</button></tr>
 	</table>
 	</form>
 	

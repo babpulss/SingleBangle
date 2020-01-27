@@ -48,6 +48,7 @@ public class MsgService {
 	public int notRead(String receiver){
 		try {
 			int notRead = dao.notRead(receiver);
+			System.out.println("안읽은 메세지 갯수 : " + notRead);
 			return notRead;
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -65,6 +66,18 @@ public class MsgService {
 			e.printStackTrace();
 			System.out.println("메세지 상세보기 서비스 오류");
 			return null;
+		}
+	};
+	
+	@Transactional("tx")
+	public int deleteMsg(int seq) {
+		try {
+			int deleteMsg = dao.deleteMsg(seq);
+			return deleteMsg;
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("메세지 삭제 오류");
+			return 0;
 		}
 	}
 }

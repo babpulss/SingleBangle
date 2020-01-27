@@ -3,7 +3,6 @@ package recoder.single.bangle.admin.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,9 +26,6 @@ public class Admin {
 	@Autowired
 	private ReportingService reportingService;
 	
-	@Autowired
-	private HttpSession session;
-
 	@RequestMapping("")
 	public String adminIndex() {
 		return "admin/adminIndex";

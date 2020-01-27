@@ -86,7 +86,7 @@ $(document).ready(function() {
 
 	typingTxt=typingTxt.split(""); // 한글자씩 잘라 배열로만든다
 
-	var tyInt = setInterval(typing,800); // 반복동작 
+	var tyInt = setInterval(typing,300); // 반복동작 
 	     
 	function typing(){ 
 	  $(".typing ul li").removeClass("on");

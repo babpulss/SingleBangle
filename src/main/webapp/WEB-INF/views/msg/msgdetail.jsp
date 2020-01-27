@@ -30,8 +30,9 @@
         #bHeader {
             background-color: #0085cb;
             border-radius: 10px 10px 0 0;
+        	line-height: 50px;
         }
-        .bRow {
+        .bRow {	
             display: flex;
             justify-content: flex-start;
             align-items: center;
@@ -106,7 +107,10 @@
 	<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 		<form action="${pageContext.request.contextPath }/msg/msgList.do">
 		<input type="hidden" name="receiver" value="${dto.receiver }">
-		<div id="bHeader" class="bRow" style="text-align: center">&nbsp</div>
+		<input type="hidden" name="seq" value="${dto.seq }">
+		<div id="bHeader" class="bRow">
+		<button type="button" style="border: none; position: relative; left: 70px; background-color: transparent; font-size: 15px;" id="msg">답장하기</button>
+		</div>
 		<div class="bRow">
 		<div style="font-weight: bold; width: 40%; float: left">보낸사람 </div><div style="width: 60%; float: left">${dto.sender }</div>
 		</div>
@@ -116,13 +120,25 @@
 		<div class="bRow">
 		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left">${dto.contents }</div>
 		</div>
-		<div class="bRow" style="height:20px">
-		<div style="width: 50%; float: left"><a href="${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }">답장하기</a>
-		</div><div style="width: 50%; float: left"><a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${dto.receiver}">뒤로가기</a></div>
+		<div class="bRow">
+		<div style="width: 50%; float: left">
+		<button type="button" id="deleteMsg" style="border: none; background-color: transparent; font-size: 15px;">삭제하기</button>
+		</div>
+		<div style="width: 50%; float: left">
+		<a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${dto.receiver}">뒤로가기</a></div>
 		</div>
 		</form>
 	</div>
 	<script>
+		$("#msg").on("click",function(){
+			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }";
+			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
+		});
+		
+		$("#deleteMsg").on("click", function(){
+			alert("선택한 쪽지를 삭제했습니다.");
+			location.href="${pageContext.request.contextPath}/msg/deleteMsg.do?seq=${dto.seq}&receiver=${dto.receiver}";
+		})
 		
 	</script>
 </body>

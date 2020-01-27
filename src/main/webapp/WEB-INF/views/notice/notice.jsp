@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Single Bangle</title>
-<link rel="stylesheet" href="/css/nav.css"/>
-<link rel="stylesheet" href="/css/index/index.css"/>
+<title>공지 사항</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-</head>
-<style>
-	 /* 메뉴 폰트 */
+<link rel="stylesheet" href="/css/nav.css"/>
+    <style>
+        /* 메뉴 폰트 */
         @font-face {
             font-family: 'BMHANNAAir';
             src:
@@ -27,11 +25,16 @@
             font-family: 'BMHANNAAir';
         }
         #board {
-            margin: 65px 110px 0 110px;
+            margin: 80px 110px 0 110px;
         }
         #bHeader {
             background-color: #0085cb;
             border-radius: 10px 10px 0 0;
+            height: 40px;
+        }
+        #bHeader * {
+            text-align: center;
+            line-height: 40px;
         }
         .bRow {
             display: flex;
@@ -43,34 +46,25 @@
             text-align: center;
         }
         .bRow>span:first-child {
-            flex-basis: 10%;
-        }
-        .bRow>span:nth-child(2) {
             flex-basis: 20%;
         }
-        .bRow>span:nth-child(3) {
-            flex-basis: 50%;
-            text-align: left;
+        .bRow>span:nth-child(2) {
+            flex-basis: 60%;
         }
         .bRow a {
             text-decoration: none;
         }
-        .bRow>span:nth-child(4) {
-            flex-basis: 10%;
-        }
         .bRow>span:last-child {
             flex-basis: 10%;
-            text-align: center;
         }
         .bRow:last-child {
             border-radius: 0 0 10px 10px;
             background-color: #e05252;
-            height: 50px;
         }
         #btns {
             margin: 20px 110px 0 110px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
         }
         #btns>button:first-child, #btns>div>button {
             border: none;
@@ -103,41 +97,27 @@
                 margin: 20px 0 0 0;
             }
         }
-</style>
+    </style>
+</head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
-<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
-<div style="height: 20px; display: table; padding: 10px;">
-<div style="float: left; display: table-cell; height: inherit; vertical-align: middle; font-weight: bold"><p>받은쪽지함 | </p></div>
-<div style="float: left; height: inherit; vertical-align: middle;">
-<button type="button" style="border: none; background-color: transparent; font-size: 16px;" id="sendbox">&nbsp 보낸쪽지함</button></div>
-</div>
-<div id="bHeader" class="bRow">
-            <div style="width:50%; float:left">보낸사람</div>
-            <div style="width:50%; float:left">제목</div>
+   <div id="board">
+        <div id="bHeader">
+        	<h1>공지 사항</h1>
         </div>
-<c:choose>
-	<c:when test="${list.size() == 0 }">
-		<div class="bRow" style="margin: auto;"><p style="position: relative; left: 35%;">쪽지함이 비어있습니다.</p></div>
-	</c:when>
-	<c:otherwise>
-	<c:forEach items="${list }" var="list">
-		<div class="bRow">
-		<div style="width:50%; float:left">${list.sender }</div>
-		<div style="width:50%; float:left">
-		<a href="${pageContext.request.contextPath }/msg/msgDetail.do?seq=${list.seq}">${list.title }</a></div>
-		</div>
-	</c:forEach>
-	</c:otherwise>
-</c:choose>
- <div class="bRow"><div style="margin: auto;">${navi }</div></div>
-</div>
-<div>${navi }</div>
-<script>
-		$("#sendbox").on("click", function(){
-		location.href="${pageContext.request.contextPath }/msg/sendMsg.do?sender=${receiver}";
-		})
-</script>
+        <c:forEach items="${list}" var="i">
+        <div class="bRow">
+            <span>${i.seq}</span>
+            <span><a href="/notice/readNotice?seq=${i.seq}">${i.title}</a></span>
+            <span>${i.writeDate}</span>
+        </div>
+        </c:forEach>
+        <div class="bRow" style="height:20px"></div>
+   </div> 
+   <c:if test="${loginInfo.adminCheck == \"Y\"}">
+   <div id="btns">
+		<button type="button" onclick="location.href='/notice/writeNotice'">글쓰기</button>
+   </div>
+   </c:if>
 </body>
 </html>

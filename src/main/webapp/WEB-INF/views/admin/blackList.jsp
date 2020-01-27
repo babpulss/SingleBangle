@@ -70,7 +70,7 @@
 	font-family: 'BMHANNAAir';
 }
 
-#viewDashBoard, #viewReporting {
+#viewDashBoard, #viewReporting, #viewRestaurant {
 	width: 200px;
 	height: 40px;
 	border: 1px solid black;
@@ -79,14 +79,14 @@
 	cursor: pointer;
 	text-align: center;
 }
-#viewDashBoard>a, #viewReporting>a {
+#viewDashBoard>a, #viewReporting>a, #viewRestaurant>a {
 	position: relative;
 	z-index: 2;
 	text-decoration: none;
 	line-height: 40px;
 	color: black;
 }
-#view1 {
+.view1 {
 	position:absolute;
 	width: 200px;
 	height: 40px;
@@ -102,13 +102,16 @@
 	background-color: black;
 	transition: all .5s ease;
 }
-#viewDashBoard:hover #view1{
+#viewDashBoard:hover .view1{
+	right: 0;
+}
+#viewRestaurant:hover .view1{
 	right: 0;
 }
 #viewReporting:hover #view2{
 	left: 0;
 }
-#viewDashBoard:hover>a, #viewReporting:hover>a {
+#viewDashBoard:hover>a, #viewReporting:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
 	color: red;
 }
@@ -142,16 +145,27 @@
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
+<c:choose>
+<c:when test="${empty loginInfo}">
+	<script>
+		location.href= "/";
+	</script>
+</c:when>
+<c:otherwise>
 	<div id="mainWrapper">
 		<div class="list">
 			<div id="btns">
 				<div id="viewDashBoard">
-					<div id="view1"> </div>
+					<div class="view1"> </div>
 					<a href="#">대쉬보드 조회</a>
 				 </div>
 				<div id="viewReporting">
 					<div id="view2"></div>
 					<a href="#">신고접수 확인 조회</a>
+				 </div>
+				<div id="viewRestaurant">
+					<div class="view1"> </div>
+					<a href="#">혼밥/혼술 게시물 관리</a>
 				 </div>
 			 </div>
 			<div style="text-align: center">
@@ -189,7 +203,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		<div class="bRow" style="height: 50px; background-color:#e05252;"></div>
+		<div class="bRow" style="height: 50px; background-color:#dce3e8;"></div>
 	</div>
 
 	<script>
@@ -198,6 +212,9 @@
 	});
 	$("#viewReporting").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
+	$("#viewRestaurant").on("click", function() {
+		location.href="${pageContext.request.contextPath}/restaurant/rstListN.rst";
 	});
 			var idArr = [
 				<c:forEach items="${list}" var="i">
@@ -255,5 +272,8 @@
 		
 		
 	</script>
+
+</c:otherwise>
+</c:choose>
 </body>
 </html>

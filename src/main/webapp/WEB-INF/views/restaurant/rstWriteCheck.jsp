@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>혼밥/혼술 글 작성</title>
+<title>혼밥 / 혼술 글 작성</title>
 </head>
 <body>
 	<script>
@@ -16,7 +16,7 @@
 		else{
 			alert("글 작성에 실패했습니다. 잠시 후 다시 시도하세요");
 		}
-		location.href="${pageContext.request.contextPath}/restaurant/rstList.rst";
+		location.href="${pageContext.request.contextPath}/restaurant/rstListY.rst";
 	</script>
 </body>
 </html>

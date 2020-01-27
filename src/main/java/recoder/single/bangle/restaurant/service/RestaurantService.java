@@ -11,6 +11,7 @@ import recoder.single.bangle.restaurant.DAO.RestaurantDAO;
 import recoder.single.bangle.restaurant.DAO.RestaurantFileDAO;
 import recoder.single.bangle.restaurant.DTO.RestaurantDTO;
 import recoder.single.bangle.restaurant.DTO.RestaurantFileDTO;
+import utils.XSSprotect;
 
 @Service
 public class RestaurantService {
@@ -23,10 +24,20 @@ public class RestaurantService {
 
 
 
-	public List<RestaurantDTO> rstList() {
+	public List<RestaurantDTO> rstListN() {
 		List<RestaurantDTO> list = null;
 		try {
-			list = rstDao.selectAll();
+			list = rstDao.selectN();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	} 
+	
+	public List<RestaurantDTO> rstListY() {
+		List<RestaurantDTO> list = null;
+		try {
+			list = rstDao.selectY();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -39,6 +50,9 @@ public class RestaurantService {
 		if(!filePath.exists()) {
 			filePath.mkdir();
 		}
+		
+		String title = dto.getTitle();
+		dto.setTitle(XSSprotect.replaceParameter(title));
 
 		int insertResult = 0;
 		try {
@@ -51,9 +65,10 @@ public class RestaurantService {
 				for(int i = 0; i < fileNum; i++) {
 					String oriName = dto.getFiles()[i].getOriginalFilename();
 					String sysName = System.currentTimeMillis() + "_" + oriName;
+					String contents = dto.getContents()[i];
 
 					dto.getFiles()[i].transferTo(new File(uploadPath + "/" + sysName));
-					rstFileDao.insert(new RestaurantFileDTO(0, seq, oriName, sysName, dto.getContents()[i]));
+					rstFileDao.insert(new RestaurantFileDTO(0, seq, oriName, sysName, XSSprotect.replaceParameter(contents)));
 				}
 				System.out.println("혼밥/혼술 파일 업로드 성공!");
 			}
