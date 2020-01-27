@@ -329,10 +329,10 @@ public class BoardService {
 		return scrapCount;
 	}
 	
-	public List<ScrapDTO> myScrap(String id){
+	public List<ScrapDTO> myScrap(String id, int currentPage){
 		List<ScrapDTO> myScrapList = new ArrayList<>();
 		try {
-			myScrapList = boardDao.myScrap(id); 
+			myScrapList = boardDao.myScrap(id, currentPage); 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

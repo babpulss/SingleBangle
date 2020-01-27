@@ -274,15 +274,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/reportPage.bo")
-	public String reportPage(String url, Model model) {
+	public String reportPage(String url, String writer, String title, Model model) {
 		System.out.println("신고하는 글의 url: " + url);
 		model.addAttribute("url",url);
+		model.addAttribute("writer",writer);
+		model.addAttribute("title",title);
 		return "tipBoard/reportPage";
 	}
 	
 	@RequestMapping("/reportProc.bo")
-	public String reportProc(String reason,String url, String reporter, Model model) {
-		ReportDTO dtoR = new ReportDTO(0,reporter,null,reason,url,null,null);
+	public String reportProc(String reportReason,String url, String reporter, Model model) {
+		ReportDTO dtoR = new ReportDTO(0,reporter,null,reportReason,url,null,null);
 		int reportResult = boardService.report(dtoR);
 		model.addAttribute("reportResult",reportResult);
 		return "tipBoard/reportResult";
