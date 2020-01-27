@@ -447,9 +447,9 @@ $(function(){
 		var writer = '${loginInfo.id}';
 		console.log(cmtWrite);
 		if(writer == ""){
-			alert("댓글은 회원만 작성할 수 있습니다.");
+			alert("로그인 후 이용하실 수 있습니다.");
 			$("#cmtWrite").val("");
-			return false;
+			location.href="${pageContext.request.contextPath}/member/login.mem";
 		}else{
 		if(cmtWrite == ""){
 			alert("댓글을 입력해주세요.");
