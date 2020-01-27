@@ -112,7 +112,8 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
         
         <jsp:include page="/resources/jsp/footer.jsp" />
     </body>

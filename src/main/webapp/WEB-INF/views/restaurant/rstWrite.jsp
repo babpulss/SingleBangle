@@ -23,6 +23,7 @@
 		<title>혼밥 / 혼술 글 작성</title>
 		
 		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/footer.css">
         <style>
         	/* 지도에 적용되는 CSS */
         	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
@@ -391,6 +392,8 @@
 	        </form>
     	</div>
 		<br><br><br>
+		
+		<jsp:include page="/resources/jsp/footer.jsp" />
 
         <script>
             // 라벨을 클릭하면 숨겨진 input[type="file"]이 클릭되게 하는 함수
