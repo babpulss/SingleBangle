@@ -39,6 +39,15 @@
 
 </head>
 <body>
+ <c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+        <jsp:include page="/resources/jsp/nav.jsp"/>
 	<div class="container">
 		<div class="invoice row-fluid">
 			<div class="col-12">
@@ -180,7 +189,7 @@
 												<td><input type="button"
 													class="modifyBtn btn btn-light" disabled="disabled"
 													value="수정" name="${list.seq }"> <input
-													type="button" class="deleteBtn btn btn-danger" value="삭제"></td>
+													type="button" class="deleteBtn btn btn-danger" name="${list.seq }" value="삭제"></td>
 
 											</tr>
 
@@ -228,6 +237,9 @@
 				id="income" name="income"> <input type="hidden" id="expense"
 				name="expense"> <input type="hidden" id="remarks"
 				name="remarks">
+		</form>
+		<form id="deleteFrm" action="${pageContext.request.contextPath }/accountBook/deleteAccountBySeq.do">
+			<input type="hidden" id="deleteSeq" name="deleteSeq">
 		</form>
 		<div class="text-light mt-5 mb-5 text-center small">
 			by : <a class="text-light" target="" href="#">Single Bangle</a>
@@ -299,10 +311,10 @@
 		$(".deleteBtn")
 				.click(
 						function() {
-							$("#selectFrm")
-									.attr("action",
-											"${pageContext.request.contextPath}/accountBook/deleteAccountBySeq");
-							$("#selectFrm").submit();
+							var seqs = $(this).parent().parent().children().children(
+							"#seqs").val();
+							$("#deleteSeq").val(seqs);
+							$("#deleteFrm").submit();
 						});
 
 		$(".custom-select").on(
