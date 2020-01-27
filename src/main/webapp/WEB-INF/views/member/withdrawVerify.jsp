@@ -18,21 +18,12 @@
                 background-color: #f5f5f5;
             }
 
-            #logo{
-            	width: 800px;
-                margin: auto;
-                text-align: center;
-            }
-            #logo img{
-                height: 180px;
-            }
-
             #myPageContainer{
-                width: 800px;
+                width: 500px;
                 margin: auto;
             }
             #myPageHeader{
-                width: 800px;
+                width: 500px;
                 height: 80px;
                 line-height: 40px;
                 margin: auto;
@@ -46,7 +37,7 @@
             }
 
             #menuContainer{
-                width: 800px;
+                width: 500px;
                 text-align: center;
                 margin: auto;
             }
@@ -113,8 +104,8 @@
     <body>
     	<jsp:include page="/resources/jsp/nav.jsp"/>
     	
+		<br><br><br>
     	<div id="mainWrapper">
-	        <br><br><br>
 	        <div id="myPageContainer">
 	            <div id="myPageHeader">
 	                <div id="myPageTitle"><b>회원 탈퇴</b></div>
@@ -163,7 +154,7 @@
 	                </div>
 	                <br>
 	                <div id="inputPw">
-	                    <form action="${pageContext.request.contextPath}/member/withdrawProc.mem" method="post">
+	                    <form action="${pageContext.request.contextPath}/member/withdrawProc.mem" method="post" onsubmit="return withdrawCheck()">
 	                        <input type="password" id="pw" name="pw" placeholder=" 비밀번호 ">
 	                        <br><br>
 	                        <input type="submit" id="submitBtn" value="탈퇴하기">
@@ -172,5 +163,12 @@
 	            </div>
 	        </div>
 		</div>
+		<br><br><br>
+		
+		<script>
+			function withdrawCheck(){
+				return confirm("탈퇴 후에는 더 이상 해당 아이디를 사용하실 수 없습니다.\n정말로 탈퇴 신청을 하시겠습니까?");
+			}
+		</script>
     </body>
 </html>

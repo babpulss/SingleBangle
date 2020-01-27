@@ -53,7 +53,8 @@ public class PdfService {
 			CssFile cssFile = XMLWorkerHelper.getCSS(new FileInputStream(rootPath + "/css/accountCSS/detailAccountCSS.css"));
 			cssResolver.addCss(cssFile);
 			XMLWorkerFontProvider fontProvider = new XMLWorkerFontProvider(XMLWorkerFontProvider.DONTLOOKFORFONTS);
-			fontProvider.register("D:\\singlebangle\\SingleWorkspace\\SingleBangle\\src\\main\\webapp\\resources\\font\\MalgunGothic.TTF","MalgunGothic");
+			
+			fontProvider.register(rootPath+"\\font\\MalgunGothic.TTF","MalgunGothic");
 			CssAppliers cssAppliers = new CssAppliersImpl(fontProvider);
 			HtmlPipelineContext htmlContext = new HtmlPipelineContext(cssAppliers);
 			htmlContext.setTagFactory(Tags.getHtmlTagProcessorFactory());
@@ -68,7 +69,7 @@ public class PdfService {
 			
 			
 			String htmlStr = "<html><head></head><body style='font-family:MalgunGothic;'>"+pdfValue+"</body></html>";
-			System.out.println(htmlStr);
+//			System.out.println(htmlStr);
 			StringReader strReader = new StringReader(htmlStr);
 			xmlParser.parse(strReader);
 			document.close();

@@ -20,7 +20,7 @@
 
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
 
-        <title>혼밥/혼술 글 상세보기</title>
+        <title>혼밥 / 혼술 - ${dto.title}</title>
         
         <link rel="stylesheet" href="/css/nav.css">
         <style>
@@ -131,7 +131,7 @@
                 width: 100%;
             }
             #placeInfo{
-                margin: auto;
+                /* margin: auto; */
             }
             .placeKey{
                 width: 120px;
@@ -142,7 +142,7 @@
                 text-align: right;
             }
             .placeVal{
-                min-width: 380px;
+                min-width: 360px;
                 padding-left: 10px;
             }
 
@@ -216,7 +216,7 @@
 	                        <div id="map" style="width:100%;height:100%;overflow:hidden;"></div>
 	                    </div>
 	                    <div class="col-12" id="placeArea">
-	                        <label id="placeLabel"><b>혼밥/혼술집 상세정보</b></label>
+	                        <label id="placeLabel"><b>혼밥 / 혼술집 상세정보</b></label>
 	                        <div id="placeInfoBox">
 	                            <table id="placeInfo">
 	                                <tbody>
@@ -266,7 +266,7 @@
             console.log("사진 개수 : " + ${filesList.size()});    
 
             $("#backBtn").on("click", function(){
-            	location.href="${pageContext.request.contextPath}/restaurant/rstListY.rst";
+            	history.back();
             })
 
 

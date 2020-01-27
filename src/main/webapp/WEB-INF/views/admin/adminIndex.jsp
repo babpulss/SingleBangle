@@ -14,7 +14,7 @@
 	margin-top: 80px;
 }
 
-#viewBlackList, #viewReporting {
+#viewBlackList, #viewReporting, #viewRestaurant {
 	width: 200px;
 	height: 40px;
 	border: 1px solid black;
@@ -23,14 +23,14 @@
 	cursor: pointer;
 	text-align: center;
 }
-#viewBlackList>a, #viewReporting>a {
+#viewBlackList>a, #viewReporting>a, #viewRestaurant>a {
 	position: relative;
 	z-index: 2;
 	text-decoration: none;
 	line-height: 40px;
 	color: black;
 }
-#view1 {
+.view1 {
 	position:absolute;
 	width: 200px;
 	height: 40px;
@@ -46,13 +46,16 @@
 	background-color: black;
 	transition: all .5s ease;
 }
-#viewBlackList:hover #view1{
+#viewBlackList:hover .view1{
+	right: 0;
+}
+#viewRestaurant:hover .view1{
 	right: 0;
 }
 #viewReporting:hover #view2{
 	left: 0;
 }
-#viewBlackList:hover>a, #viewReporting:hover>a {
+#viewBlackList:hover>a, #viewReporting:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
 	color: red;
 }
@@ -83,12 +86,16 @@
 <div class="list">
 			<div id="btns">
 				<div id="viewBlackList">
-					<div id="view1"> </div>
+					<div class="view1"> </div>
 					<a href="#">블랙리스트 조회</a>
 				 </div>
 				<div id="viewReporting">
 					<div id="view2"></div>
 					<a href="#">신고접수 확인 조회</a>
+				 </div>
+				<div id="viewRestaurant">
+					<div class="view1"> </div>
+					<a href="#">혼밥/혼술 게시물 관리</a>
 				 </div>
 			 </div>
 </div>
@@ -104,6 +111,9 @@
 	});
 	$("#viewReporting").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewReporting";
+	});
+	$("#viewRestaurant").on("click", function() {
+		location.href="${pageContext.request.contextPath}/restaurant/rstListN.rst";
 	});
 </script>
 

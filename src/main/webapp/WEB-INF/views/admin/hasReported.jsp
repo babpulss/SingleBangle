@@ -78,7 +78,7 @@ html, body {
 
 .bRow:last-child {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
+	background-color: #dce3e8;
 }
 
 #mainWrapper {
@@ -86,7 +86,7 @@ html, body {
 	font-family: 'BMHANNAAir';
 }
 
-#viewDashBoard, #viewBlackList {
+#viewDashBoard, #viewBlackList, #viewRestaurant {
 	width: 200px;
 	height: 40px;
 	border: 1px solid black;
@@ -95,14 +95,14 @@ html, body {
 	cursor: pointer;
 	text-align: center;
 }
-#viewDashBoard>a, #viewBlackList>a {
+#viewDashBoard>a, #viewBlackList>a, #viewRestaurant>a {
 	position: relative;
 	z-index: 2;
 	text-decoration: none;
 	line-height: 40px;
 	color: black;
 }
-#view1 {
+.view1 {
 	position:absolute;
 	width: 200px;
 	height: 40px;
@@ -118,13 +118,16 @@ html, body {
 	background-color: black;
 	transition: all .5s ease;
 }
-#viewDashBoard:hover #view1{
+#viewDashBoard:hover .view1{
+	right: 0;
+}
+#viewRestaurant:hover .view1{
 	right: 0;
 }
 #viewBlackList:hover #view2{
 	left: 0;
 }
-#viewDashBoard:hover>a, #viewBlackList:hover>a {
+#viewDashBoard:hover>a, #viewBlackList:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
 	color: red;
 }
@@ -163,12 +166,16 @@ html, body {
 		<div class="list">
 			<div id="btns">
 				<div id="viewDashBoard">
-					<div id="view1"> </div>
+					<div class="view1"> </div>
 					<a href="#">대쉬보드 조회</a>
 				 </div>
 				<div id="viewBlackList">
 					<div id="view2"></div>
 					<a href="#">블랙리스트 조회</a>
+				 </div>
+				<div id="viewRestaurant">
+					<div class="view1"></div>
+					<a href="#">혼밥/혼술 게시물 관리</a>
 				 </div>
 			 </div>
 		</div>
@@ -208,6 +215,9 @@ html, body {
 	});
 	$("#viewBlackList").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
+	});
+	$("#viewRestaurant").on("click", function() {
+		location.href="${pageContext.request.contextPath}/restaurant/rstListN.rst";
 	});
 		$(".unblock").on("click", function() {
 			var conf = confirm("신고요청완료하시겠습니까?");

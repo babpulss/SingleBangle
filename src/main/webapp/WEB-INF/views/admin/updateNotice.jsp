@@ -101,14 +101,14 @@
 			<div id="bHeader"></div>
 			<div id="bTitles">
 				<div>
-					<span>Title: </span><input type="text" id="title" name="title">
+					<span>Title: </span><input type="text" id="title" name="title" value="${dto.title}">
 				</div>
 			</div>
 			<div id="summernote"></div>
 			<input type="hidden" id="contents" name="contents">
 			<div id="btns">
 				<button type="button" id="toList">목록</button>
-				<button>글쓰기</button>
+				<button>수정 완료</button>
 			</div>
 			<div id="bFooter"></div>
 		</form>
@@ -120,6 +120,7 @@
             lang: "ko-KO",
             airMode: true
         });
+		$(".note-editable").html("${dto.contents}");
     });
     $("#frm").on("submit", function() {
         var content = $(".note-editable").html();
@@ -131,7 +132,7 @@
         $("#contents").val(content);
     });
     $("#toList").click(() => {
-        history.back();
+    	location.href="/notice";
     })
   </script>
 </body>
