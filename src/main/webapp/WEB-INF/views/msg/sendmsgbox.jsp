@@ -65,7 +65,7 @@
         .bRow:last-child {
             border-radius: 0 0 10px 10px;
             background-color: #e05252;
-            height: 50px;
+            
         }
         #btns {
             margin: 20px 110px 0 110px;
@@ -109,35 +109,34 @@
 
 <div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
-<div style="float: left; display: table-cell; height: inherit; vertical-align: middle; font-weight: bold"><p>받은쪽지함 | </p></div>
-<div style="float: left; height: inherit; vertical-align: middle;">
-<button type="button" style="border: none; background-color: transparent; font-size: 16px;" id="sendbox">&nbsp 보낸쪽지함</button></div>
+<div style="float: left; display: table-cell; height: inherit; vertical-align: middle;">
+<button type="button" id="receiveBox" style="border: none; background-color: transparent; font-size: 16px;" id="sendbox">받은쪽지함 | </button></div>
+<div style="float: left; height: inherit; vertical-align: middle; font-weight: bold">&nbsp 보낸쪽지함</div>
 </div>
 <div id="bHeader" class="bRow">
-            <div style="width:50%; float:left">보낸사람</div>
+            <div style="width:50%; float:left">받는사람</div>
             <div style="width:50%; float:left">제목</div>
         </div>
 <c:choose>
 	<c:when test="${list.size() == 0 }">
-		<div class="bRow" style="margin: auto;"><p style="position: relative; left: 35%;">쪽지함이 비어있습니다.</p></div>
+		<div class="bRow" style="text-align: center">보낸쪽지가 없습니다.</div>
 	</c:when>
 	<c:otherwise>
 	<c:forEach items="${list }" var="list">
 		<div class="bRow">
-		<div style="width:50%; float:left">${list.sender }</div>
+		<div style="width:50%; float:left">${list.receiver }</div>
 		<div style="width:50%; float:left">
-		<a href="${pageContext.request.contextPath }/msg/msgDetail.do?seq=${list.seq}">${list.title }</a></div>
+		<a href="${pageContext.request.contextPath }/msg/sendMsgDetail.do?seq=${list.seq}">${list.title }</a></div>
 		</div>
 	</c:forEach>
 	</c:otherwise>
 </c:choose>
  <div class="bRow"><div style="margin: auto;">${navi }</div></div>
 </div>
-<div>${navi }</div>
 <script>
-		$("#sendbox").on("click", function(){
-		location.href="${pageContext.request.contextPath }/msg/sendMsg.do?sender=${receiver}";
-		})
+	$("#receiveBox").on("click",function(){
+		location.href="${pageContext.request.contextPath}/msg/msgList.do?receiver=${sender}"
+	})
 </script>
 </body>
 </html>
