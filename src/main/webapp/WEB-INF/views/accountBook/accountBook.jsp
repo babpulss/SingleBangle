@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가계부</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
@@ -92,7 +92,7 @@
 				<c:out value="${sessionScope.userName}" />
 				(
 				<c:out value="${sessionScope.id}" />
-				) 님 의가계부
+				) 님의 가계부
 			</h2>
 		</div>
 		<div class="card-block p-0">

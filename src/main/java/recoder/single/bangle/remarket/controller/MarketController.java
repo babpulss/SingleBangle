@@ -78,55 +78,70 @@ public class MarketController {
 			System.out.println("navilist.size() : " + navilist.size());
 			model.addAttribute("navilist", navilist);
 			model.addAttribute("navi", navi);
-			
+
 			List<MarketFileDTO> fileList = file_dao.selectByPage(start, end);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("fileList", fileList);
 			model.addAttribute("list", list);
 			return "market/marketList";
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
-			return null;
+			return "redirect:/error";
 		}
 	}
 
 	@RequestMapping("/delete.do")
 	public String delete() {
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		System.out.println("삭제시퀀스 : " + seq);
-		service.delete(seq);
-		//댓글삭제
-		int board_seq = seq;
-		file_dao.delete(board_seq); //board삭제할때 file에서도 삭제
-		int boardSeq = board_seq;
-		reService.deleteUseBoardSeq(boardSeq);
-		return "redirect:/market/boardList.do";
+		try {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			System.out.println("삭제시퀀스 : " + seq);
+			service.delete(seq);
+			//댓글삭제
+			int board_seq = seq;
+			file_dao.delete(board_seq); //board삭제할때 file에서도 삭제
+			int boardSeq = board_seq;
+			reService.deleteUseBoardSeq(boardSeq);
+			return "redirect:/market/boardList.do";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/update.do")
 	public String update(Model model) {
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		System.out.println("수정할 글 번호 : " + seq); //ok
-		MarketDTO dto = service.writedetail(seq);
-		model.addAttribute("dto", dto);
-		return "market/updatemarket";
+		try {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			System.out.println("수정할 글 번호 : " + seq); //ok
+			MarketDTO dto = service.writedetail(seq);
+			model.addAttribute("dto", dto);
+			return "market/updatemarket";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/updateProc.do")//게시글 업데이트
 	public String updateProc(MarketDTO dto, String path) {
-		System.out.println("업데이트프록 컨트롤러");
-		System.out.println(dto.getSeq());
-		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		String writer = loginInfo.getId();
-		path = session.getServletContext().getRealPath("files");
-		System.out.println(dto.getContent());
-		String content = dto.getContent();
-		content.replace("<", "&lt");
-		content.replace(">", "&gt");
-		content.replace("&", "&amp");
-		service.updateProc(dto, content, writer, path);
-		return "redirect:/market/boardList.do";
+		try {
+			System.out.println("업데이트프록 컨트롤러");
+			System.out.println(dto.getSeq());
+			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+			String writer = loginInfo.getId();
+			path = session.getServletContext().getRealPath("files");
+			System.out.println(dto.getContent());
+			String content = dto.getContent();
+			content.replace("<", "&lt");
+			content.replace(">", "&gt");
+			content.replace("&", "&amp");
+			service.updateProc(dto, content, writer, path);
+			return "redirect:/market/boardList.do";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/writeboard.do") //게시판에서 글쓰기버튼 클릭
@@ -138,15 +153,20 @@ public class MarketController {
 	@RequestMapping("/updateSellDone")//판매완료누르기
 	@ResponseBody
 	public String updateDone() {
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		System.out.println("판매완료 보드 : " + seq);
-		MarketDTO dto = service.updateSellDone(seq);
-		Gson g = new Gson();
-		String json = g.toJson(dto);
-		System.out.println(json);
-		return "json";
+		try {
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			System.out.println("판매완료 보드 : " + seq);
+			MarketDTO dto = service.updateSellDone(seq);
+			Gson g = new Gson();
+			String json = g.toJson(dto);
+			System.out.println(json);
+			return "json";
+		}catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
-	
+
 	@RequestMapping("/report.do")//신고하기 누르기
 	public String report(Model model) {
 		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
@@ -162,12 +182,17 @@ public class MarketController {
 
 	@RequestMapping("/reportProc.do")//신고사유 받아오기
 	public String reportProc(Model model, ReportDTO dto) {
-		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		String id = loginInfo.getId();
-		String reason = request.getParameter("reason");
-		String reportedUrl = request.getParameter("reportedUrl");
-		service.reportProc(id, dto);
-		return "redirect:/";
+		try {
+			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+			String id = loginInfo.getId();
+			String reason = request.getParameter("reason");
+			String reportedUrl = request.getParameter("reportedUrl");
+			service.reportProc(id, dto);
+			return "redirect:/";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/write.do") //writeboard에서 글쓰기 버튼 클릭
@@ -186,191 +211,192 @@ public class MarketController {
 			List<MarketDTO> list = service.board();
 			model.addAttribute("list", list);
 			return "redirect:/market/boardList.do";
-		
-	}catch(Exception e) {
-		e.printStackTrace();
-		return null;
-	}
-};
 
-
-@RequestMapping("/marketDetail.do") //게시글상세
-public String writedetail(Model model, @RequestParam(value="cpage", required=false)String cpage_) {
-	int cpage = 0;
-	System.out.println("도착");
-	try {
-		if(cpage_ == null) {
-			cpage = 1;
-		}else {
-			cpage = Integer.parseInt(cpage_);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
 		}
-		System.out.println("cpage : " + cpage);
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		MarketDTO dto = service.writedetail(seq); //seq값 넘기기
-		model.addAttribute("dto", dto);
-		StringBuffer url = request.getRequestURL();
-		String realUrl = url + "?seq=" + seq;
-		model.addAttribute("realUrl", realUrl);
-		int boardSeq = seq;
-		
-		//댓글
-		List<MarketReplyDTO> list = reService.list(boardSeq);
-		model.addAttribute("list", list);
-		System.out.println("이 글의 댓글 갯수 : " + list.size());
-		String navi = rdao.getPageNavi(1, boardSeq);
+	};
 
-		int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
-		int end = cpage * Configuration.recordCountPerPage;
-		List<MarketReplyDTO> renavilist = rdao.selectByPage(start, end, boardSeq);
-		System.out.println(start + " : " + end);
-		System.out.println("renavilist" + renavilist.size());
-		model.addAttribute("renavilist", renavilist);
-		model.addAttribute("navi", navi);
-		return "market/marketdetail";
-		
-	}catch(Exception e) {
-		e.printStackTrace();
-		return null;
-	}
-}
 
-@RequestMapping("/search.do")//게시글 검색하기
-public String search(Model model) {
-	String category = (String) request.getParameter("category");
-	String title = (String) request.getParameter("title");
-	System.out.println("검색시작 : " + category + " : " + title);
-	try {
-		//제목으로만 검색하기
-		if(category.contentEquals("전체")) { 
-			System.out.println("전체&제목 검색 : " + title + category);
-			List<MarketDTO> list = service.searchNoCategory(title);
-			System.out.println("제목검색 갯수 : " + list.size());//size ok
+	@RequestMapping("/marketDetail.do") //게시글상세
+	public String writedetail(Model model, @RequestParam(value="cpage", required=false)String cpage_) {
+		int cpage = 0;
+		System.out.println("도착");
+		try {
+			if(cpage_ == null) {
+				cpage = 1;
+			}else {
+				cpage = Integer.parseInt(cpage_);
+			}
+			System.out.println("cpage : " + cpage);
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			MarketDTO dto = service.writedetail(seq); //seq값 넘기기
+			model.addAttribute("dto", dto);
+			StringBuffer url = request.getRequestURL();
+			String realUrl = url + "?seq=" + seq;
+			model.addAttribute("realUrl", realUrl);
+			int boardSeq = seq;
+
+			//댓글
+			List<MarketReplyDTO> list = reService.list(boardSeq);
 			model.addAttribute("list", list);
-			String navi = dao.getPageNaviUseTitle(1, title);
-			System.out.println("navi : " + navi);
-			model.addAttribute("navi", navi);
-			int cpage=1;
-			String page = request.getParameter("cpage");
-			if(page != null) {
-				cpage = Integer.parseInt(page);
-			}
-			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
-			int end = cpage * Configuration.recordCountPerPage;
-			System.out.println(start + " :: " + end + " ::" + title);
-			List<MarketDTO> navilist = dao.selectByPageUseTitle(title, start, end);
-			System.out.println("검색된 갯수 : " + navilist.size());
-			model.addAttribute("navilist", navilist);
-			List<MarketFileDTO> fileList = new ArrayList<>();
-			
-			for(int i = 0; i < navilist.size(); i++) {
-//				System.out.println(navilist.get(i).getSeq());
-				int board_seq = navilist.get(i).getSeq();
-				System.out.println("검색된시퀀스 : " + board_seq);
-				fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
-			}
-			model.addAttribute("fileList", fileList);
+			System.out.println("이 글의 댓글 갯수 : " + list.size());
+			String navi = rdao.getPageNavi(1, boardSeq);
 
-			return "market/marketList";
-		}else if(title == "" || title == null) { //카테고리로 검색하기
-			System.out.println("카테고리로 검색하기");
-			List<MarketDTO> list = service.searchNoTitle(category);
-			System.out.println("타이틀검색 갯수 : " + list.size());
-			model.addAttribute("list", list);
-			System.out.println("카테고리 검색 뭐라고됨? : " + category);
-			String navi = dao.getPageNaviUseCategory(1, category);
-			System.out.println("navi : " + navi); //출력ok
-			model.addAttribute("navi", navi);
-			int cpage=1;
-			String page = request.getParameter("cpage");
-			if(page != null) {
-				cpage = Integer.parseInt(page);
-			}
-			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
+			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
 			int end = cpage * Configuration.recordCountPerPage;
-			List<MarketDTO> navilist = dao.selectByPageUseCategory(category, start, end);
-			model.addAttribute("navilist", navilist);
-			System.out.println("네비리스트사이즈 : " + navilist.size());
-			List<MarketFileDTO> fileList = new ArrayList<>();
-			for(int i = 0; i < navilist.size(); i++) {
-				System.out.println(navilist.get(i).getSeq());
-				System.out.println(start + " : " + end);
-				int board_seq = navilist.get(i).getSeq();
-				fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
-			}
-			
-			model.addAttribute("fileList", fileList);
-			
-			return "market/marketList";
+			List<MarketReplyDTO> renavilist = rdao.selectByPage(start, end, boardSeq);
+			System.out.println(start + " : " + end);
+			System.out.println("renavilist" + renavilist.size());
+			model.addAttribute("renavilist", renavilist);
+			model.addAttribute("navi", navi);
+			return "market/marketdetail";
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
 		}
-		else {//제목카테고리 같이 검색하기
-			System.out.println("카테고리 제목 전부 선택했음ㅇㅇ");
-		
-			List<MarketDTO> list = service.search(title, category);
-			System.out.println("타이틀, 카테고리 동시 검색 갯수 : " + list.size());
-			model.addAttribute("list", list);
-			String navi = dao.getPageNaviUseCaTi(1, category, title);
-			System.out.println("navi : " + navi); //출력ok
-			model.addAttribute("navi", navi);
-			int cpage=1;
-			String page = request.getParameter("cpage");
-			if(page != null) {
-				cpage = Integer.parseInt(page);
+	}
+
+	@RequestMapping("/search.do")//게시글 검색하기
+	public String search(Model model) {
+		String category = (String) request.getParameter("category");
+		String title = (String) request.getParameter("title");
+		System.out.println("검색시작 : " + category + " : " + title);
+		try {
+			//제목으로만 검색하기
+			if(category.contentEquals("전체")) { 
+				System.out.println("전체&제목 검색 : " + title + category);
+				List<MarketDTO> list = service.searchNoCategory(title);
+				System.out.println("제목검색 갯수 : " + list.size());//size ok
+				model.addAttribute("list", list);
+				String navi = dao.getPageNaviUseTitle(1, title);
+				System.out.println("navi : " + navi);
+				model.addAttribute("navi", navi);
+				int cpage=1;
+				String page = request.getParameter("cpage");
+				if(page != null) {
+					cpage = Integer.parseInt(page);
+				}
+				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
+				int end = cpage * Configuration.recordCountPerPage;
+				System.out.println(start + " :: " + end + " ::" + title);
+				List<MarketDTO> navilist = dao.selectByPageUseTitle(title, start, end);
+				System.out.println("검색된 갯수 : " + navilist.size());
+				model.addAttribute("navilist", navilist);
+				List<MarketFileDTO> fileList = new ArrayList<>();
+
+				for(int i = 0; i < navilist.size(); i++) {
+					//				System.out.println(navilist.get(i).getSeq());
+					int board_seq = navilist.get(i).getSeq();
+					System.out.println("검색된시퀀스 : " + board_seq);
+					fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
+				}
+				model.addAttribute("fileList", fileList);
+
+				return "market/marketList";
+			}else if(title == "" || title == null) { //카테고리로 검색하기
+				System.out.println("카테고리로 검색하기");
+				List<MarketDTO> list = service.searchNoTitle(category);
+				System.out.println("타이틀검색 갯수 : " + list.size());
+				model.addAttribute("list", list);
+				System.out.println("카테고리 검색 뭐라고됨? : " + category);
+				String navi = dao.getPageNaviUseCategory(1, category);
+				System.out.println("navi : " + navi); //출력ok
+				model.addAttribute("navi", navi);
+				int cpage=1;
+				String page = request.getParameter("cpage");
+				if(page != null) {
+					cpage = Integer.parseInt(page);
+				}
+				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
+				int end = cpage * Configuration.recordCountPerPage;
+				List<MarketDTO> navilist = dao.selectByPageUseCategory(category, start, end);
+				model.addAttribute("navilist", navilist);
+				System.out.println("네비리스트사이즈 : " + navilist.size());
+				List<MarketFileDTO> fileList = new ArrayList<>();
+				for(int i = 0; i < navilist.size(); i++) {
+					System.out.println(navilist.get(i).getSeq());
+					System.out.println(start + " : " + end);
+					int board_seq = navilist.get(i).getSeq();
+					fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
+				}
+
+				model.addAttribute("fileList", fileList);
+
+				return "market/marketList";
 			}
-			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
-			int end = cpage * Configuration.recordCountPerPage;
-			List<MarketDTO> navilist = dao.selectByPageUseCaTi(category, title, start, end);
-			model.addAttribute("navilist", navilist);
-			System.out.println("네비리스트사이즈 : " + navilist.size());
-			List<MarketFileDTO> fileList = new ArrayList<>();
-			for(int i = 0; i < navilist.size(); i++) {
-				System.out.println(navilist.get(i).getSeq());
-				System.out.println(start + " : " + end);
-				int board_seq = navilist.get(i).getSeq();
-				fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
+			else {//제목카테고리 같이 검색하기
+				System.out.println("카테고리 제목 전부 선택했음ㅇㅇ");
+
+				List<MarketDTO> list = service.search(title, category);
+				System.out.println("타이틀, 카테고리 동시 검색 갯수 : " + list.size());
+				model.addAttribute("list", list);
+				String navi = dao.getPageNaviUseCaTi(1, category, title);
+				System.out.println("navi : " + navi); //출력ok
+				model.addAttribute("navi", navi);
+				int cpage=1;
+				String page = request.getParameter("cpage");
+				if(page != null) {
+					cpage = Integer.parseInt(page);
+				}
+				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1 );
+				int end = cpage * Configuration.recordCountPerPage;
+				List<MarketDTO> navilist = dao.selectByPageUseCaTi(category, title, start, end);
+				model.addAttribute("navilist", navilist);
+				System.out.println("네비리스트사이즈 : " + navilist.size());
+				List<MarketFileDTO> fileList = new ArrayList<>();
+				for(int i = 0; i < navilist.size(); i++) {
+					System.out.println(navilist.get(i).getSeq());
+					System.out.println(start + " : " + end);
+					int board_seq = navilist.get(i).getSeq();
+					fileList.add(file_dao.selectByPageUseTitle(board_seq, start, end));
+				}
+				model.addAttribute("fileList", fileList);
+				return "market/marketList";
 			}
-			model.addAttribute("fileList", fileList);
-			return "market/marketList";
+
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
 		}
 
-	}catch(Exception e) {
-		e.printStackTrace();
-		return null;
+
 	}
-	
-
-}
 
 
-@RequestMapping("/filedownload.do")
-public void filedownload() {
-	String sys_name = request.getParameter("sys_name");//다운할 파일 이름 출력o
-	String path = session.getServletContext().getRealPath("files"); //다운위치 출력o
-	String fullPath = path + "/" + sys_name;
+	@RequestMapping("/filedownload.do")
+	public void filedownload() {
+		String sys_name = request.getParameter("sys_name");//다운할 파일 이름 출력o
+		String path = session.getServletContext().getRealPath("files"); //다운위치 출력o
+		String fullPath = path + "/" + sys_name;
 
-	File f = new File(fullPath);
+		File f = new File(fullPath);
 
-	try(
-			FileInputStream fis = new FileInputStream(f);
-			DataInputStream fileDis = new DataInputStream(fis);
-			ServletOutputStream sos = response.getOutputStream();
-			){
-		byte[] fileContents = new byte[(int)f.length()];
-		fileDis.readFully(fileContents); // 파일 내용 준비 완료
+		try(
+				FileInputStream fis = new FileInputStream(f);
+				DataInputStream fileDis = new DataInputStream(fis);
+				ServletOutputStream sos = response.getOutputStream();
+				){
+			byte[] fileContents = new byte[(int)f.length()];
+			fileDis.readFully(fileContents); // 파일 내용 준비 완료
 
-		response.reset();//response 백지화
-		response.setContentType("application/octet-stream");
+			response.reset();//response 백지화
+			response.setContentType("application/octet-stream");
 
-		String encFileName = new String(sys_name.getBytes("utf8"),"iso-8859-1");
+			String encFileName = new String(sys_name.getBytes("utf8"),"iso-8859-1");
 
-		response.setHeader("Content-Disposition", "attachment; filename=\""+ encFileName +"\"");
-		response.setHeader("Content-Length", String.valueOf(f.length()));
+			response.setHeader("Content-Disposition", "attachment; filename=\""+ encFileName +"\"");
+			response.setHeader("Content-Length", String.valueOf(f.length()));
 
-		sos.write(fileContents);
-		sos.flush();
+			sos.write(fileContents);
+			sos.flush();
 
-	}catch(Exception e) {
-		e.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+			
+		}
 	}
-}
 
 }

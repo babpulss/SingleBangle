@@ -15,10 +15,12 @@
 @font-face {
 	font-family: 'BMHANNAAir';
 	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff')
 		format('woff');
 	font-weight: normal;
 	font-style: normal;
+	
+	
 }
 
 .sidebar {
