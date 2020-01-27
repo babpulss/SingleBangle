@@ -189,7 +189,7 @@
 												<td><input type="button"
 													class="modifyBtn btn btn-light" disabled="disabled"
 													value="수정" name="${list.seq }"> <input
-													type="button" class="deleteBtn btn btn-danger" name="${list.seq }" value="삭제"></td>
+													type="button" class="deleteBtn btn btn-dark" name="${list.seq }" value="삭제"></td>
 
 											</tr>
 
