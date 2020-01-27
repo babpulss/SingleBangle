@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>혼밥/혼술 글 작성</title>
+<title>혼밥 / 혼술 글 작성</title>
 </head>
 <body>
 	<script>

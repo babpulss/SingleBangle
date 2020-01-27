@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
-        <title>혼밥/혼술</title>
+        <title>혼밥 / 혼술</title>
 
         <link rel="stylesheet" href="/css/nav.css">
         <style>
@@ -18,46 +18,82 @@
 			body {
 				background-color: #f5f5f5;
 			}
+			
+			#rstHeader{
+                width: 80%;
+                min-width: 600px;
+                height: 80px;
+                line-height: 40px;
+                margin: auto;
+            }
+            #rstTitle{
+                font-size: 32px;
+            }
+            #rstNotice{
+                font-size: 12px;
+                border-bottom: 1px solid black;
+            }
         	
-        	#writeBox{
+        	#rstContainer{
+        		border: 1px solid #b2b2b2;
+        		width: 80%;
+        		min-width: 600px;
         		margin: auto;
+        	}
+        	
+        	#writeBtnBox{
+        		width: 100%;
         		text-align: center;
-        		min-width: 700px;
+        		margin: auto;
         	}
         	#writeBtn{
-        		border: none;
+        		border: 2px dashed #0085cb;
             	border-radius: 5px;
-            	width: 80px;
-            	height: 40px;
-            	font-size: 16px;
             	cursor: pointer;
-            	color: white;
-            	background-color: #0085cb;
+            	color: #0085cb;
+            	background-color: white;
+            	width: 200px;
+            	height: 50px;
+            	font-size: 16px;
+        	}
+        	#writeBtn:hover{
+                background-color: #cceeff;
+            }
+        	
+        	#map{
+        		border-top: 1px dashed #b2b2b2;
         	}
         	
 			#placeInfoBox{
-            	display: none;
-            	width: 80%;
-            	margin: auto;
+				display: none;
+            	width: 100%;
+            	background-color: #f7f7f7;
             }
-            #placeInfo{
-            	margin: auto;
+            #placeInfoBox:hover{
+            	background-color: #cceeff;
             }
-            
-            .placeKey{
-            	width: 120px;
-            	height: 40px;
-            	background-color: #e0e0e0;
-            	padding-right: 10px;
-            	text-align: right;
-            }
-            .placeVal{
-            	min-width: 400px;
-            	padding-left: 10px;
-            }
-            #placeTitle a{
-            	color: #0085cb;
+            #placeDetail{
+            	color: #999999;
             	text-decoration: none;
+            	margin-top: 30px;
+            	margin-bottom: 30px;
+            }
+            #placeTitle{
+            	color: black;
+            	font-size: 20px;
+            	margin-left: 30px;
+            	margin-bottom: 5px;
+            }
+            #writer{
+            	display: inline-block;
+            	font-size: 16px;
+            	margin-left: 30px;
+            	margin-bottom: 15px;
+            }
+            #writeDate{
+            	display: inline-block;
+            	font-size: 16px;
+            	margin-left: 30px;
             }
         </style>
     </head>
@@ -66,33 +102,38 @@
 
         <br><br><br>
         <div id="mainWrapper">
-			<div id="writeBox">
-				<button type="button" id="writeBtn">글쓰기</button>
-			</div>
-			
-            <br><hr><br>
-            <div id="map" style="width:80%; min-width:700px; height:700px; margin:auto"></div>
-            <br><hr><br>
-
-            <div id="placeInfoBox">
-                <table id="placeInfo">
-                    <tbody>
-                        <tr>
-                            <td class="placeKey">제목</td>
-                            <td class="placeVal" id="placeTitle"></td>
-                        </tr>
-                        <tr>
-                            <td class="placeKey">작성자</td>
-                            <td class="placeVal" id="writer"></td>
-                        </tr>
-                        <tr>
-                            <td class="placeKey">작성일</td>
-                            <td class="placeVal" id="writeDate"></td>
-                        </tr>
-                    </tbody>
-                </table>
+        	<div id="rstHeader">
+        		<div id="rstTitle">
+        			<b>혼밥 / 혼술</b>
+        		</div>
+        		<div id="rstNotice">
+        			회원님 주변의 <b>혼밥 / 혼술집</b>을 추천 받아보세요!
+        		</div>
+        	</div>
+        	<br><br><br>
+        	
+        	<div id="rstContainer">
+        		<br>
+        		<div id="writeBtnBox">
+					<button type="button" id="writeBtn">혼밥 / 혼술집 추천하기</button>
+				</div>
+				<br>
+				
+	            <div id="map" style="width:100%; height:700px;"></div>
+	            
+		        <div id=placeInfoBox>
+		        	<a href="" id="placeDetail">
+		        		<div id="placeInfo">
+		        			<br>
+				        	<div id="placeTitle"></div>
+				        	<div id="writer"></div>
+				        	<div id="writeDate"></div>
+				        	<br>
+						</div>
+					</a>
+		        </div>
             </div>
-
+            
         </div>
         <br><br><br>
 
@@ -152,7 +193,8 @@
             // 화면에 게시글 상세정보를 띄우는 클로저를 만드는 함수
             function printPlaceInfo(placeData) {
             	return function(){
-            		$("#placeTitle").html("<a href='${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=" + placeData.seq + "'>" + placeData.title + "</a>");
+            		$("#placeDetail").attr("href", "${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=" + placeData.seq)
+            		$("#placeTitle").html(placeData.title);
             		$("#writer").html(placeData.writer);
             		$("#writeDate").html(placeData.formedDate1);
             		
@@ -204,7 +246,7 @@
                     userMarker.setMap(map);
                     
                 } else{
-                    alert("로그인하셔야 근처 혼밥/혼술집을 보실 수 있습니다.")
+                    alert("로그인하셔야 근처 혼밥 / 혼술집을 보실 수 있습니다.")
                 }
             }); 
 	        
