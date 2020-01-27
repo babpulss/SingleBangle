@@ -21,10 +21,12 @@
 				<ul>
 					<li>싱글이</li>
 					<li>방글할 때까지</li>
+					<li>SingleBangle<li>
 				</ul>
 			</div>
 			<div class="typing">
 				<ul>
+					<li></li>
 					<li></li>
 					<li></li>
 				</ul>

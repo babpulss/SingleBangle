@@ -108,7 +108,7 @@ $(document).ready(function() {
 	         clearInterval(tyInt);
 	          //타이핑종료
 	     
-	            tyInt = setInterval(typing,800);
+	            tyInt = setInterval(typing,300);
 	          
 	        }
 	    } 

@@ -45,7 +45,7 @@ public class AccountController {
 	
 	@RequestMapping("/account")
 	public String accountIndex() {
-		return "accountBook/accountIndex";
+		return "index";
 	}
 	
 //	가계부 월별 리스트
@@ -184,6 +184,13 @@ public class AccountController {
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
 		dto.setId(memberdto.getId());
 		dto.setUserName(memberdto.getName());
+		if(dto.getSpec().equals("수입")&&dto.getExpense()!=0) {
+			dto.setIncome(dto.getExpense());
+			dto.setExpense(0);
+		}else if(dto.getSpec().equals("지출")&&dto.getIncome()!=0){
+			dto.setExpense(dto.getIncome());
+			dto.setIncome(0);
+		}
 		System.out.println("controller"+dto);
 		int result = accService.modifyAccountData(dto);
 		if(result>0) {
