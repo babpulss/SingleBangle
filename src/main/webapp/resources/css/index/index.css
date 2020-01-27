@@ -31,20 +31,18 @@
 	cursor: default;
 }
 
-#typing-txt{
-	display: none;
-}
+.typing-txt1, .typing-txt2{display: none;}
 
-#firstRow ul{
-	list-style:none;
-}
+.typing ul{list-style: none;}
 .typing * {
 	font-size: 75px;
+	animation-name: cursor; 
+	animation-iteration-count: infinite; 
 }
 .typing ul li.on {  
   display: inline-block; 
   animation-name: cursor; 
-  animation-duration: .5s; 
+  animation-duration: 0.3s; 
   animation-iteration-count: infinite; 
 } 
 
