@@ -59,7 +59,7 @@
         }
         .bRow:last-child {
             border-radius: 0 0 10px 10px;
-            background-color: #e05252;
+            background-color: #dce3e8;
         }
         #btns {
             margin: 20px 110px 0 110px;

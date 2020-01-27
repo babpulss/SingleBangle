@@ -49,7 +49,7 @@
 
 #bFooter {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
+	background-color: #dce3e8;
 	height: 20px;
 }
 
