@@ -219,6 +219,10 @@
                             $("#idCheck").html("중복된 아이디입니다.").css("color", "red");
                             validIdDupl = 0;
                         }
+                        else if(data.result == -1){
+                        	alert("오류가 발생하였습니다. 다시 시도해주세요.");
+                        	validIdDupl = 0;
+                        }
                         else{
                             $("#idCheck").html("사용 가능한 아이디입니다.").css("color", "green");
                             validIdDupl = 1;

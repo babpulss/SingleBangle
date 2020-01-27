@@ -20,7 +20,7 @@
 		
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
 		
-		<title>혼밥/혼술 글 작성</title>
+		<title>혼밥 / 혼술 글 작성</title>
 		
 		<link rel="stylesheet" href="/css/nav.css">
         <style>
@@ -228,7 +228,7 @@
             	text-align: right;
             }
             .placeVal{
-            	min-width: 400px;
+            	min-width: 360px;
             	padding-left: 10px;
             }
             .placeInput{
@@ -317,7 +317,7 @@
 	                    <br>
 	                    <div class="row">
 	                    	<div class="col-12" id="mapSearchArea">
-	                    		<label for="keyword" id="mapSearchLabel">혼밥/혼술집 위치 검색</label>
+	                    		<label for="keyword" id="mapSearchLabel">혼밥 / 혼술집 위치 검색</label>
 	                    	</div>
 	                        <div class="col-12 map_wrap" id="mapArea">
 	                            <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
@@ -325,7 +325,7 @@
 					            <div id="menu_wrap" class="bg_white">
 					                <div class="option">
 					                    <div>
-											키워드 : <input type="text" id="keyword" size="15" placeholder=" 검색어 입력 "> 
+											키워드 : <input type="text" id="keyword" size="14" placeholder=" 검색어 입력 "> 
 											<button type="button" id="searchBtn">검색하기</button> 
 					                    </div>
 					                </div>
@@ -335,7 +335,7 @@
 					            </div>
 	                        </div>
 	                        <div class="col-12" id="placeArea">
-		                        <label id="placeLabel"><b>혼밥/혼술집 위치를 등록하세요. (필수 입력)</b></label>
+		                        <label id="placeLabel"><b>혼밥 / 혼술집 위치를 등록하세요. (필수 입력)</b></label>
 		                        <div id="placeInfoBox">
 			                        <table id="placeInfo">
 										<tbody>

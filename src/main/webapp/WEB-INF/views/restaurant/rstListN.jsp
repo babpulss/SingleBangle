@@ -9,7 +9,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
-        <title>혼밥/혼술</title>
+        <title>혼밥 / 혼술 (비승인 목록)</title>
         
         <link rel="stylesheet" href="/css/nav.css">
         <style>

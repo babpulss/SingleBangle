@@ -1,6 +1,6 @@
 package utils;
 
-public class XSS_protect {
+public class XSSprotect {
 	public static String replaceParameter(String param) {
 
 		String result = param;
