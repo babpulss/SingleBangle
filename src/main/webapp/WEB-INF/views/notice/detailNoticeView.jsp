@@ -104,8 +104,13 @@
    <div id="btns">
         <button type="button" onclick="history.back()">목록</button>
         <c:if test="${loginInfo.adminCheck eq \"Y\"}">
-        <button type="button">수정</button>
+        <button id="modify" type="button">수정</button>
         <button type="button" onclick="location.href='/notice/deleteNotice?seq=${dto.seq}">삭제</button>
+        <script>
+			$("#modify").on('click', function() {
+				location.href="/notice/updateNotice"
+			})
+        </script>
         </c:if>
    </div>
 </body>
