@@ -1,0 +1,50 @@
+* {
+	box-sizing: border-box;
+}
+
+#footerContainer {
+	float: left;
+	width: 100%;
+	min-width: 720px;
+	box-shadow: 0px -5px 10px -5px black;
+	background-color: #f2f2f2;
+	margin-top: 200px;
+}
+
+.footerArea {
+	float: left;
+	height: 160px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#footerImgBox {
+	border-right: 1px solid #dadada;
+	width: 200px;
+	line-height: 200px;
+	text-align: center;
+	margin-left: 80px;
+}
+
+#footerImg {
+	max-width: 200px;
+	max-height: 160px;
+}
+
+#footerInfoBox {
+	width: 420px;
+	height: 160px;
+	margin-left: 20px;
+}
+
+.footerInfo {
+	font-size: 14px;
+	color: #6d6d6d;
+}
+
+#footerCompany {
+	font-size: 18px;
+	color: black;
+	margin-top: 15px;
+	margin-bottom: 5px;
+}

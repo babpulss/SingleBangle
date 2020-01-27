@@ -10,6 +10,7 @@
         <title>회원 탈퇴</title>
 
 		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -173,6 +174,8 @@
 	        </div>
 		</div>
 		<br><br><br>
+		
+		<jsp:include page="/resources/jsp/footer.jsp" />
 		
 		<script>
 			function withdrawCheck(){

@@ -8,6 +8,8 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<title>비밀번호 찾기</title>
 		
+		<link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -109,47 +111,46 @@
         </style>
     </head>
     <body>
-    	<c:choose>
-            <c:when test="${loginInfo==null}">
-                <script>
-                    alert("로그인 후 이용하실 수 있습니다.");
-                    location.href="${pageContext.request.contextPath}/member/login.mem";
-                </script>		
-            </c:when>
-        </c:choose>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
     	
-        <div id="findWayContainer">
-            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
-                <div class="findWayIcon"><img src="/img/member/id_unchecked.png"></div>
-                <div class="findWayText"><b>아이디 찾기</b></div>
-            </a>
-            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
-                <div class="findWayIcon"><img src="/img/member/pw_checked.png"></div>
-                <div class="findWayText"><b>비밀번호 찾기</b></div>
-            </a>
+    	<br><br><br>
+        <div id="mainWrapper">
+	        <div id="findWayContainer">
+	            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
+	                <div class="findWayIcon"><img src="/img/member/id_unchecked.png"></div>
+	                <div class="findWayText"><b>아이디 찾기</b></div>
+	            </a>
+	            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
+	                <div class="findWayIcon"><img src="/img/member/pw_checked.png"></div>
+	                <div class="findWayText"><b>비밀번호 찾기</b></div>
+	            </a>
+	        </div>
+	        <br><br><br>
+	        <form action="${pageContext.request.contextPath}/email/findPwResult.email" method="post" id="findPwFrm" onsubmit="return validCheck()">
+	            <div id="findPwContainer">
+	                <div id="findPwHeader">
+	                    <div id=findPwTitle><b>비밀번호 찾기</b></div>
+	                    <div id="findPwNotice">회원정보에 등록한 아이디와 이메일을 입력하세요.</div>
+	                </div>
+	                <br>
+	                <div class="info">
+	                    <label class="label1" for="id"><b>아이디</b></label><br>
+	                    <input type="text" class="infoVal" id="id" name="id">
+	                </div>
+	                <div class="info">
+	                    <label class="label1" for="email"><b>이메일</b></label><br>
+	                    <input type="text" class="infoVal" id="email" name="email">
+	                </div>
+	                <div id="submitContainer">
+	                    <input type="submit" class="btns" id="submitBtn" value="찾기">
+	                    <button type="button" class="btns" id="cancelBtn">취소</button>
+	                </div>
+	            </div>
+	        </form>
         </div>
         <br><br><br>
-        <form action="${pageContext.request.contextPath}/email/findPwResult.email" method="post" id="findPwFrm" onsubmit="return validCheck()">
-            <div id="findPwContainer">
-                <div id="findPwHeader">
-                    <div id=findPwTitle><b>비밀번호 찾기</b></div>
-                    <div id="findPwNotice">회원정보에 등록한 아이디와 이메일을 입력하세요.</div>
-                </div>
-                <br>
-                <div class="info">
-                    <label class="label1" for="id"><b>아이디</b></label><br>
-                    <input type="text" class="infoVal" id="id" name="id">
-                </div>
-                <div class="info">
-                    <label class="label1" for="email"><b>이메일</b></label><br>
-                    <input type="text" class="infoVal" id="email" name="email">
-                </div>
-                <div id="submitContainer">
-                    <input type="submit" class="btns" id="submitBtn" value="찾기">
-                    <button type="button" class="btns" id="cancelBtn">취소</button>
-                </div>
-            </div>
-        </form>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
         
         <script>
 	        function validCheck(){
