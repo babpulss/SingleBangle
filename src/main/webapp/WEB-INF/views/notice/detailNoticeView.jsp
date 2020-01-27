@@ -18,7 +18,6 @@
 }
 
 #bTitles {
-	border-bottom: 1px dotted black;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	padding-bottom: 20px;

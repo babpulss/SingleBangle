@@ -37,6 +37,7 @@ public class NoticeController {
 
 	@RequestMapping("/postNotice")
 	public String postNotice(NoticeDTO dto, Model m) {
+		System.out.println(dto);
 		int result = sst.insert("Notice.postNotice", dto);
 		m.addAttribute("result", result);
 		return "notice/resultAlert";

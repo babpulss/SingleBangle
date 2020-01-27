@@ -19,6 +19,7 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -276,8 +277,9 @@ public class AccountController {
 			footStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("#,##0"));
 			
 			// 헤더 생성
-			row = sheet.createRow(rowNo++);
 			
+			rowNo++;
+			row = sheet.createRow(rowNo++);
 			int columnIndex = 0;
 		    while (columnIndex < 7) {
 		    	

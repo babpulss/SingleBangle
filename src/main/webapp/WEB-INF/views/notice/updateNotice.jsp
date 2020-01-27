@@ -117,13 +117,14 @@
 		</form>
 	</div>
 	<script>
+	var contents = '${dto.contents}';
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 500,
             lang: "ko-KO",
             airMode: true
         });
-		$(".note-editable").html("${dto.contents}");
+		$(".note-editable").html(contents);
     });
     $("#frm").on("submit", function() {
         var content = $(".note-editable").html();
@@ -131,9 +132,10 @@
             alert('editor content is empty');
             return false;
         }
+        $("#contents").val(content);
     });
     $("#toList").click(() => {
-        history.back();
+    	location.href="/notice";
     })
   </script>
 </c:when>
