@@ -222,7 +222,7 @@
 				seq : seq
 			},
 			success: function(data){
-				alert("판매완료상태로 전환되었습니다. 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.");
+				alert("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.");
 				window.location.reload();
 			}
 		}).fail(function(data){
