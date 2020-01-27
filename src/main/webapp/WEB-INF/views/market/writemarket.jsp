@@ -116,6 +116,14 @@
 </style>
 </head>
 <body>
+<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>      
+            </c:when>
+        </c:choose>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <form action="write.do" method="post" id="frm" enctype="multipart/form-data" id="boardfrm">
 <div style="width: 700px; margin: auto; position: relative; top: 80px;">
