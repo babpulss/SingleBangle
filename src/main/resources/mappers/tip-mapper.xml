@@ -110,13 +110,16 @@
 		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where title like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
 	</select>
 
-	
 	<select id="selectByPageContents" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
 		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where contents like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
 	</select>
 	
 	<select id="selectByPageBoth" resultType="recoder.single.bangle.tipBoard.DTO.BoardDTO">
 		select * from (select livingPoint.*, row_number() over(order by seq desc) as rown from livingPoint where title like '%'||#{input}||'%' or contents like '%'||#{input}||'%') where rown between #{startNum} and #{endNum}
+	</select>
+	
+	<select id="selectByPageCmt" resultType="recoder.single.bangle.tipBoard.DTO.CommentDTO">
+		select * from (select livingComment.*, row_number() over(order by seq desc) as rown from livingComment where rootSeq = #{seq}) where rown between #{startNum} and #{endNum} order by writeDate desc
 	</select>
 	
 <!-- 상세검색  -->
@@ -143,7 +146,7 @@
 	</insert>
 	
 	<select id="cmtList" resultType="recoder.single.bangle.tipBoard.DTO.CommentDTO">
-		select * from livingComment where rootSeq = #{rootSeq}
+		select * from livingComment where rootSeq = #{rootSeq} order by writeDate
 	</select>
 <!-- 그냥 바로 댓글 지우기 mapper -->
 	<delete id="cmtDelete">
@@ -161,7 +164,10 @@
 	<update id="cmtUpdate">
 		update livingComment set contents = #{contents} where seq = #{seq}
 	</update>
-
+<!-- 댓글 수 구하기 -->
+	<select id="cmtCount" resultType="Integer">
+		select count(*) from livingComment where rootSeq = #{value}
+	</select>
 </mapper>
 
 

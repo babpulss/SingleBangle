@@ -16,6 +16,8 @@ public class BoardDTO {
 	private int likeCount;
 	private int countSeq;
 	
+	private String formedDate;
+	
 	public BoardDTO() {
 		super();
 	}

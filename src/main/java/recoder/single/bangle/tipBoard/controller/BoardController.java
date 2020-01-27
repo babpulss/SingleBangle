@@ -2,18 +2,17 @@ package recoder.single.bangle.tipBoard.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import recoder.single.bangle.member.DTO.MemberDTO;
@@ -88,11 +87,12 @@ public class BoardController {
 	//글 제목 클릭하면 글 상세보기 화면
 	@RequestMapping("/detailView.bo")
 	public String detailView(int seq, Model model) {
-	
+
 		boardService.viewCount(seq);
 		MemberDTO loginDTO = (MemberDTO)session.getAttribute("loginInfo");
 		
 		if(loginDTO != null) {
+			//로그인 해야만 좋아요, 스크랩 가능!
 			String id = loginDTO.getId();
 			
 			int likeCheck = boardService.likeCheck(seq, id);
@@ -100,8 +100,9 @@ public class BoardController {
 			int scrapCheck = boardService.scrapCheck(seq, id);
 			model.addAttribute("scrapCheck",scrapCheck);
 		}
-		BoardDTO dtoB = boardService.getDto(seq);
-		model.addAttribute("detailView",dtoB);	
+		BoardDTO dtoB = boardService.getDto(seq); 
+
+		model.addAttribute("detailView",dtoB);
 		
 		return "tipBoard/detailView";
 	}
@@ -140,7 +141,7 @@ public class BoardController {
 		boardService.commentDelete(seq);
 
 //		게시글 지우면 그 게시글이 가진 파일도 지우기
-		
+// 		해야됨		
 		
 		
 		int deleteResult = boardService.deleteTip(seq);
@@ -273,15 +274,17 @@ public class BoardController {
 	}
 	
 	@RequestMapping("/reportPage.bo")
-	public String reportPage(String url, Model model) {
+	public String reportPage(String url, String writer, String title, Model model) {
 		System.out.println("신고하는 글의 url: " + url);
 		model.addAttribute("url",url);
+		model.addAttribute("writer",writer);
+		model.addAttribute("title",title);
 		return "tipBoard/reportPage";
 	}
 	
 	@RequestMapping("/reportProc.bo")
-	public String reportProc(String reason,String url, String reporter, Model model) {
-		ReportDTO dtoR = new ReportDTO(0,reporter,null,reason,url,null,null);
+	public String reportProc(String reportReason,String url, String reporter, Model model) {
+		ReportDTO dtoR = new ReportDTO(0,reporter,null,reportReason,url,null,null);
 		int reportResult = boardService.report(dtoR);
 		model.addAttribute("reportResult",reportResult);
 		return "tipBoard/reportResult";
@@ -302,15 +305,45 @@ public class BoardController {
 	
 	@RequestMapping(value = "/cmtList.bo", produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String cmtList(int rootSeq){
+	public String cmtList(int rootSeq,Model model, @RequestParam(value="currentPage", required=false)String currentPage_){
+		int currentPage;
+		if (currentPage_ == null)
+			currentPage = 1;
+		else
+			currentPage = Integer.parseInt(currentPage_ = currentPage_.trim());
+		
 		System.out.println("cmtList.bo에 도착!");
 		
-		List<CommentDTO> cmtList = boardService.cmtList(rootSeq);
+
+		List<CommentDTO> cmtFullList = boardService.cmtList(rootSeq);
+		int cmtCount = cmtFullList.size();
+		// 댓글창에서 getFormedDate 사용! getter뿐 아니라 setter도 만들어주기!
+	
+		List<CommentDTO> cmtList = boardService.selectByPageCmt(currentPage, rootSeq);
+
+		String getNavi = boardService.getCmtNavi(currentPage, rootSeq);
+		
+		for(int i=0; i<cmtList.size();i++) {
+			String formedDate = cmtList.get(i).getFormedDate();
+			cmtList.get(i).setFormedDate(formedDate);
+		}
+		
+//		모델에 담지 말고, 
+//		model.addAttribute("cmtList", cmtList);
+//		model.addAttribute("getNavi",getNavi);
+//		
 		System.out.println("controller에서 cmtList: "+cmtList);
+		
 		Gson g = new Gson();
 		String toJsonResult = g.toJson(cmtList);
 		
-		return toJsonResult;
+		JsonObject obj = new JsonObject();
+		
+		obj.addProperty("cmtCount", cmtCount);
+		obj.addProperty("cmtList", toJsonResult);
+		obj.addProperty("getNavi", getNavi);
+
+		return obj.toString();
 	}
 	
 	@RequestMapping("/replyDelete.bo")

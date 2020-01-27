@@ -59,7 +59,7 @@
         }
         .bRow:last-child {
             border-radius: 0 0 10px 10px;
-            background-color: #e05252;
+            background-color: #dce3e8;
         }
         #btns {
             margin: 20px 110px 0 110px;
@@ -112,8 +112,9 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <div id="mainWrapper">
-	<h2>검색결과</h2>
-	<h3>총 ${searchResultSize}의 결과가 있습니다.</h3>
+<br><br>
+	<h1 style="text-align:center;">검색결과</h1><br>
+	<h3 style="text-align:center;">총 ${searchResultSize}건의 게시물이 있습니다.</h3>
 	
 		<div id="board">
         <div id="bHeader" class="bRow">
@@ -123,6 +124,8 @@
             <span>작성일</span>
             <span>조회수</span>
         </div>
+        <c:choose>
+        <c:when test="${searchResultSize != 0}">
      <c:forEach items="${searchResult}" var="dto">
         <div class="bRow">
 				<span> 
@@ -136,15 +139,42 @@
 				</span> 
 			<span><a href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.seq}">${dto.title}</a></span>
             <span>${dto.writer}</span>
-            <span>${dto.writeDate}</span>
+            <span>${dto.getFormedDate()}</span>
             <span>${dto.viewCount}</span>
         </div>
-     </c:forEach>   
+     </c:forEach>
+     </c:when>
+     <c:otherwise><br><p style="text-align:center;">해당 검색어가 포함된 게시물이 없습니다.</p><br></c:otherwise>
+     </c:choose>   
         <div class="bRow" style="height:20px"></div>
    </div>
+  <form action="tipSearch.bo" method="get">
+	<div id="btns">
+		<button type="button" id="btnToBack">메인</button>
+		<div>
+		<select id="searchType" name="tipCategory">
+			<option value="title">제목</option>
+			<option value="contents">본문</option>
+			<option value="both">제목+본문</option>
+		</select> 
+			<input type="text" placeholder="  search"  name="searchInput">
+			<button type="submit">검색</button>
+		</div>
+		<button type="button" id="btnToWrite">글쓰기</button>
+	</div>
+</form>
 	<br>
 	<div id="paging" style="text-align:center;">${getNavi} </div>
-	
+	<br>
 </div>
+
+<script>
+$("#btnToWrite").on("click",function() {
+	location.href = "${pageContext.request.contextPath}/board/toBoardWrite.bo";
+})
+$("#btnToBack").on("click", function() {
+	location.href = "${pageContext.request.contextPath}/";
+})
+</script>
 </body>
 </html>
