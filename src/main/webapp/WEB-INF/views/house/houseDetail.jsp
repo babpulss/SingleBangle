@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>랜선집들이 상세보기</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/nav.css">
@@ -54,12 +54,18 @@
 }
 
 .img{
-	width: 800px;
+	width: 540px;
 }
 </style>
 <script type="text/javascript">
 	$(function() {
-		var id = "${loginInfo.id}" 
+		$('input[type="text"]').keydown(function() {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+		})
+		
+		var id = "${loginInfo.id}";
 		$("#btnComment").on("click", function() {
 			var input =  $("#inputComment").val();
 			if(input.length != 0){
@@ -77,12 +83,13 @@
 					 $("#comments").empty();
 					 var commentList = json.commentList;
 					 for(var i =0; i<commentList.length; i++){
-						 var writer = "'"+ commentList[i].writer +"'"
+						 var writer = commentList[i].writer
 						 console.log(writer)
-						 if(writer == id){
+						 console.log(id);
+						 if(writer !=id){
 						
 							 $("#comments").prepend(
-										"<div class='panel-body'> <span> 									 						 										<b>" + commentList[i].writer + "</b> " + commentList[i].wirteDate 			 										+ "<br> "+ commentList[i].content + "</span> </div>"
+										"<div class='panel-body'> <span><b>" + commentList[i].writer + "</b> " + commentList[i].wirteDate + "<br> "+ commentList[i].content + "</span> </div>"
 							 )
 						 }else{
 							 $("#comments").prepend(
@@ -108,6 +115,7 @@
 		
 		$("#btnLogin").on("click", function() {
 			alert("로그인이 필요합니다.");
+			location.href ="${pageContext.request.contextPath}/member/login.mem";
 		})
 		
 		$("#btnList").on("click", function() {
@@ -143,16 +151,6 @@
 				}else{
 					alert("실패")
 				}
-				/*  $("#inputComment").val("");
-				 $("#comments").empty();
-				 var commentList = json.commentList;
-				 for(var i =0; i<commentList.length; i++){
-					$("#comments").prepend(
-						"<div class='panel-body'> 									<span> 										<b>" + commentList[i].writer + "</b> " + commentList[i].wirteDate+" <br> 										" + commentList[i].content + " 									</span> 								</div>		"	
-					)
-							
-				 }
-				 $("#comments").prepend("") */
 			}).fail(function() {
 				
 			});
@@ -197,7 +195,7 @@
 							</c:when>
 							<c:otherwise>
 								<div class="input-group mb-3">
-									<input id="inputComment" type="text" class="form-control"
+									<input id="inputComment" type="text" class="form-control" readonly="readonly"
 										placeholder="로그인이 필요합니다.">
 									<div class="input-group-append">
 										<button class="btn btn-outline-secondary" type="button"
@@ -212,7 +210,7 @@
 								<c:forEach items="${commentList}" var="dto">
 									<div class="panel-body">
 										<span> <b>${dto.writer}</b> ${dto.wirteDate}
-											<c:if test="${loginInfo.id eq houseDTO.writer}">
+											<c:if test="${loginInfo.id == dto.writer}">
 											<button type="button" class="btn btn-outline-danger btn-sm"
 												onclick="commentDel('${dto.seq}')">삭제</button>
 											</c:if>

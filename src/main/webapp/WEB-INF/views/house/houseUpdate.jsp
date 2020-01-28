@@ -1,26 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<title>랜선 집들이 게시판 수정</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/nav.css">
 <link rel="stylesheet" href="/css/footer.css">
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <style>
 .hidden {
 	display: none;
@@ -53,17 +48,18 @@
 	cursor: pointer;
 }
 
-
-.imgHelp{
+.imgHelp {
 	color: red;
 }
-#stat{
+
+#stat {
 	display: none;
 }
 </style>
 <script>
 	var stat ="";
-	var div = "<div class='contentInput'>                 <div class='btnDel col-sm-push-9'>                     <button type='button' class='btn btn-danger' onclick='deleteContents(this)'>삭제</button>                 </div>                 <div class='form-group hidden'>                     <label class='form-control-label' for='inputSuccess1'>이미지 제목</label>                     <input type='text' class='form-control' name='imgTitle' required>                     <div class='valid-feedback'>Success! You've done it.</div>                     <div class='invalid-feedback'>No, you missed this one.</div>                 </div>                 <div class='form-group'>                     <label class='form-control-label' for='inputSuccess2'>이미지</label>                     <div class='imgDiv'>                         <input type='file' class='form-control' name='img' onchange='readURL(this)' accept='image/jpeg, image/png' required>                         <img class='img-thumbnail' src='#' alt='your image' style='display: none' />                         <div class='valid-feedback'>Success! You've done it.</div>                         <div class='invalid-feedback'>No, you missed this one.</div>                     </div>                 </div>                 <div class='form-group hidden'>                     <label class='form-control-label' for='inputSuccess3'>이미지 설명</label>                     <textarea class='form-control' name='imgContent' required></textarea>                     <div class='valid-feedback'>Nice! You got this one!</div>                     <div class='invalid-feedback'>Sorry, you missed this one.</div>                 </div>                 <hr>             </div> ";
+	var div = 
+		"<div class='contentInput'>               		<div class='btnDel col-sm-push-9'>              		<button type='button' class='btn btn-danger' onclick='deleteContents(this)'>삭제</button> 		</div>                 <div class='form-group hidden'>                 		<label class='form-control-label' for='inputSuccess1'>이미지 제목</label>        		<input type='text' class='form-control imgTitle' name='imgTitle' required>        		<div class='valid-feedback'>Success! You've done it.</div>                 		<div class='invalid-feedback'>No, you missed this one.</div>               		</div>                 <div class='form-group'>                   		<label class='form-control-label' for='inputSuccess2'>이미지</label>     		<div class='imgDiv'>                        		<input type='file' class='form-control' name='img' onchange='readURL(this)' accept='image/jpeg, image/png' required>   		<img class='img-thumbnail' src='#' alt='your image' style='display: none' />                      		<div class='valid-feedback'>Success! You've done it.</div>                      		<div class='invalid-feedback'>No, you missed this one.</div>                     </div>                 </div>            		<div class='form-group hidden'>                     <label class='form-control-label' for='inputSuccess3'>이미지 설명</label>     		<textarea class='form-control imgContent' name='imgContent' required></textarea>                     <div class='valid-feedback'>Nice! You got this one!</div>                   		<div class='invalid-feedback'>Sorry, you missed this one.</div>                 </div>                 <hr>             </div> ";
 	function readURL(input) {
 		if (input.files && input.files[0]) {
 			var fileType = input.files[0].type;
@@ -112,7 +108,7 @@
 				var form = $("#myForm");
 				console.log(form);
 				$("#stat").val(stat);
-				if (form[0].checkValidity() === false) {
+				if (form[0].checkValidity() == false) {
 					event.preventDefault()
 					event.stopPropagation()
 				}else{
@@ -135,7 +131,34 @@
 		$("#btnCancle").on("click", function() {
 			location.href = "${pageContext.request.contextPath}/house/houseMain";
 		})
-
+		 
+            // 이미지 제목 길이 유효성 검사
+            $("#container").on("input", ".imgTitle", function(){
+               var contentsNum = $(".imgTitle").index(this);
+               console.log("내용 번호 : " + contentsNum);
+               
+               var contents = $(this).html();
+               var imgTitleLength = $($(".imgTitle")[contentsNum])[0].value.length;
+				console.log(imgTitleLength)
+               if(imgTitleLength >40){
+            	   alert("이미지 제목은 최대 40자까지 작성 가능합니다.");
+            	   $($(".imgTitle")[contentsNum]).val("");
+               }
+            })
+            
+            //이미지 설명 길이 유효성 검사
+            $("#container").on("input", ".imgContent", function(){
+               var contentsNum = $(".imgContent").index(this);
+               console.log("내용 번호 : " + contentsNum);
+               
+               var contents = $(this).html();
+               var imgTitleLength = $($(".imgContent")[contentsNum])[0].value.length;
+				console.log(imgTitleLength)
+               if(imgTitleLength >300){
+            	   alert("이미지 설명은 최대 300자까지 작성 가능합니다.");
+            	   $($(".imgContent")[contentsNum]).val("");
+               }
+            })
 	})
 </script>
 </head>
@@ -143,79 +166,76 @@
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div id="mainWrapper">
-	<c:choose>
-		<c:when test="${stat < 0}">
-			<script>
+		<c:choose>
+			<c:when test="${stat < 0}">
+				<script>
 				alert("잘못된 접근입니다.");
 				location.href = "/house/houseMain";
 			</script>
-		</c:when>
-		<%-- <c:when test="${loginInfo == null }">
+			</c:when>
+			<%-- <c:when test="${loginInfo == null }">
 			<script>
 				alert("로그인 후 이용하실 수 있습니다.");
 				location.href = "${pageContext.request.contextPath}/member/login.mem";
 			</script>
 		</c:when> --%>
-	</c:choose>
+		</c:choose>
 
-	<c:choose>
-		<c:when test="${houseDTO ne null && contentList ne null}">
-			<form class="container" action="houseUpdateProc" method="POST"
-				id="myForm" enctype="multipart/form-data">
-			
-				<div class="contents">
-					<div class="form-group">
-						<label class="form-control-label" for="inputSuccess3">제목</label>
-						 <div class="card-title"><h3>${houseDTO.title}</h3></div>
-					</div>
-					<hr>
-					<c:forEach items="${contentList}" var="content">
-					<div class="contentInput">
-						<label class="imgHelp">❗ 이미 작성한 이미지는 수정할 수 없습니다. 삭제 후 다시 작성해 주세요.</label>
-						<div class="btnDel col-sm-push-9">
-							<button type="button" class="btn btn-danger"
-								onclick="deleteContents(this, ${content.seq})">삭제</button>
-						</div>
+		<c:choose>
+			<c:when test="${houseDTO ne null && contentList ne null}">
+				<form id="container" action="houseUpdateProc" method="POST" id="myForm" enctype="multipart/form-data">
+
+					<div class="contents">
 						<div class="form-group">
-							<label class="form-control-label" for="inputSuccess1">이미지 제목</label> 
-								<input type="text" class="form-control" value="${content.imgTitle}" readonly="readonly">
-							<div class="valid-feedback">Success! You've done it.</div>
-							<div class="invalid-feedback">No, you missed this one.</div>
-						</div>
-						<div class="form-group">
-							<label class="form-control-label" for="inputSuccess2">이미지</label>
-							<br>
-							<div class="imgDiv">
-								<img class="img-thumbnail" src="/files/${content.sysName}" alt="${content.oriName}" />
+							<label class="form-control-label" for="inputSuccess3">제목</label>
+							<div class="card-title">
+								<h3>${houseDTO.title}</h3>
 							</div>
 						</div>
-						<div class="form-group">
-							<label class="form-control-label" for="inputSuccess3">이미지
-								설명</label>
-							<textarea class="form-control" required readonly="readonly">${content.imgContent}</textarea>
-							<div class="valid-feedback">Nice! You got this one!</div>
-							<div class="invalid-feedback">Sorry, you missed this one.</div>
-						</div>
 						<hr>
-					</div>
-					</c:forEach>
-					<input type="text" id="stat" name="stat" style="display: none; height: 0px; width: 0px">
-					
-				</div>
+						<c:forEach items="${contentList}" var="content">
+							<div class="contentInput">
+								<label class="imgHelp">❗ 이미 작성한 이미지는 수정할 수 없습니다. 삭제 후 다시 작성해 주세요.</label>
+								<div class="btnDel col-sm-push-9">
+									<button type="button" class="btn btn-danger" onclick="deleteContents(this, ${content.seq})">삭제</button>
+								</div>
+								<div class="form-group">
+									<label class="form-control-label" for="inputSuccess1">이미지 제목</label> <input type="text" class="form-control" value="${content.imgTitle}" readonly="readonly">
+									<div class="valid-feedback">Success! You've done it.</div>
+									<div class="invalid-feedback">No, you missed this one.</div>
+								</div>
+								<div class="form-group">
+									<label class="form-control-label" for="inputSuccess2">이미지</label> <br>
+									<div class="imgDiv">
+										<img class="img-thumbnail" src="/files/${content.sysName}" alt="${content.oriName}" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="form-control-label" for="inputSuccess3">이미지 설명</label>
+									<textarea class="form-control" required readonly="readonly">${content.imgContent}</textarea>
+									<div class="valid-feedback">Nice! You got this one!</div>
+									<div class="invalid-feedback">Sorry, you missed this one.</div>
+								</div>
+								<hr>
+							</div>
+						</c:forEach>
+						<input type="text" id="stat" name="stat" style="display: none; height: 0px; width: 0px">
 
-				<div id="btnDiv">
-					<button type="button" class="btn btn-primary" id="btnAdd">추가</button>
-					<button type="button" class="btn btn-danger" id="btnSubmit">수정</button>
-					<button type="button" class="btn btn-secondary" id="btnCancle">취소</button>
-					
-				</div>
-			</form>
-			<hr>
-		</c:when>
-	</c:choose>
+					</div>
+
+					<div id="btnDiv">
+						<button type="button" class="btn btn-primary" id="btnAdd">추가</button>
+						<button type="submit" class="btn btn-danger" id="btnSubmit">수정</button>
+						<button type="button" class="btn btn-secondary" id="btnCancle">취소</button>
+
+					</div>
+				</form>
+				<hr>
+			</c:when>
+		</c:choose>
 	</div>
 	<jsp:include page="/resources/jsp/footer.jsp" />
-	
+
 </body>
 
 </html>

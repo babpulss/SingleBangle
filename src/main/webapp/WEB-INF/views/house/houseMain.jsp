@@ -2,19 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <!DOCTYPE html>
 <html>
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>랜선집들이 게시판</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="/css/nav.css">
 <link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-serialize-object/2.5.0/jquery.serialize-object.min.js"></script>
@@ -151,7 +151,7 @@ div [class^="col-"] {
 		<br>
 		<h1 style="text-align:center;">랜선 집들이</h1>
 		<br>
-		<h4 style="text-align:center;">회원의 집을 소개해 보세요!</h4>
+		<h4 style="text-align:center;">회원님의 집을 소개해 보세요!</h4>
 		<br>
 		<p style="text-align:center;"><button type="button" class="btn btn-info" id="btnWrite">작성하기</button></p>
 		<div class="container mt-2">
@@ -160,11 +160,11 @@ div [class^="col-"] {
     <p class="card-text">Welcom to bootstrap card styles</p>
     <a href="#" class="btn btn-primary">Submit</a>
   </div>   -->
-			<div class="row">
+			<div class="row ml-5">
 				<c:choose>
 					<c:when test="${list ne null}">
 						<c:forEach items="${list}" var="map">
-							<div class="col-md-3 col-sm-6 mt-5 mr-5"
+							<div class="col-md-3 col-sm-6 mt-5  mr-5"
 								onclick="detailContent(${map.SEQ})">
 								<div class="card card-block">
 									<!-- <h4 class="card-title text-right"><i class="material-icons">settings</i></h4> -->
