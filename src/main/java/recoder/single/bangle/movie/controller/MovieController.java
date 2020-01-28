@@ -20,8 +20,8 @@ public class MovieController {
 	public String viewMovie(Model model) {
 		try {
 			//시연시 한번만 실행해야됨!!!!!
-			//kakao.deleteMovie();
-			//kakao.insertMovie();
+//			kakao.deleteMovie();
+//			kakao.insertMovie();
 			model.addAttribute("list", movieService.viewMovie());
 		}catch (Exception e) {
 			e.printStackTrace();
