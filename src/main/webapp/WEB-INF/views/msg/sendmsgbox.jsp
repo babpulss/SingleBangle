@@ -119,7 +119,7 @@
 		<div class="bRow">
 		<div style="width:50%; float:left">${list.receiver }</div>
 		<div style="width:50%; float:left">
-		<a href="${pageContext.request.contextPath }/msg/sendMsgDetail.do?seq=${list.seq}">${list.title }</a></div>
+		<a href="${pageContext.request.contextPath }/msg/sendMsgDetail.do?seq=${list.seq}"><c:out value="${list.title }"></c:out></a></div>
 		</div>
 	</c:forEach>
 	</c:otherwise>

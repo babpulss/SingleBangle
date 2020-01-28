@@ -108,10 +108,10 @@
 		<div style="font-weight: bold; width: 40%; float: left">보낸사람 </div><div style="width: 60%; float: left">${dto.sender }</div>
 		</div>
 		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">제목 </div><div style="width: 60%; float: left">${dto.title }</div>
+		<div style="font-weight: bold; width: 40%; float: left">제목 </div><div style="width: 60%; float: left"><c:out value="${dto.title }"></c:out></div>
 		</div>
 		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left">${dto.contents }</div>
+		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left"><c:out value="${dto.contents }"></c:out></div>
 		</div>
 		<div class="bRow">
 		<div style="width: 50%; float: left">
