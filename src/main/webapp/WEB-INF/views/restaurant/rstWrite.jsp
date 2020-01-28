@@ -69,6 +69,10 @@
             *{
                 box-sizing: border-box;
             }
+            body {
+				background-color: #f7f7ef;
+			}
+            
             #frmContainer, #addContainer, #submitContainer{
                 width: 500px;
                 margin: auto;

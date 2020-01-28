@@ -28,6 +28,10 @@
             *{
                 box-sizing: border-box;
             }
+            body {
+				background-color: #f7f7ef;
+			}
+            
             #frmContainer, #btnContainer{
                 width: 500px;
                 margin: auto;
@@ -106,7 +110,6 @@
                 text-align: center;
             }
             #mapLocationLabel{
-                background-color: white;
                 line-height: 50px;
                 margin-bottom: 20px;
             }
