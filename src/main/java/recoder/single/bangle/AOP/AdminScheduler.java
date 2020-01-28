@@ -18,6 +18,7 @@ public class AdminScheduler {
 
 	@Scheduled(cron="0 0 * * * *")
 	public void blockedId() {
+		System.out.println("hello");
 		sst.update("Admin.reduceTime");
 		sst.delete("Admin.checkBlockTime");
 	}
