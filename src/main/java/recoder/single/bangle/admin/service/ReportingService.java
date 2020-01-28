@@ -14,17 +14,17 @@ public class ReportingService {
 	@Autowired
 	private ReportingDAO dao;
 	
-	public List<ReportingDTO> getReportingList() {
+	public List<ReportingDTO> getReportingList()  throws Exception {
 		return dao.getReportingList();
 	}
 	
-	public boolean confirmReporting(int seq) {
+	public boolean confirmReporting(int seq)  throws Exception {
 		int result = dao.confirmReporting(seq);
 		if (result > 0) return true;
 		else return false;
 	}
 
-	public boolean addReporting(String id, String reason, String url) {
+	public boolean addReporting(String id, String reason, String url)  throws Exception {
 		int result = dao.addReporting(id, reason, url);
 		if (result > 0) return true;
 		else return false;

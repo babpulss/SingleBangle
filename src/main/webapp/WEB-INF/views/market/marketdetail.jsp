@@ -8,16 +8,9 @@
 <title>re마켓</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
-	  /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+	 
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
@@ -103,8 +96,8 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
-        <div id="bHeader" class="bRow" style="text-align: center; font-size: 20px;">
-            <span>${dto.title }</span>
+        <div id="bHeader" class="bRow" style="font-size: 20px; font-weight: bold;">
+            <span style="margin: auto;">${dto.title }</span>
         </div>
 		<div id="contentBox">
 		<div style="border-bottom: 1px solid #c4c4c4;">
@@ -170,16 +163,16 @@
 				<c:otherwise>
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
-								<div style="width:20%; float:left;">${list.writer }</div>
+								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
 								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
 									<div style="float:left; width: 30%; text-align: center;">
-										<button style="border: none; width: 50px; height: 30px; border-radius: 10px;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
+										<button style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
 										<input type="hidden" id="boardSeqRe_${list.seq }" value="${list.boardSeq }">
-										<button id="deleteRe_${list.seq }" style="border: none; width: 50px; height: 30px; border-radius: 10px;" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
-										<button type="button" style="border: none; display:none; width: 50px; height: 30px; border-radius: 10px;" id="updateDone_${list.seq }" onclick="updateDone('${list.seq}')">완료</button>
+										<button id="deleteRe_${list.seq }" style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
+										<button type="button" style="border: none; display:none; width: 50px; height: 25px; border-radius: 10px;" id="updateDone_${list.seq }" onclick="updateDone('${list.seq}')">완료</button>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -209,12 +202,8 @@
 			</c:choose>
 		</div>
 		</div>
-
+	<jsp:include page="/resources/jsp/footer.jsp" />
 	<script>
-	
-// 	$("#done").on("click", function(){
-// 		location.href="${pageContext.request.contextPath}/market/updateDone.do?seq=${dto.seq}"
-// 	});
 	
 	var updateSellDone = function(seq){
 		var updateSellDone = "#updateSellDone_"+seq;
@@ -316,7 +305,7 @@
 		
 		$("#msg").on("click",function(){
 			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.writer }";
-			window.open(url, "메세지", "width=400px, height=500px, location=no, status=no, scrollbars=no");
+			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
 		})
 		
 		$("#report").on("click",function(){
