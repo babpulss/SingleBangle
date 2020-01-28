@@ -96,6 +96,8 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+
+<br><br><br>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
         <div id="bHeader" class="bRow" style="font-size: 20px; font-weight: bold;">
             <span style="margin: auto;">${dto.title }</span>
