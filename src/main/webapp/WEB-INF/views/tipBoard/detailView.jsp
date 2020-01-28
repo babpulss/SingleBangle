@@ -404,7 +404,7 @@ $(function(){
                 <br>
                 <div class="row">
                     <div class="col-10">
-                        <textarea style="width: 800px" rows="3" cols="30" id="cmtWrite" placeholder=" 댓글은 로그인 후 이용가능합니다."></textarea>
+                        <textarea style="width: 800px" rows="3" cols="30" id="cmtWrite" placeholder=" 댓글은 로그인 후 이용가능합니다. (200자 이내)"></textarea>
                     </div>
                     <div class="col-2">
                         <button id="cmtOk" type="button" onclick="fn_Cmt()">등록</button>
@@ -446,6 +446,16 @@ $(function(){
 	$("#deleteTip").on("click",function(){
 		location.href = "${pageContext.request.contextPath}/board/deleteTip.bo?seq=${detailView.seq}";
 	});
+	
+	$("#cmtWrite").on("focusout",function(){
+        var regex = /^[a-z가-힣ㄱ-ㅎ0-9!@#$%^&*(.)(-)_=(+)].{0,200}$/;
+        var data = $("#cmtWrite").val();
+        var result = regex.exec(data);
+        if($("#cmtWrite").val() != "" && result == null){
+           $("#cmtWrite").val("");
+           alert("사용가능한 글자수를 초과하였습니다 \n 댓글은 최대 200자까지 작성 가능합니다.");
+        }
+     })
 	
 	function fn_Cmt(){
 		var seqB = ${detailView.seq};
