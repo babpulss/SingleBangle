@@ -73,7 +73,7 @@
             <div id="myPageContainer">
                 <div id="myPageHeader">
                     <div id="myPageTitle"><b>마이 페이지</b></div>
-                    <div id="myPageNotice"><b>${loginInfo.id}</b>님의 정보를 관리할 수 있습니다.</div>
+                    <div id="myPageNotice"><b>${loginInfo.name}</b>님의 정보를 관리할 수 있습니다.</div>
                 </div>
                 <br><br><br>
                 <div id="menuContainer">
@@ -112,8 +112,7 @@
                 </div>
             </div>
         </div>
-        <br><br><br><br>
-        <br><br><br><br>
+        <br><br><br>
         
         <jsp:include page="/resources/jsp/footer.jsp" />
     </body>
