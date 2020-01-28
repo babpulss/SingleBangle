@@ -8,15 +8,7 @@
 <title>쪽지</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <style>
-	 /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+	
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
