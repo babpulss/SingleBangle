@@ -20,7 +20,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/nav.css" />
-<link rel="stylesheet" href="/css/footer.css"/>
+<link rel="stylesheet" href="/css/footer.css" />
 <script
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet"
@@ -41,15 +41,15 @@
 
 </head>
 <body>
- <c:choose>
-            <c:when test="${loginInfo==null}">
-                <script>
+	<c:choose>
+		<c:when test="${loginInfo==null}">
+			<script>
                     alert("로그인 후 이용하실 수 있습니다.");
                     location.href="${pageContext.request.contextPath}/member/login.mem";
-                </script>		
-            </c:when>
-        </c:choose>
-        <jsp:include page="/resources/jsp/nav.jsp"/>
+                </script>
+		</c:when>
+	</c:choose>
+	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div class="container">
 		<div class="invoice row-fluid">
 			<div class="col-12">
@@ -114,7 +114,7 @@
 											<th class="border-0 text-uppercase small font-weight-bold"
 												style="width: 5%">No</th>
 											<th class="border-0 text-uppercase small font-weight-bold"
-												style="display:none"></th>
+												style="display: none"></th>
 											<th class="border-0 text-uppercase small font-weight-bold"
 												style="width: 23%">날짜</th>
 											<th class="border-0 text-uppercase small font-weight-bold"
@@ -190,7 +190,8 @@
 												<td><input type="button"
 													class="modifyBtn btn btn-light" disabled="disabled"
 													value="수정" name="${list.seq }"> <input
-													type="button" class="deleteBtn btn btn-dark" name="${list.seq }" value="삭제"></td>
+													type="button" class="deleteBtn btn btn-dark"
+													name="${list.seq }" value="삭제"></td>
 
 											</tr>
 
@@ -239,14 +240,15 @@
 				name="expense"> <input type="hidden" id="remarks"
 				name="remarks">
 		</form>
-		<form id="deleteFrm" action="${pageContext.request.contextPath }/accountBook/deleteAccountBySeq.do">
+		<form id="deleteFrm"
+			action="${pageContext.request.contextPath }/accountBook/deleteAccountBySeq.do">
 			<input type="hidden" id="deleteSeq" name="deleteSeq">
 		</form>
 		<div class="text-light mt-5 mb-5 text-center small">
 			by : <a class="text-light" target="" href="#">Single Bangle</a>
 		</div>
 	</div>
-<jsp:include page="/resources/jsp/footer.jsp"/>
+	<jsp:include page="/resources/jsp/footer.jsp" />
 	<script>
 		function inputNumberFormat(obj) {
 			obj.value = comma(uncomma(obj.value));
@@ -276,16 +278,16 @@
 					var income = $(this).parent().parent().children().children("#incomes").val();
 					var expense = $(this).parent().parent().children().children("#expenses").val();
 					if ($(this).parent().parent().children().children(
-							"#expenses").val() != 0) {
-						expense = $(this).parent().parent().children().children(
-								"#expenses").val();
+							"#expenses").val() != null) {
+						expense = $(this).parent().parent().children().children("#expenses").val();
 						income = 0;
 					} else if ($(this).parent().parent().children().children(
-							"#incomes").val() != 0) {
-						income = $(this).parent().parent().children()
-								.children("#incomes").val();
+							"#incomes").val() != null) {
+						income = $(this).parent().parent().children().children("#incomes").val();
 						expense = 0;
 					} 
+					console.log("income : "+income);
+					console.log("expense : "+expense);
 					var incomes = uncomma(income);
 					var expenses = uncomma(expense);
 					var remark = $(this).parent().parent().children().children(
