@@ -135,7 +135,7 @@
 	        <div id="scrapContainer">
 		        <h2>My Scrap List</h2>
 		        <br>
-			<div id="scrapBox">
+			<div id="scrapBox" style="min-width:900px;">
 				<div class="row">
 					<div class="col-1 scrapIndex">글번호</div>
 					<div class="col-2 scrapIndex">카테고리</div>
