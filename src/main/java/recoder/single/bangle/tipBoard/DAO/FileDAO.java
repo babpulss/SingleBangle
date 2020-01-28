@@ -16,6 +16,10 @@ public class FileDAO {
 		return sst.insert("File.insert",dto);
 	}
 	
+	public int deleteFile(int seq) {
+		return sst.delete("File.deleteFile",seq);
+	}
+	
 //	public String selectPic(int rootSeq) {
 //		return sst.selectOne("File.selectPic",rootSeq);
 //	}

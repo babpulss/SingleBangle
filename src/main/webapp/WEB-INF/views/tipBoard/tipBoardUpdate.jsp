@@ -149,6 +149,14 @@
 </style>
 </head>
 <body>
+<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>      
+            </c:when>
+        </c:choose>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <br>
 <div id="mainWrapper">
@@ -166,7 +174,7 @@
 		<input type="text" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;"  id="title" name="title" size="50" value="${dtoB.title }" required>
 		<br><br>
 		<textarea rows="30" cols="50" name="contents" id="contents" style="resize:none;" hidden></textarea>
-		<div id="summernote"></div>
+		<div id="summernote">${dtoB.contents}</div>
 		<br>
 		<div style="text-align:center;" id="writeBtns">
 			<button type="submit" id="btnSubmit">완료</button>
@@ -180,7 +188,7 @@
 
     $("#selectCategory").val("${dtoB.category}");
     $(document).ready(function(){
-	    $(".note-editable").html('${dtoB.contents}');    	
+	    $(".note-editable").html();    	
     })
     
     $("#btnCancel").on("click",function(){

@@ -10,14 +10,7 @@
 <link rel="stylesheet" href="/css/nav.css">
 <style>
  /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+        @font-face { font-family: 'MapoPeacefull'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff'); font-weight: normal; font-style: normal; }
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 

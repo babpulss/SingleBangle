@@ -163,15 +163,16 @@
         text-decoration: none;
         color: black;
         }
-     
+     	.cmtContents{
+     	border-bottom: 1px solid #cccccc;
+     	}
     </style>
 <script>
 $(function(){
 	//****동적바인딩****//
 	$(document).on("click",".replyUpdate",function(){
 // replyUpdate : 수정 / reUpdate : (수정)확인 / reDelete : 삭제 / reCancel : (수정)취소
-
-	var oriContents = $(this).parent().siblings(".cmtContents").html();
+		var oriContents = $(this).parent().siblings(".cmtContents").html();
 		$(this).parent().siblings(".cmtContents").attr("contenteditable","true");
 		$(this).parent().siblings(".cmtContents").attr("style","background-color: #f5f3ed");
 		$(this).attr("hidden","true");
@@ -185,7 +186,9 @@ $(function(){
 			var contents = $(this).parent().siblings(".cmtContents").html();
 			console.log(seq + " : " + contents);
 			
-			location.href = "${pageContext.request.contextPath}/board/replyUpdate.bo?seq="+seq+"&contents="+contents;
+			$("#updateContents").html(contents);
+			$("#updateSeq").val(seq);
+			$("#updateForm").submit();
 		})
 		
 		$(".reCancel").on("click",function(){
@@ -245,8 +248,11 @@ $(function(){
                 ${detailView.contents}
             </div>
             <br>
-        </div>
-
+        </div> 
+		<form action="replyUpdate.bo" method="post" id="updateForm">
+			<textarea style="display:none" id="updateContents" name="contents"></textarea>
+			<input type="hidden" id="updateSeq" name="seq">
+		</form>
         <div id="tipIcon">
             <div class="row">
                 <div class="col-9"></div>
@@ -372,6 +378,14 @@ $(function(){
                         <div class="col-2">
                             <button id="updateTip">글 수정</button>
                         </div>
+                        <div class="col-2">
+                            <button id="deleteTip">글 삭제</button>
+                        </div>
+                    </div>
+                </c:when>
+                <c:when test="${loginInfo.adminCheck == 'Y'}">
+                 <div class="row" id="contentsEdit">
+                        <div class="col-10"></div>
                         <div class="col-2">
                             <button id="deleteTip">글 삭제</button>
                         </div>
@@ -507,14 +521,14 @@ $(function(){
 				console.log(data[i].contents);
 							
 				if(data[i].writer != id){
-					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-7'>"+data[i].contents
-					+"</div><div class='col-3'>"+data[i].formedDate+"</div></div>");			
+					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-6 cmtContents'>"+data[i].contents
+					+"</div><div class='col-2'>"+data[i].formedDate+"</div><div class='col-2'></div></div>");			
 				}else{
-					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-5 cmtContents'>"+data[i].contents
-							+"</div><div class='col-3'>"+data[i].formedDate
+					$("#cmtListForm").append("<div class='row cmtList'><div class='col-2'>"+data[i].writer+"</div><div class='col-6 cmtContents'>"+data[i].contents
+							+"</div><div class='col-2'>"+data[i].formedDate
 							+"</div><div class='col-2'><a class='replyUpdate' seq="+data[i].seq+">수정</a> <a class='replyDelete' href='${pageContext.request.contextPath}/board/replyDelete.bo?seq=" 
 							+ data[i].seq + "&contents="+data[i].contents+"'>삭제</a> <a class='reUpdate' seq=" + data[i].seq + " hidden>확인</a> <a class='reCancel' seq="+data[i].seq+" hidden>취소</a></div>");
-					}	
+					}
 			}
 		}).fail(function(data){
 			alert("비동기 실패ㅠ")
