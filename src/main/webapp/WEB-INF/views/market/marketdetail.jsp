@@ -96,11 +96,9 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
-<br><br><br>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
         <div id="bHeader" class="bRow" style="font-size: 20px; font-weight: bold;">
-            <span style="margin: auto;"><c:out value="${dto.title }"></c:out></span>
+            <span style="margin: auto;">${dto.title }</span>
         </div>
 		<div id="contentBox">
 		<div style="border-bottom: 1px solid #c4c4c4;">
@@ -135,7 +133,7 @@
 			</c:when>
 		</c:choose>
 		<br>
-		<div><c:out value="${dto.content }"></c:out></div>
+		<div>${dto.content }</div>
 		<br>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id }">
@@ -167,7 +165,7 @@
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;"><c:out value="${list.recontent }"></c:out></div>
+								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
