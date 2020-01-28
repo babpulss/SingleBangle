@@ -148,14 +148,26 @@
       
       $("#price").on("focusout",function(){
     	  var regex = /^[0-9]*$/;
-          var data = $("#price").val();
+    	  var data = $("#price").val();
           var result = regex.exec(data);
-    	  if($("#price").val() == "" || result == null){
+          
+    	  if(data != "" && result == null){
     		  $("#price").val("");
     	  	alert("가격은 숫자만 입력이 가능합니다.");
     	  }
       })
       
+      $("#price").on("focusout", function(){
+    	  var regex = /^\d.{1,6}$/;
+          var data = $("#price").val();
+          var result = regex.exec(data);
+          
+          if(data != "" && result == null){
+        	  $("#price").val("");
+        	  alert("가격은 1000만원을 넘을 수 없습니다.");
+          }
+      })
+           
       $("#confirm").on("click",function(){
     	  $("#content").val($(".note-editable").html());
     	  var regex = /<img.*/;
