@@ -56,7 +56,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -93,7 +93,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -114,7 +114,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -138,7 +138,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -163,7 +163,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -184,7 +184,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -217,7 +217,7 @@ public class MemberController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 

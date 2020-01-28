@@ -76,7 +76,7 @@ public class MailController {
 
 		} catch(Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -136,7 +136,7 @@ public class MailController {
 
 		} catch(Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 }
