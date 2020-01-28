@@ -165,15 +165,15 @@
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
+								<div class="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
 									<div style="float:left; width: 30%; text-align: center;">
-										<button style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" id="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
-										<input type="hidden" id="boardSeqRe_${list.seq }" value="${list.boardSeq }">
-										<button id="deleteRe_${list.seq }" style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
-										<button type="button" style="border: none; display:none; width: 50px; height: 25px; border-radius: 10px;" id="updateDone_${list.seq }" onclick="updateDone('${list.seq}')">완료</button>
+										<button style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" class="updateRe_${list.seq }" onclick="updateRe('${list.seq}')">수정</button>
+										<input type="hidden" class="boardSeqRe_${list.seq }" value="${list.boardSeq }">
+										<button class="deleteRe_${list.seq }" style="border: none; width: 50px; height: 25px; border-radius: 10px;" type="button" onclick="deleteRe('${list.seq}')">삭제</button>
+										<button type="button" style="border: none; display:none; width: 50px; height: 25px; border-radius: 10px;" class="updateDone_${list.seq }" onclick="updateDone('${list.seq}')">완료</button>
 									</div>
 								</c:when>
 								<c:otherwise>
@@ -230,7 +230,7 @@
 	};
 	
 	var deleteRe = function(seq){
-		var boardSeq= $("#boardSeqRe_"+seq).val();
+		var boardSeq= $(".boardSeqRe_"+seq).val();
 		console.log(boardSeq);
 		$.ajax({
 			url: "${pageContext.request.contextPath }/marketReply/delete.do?seq="+seq+"&boardSeq="+boardSeq,
@@ -258,10 +258,10 @@
 	};
 	
 		function updateRe(seq){
-				var updateRe = "#updateRe_"+seq;
-				var updateOk = "#updateDone_"+seq;
-				var reText = "#reText_"+seq;
-				var deleteRe = "#deleteRe_"+seq;
+				var updateRe = ".updateRe_"+seq;
+				var updateOk = ".updateDone_"+seq;
+				var reText = ".reText_"+seq;
+				var deleteRe = ".deleteRe_"+seq;
 				
 				$(updateRe).css("display","none");
 				$(updateOk).css("display","inline");
@@ -270,11 +270,11 @@
 			}
 		
 		function updateDone(seq){
-			var updateRe = "#updateRe_"+seq;
-			var deleteRe = "#deleteRe_"+seq;
-			var updateOk = "#updateDone_"+seq;
+			var updateRe = ".updateRe_"+seq;
+			var deleteRe = ".deleteRe_"+seq;
+			var updateOk = ".updateDone_"+seq;
 			
-			var recontent = $("#reText_"+seq).text();
+			var recontent = $(".reText_"+seq).text();
 			console.log(recontent);
 			$.ajax({
 				url: "${pageContext.request.contextPath}/marketReply/update.do?seq="+seq,
