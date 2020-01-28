@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -96,22 +96,12 @@ div [class^="col-"] {
 		
         $(function() {
             $(window).scroll(function() {
-            	// 맨 밑으로 스크롤이 갔을경우 if문을 탑니다.
-                //console.log("스크롤 : " +Math.ceil($(window).scrollTop()));
-                //console.log("위치: " + Math.ceil($(document).height() - $(window).height()));
-				console.log($(window).scrollTop());
-                console.log(Math.ceil($(window).scrollTop()) >= Math.round($(document).height() - $(window).height())) 
-                //$(window).scrollTop() == $(document).height() - $(window).height()
-                
                 var total = ${total} //총 페이지
                 if(curPage <= total){ //현재 페이지가 전체 페이지와 비교
                 	if (Math.ceil($(window).scrollTop()) >= Math.round($(document).height() - $(window).height())) {
-                        //location.href = "#mark";
                         window.scrollTo(0, $(window).scrollTop() -20); //하단에서 -20 위에로 이동; 
                         curPage++; // 현재 페이지에서 +1 처리.
-                        console.log(curPage);
                     	getContent();
-                        console.error("마지막");
                         //ajax 호출
                     }
                 }
@@ -133,10 +123,7 @@ div [class^="col-"] {
                 },
                 dataType: "JSON",
             }).done(function(data) {
-            	console.log("성공")
-                console.log(data);
                 for (var i = 0; i < data.length; i++) {
-                	console.log(data[i].title)
                     $("#mark").before
                     (
 						"<div class='col-md-3 col-sm-6 mt-5 mr-5' onclick='detailContent( " + data[i].SEQ + ")'>                             <div class='card card-block' >                                 <!-- <h4 class='card-title text-right'><i class='material-icons'>settings</i></h4> -->                                 <img src='/files/" + data[i].SYSNAME + "' alt='${map.ORINAME}'>                                 <h3 class='card-title mt-2 text-center'>                                     <b>" + data[i].TITLE + "</b>                                 </h3>                                 <h6 class='card-subtitle mb-2 text-muted'>작성자 " + data[i].WRITER + " 조회수 " + data[i].VIEWCOUNT + "</h6>                             </div>                         </div>"

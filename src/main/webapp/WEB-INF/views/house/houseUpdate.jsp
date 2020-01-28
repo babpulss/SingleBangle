@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -57,6 +57,9 @@
 .imgHelp{
 	color: red;
 }
+#stat{
+	display: none;
+}
 </style>
 <script>
 	var stat ="";
@@ -103,20 +106,21 @@
 	$(function() {
 		$("#btnSubmit").click(function(event) {
 			var contentsSize = $(".contentInput").length;
-			alert(contentsSize);
-			if (contentsSize > 0) {
+			var inputTag = $("input[name=img]").length;
+			if (contentsSize > 0 && inputTag > 0) {
 				// Fetch form to apply custom Bootstrap validation
 				var form = $("#myForm");
 				console.log(form);
-				alert(stat);
 				$("#stat").val(stat);
 				if (form[0].checkValidity() === false) {
 					event.preventDefault()
 					event.stopPropagation()
+				}else{
+					form.addClass('was-validated');
+					// Perform ajax submit here...
+					form.submit();
 				}
-				form.addClass('was-validated');
-				// Perform ajax submit here...
-				//form.submit();
+			
 			} else {
 				alert("작성한 내용이 없습니다. 내용을 추가해주세요.");
 				return false;
@@ -195,13 +199,13 @@
 						<hr>
 					</div>
 					</c:forEach>
-					<input type="text" id="stat" name="stat" style="visibility: none; height: 0px; width: 0px">
+					<input type="text" id="stat" name="stat" style="display: none; height: 0px; width: 0px">
 					
 				</div>
 
 				<div id="btnDiv">
 					<button type="button" class="btn btn-primary" id="btnAdd">추가</button>
-					<button type="submit" class="btn btn-danger" id="btnSubmit">수정</button>
+					<button type="button" class="btn btn-danger" id="btnSubmit">수정</button>
 					<button type="button" class="btn btn-secondary" id="btnCancle">취소</button>
 					
 				</div>
