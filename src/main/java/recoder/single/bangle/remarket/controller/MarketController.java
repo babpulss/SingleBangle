@@ -33,6 +33,7 @@ import recoder.single.bangle.remarket.service.MarketService;
 import recoder.single.bangle.tipBoard.DTO.FileDTO;
 import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import utils.Configuration;
+import utils.XSSprotect;
 
 @Controller
 @RequestMapping("/market")
@@ -133,9 +134,8 @@ public class MarketController {
 			path = session.getServletContext().getRealPath("files");
 			System.out.println(dto.getContent());
 			String content = dto.getContent();
-			content.replace("<", "&lt");
-			content.replace(">", "&gt");
-			content.replace("&", "&amp");
+			content.replaceAll("<script", "&lt;script");
+			System.out.println("content : " + content);
 			service.updateProc(dto, content, writer, path);
 			return "redirect:/market/boardList.do";
 		}catch(Exception e) {
@@ -206,7 +206,8 @@ public class MarketController {
 			String place = placeSplit[0]+ " " + placeSplit[1] + " " + placeSplit[2];
 			String path = session.getServletContext().getRealPath("files");
 			String content = dto.getContent();			
-			content = content.replaceAll("<script", "&lt;script");
+			content.replaceAll("<script", "&lt;script");
+			System.out.println("content : " + content.length());
 			service.write(dto, content, writer, place, gender, path);
 			List<MarketDTO> list = service.board();
 			model.addAttribute("list", list);
