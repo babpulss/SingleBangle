@@ -39,7 +39,7 @@ public class Admin {
 		return "admin/blackList";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -51,7 +51,7 @@ public class Admin {
 		return String.valueOf(blackListService.unblock(id));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -63,7 +63,7 @@ public class Admin {
 		BlackMemberDTO dto = blackListService.searchByBlockedId(id);
 			return new Gson().toJson(dto);
 		} catch(Exception e) { e.printStackTrace(); }
-		return "error";
+		return "redirect:/error";
 	}
 
 	// 신고접수리스트 보기
@@ -75,7 +75,7 @@ public class Admin {
 		return "admin/hasReported";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -87,7 +87,7 @@ public class Admin {
 		return String.valueOf(reportingService.confirmReporting(seq)); 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 
@@ -103,7 +103,7 @@ public class Admin {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 		return "admin/searchId";
 	}
@@ -120,7 +120,7 @@ public class Admin {
 		return "/admin/blockResult";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
