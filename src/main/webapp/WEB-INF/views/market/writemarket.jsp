@@ -107,6 +107,9 @@
                 margin: 20px 0 0 0;
             }
         }
+        .note-toolbar card-header{
+        	z-index : 1;
+        }
 </style>
 </head>
 <body>
@@ -167,6 +170,16 @@
         	  $("#price").val("");
         	  alert("가격은 1000만원을 넘을 수 없습니다.");
           }
+      })
+      
+      $("#title").on("focusout",function(){
+    	  var regex = /^[a-z가-힣ㄱ-ㅎ0-9!@#$%^&*(.)(-)_=(+)].{0,50}$/;
+    	  var data = $("#title").val();
+    	  var result = regex.exec(data);
+    	  if($("#title").val() != "" && result == null){
+    		  $("#title").val("");
+    		  alert("사용가능한 글자수를 초과하였습니다 \n 제목은 최대 50자까지 사용가능합니다.");
+    	  }
       })
            
       $("#confirm").on("click",function(){
