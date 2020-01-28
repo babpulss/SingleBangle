@@ -76,7 +76,6 @@
 
 							</div>
 						</div>
-
 						<hr class="my-1" />
 
 						<div class="row pb-5 p-5">
