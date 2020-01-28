@@ -8,20 +8,6 @@ import recoder.single.bangle.movie.tool.KakaoAPI;
 
 @Component
 public class MovieScheduler {
-	@Autowired
-	private KakaoAPI kakao;
-
-	
-	@Scheduled(fixedRate = 60000)
-	public void test() {
-		System.out.println("1분");
-		try {
-			kakao.deleteMovie();
-			kakao.insertMovie();
-		} catch (Exception e) {			
-			e.printStackTrace();
-		}	
-	}
 	/*
 	//@Scheduled(cron = "0 10 00 * * ?")
 	@Scheduled(cron= "0 35 20 1/1 * ? *")
