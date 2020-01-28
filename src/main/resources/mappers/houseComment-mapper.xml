@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="houseComment">
+  	<select id="selectBySeq" resultType="recoder.single.bangle.house.DTO.HouseCommentDTO" parameterType="Integer">
+  		select seq, writer, content, to_char(wirteDate,'yyyy-mm-dd hh:MM') as wirteDate from housecomment where houseSeq = #{seq} order by seq asc
+  	</select>
+  	
+  	<insert id="insertBySeq" parameterType="recoder.single.bangle.house.DTO.HouseCommentDTO">
+  		insert into housecomment values(houseComment_seq.nextval, ${houseSeq}, #{writer}, #{content}, SYSDATE)
+  	</insert>   
+  	
+  	<select id="selectBySeqOne" resultType="recoder.single.bangle.house.DTO.HouseCommentDTO" parameterType="Integer">
+  		select * from housecomment where seq = #{seq}
+  	</select>
+  	
+  	<delete id="deleteBySeq" parameterType="Integer">
+  		delete from housecomment where seq = #{seq}
+  	</delete>
+  	
+
+  </mapper>
