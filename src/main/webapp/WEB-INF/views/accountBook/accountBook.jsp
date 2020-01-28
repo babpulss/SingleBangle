@@ -137,10 +137,10 @@
 							</select></td>
 
 							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="10" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
+								placeholder="(ex. 10000)" maxlength="10" autocomplete="off" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
-								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
+								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" autocomplete="off" onkeydown="characterCheck()"></td>
 							<td class="plusBtn"><button type="button" class="button" id="addBtn" style="vertical-align:middle;"
 								><span>적용 </span></button></td>
 						</tr>
@@ -148,7 +148,7 @@
 				</table>
 			</form>
 			<table id="accountTable"
-				class="table 	table-sm m-0 table table-condensed table-hover">
+				class="table table-sm m-0 table table-condensed table-hover">
 				<thead>
 					<tr>
 						<th>날짜</th>
