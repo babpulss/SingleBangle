@@ -19,7 +19,6 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,7 +64,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			return "redirect:error";
 		}
 		
 		return "accountBook/accountBook";
@@ -102,7 +101,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			return "redirect:error";
 		}		
 		
 		return "accountBook/detailAccountBook";
@@ -124,7 +123,14 @@ public class AccountController {
 			dtos = new AccountDTO(0, id, userName, dto.getReportingDate(), null, dto.getDetails(), dto.getPayments(), dto.getSpec(), 0, dto.getExpense(), dto.getRemarks());
 			System.out.println(dtos);
 		}
-		accService.insertAccountData(dtos);
+		try {
+			accService.insertAccountData(dtos);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "redirect:error";
+		}
 		
 		return "redirect:accountBook";
 	}
@@ -154,7 +160,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "error";
+			return "redirect:error";
 		}		
 		
 		return "accountBook/pdfAccountView";
@@ -169,23 +175,34 @@ public class AccountController {
 	@RequestMapping("/deleteAccountByMonth")
 	public String deleteAccountMonth() {
 		String formedReportingDate = request.getParameter("formedReportingDate");
-		
-		int result = accService.deleteAccountByMonth(formedReportingDate);
-		if(result>0) {
-			return "redirect:accountBook";
+		try {
+			int result = accService.deleteAccountByMonth(formedReportingDate);
+			if(result>0) {
+				return "redirect:accountBook";
+			}else {
+				return "redirect:error";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "redirect:error";
 		}
 		
-		return "error";
 	}
 	
 	@RequestMapping("/deleteAccountBySeq.do")
 	public String deleteAccountSeq() {
 		int seq = Integer.parseInt(request.getParameter("deleteSeq"));
-		int result = accService.deleteAccountBySeq(seq);
-		if(result > 0) {
-		return "redirect:detailAccount";
-		}else {
-			return "error";
+		try {
+			int result = accService.deleteAccountBySeq(seq);
+			if(result > 0) {
+				return "redirect:detailAccount";
+			}else {
+				return "redirect:error";
+			}			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "redirect:error";
 		}
 	}
 	
@@ -228,11 +245,12 @@ public class AccountController {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return "redirect:error";
 			}		
 			
 			return "accountBook/detailAccountBook";
 		}else {
-			return "error";
+			return "redirect:error";
 		}
 	}
 	
