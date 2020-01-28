@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -54,11 +54,12 @@
 }
 
 .img{
-	width: 1000px;
+	width: 800px;
 }
 </style>
 <script type="text/javascript">
 	$(function() {
+		var id = "${loginInfo.id}" 
 		$("#btnComment").on("click", function() {
 			var input =  $("#inputComment").val();
 			if(input.length != 0){
@@ -76,9 +77,20 @@
 					 $("#comments").empty();
 					 var commentList = json.commentList;
 					 for(var i =0; i<commentList.length; i++){
-						$("#comments").prepend(
-							"<div class='panel-body'> 									<span> " + commentList[i].writer + "</b> " + commentList[i].wirteDate+" 										<c:if test='" + ${loginInfo.id eq commentList[i].writer } +"'> 										<button type='button' class='btn btn-outline-danger btn-sm' 											onclick='commentDel('"+  commentList[i].seq  +"')'>삭제</button> 										</c:if> 										<br> 										${dto.content} 									</span> 								</div>"
-						)
+						 var writer = "'"+ commentList[i].writer +"'"
+						 console.log(writer)
+						 if(writer == id){
+						
+							 $("#comments").prepend(
+										"<div class='panel-body'> <span> 									 						 										<b>" + commentList[i].writer + "</b> " + commentList[i].wirteDate 			 										+ "<br> "+ commentList[i].content + "</span> </div>"
+							 )
+						 }else{
+							 $("#comments").prepend(
+									 "<div class='panel-body'><span><b>" + commentList[i].writer + "</b>" + commentList[i].wirteDate + "<button type=button class='btn btn-outline-danger btn-sm' onclick='commentDel(" +commentList[i].seq + ")'>삭제</button> <br> " + commentList[i].content + "</span> </div>"
+
+							 )
+						 }
+						
 								
 					 }
 					 $("#comments").prepend("")
@@ -104,6 +116,14 @@
 		
 		$("#btnDelete").on("click", function() {
 			location.href= "/house/houseDelete?seq=" + ${houseDTO.seq}
+		})
+		
+		$("#inputComment").on("input", function() {
+			var inputComment =  $("#inputComment").val();
+			if(inputComment.length > 30){
+				alert("댓글은 30자 미만으로 작성해주세요.");
+				 $("#inputComment").val("");
+			}
 		})
 	})
 	

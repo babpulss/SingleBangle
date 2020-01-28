@@ -45,7 +45,7 @@
             order by c.seq
         )
         where cnt = 1
-        order by seq desc;
+        order by seq desc
   	</select>
 
   	<select id="selectBySeq" resultType="recoder.single.bangle.house.DTO.HouseDTO" parameterType="Integer">

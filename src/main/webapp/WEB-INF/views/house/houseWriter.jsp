@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -95,11 +95,9 @@
         $(function() {
             $("#btnSubmit").click(function(event) {
                 var contentsSize = $(".contentInput").length;
-                alert(contentsSize);
                if (contentsSize > 0) {
                     // Fetch form to apply custom Bootstrap validation
                     var form = $("#myForm");
-                    console.log(form);
                     if (form[0].checkValidity() === false) {
                         event.preventDefault()
                         event.stopPropagation()
@@ -117,7 +115,15 @@
             $("#btnAdd").on("click", function() {
                 $("#btnDiv").before(div);
             })
-
+            
+            $("#inputTitle").on("input", function() {
+			 	var inputTitle = $("#inputTitle").val();
+			 	if(inputTitle.length > 50){
+			 		alert("제목은 50자 미만으로만 작성 가능합니다.")
+			 		$("#inputTitle").val("");
+			 	}
+			})
+			
         })
 
     </script>
@@ -138,8 +144,8 @@
 			id="myForm" enctype="multipart/form-data">
 			<div class="contents">
 				<div class="form-group">
-					<label class="form-control-label" for="inputSuccess3">제목</label> <input
-						type="text" class="form-control" name="title" required>
+					<label class="form-control-label" for="inputSuccess3">제목</label> 
+					<input id="inputTitle" type="text" class="form-control" name="title" required>
 					<div class="valid-feedback">Success! You've done it.</div>
 					<div class="invalid-feedback">No, you missed this one.</div>
 				</div>
@@ -194,7 +200,6 @@
     </form>-->
 	</div>
 	<jsp:include page="/resources/jsp/footer.jsp" />
-	
 </body>
 
 </html>
