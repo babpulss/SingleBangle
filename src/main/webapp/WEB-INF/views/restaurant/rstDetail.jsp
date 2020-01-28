@@ -23,6 +23,7 @@
         <title>혼밥 / 혼술 - ${dto.title}</title>
         
         <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -290,6 +291,8 @@
 	        </div>
         </div>
         <br><br><br>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
 
         <script>
             console.log("사진 개수 : " + ${filesList.size()});    

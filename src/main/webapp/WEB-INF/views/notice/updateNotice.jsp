@@ -106,7 +106,7 @@
 					<span>Title: </span><input type="text" id="title" name="title" value="${dto.title}">
 				</div>
 			</div>
-			<div id="summernote"></div>
+			<div id="summernote">${dto.contents}</div>
 			<input type="hidden" id="contents" name="contents">
 			<input type="hidden" name="seq" value="${dto.seq}">
 			<div id="btns">
@@ -117,14 +117,12 @@
 		</form>
 	</div>
 	<script>
-	var contents = '${dto.contents}';
     $(document).ready(function() {
         $('#summernote').summernote({
             height: 500,
             lang: "ko-KO",
             airMode: true
         });
-		$(".note-editable").html(contents);
     });
     $("#frm").on("submit", function() {
         var content = $(".note-editable").html();

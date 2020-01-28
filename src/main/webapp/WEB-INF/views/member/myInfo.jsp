@@ -10,6 +10,7 @@
         <title>내 정보</title>
 		
 		<link rel="stylesheet" href="/css/nav.css">
+		<link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -190,6 +191,8 @@
 	        </div>
 		</div>
 		<br><br><br>
+		
+		<jsp:include page="/resources/jsp/footer.jsp" />
 
         <script>
             // 정보 수정 페이지로 이동

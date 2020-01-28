@@ -9,6 +9,8 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <title>아이디 찾기 결과</title>
         
+        <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -97,47 +99,55 @@
         </style>
     </head>
     <body>
-        <div id="findWayContainer">
-            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
-                <div class="findWayIcon"><img src="/img/member/id_checked.png"></div>
-                <div class="findWayText"><b>아이디 찾기</b></div>
-            </a>
-            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
-                <div class="findWayIcon"><img src="/img/member/pw_unchecked.png"></div>
-                <div class="findWayText"><b>비밀번호 찾기</b></div>
-            </a>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
+    	
+    	<br><br><br>
+        <div id="mainWrapper">
+	        <div id="findWayContainer">
+	            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
+	                <div class="findWayIcon"><img src="/img/member/id_checked.png"></div>
+	                <div class="findWayText"><b>아이디 찾기</b></div>
+	            </a>
+	            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
+	                <div class="findWayIcon"><img src="/img/member/pw_unchecked.png"></div>
+	                <div class="findWayText"><b>비밀번호 찾기</b></div>
+	            </a>
+	        </div>
+	        <br><br><br>
+	        <div id="findIdContainer">
+	            <div id="findIdHeader">
+	                <div id=findIdTitle><b>아이디 찾기 결과</b></div>
+	                <div id="findIdNotice">입력하신 정보와 일치하는 아이디 목록입니다.</div>
+	            </div>
+	            <br>
+	            <div id="idList">
+	            	<c:choose>
+						<c:when test="${findIdResult.size() > 0}">
+							<c:forEach items="${findIdResult}" var="id">
+								<b>${id}</b><br>						
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							입력하신 정보와 일치하는 아이디가 없습니다.<br>
+						</c:otherwise>
+					</c:choose>
+	            </div>
+	            <div id="toLoginContainer">
+	            	<c:choose>
+						<c:when test="${fn:length(findIdResult) != 0}">
+			                <button type="button" class="btns" id="toLogin">로그인하러 가기</button>
+			                <button type="button" class="btns" id="toFindPw">비밀번호 찾기</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btns" id="toFindId">아이디 다시 찾기</button>
+						</c:otherwise>
+					</c:choose>
+	            </div>
+	        </div>
         </div>
         <br><br><br>
-        <div id="findIdContainer">
-            <div id="findIdHeader">
-                <div id=findIdTitle><b>아이디 찾기 결과</b></div>
-                <div id="findIdNotice">입력하신 정보와 일치하는 아이디 목록입니다.</div>
-            </div>
-            <br>
-            <div id="idList">
-            	<c:choose>
-					<c:when test="${findIdResult.size() > 0}">
-						<c:forEach items="${findIdResult}" var="id">
-							<b>${id}</b><br>						
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						입력하신 정보와 일치하는 아이디가 없습니다.<br>
-					</c:otherwise>
-				</c:choose>
-            </div>
-            <div id="toLoginContainer">
-            	<c:choose>
-					<c:when test="${fn:length(findIdResult) != 0}">
-		                <button type="button" class="btns" id="toLogin">로그인하러 가기</button>
-		                <button type="button" class="btns" id="toFindPw">비밀번호 찾기</button>
-					</c:when>
-					<c:otherwise>
-						<button type="button" class="btns" id="toFindId">아이디 다시 찾기</button>
-					</c:otherwise>
-				</c:choose>
-            </div>
-        </div>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
         
         <script>
         	$("#toLogin").on("click", function(){

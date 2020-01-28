@@ -10,6 +10,7 @@
         <title>마이 페이지</title>
 
         <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -111,6 +112,9 @@
                 </div>
             </div>
         </div>
-        <br><br><br>
+        <br><br><br><br>
+        <br><br><br><br>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
     </body>
 </html>
