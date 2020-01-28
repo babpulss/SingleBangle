@@ -174,6 +174,7 @@
                 <div class="info">
                     <label class="label1" for="address2"><b>상세주소</b></label><br>
                     <input type="text" class="infoVal" id="address2" name="address2" placeholder=" 필수 입력 " >
+                    <span class="validCheck" id="addrCheck"></span>
                 </div>
                 <div id="submitContainer">
                     <input type="submit" class="btns submitBtns" id="submitBtn" value="가입하기">
@@ -194,6 +195,7 @@
             var validPhone = 0;
             var validEmail = 0;
             var validEmailCheck = 0;
+            var validAddr = 0;
 
             // 아이디 유효성 검사
             $("#id").on("input", function(){
@@ -353,6 +355,22 @@
                     }
                 }).open();
             }
+            
+            // 주소 길이 유효성 검사
+            $("#address2").on("input", function(){
+            	var addr = $("#address2").val();
+            	var addrRegex = /^[\w\W]{0,50}$/;
+            	var addrResult = addrRegex.exec(addr);
+            	
+            	if(addrResult != null){
+            		$("#addrCheck").html("");
+            		validAddr = 1;
+            	}
+            	else{
+            		$("#addrCheck").html("50글자 이내로 작성해야 합니다.").css("color", "red");
+            		validAddr = 0;
+            	}
+            })
 
             // 회원가입 form 제출하기 전에 전체 검사하기
             function validCheck(){
@@ -366,6 +384,7 @@
                 console.log("전화번호 검사 : " + validPhone);
                 console.log("이메일 검사 : " + validEmail);
                 console.log("이메일 인증 검사 : " + validEmailCheck);
+                console.log("주소 길이 검사 : " + validAddr);
                 console.log("");
 
                 for(var i = 0; i < $(".infoVal").length; i++){
@@ -380,7 +399,7 @@
                 //				return false;
                 //			}
 
-                validAll = validId * validIdDupl * validPw * validPwre * validName * validPhone * validEmail * validEmailCheck;
+                validAll = validId * validIdDupl * validPw * validPwre * validName * validPhone * validEmail * validEmailCheck * validAddr;
                 if(validAll != 1){
                     alert("유효하지 않은 정보가 있습니다.");
                     return false;

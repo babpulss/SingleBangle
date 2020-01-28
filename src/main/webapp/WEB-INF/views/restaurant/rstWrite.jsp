@@ -241,6 +241,10 @@
             	background-color: #f7f7f7;
             }
             
+            .validCheck {
+                font-size: 12px;
+            }
+            
             #submitArea{
                 text-align: center;
             }
@@ -282,6 +286,7 @@
 	                    <div class="row">
 	                        <div class="col-12" id="titleArea">
 	                            <input type="text" id="title" name="title" placeholder=" 제목" >
+	                            <span class="validCheck" id="titleCheck"></span>
 	                        </div>
 	                    </div>
 	                </div>
@@ -300,6 +305,7 @@
 	                        <div class="col-12 contentsArea">
 	                            <label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>
 	                            <div class="contentsTmp" contenteditable="true"></div>
+	                            <span class="validCheck contentsCheck"></span>
 	                            <textarea class="contents" name="contents" placeholder=" 내용" hidden></textarea>
 	                        </div>
 	                    </div>
@@ -486,6 +492,7 @@
                                                     '<div class="col-12 contentsArea">' +
                                                         '<label class="contentsLabel"><b>사진에 대한 설명을 작성하세요. (생략 가능)</b></label>' +
                                                         '<div class="contentsTmp" contenteditable="true"></div>' +
+                                                        '<span class="validCheck contentsCheck"></span>' +
                                                         '<textarea class="contents" name="contents" placeholder=" 내용" hidden></textarea>' +
                                                     '</div>' +
                                                 '</div>' +
@@ -528,8 +535,56 @@
             
             
             
+            // 유효성 검사 변수들
+            var validAll = 0;
+            var validTitle = 0;
+            var validContents = 1;
+            
+            // 제목 길이 유효성 검사
+            $("#title").on("input", function(){
+            	var title = $("#title").val();
+            	var titleRegex = /^[\w\W]{0,50}$/;
+            	var titleResult = titleRegex.exec(title);
+            	
+            	if(titleResult != null){
+            		$("#titleCheck").html("");
+            		validTitle = 1;
+            	}
+            	else{
+            		$("#titleCheck").html("50글자 이내로 작성해야 합니다.").css("color", "red");
+            		validTitle = 0;
+            	}
+            })
+            
+            // 내용 길이 유효성 검사
+            $("#frmContainer").on("input", ".contentsTmp", function(){
+            	var contentsNum = $(".contentsTmp").index(this);
+            	console.log("내용 번호 : " + contentsNum);
+            	
+            	var contents = $(this).html();
+            	var contentsRegex = /^[\w\W]{0,1000}$/;
+            	var contentsResult = contentsRegex.exec(contents);
+            	
+            	if(contentsResult != null){
+            		$($(".contentsCheck")[contentsNum]).html("");
+            		validContents = 1;
+            	}
+            	else{
+            		$($(".contentsCheck")[contentsNum]).html("1000글자 이내로 작성해야 합니다.").css("color", "red");
+            		validContents = 0;
+            	}
+            })
+            
+            
+            
             // 제목, 사진, 주소를 등록했는지 검사하는 함수
             function validCheck(){
+            	
+            	// 유효성 변수 확인
+                console.log("제목 검사 : " + validTitle);
+                console.log("내용 검사 : " + validContents);
+                console.log("");
+            	
                 var title = $("#title").val();
             	var boxLength = $(".writeBox").length;
             	var place = $("#placeName").val();
@@ -552,6 +607,12 @@
                 	alert("주소를 등록하세요.");
                 	$("#keyword").focus();
                 	return false;
+                }
+                
+                validAll = validTitle * validContents;
+                if(validAll != 1){
+                    alert("유효하지 않은 정보가 있습니다.");
+                    return false;
                 }
                 
                 for(var i = 0; i < boxLength; i++){
