@@ -40,7 +40,7 @@ public class RestaurantController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -64,7 +64,7 @@ public class RestaurantController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -101,7 +101,7 @@ public class RestaurantController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -120,7 +120,7 @@ public class RestaurantController {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class RestaurantController {
 			return "restaurant/rstApprovalCheck";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -146,7 +146,7 @@ public class RestaurantController {
 			return "restaurant/rstDeleteCheck";
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "error";
+			return "redirect:/error";
 		}
 	}
 }
