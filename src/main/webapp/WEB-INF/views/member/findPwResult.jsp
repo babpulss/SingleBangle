@@ -8,6 +8,8 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<title>비밀번호 찾기 결과</title>
 		
+		<link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
 		<style>
             *{
                 box-sizing: border-box;
@@ -96,54 +98,62 @@
         </style>
     </head>
     <body>
-        <div id="findWayContainer">
-            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
-                <div class="findWayIcon"><img src="/img/member/id_unchecked.png"></div>
-                <div class="findWayText"><b>아이디 찾기</b></div>
-            </a>
-            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
-                <div class="findWayIcon"><img src="/img/member/pw_checked.png"></div>
-                <div class="findWayText"><b>비밀번호 찾기</b></div>
-            </a>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
+    	
+    	<br><br><br>
+        <div id="mainWrapper">
+	        <div id="findWayContainer">
+	            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
+	                <div class="findWayIcon"><img src="/img/member/id_unchecked.png"></div>
+	                <div class="findWayText"><b>아이디 찾기</b></div>
+	            </a>
+	            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
+	                <div class="findWayIcon"><img src="/img/member/pw_checked.png"></div>
+	                <div class="findWayText"><b>비밀번호 찾기</b></div>
+	            </a>
+	        </div>
+	        <br><br><br>
+	        <div id="findPwContainer">
+	            <div id="findPwHeader">
+	                <div id=findPwTitle><b>비밀번호 찾기 결과</b></div>
+	                <div id="findPwNotice">
+	                <c:choose>
+	                	<c:when test="${findPwResult > 0 }">
+							이메일로 임시 비밀번호를 발급하였습니다.
+	                	</c:when>
+	                	<c:otherwise>
+	                		입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.
+	                	</c:otherwise>
+	                </c:choose>
+	                </div>
+	            </div>
+	            <br>
+	            <div id="pwList">
+	            <c:choose>
+	                <c:when test="${findPwResult > 0 }">
+		                <b>로그인 후 비밀번호를 변경하여</b><br>
+		                <b>개인정보를 보호하시기 바랍니다.</b>
+	                </c:when>
+	                <c:otherwise>
+	                	<b>등록한 정보를 정확히 입력하시기 바랍니다.</b><br>
+	                </c:otherwise>
+				</c:choose>
+	            </div>
+	            <div id="toLoginContainer">
+	            	<c:choose>
+	                	<c:when test="${findPwResult > 0 }">
+			                <button type="button" class="btns" id="toLogin">로그인하러 가기</button>
+	                	</c:when>
+	                	<c:otherwise>
+			                <button type="button" class="btns" id="toFindPw">비밀번호 다시 찾기</button>
+	                	</c:otherwise>
+	                </c:choose>
+	            </div>
+	        </div>
         </div>
         <br><br><br>
-        <div id="findPwContainer">
-            <div id="findPwHeader">
-                <div id=findPwTitle><b>비밀번호 찾기 결과</b></div>
-                <div id="findPwNotice">
-                <c:choose>
-                	<c:when test="${findPwResult > 0 }">
-						이메일로 임시 비밀번호를 발급하였습니다.
-                	</c:when>
-                	<c:otherwise>
-                		입력하신 정보와 일치하는 회원정보가 존재하지 않습니다.
-                	</c:otherwise>
-                </c:choose>
-                </div>
-            </div>
-            <br>
-            <div id="pwList">
-            <c:choose>
-                <c:when test="${findPwResult > 0 }">
-	                <b>로그인 후 비밀번호를 변경하여</b><br>
-	                <b>개인정보를 보호하시기 바랍니다.</b>
-                </c:when>
-                <c:otherwise>
-                	<b>등록한 정보를 정확히 입력하시기 바랍니다.</b><br>
-                </c:otherwise>
-			</c:choose>
-            </div>
-            <div id="toLoginContainer">
-            	<c:choose>
-                	<c:when test="${findPwResult > 0 }">
-		                <button type="button" class="btns" id="toLogin">로그인하러 가기</button>
-                	</c:when>
-                	<c:otherwise>
-		                <button type="button" class="btns" id="toFindPw">비밀번호 다시 찾기</button>
-                	</c:otherwise>
-                </c:choose>
-            </div>
-        </div>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
         
         <script>
         	$("#toLogin").on("click", function(){
