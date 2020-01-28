@@ -6,6 +6,7 @@
 <head>
 <link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" href="/css/footer.css">
 <title>re마켓</title>
 <style>
 	 @font-face {
@@ -168,6 +169,7 @@
         
    </div>
 </div>
+<jsp:include page="/resources/jsp/footer.jsp" />
 	<script>
 		$("#write").on("click", function(){
 			location.href="${pageContext.request.contextPath}/market/writeboard.do";
