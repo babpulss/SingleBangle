@@ -33,28 +33,28 @@ public class Adviser {
 	@Autowired
 	private HttpSession session;
 	
-//	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
-//			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
-//			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
-//			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())") 
-//	public Object getInfoFromIndex(ProceedingJoinPoint pjp) {
-//		String url = req.getRequestURL().toString();
-//		String path = req.getServletPath();
-//		String ip = req.getRemoteAddr();
-//		Date d = new Date();
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd hh:mm:ss");
-//		
-//
-//		logger.debug(url + " ~ " + path);
-//		logger.debug(ip + " - " + sdf.format(d.getTime()));
-//
-//		try {
-//			return pjp.proceed();
-//		} catch(Throwable e) {
-//			e.printStackTrace();
-//		}
-//		return null;
-//	}
+	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
+			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
+			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
+			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())") 
+	public Object getInfoFromIndex(ProceedingJoinPoint pjp) {
+		String url = req.getRequestURL().toString();
+		String path = req.getServletPath();
+		String ip = req.getRemoteAddr();
+		Date d = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyy/MM/dd hh:mm:ss");
+		
+
+		logger.debug(url + " ~ " + path);
+		logger.debug(ip + " - " + sdf.format(d.getTime()));
+
+		try {
+			return pjp.proceed();
+		} catch(Throwable e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@Before("execution(* recoder.single.bangle.index.*.*(..))" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
