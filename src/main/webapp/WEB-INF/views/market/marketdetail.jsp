@@ -209,22 +209,26 @@
 	<script>
 	
 	var updateSellDone = function(seq){
-		var updateSellDone = "#updateSellDone_"+seq;
-		var doneYes = "#doneYes_"+seq;
-		$(updateSellDone).css("display","none");
-		$.ajax({
-			url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
-			type: "post",
-			data: {
-				seq : seq
-			},
-			success: function(data){
-				alert("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.");
-				window.location.reload();
-			}
-		}).fail(function(data){
-			console.log(data);
-		})
+		if(confirm("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.") == true){
+			var updateSellDone = "#updateSellDone_"+seq;
+			var doneYes = "#doneYes_"+seq;
+			$(updateSellDone).css("display","none");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
+				type: "post",
+				data: {
+					seq : seq
+				},
+				success: function(data){
+					window.location.reload();
+				}
+			}).fail(function(data){
+				console.log(data);
+			})
+		}else{
+			return false;
+		}
+		
 	};
 	
 	var deleteRe = function(seq){

@@ -99,7 +99,7 @@
 </style>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
+<br><br><br>
 <div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle;">
@@ -112,7 +112,7 @@
         </div>
 <c:choose>
 	<c:when test="${list.size() == 0 }">
-		<div class="bRow" style="text-align: center">보낸쪽지가 없습니다.</div>
+		<div class="bRow"><div style="margin: auto;">보낸쪽지가 없습니다.</div></div>
 	</c:when>
 	<c:otherwise>
 	<c:forEach items="${list }" var="list">
@@ -124,7 +124,7 @@
 	</c:forEach>
 	</c:otherwise>
 </c:choose>
- <div class="bRow"><div style="margin: auto;">${navi }</div></div>
+<div class="bRow"><div style="margin: auto; height: 50px;">${navi }</div></div>
 </div>
 <jsp:include page="/resources/jsp/footer.jsp" />
 <script>
