@@ -59,6 +59,13 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+		$('input[type="text"]').keydown(function() {
+			  if (event.keyCode === 13) {
+			    event.preventDefault();
+			  };
+		})
+		
 		var id = "${loginInfo.id}" 
 		$("#btnComment").on("click", function() {
 			var input =  $("#inputComment").val();

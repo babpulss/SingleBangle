@@ -56,8 +56,8 @@
 </style>
 <script>
         var div =
-        	"<div class='contentInput'>                 <div class='btnDel col-sm-push-9'>                     <button type='button' class='btn btn-danger' onclick='deleteContents(this)'>삭제</button>                 </div>                 <div class='form-group hidden'>                     <label class='form-control-label' for='inputSuccess1'>이미지 제목</label>                     <input type='text' class='form-control' name='imgTitle' required>                     <div class='valid-feedback'>Success! You've done it.</div>                     <div class='invalid-feedback'>No, you missed this one.</div>                 </div>                 <div class='form-group'>                     <label class='form-control-label' for='inputSuccess2'>이미지</label>                     <div class='imgDiv'>                         <input type='file' class='form-control' name='img' onchange='readURL(this)' accept='image/jpeg, image/png' required>                         <img class='img-thumbnail' src='#' alt='your image' style='display: none' />                         <div class='valid-feedback'>Success! You've done it.</div>                         <div class='invalid-feedback'>No, you missed this one.</div>                     </div>                 </div>                 <div class='form-group hidden'>                     <label class='form-control-label' for='inputSuccess3'>이미지 설명</label>                     <textarea class='form-control' name='imgContent' required></textarea>                     <div class='valid-feedback'>Nice! You got this one!</div>                     <div class='invalid-feedback'>Sorry, you missed this one.</div>                 </div>                 <hr>             </div> ";
-        function readURL(input) {
+        	"<div class='contentInput'>               			<div class='btnDel col-sm-push-9'>              			<button type='button' class='btn btn-danger' onclick='deleteContents(this)'>삭제</button>  			</div>                 <div class='form-group hidden'>                   			<label class='form-control-label' for='inputSuccess1'>이미지 제목</label>                			<input type='text' class='form-control imgTitle' name='imgTitle' required>                   			<div class='valid-feedback'>Success! You've done it.</div>                    			<div class='invalid-feedback'>No, you missed this one.</div>                 </div>        			<div class='form-group'>                     <label class='form-control-label' for='inputSuccess2'>이미지</label>    			<div class='imgDiv'>                      			<input type='file' class='form-control' name='img' onchange='readURL(this)' accept='image/jpeg, image/png' required>  			<img class='img-thumbnail' src='#' alt='your image' style='display: none' />                        			<div class='valid-feedback'>Success! You've done it.</div>                        			<div class='invalid-feedback'>No, you missed this one.</div>                     </div>                 </div>                 <div class='form-group hidden'>                  			<label class='form-control-label' for='inputSuccess3'>이미지 설명</label>               			<textarea class='form-control imgContent' name='imgContent' required></textarea>                 			<div class='valid-feedback'>Nice! You got this one!</div>                  			<div class='invalid-feedback'>Sorry, you missed this one.</div>                 </div>      			<hr>             </div> "; 
+        	function readURL(input) {
             if (input.files && input.files[0]) {
                 var fileType = input.files[0].type;
                 var reg = /image\/(png|jpeg|jpg)/;
@@ -123,7 +123,21 @@
 			 		$("#inputTitle").val("");
 			 	}
 			})
-			
+
+			// 내용 길이 유효성 검사
+            $(".container").on("input", ".imgTitle", function(){
+               var contentsNum = $(".imgTitle").index(this);
+               console.log("내용 번호 : " + contentsNum);
+               
+               var contents = $(this).html();
+               var contentsRegex = /^[\w\W]{0,300}$/;
+               var contentsResult = contentsRegex.exec(contents);
+               
+               if(contentsResult != null){
+                  $($(".imgTitle")[contentsNum]).html("");
+                  validContents = 1;
+               }           
+            })
         })
 
     </script>
@@ -157,7 +171,7 @@
 					</div>
 					<div class="form-group hidden">
 						<label class="form-control-label" for="inputSuccess1">이미지
-							제목</label> <input type="text" class="form-control" name="imgTitle"
+							제목</label> <input type="text" class="form-control imgTitle" name="imgTitle"
 							required>
 						<div class="valid-feedback">Success! You've done it.</div>
 						<div class="invalid-feedback">No, you missed this one.</div>
@@ -176,7 +190,7 @@
 					<div class="form-group hidden">
 						<label class="form-control-label" for="inputSuccess3">이미지
 							설명</label>
-						<textarea class="form-control" name="imgContent" required></textarea>
+						<textarea class="form-control imgContent" name="imgContent" required></textarea>
 						<div class="valid-feedback">Nice! You got this one!</div>
 						<div class="invalid-feedback">Sorry, you missed this one.</div>
 					</div>

@@ -10,6 +10,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+	<link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.js"></script>
@@ -54,6 +56,12 @@
 </script>
 </head>
 <body>
+<jsp:include page="/resources/jsp/nav.jsp" />
+	<div id="mainWrapper">
+	<br>
+	<br>
+	<h3 style="text-align:center;">문화생활</h3>
+	<br>
 	<div class="cont"></div>
 	<c:forEach items="${list}" var="dto">
 		<div class="card mb-3" style="max-width: 540px;">
@@ -109,6 +117,8 @@
 			</div>
 		</div>
 	</c:forEach>
+	</div>
+	<jsp:include page="/resources/jsp/footer.jsp" />
 
 </body>
 </html>
