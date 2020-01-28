@@ -535,10 +535,8 @@
             
             
             
-            // 유효성 검사 변수들
-            var validAll = 0;
+            // 제목 길이 유효성 검사 변수
             var validTitle = 0;
-            var validContents = 1;
             
             // 제목 길이 유효성 검사
             $("#title").on("input", function(){
@@ -567,11 +565,9 @@
             	
             	if(contentsResult != null){
             		$($(".contentsCheck")[contentsNum]).html("");
-            		validContents = 1;
             	}
             	else{
             		$($(".contentsCheck")[contentsNum]).html("1000글자 이내로 작성해야 합니다.").css("color", "red");
-            		validContents = 0;
             	}
             })
             
@@ -582,7 +578,6 @@
             	
             	// 유효성 변수 확인
                 console.log("제목 검사 : " + validTitle);
-                console.log("내용 검사 : " + validContents);
                 console.log("");
             	
                 var title = $("#title").val();
@@ -609,10 +604,18 @@
                 	return false;
                 }
                 
-                validAll = validTitle * validContents;
-                if(validAll != 1){
-                    alert("유효하지 않은 정보가 있습니다.");
+                if(validTitle != 1){
+                    alert("제목의 글자 수를 확인해주세요.");
+                    $("#title").focus();
                     return false;
+                }
+                
+                for(var i = 0; i < boxLength; i++){
+                	if($($(".contentsTmp")[i]).html().length > 1000){
+                		alert("내용의 글자 수를 확인해주세요.");
+                		$(".contentsTmp")[i].scrollIntoView();
+                		return false;
+                	}
                 }
                 
                 for(var i = 0; i < boxLength; i++){
