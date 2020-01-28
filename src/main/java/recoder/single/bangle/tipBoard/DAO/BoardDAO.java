@@ -99,6 +99,10 @@ public class BoardDAO {
 			return sst.delete("Tip.deleteScrap", seq);
 		}
 		
+		public int deleteScrapBySeq(int seq) throws Exception{
+			return sst.delete("Tip.deleteScrapBySeq", seq);
+		}
+		
 		public int scrapCheck(int seq, String id) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("seq", seq);

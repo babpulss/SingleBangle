@@ -1,19 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>신고하기</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
 </head>
 <style>
-
+	@import
+	url(//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+	@font-face {
+	font-family: 'BMHANNAAir';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+	
 	*{
 	font-size: 17px;
 	font-family: 'BMHANNAAir'; 
-	
 	}
 	
 	#reportForm{

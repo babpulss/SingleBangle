@@ -72,6 +72,10 @@
 	<delete id="deleteScrap">
 		delete from livingScrap where rootSeq = #{value}
 	</delete>
+<!-- 	스크랩 seq로 스크랩 지우기-->
+	<delete id="deleteScrapBySeq">
+		delete from livingScrap where seq = #{value}
+	</delete>
 	
 <!-- 	게시글 스크랩 수 구하기 -->
 	<select id="scrapCount" resultType="Integer">

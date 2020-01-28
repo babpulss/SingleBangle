@@ -139,8 +139,9 @@
 				<div class="row">
 					<div class="col-1 scrapIndex">글번호</div>
 					<div class="col-2 scrapIndex">카테고리</div>
-					<div class="col-7 scrapIndex">제목</div>
+					<div class="col-6 scrapIndex">제목</div>
 					<div class="col-2 scrapIndex">스크랩날짜</div>
+					<div class="col-1 scrapIndex">삭제</div>
 				</div>
 				<c:forEach items="${myScrapList}" var="dto">
 					<div class="row">
@@ -154,11 +155,11 @@
 								<c:otherwise>기타</c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col-7">
-							<a
-								href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
+						<div class="col-6">
+							<a href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
 						</div>
 						<div class="col-2" style="text-align: center">${dto.getFormedDate()}</div>
+						<div class="col-1" style="text-align: center"><a id="scrapDelete" href="${pageContext.request.contextPath}/board/scrapDelete.bo?seq=${dto.seq}">삭제</a></div>
 					</div>
 				</c:forEach>
 				<br>
@@ -177,6 +178,7 @@
             $("#toMyPage").on("click",function(){
 				location.href = "${pageContext.request.contextPath}/member/myPage.mem";
 				})
+			
 		</script>
     </body>
 </html>
