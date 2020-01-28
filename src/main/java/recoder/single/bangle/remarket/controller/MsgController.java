@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import utils.Configuration;
+import utils.XSSprotect;
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DAO.MsgDAO;
 import recoder.single.bangle.remarket.DTO.MsgDTO;
@@ -63,8 +64,8 @@ public class MsgController {
 		String title = dto.getTitle();
 		String contents = dto.getContents();
 		System.out.println("1 : " + contents);
-		title = title.replaceAll("<script", "&lt;script");
-		contents = contents.replaceAll("<script", "&lt;script");
+		title = XSSprotect.replaceParameter(title);
+		contents = XSSprotect.replaceParameter(contents);
 		System.out.println(contents);
 		//내용 전부 들어옴ㅇㅇ
 		try {
