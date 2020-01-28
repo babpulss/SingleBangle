@@ -27,6 +27,7 @@
 	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 <link rel="stylesheet"
 	href="/resources/css/accountCSS/detailAccountCSS.css" />
+
 <style>
 /*datepicer 버튼 롤오버 시 손가락 모양 표시*/
 .ui-datepicker-trigger {
