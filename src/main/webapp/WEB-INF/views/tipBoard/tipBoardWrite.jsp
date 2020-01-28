@@ -139,13 +139,7 @@
    		border: 1px solid #c8cccc;
         }
 </style>
-<script>
-	$(function(){
-		$("#frm").on("submit",function(){
-			$("#contents").val($(".note-editable").html());
-		});
-	})
-</script>
+
 </head>
 <body>
 	<c:choose>
@@ -171,7 +165,7 @@
 			<option value="4">동식물</option>
 			<option value="5">기타</option>
 		</select> &nbsp;&nbsp;
-		<input type="text" id="inputTitle" name="title" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;" placeholder="  게시글 제목을 입력하세요.">
+		<input type="text" id="inputTitle" name="title" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;" placeholder="  게시글 제목을 30자 내로 입력하세요.">
 		<br><br>
 		<textarea id="contents" id="inputContents" name="contents" hidden></textarea>
 		<div id="summernote"></div>
@@ -186,7 +180,7 @@
 	</div>
     <script>
       $('#summernote').summernote({
-    	  placeholder: ' 당신의 싱글생활 꿀팁을 공유해주세요!',
+     	  placeholder: ' 당신의 싱글생활 꿀팁을 공유해주세요!',
           tabsize: 2,
           height: 100,
           width: 700
@@ -196,15 +190,28 @@
     	  location.href = "${pageContext.request.contextPath}/board/boardList.bo";
       })
       
+       $("#inputTitle").on("focusout",function(){
+         var regex = /^[a-z가-힣ㄱ-ㅎ0-9!@#$%^&*(.)(-)_=(+)].{0,30}$/;
+         var data = $("#inputTitle").val();
+         var result = regex.exec(data);
+         if($("#inputTitle").val() != "" && result == null){
+            $("#inputTitle").val("");
+            alert("사용가능한 글자수를 초과하였습니다 \n 제목은 최대 30자까지 사용가능합니다.");
+         }
+      })
+      
     function validCheck(){
     	  var title = $("#inputTitle").val();
-    	  var contents = $("#inputContents").html();
+    	  var contents = $(".note-editable").html();
+    	  //contents = contents.replace('<p><br></p>','');
     	  
-    	  if(title =="" || contents == ""){
-    		  alert("내용을 입력해주세요!");
+    	  $("#contents").val(contents);
+    	  
+    	  if(title ==""){
+    		  alert("제목을 입력해주세요!");
     		  return false;
     	  }
-    	confirm("글을 작성하시겠습니까?");
+    	return confirm("글을 작성하시겠습니까?");
 
       }
     </script>

@@ -193,13 +193,24 @@
         width: 700
     });
 	
+    $("#inputTitle").on("focusout",function(){
+        var regex = /^[a-z가-힣ㄱ-ㅎ0-9!@#$%^&*(.)(-)_=(+)].{0,30}$/;
+        var data = $("#inputTitle").val();
+        var result = regex.exec(data);
+        if($("#inputTitle").val() != "" && result == null){
+           $("#inputTitle").val('${dtoB.title}');
+           alert("사용가능한 글자수를 초과하였습니다 \n 제목은 최대 30자까지 사용가능합니다.");
+        }
+     })
+    
     function validCheck(){
-    	$("#contents").val($(".note-editable").html());
 	  var title = $("#inputTitle").val();
   	  var contents = $(".note-editable").html();
+    	
+  	  $("#contents").val(contents);
   	  
-  	  if(title =="" || contents == ""){
-  		  alert("내용을 입력해주세요!");
+  	  if(title ==""){
+  		  alert("제목을 입력해주세요!");
   		  return false;
   	  }
   	return confirm("글을 수정하시겠습니까?");

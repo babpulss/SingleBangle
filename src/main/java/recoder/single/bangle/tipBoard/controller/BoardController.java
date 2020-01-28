@@ -476,5 +476,16 @@ public class BoardController {
 			return "redirect:/error";
 		}
 	}
+	
+	@RequestMapping("/scrapDelete.bo")
+	public String scrapDelete(int seq, Model model) {
+		try {
+			int scrapDeleteResult = boardService.deleteScrapBySeq(seq);
+			model.addAttribute("scrapDeleteResult",scrapDeleteResult);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "tipBoard/scrapDeleteResult";
+	}
 }
 
