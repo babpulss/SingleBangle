@@ -114,33 +114,33 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td id="datePic"><input type="text" id="datepicker" name="reportingDate"></td>
+							<td id="datePic"><input type="text" id="datepicker" name="reportingDate" required="required"></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 								id="detailsSelect" name="details">
 									<option selected>선택</option>
 									<option value="식비">식비</option>
 									<option value="문화 생활비">문화 생활비</option>
 									<option value="교통비">교통비</option>
-									<option value="관리비">관리비</option>
+									<option value="관리비" selected="selected">관리비</option>
 									<option value="급여">급여</option>
 									<option value="저축">저축</option>
 									<option value="기타">기타</option>
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-								id="paymentsSelect" name="payments">
+								id="paymentsSelect" name="payments"required="required">
 									<option selected>선택</option>
-									<option value="카드">카드</option>
+									<option value="카드" selected="selected">카드</option>
 									<option value="현금">현금</option>
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-								id="specSelect" name="spec">
+								id="specSelect" name="spec"required="required">
 									<option selected>선택</option>
 									<option value="수입">수입</option>
-									<option value="지출">지출</option>
+									<option value="지출" selected="selected">지출</option>
 							</select></td>
 
 							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="15" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);"></td>
+								placeholder="(ex. 10000)" maxlength="8" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>

@@ -52,26 +52,37 @@
 				</div>
 			</div>
 			<div id="imgBox">
-				<div class="imgDiv">
+				<div class="imgDiv" style="cursor:pointer;">
 					<img src="/img/index/cate_living.png">
 					<div class="indexText">Living Point</div>
 				</div>
-				<div class="imgDiv">
+				<div class="imgDiv" style="cursor:pointer;">
 					<img src="/img/index/cate_local.png">
 					<div class="indexText">
 						혼밥/혼술 플레이스<br> 병원 위치검색
 					</div>
 				</div>
-				<div class="imgDiv">
+				<div class="imgDiv"  style="cursor:pointer;">
 					<img src="/img/index/cate_reMarket.png">
 					<div class="indexText">
 						쇼핑을 바꾸는 쇼핑<br> Re:Market
 					</div>
 				</div>
-				<div class="imgDiv">
-					<img src="/img/index/cate_account.png">
+				<c:choose>
+            <c:when test="${loginInfo==null}">
+                <div class="imgDiv" style="cursor:pointer;">
+					<img onclick="alert('로그인 후 이용가능합니다.')" src="/img/index/cate_account.png">
+					<div class="indexText">나만의 가계부를 PDF로</div>
+				</div>		
+            </c:when>
+            <c:otherwise>
+            <div class="imgDiv" style="cursor:pointer;">
+					<img src="/img/index/cate_account.png" onclick="location.href='${pageContext.request.contextPath}/accountBook/accountBook'">
 					<div class="indexText">나만의 가계부를 PDF로</div>
 				</div>
+            </c:otherwise>
+        </c:choose>
+				
 			</div>
 		</div>
 		<div id="fourthRow">
