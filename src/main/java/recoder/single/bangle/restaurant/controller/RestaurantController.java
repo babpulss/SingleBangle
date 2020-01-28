@@ -82,16 +82,16 @@ public class RestaurantController {
 			System.out.println();
 			
 			for(int i = 0; i < fileNum; i++) {
-				System.out.println("파일 : " + dto.getFiles()[i].getOriginalFilename());
-				System.out.println("내용 : " + dto.getContents()[i]);
-				System.out.println();
+//				System.out.println("파일 : " + dto.getFiles()[i].getOriginalFilename());
+//				System.out.println("내용 : " + dto.getContents()[i]);
+//				System.out.println();
 			}
 			
 			String writer = ((MemberDTO) session.getAttribute("loginInfo")).getId();
 			dto.setWriter(writer);
 			
 			String uploadPath = session.getServletContext().getRealPath("/files");
-			System.out.println("사진 저장 경로 : " + uploadPath);
+//			System.out.println("사진 저장 경로 : " + uploadPath);
 			
 			int insertResult = rstSvc.rstWrite(dto, uploadPath);
 			model.addAttribute("insertResult", insertResult);
@@ -115,6 +115,7 @@ public class RestaurantController {
 			model.addAttribute("filesList", filesList);
 			
 			System.out.println("현재 글 번호 : " + seq);
+			System.out.println();
 			
 			return "restaurant/rstDetail";
 			
