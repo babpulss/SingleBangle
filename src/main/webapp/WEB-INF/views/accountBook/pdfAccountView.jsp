@@ -6,17 +6,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가계부PDF</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet"
 	href="/resources/css/accountCSS/detailAccountCSS.css" />
 <script src="/resources/js/accountJS/accountJS.js"></script>
 </head>
 <body>
+ <c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+        <jsp:include page="/resources/jsp/nav.jsp"/>
 	<form id="pdf" action="${pageContext.request.contextPath }/accountBook/accountPDF"
 		method="post">
 		<input type="hidden" class="pdfValue btn btn-info" id="pdfValue"
@@ -36,9 +46,8 @@
 							</div>
 
 							<div class="col-md-6 text-right">
-								<button id="printInvoice" class="btn btn-info">
-									<i class="fa fa-print"></i> Print
-								</button>
+								
+								
 								<button type="button" class="pdfBtn btn btn-info"
 									value="PDF DownLoad">PDF DownLoad</button>
 
@@ -143,7 +152,7 @@
 
 		<div class="text-light mt-5 mb-5 text-center small" style="text-align: center">
 			by : <a class="text-light" target=""
-				href="#">Single Bangle</a>
+				href=#">Single Bangle</a>
 		</div>
 	</div>
 	<script>
@@ -152,6 +161,9 @@
 		console.log($("#pdfValue").val());
 		$("#pdf").submit();
 	});
+	$("#homeBtn").on("click",function(){
+		location.href = "${pageContext.request.contextPath}/";
+	})
 	</script>
 </body>
 </html>

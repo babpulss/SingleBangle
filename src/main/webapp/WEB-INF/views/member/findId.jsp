@@ -8,6 +8,8 @@
 		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 		<title>아이디 찾기</title>
 		
+		<link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -109,38 +111,46 @@
         </style>
     </head>
     <body>
-        <div id="findWayContainer">
-            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
-                <div class="findWayIcon"><img src="/img/member/id_checked.png"></div>
-                <div class="findWayText"><b>아이디 찾기</b></div>
-            </a>
-            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
-                <div class="findWayIcon"><img src="/img/member/pw_unchecked.png"></div>
-                <div class="findWayText"><b>비밀번호 찾기</b></div>
-            </a>
+    	<jsp:include page="/resources/jsp/nav.jsp"/>
+    	
+    	<br><br><br>
+        <div id="mainWrapper">
+	        <div id="findWayContainer">
+	            <a href="${pageContext.request.contextPath}/member/findId.mem" class="findWay" id="findWayId">
+	                <div class="findWayIcon"><img src="/img/member/id_checked.png"></div>
+	                <div class="findWayText"><b>아이디 찾기</b></div>
+	            </a>
+	            <a href="${pageContext.request.contextPath}/member/findPw.mem" class="findWay" id="findWayPw">
+	                <div class="findWayIcon"><img src="/img/member/pw_unchecked.png"></div>
+	                <div class="findWayText"><b>비밀번호 찾기</b></div>
+	            </a>
+	        </div>
+	        <br><br><br>
+	        <form action="${pageContext.request.contextPath}/member/findIdResult.mem" method="post" id="findIdFrm" onsubmit="return validCheck()">
+	            <div id="findIdContainer">
+	                <div id="findIdHeader">
+	                    <div id=findIdTitle><b>아이디 찾기</b></div>
+	                    <div id="findIdNotice">회원정보에 등록한 이름과 전화번호를 입력하세요.</div>
+	                </div>
+	                <br>
+	                <div class="info">
+	                    <label class="label1" for="name"><b>이름</b></label><br>
+	                    <input type="text" class="infoVal" id="name" name="name">
+	                </div>
+	                <div class="info">
+	                    <label class="label1" for="phone"><b>전화번호</b></label><br>
+	                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" '-' 없이 숫자만 입력 ">
+	                </div>
+	                <div id="submitContainer">
+	                    <input type="submit" class="btns" id="submitBtn" value="찾기">
+	                    <button type="button" class="btns" id="cancelBtn">취소</button>
+	                </div>
+	            </div>
+	        </form>
         </div>
         <br><br><br>
-        <form action="${pageContext.request.contextPath}/member/findIdResult.mem" method="post" id="findIdFrm" onsubmit="return validCheck()">
-            <div id="findIdContainer">
-                <div id="findIdHeader">
-                    <div id=findIdTitle><b>아이디 찾기</b></div>
-                    <div id="findIdNotice">회원정보에 등록한 이름과 전화번호를 입력하세요.</div>
-                </div>
-                <br>
-                <div class="info">
-                    <label class="label1" for="name"><b>이름</b></label><br>
-                    <input type="text" class="infoVal" id="name" name="name">
-                </div>
-                <div class="info">
-                    <label class="label1" for="phone"><b>전화번호</b></label><br>
-                    <input type="text" class="infoVal" id="phone" name="phone" placeholder=" '-' 없이 숫자만 입력 ">
-                </div>
-                <div id="submitContainer">
-                    <input type="submit" class="btns" id="submitBtn" value="찾기">
-                    <button type="button" class="btns" id="cancelBtn">취소</button>
-                </div>
-            </div>
-        </form>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
         
         <script>
         	function validCheck(){

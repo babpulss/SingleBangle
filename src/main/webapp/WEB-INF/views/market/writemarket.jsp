@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Single Bangle</title>
+<title>re마켓</title>
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
@@ -14,6 +14,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
+      <link rel="stylesheet" href="/css/footer.css">
 	<script>
 		$(function(){
 			$("#boardfrm").on("submit", function(){
@@ -127,8 +128,8 @@
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <form action="write.do" method="post" id="frm" enctype="multipart/form-data" id="boardfrm">
 <div style="width: 700px; margin: auto; position: relative; top: 80px;">
-<input style="width: 100%;" type="text" name="title" id="title" placeholder="제목을 입력하세요" required="required"><br>
-<input style="width: 30%;" type="text" name="price" id="price" placeholder="가격을 입력하세요" required="required">원
+<input style="width: 100%; border: none; border-bottom: 1px solid black" type="text" name="title" id="title" placeholder="제목을 입력하세요" required="required">
+<br><input style="width: 30%; border: none; border-bottom: 1px solid black" type="text" name="price" id="price" placeholder="가격을 입력하세요" required="required">원
 <select name="category">
 	<option>디지털/가전</option>
 	<option>가구/인테리어</option>
@@ -146,7 +147,7 @@
 	 <button type="button" id="confirm">제출</button></div>
 	 </div>
 </form>
-
+<jsp:include page="/resources/jsp/footer.jsp" />
     <script>
       $('#summernote').summernote({
     	  height: 500,

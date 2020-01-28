@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>가계부</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet"
@@ -20,6 +20,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/css/nav.css"/>
+	<link rel="stylesheet" href="/css/footer.css"/>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
 
@@ -74,6 +75,14 @@
 </style>
 </head>
 <body>
+ <c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <div id="mainWrapper">
 	<main class="container pt-5">
@@ -84,7 +93,7 @@
 				<c:out value="${sessionScope.userName}" />
 				(
 				<c:out value="${sessionScope.id}" />
-				) 님 의가계부
+				) 님의 가계부
 			</h2>
 		</div>
 		<div class="card-block p-0">
@@ -105,33 +114,33 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td id="datePic"><input type="text" id="datepicker" name="reportingDate"></td>
+							<td id="datePic"><input type="text" id="datepicker" name="reportingDate" required="required"></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 								id="detailsSelect" name="details">
 									<option selected>선택</option>
 									<option value="식비">식비</option>
 									<option value="문화 생활비">문화 생활비</option>
 									<option value="교통비">교통비</option>
-									<option value="관리비">관리비</option>
+									<option value="관리비" selected="selected">관리비</option>
 									<option value="급여">급여</option>
 									<option value="저축">저축</option>
 									<option value="기타">기타</option>
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-								id="paymentsSelect" name="payments">
+								id="paymentsSelect" name="payments"required="required">
 									<option selected>선택</option>
-									<option value="카드">카드</option>
+									<option value="카드" selected="selected">카드</option>
 									<option value="현금">현금</option>
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-								id="specSelect" name="spec">
+								id="specSelect" name="spec"required="required">
 									<option selected>선택</option>
 									<option value="수입">수입</option>
-									<option value="지출">지출</option>
+									<option value="지출" selected="selected">지출</option>
 							</select></td>
 
 							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="15" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);"></td>
+								placeholder="(ex. 10000)" maxlength="8" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
@@ -181,6 +190,7 @@
 	</div>
 	</main>
 	</div>
+	<jsp:include page="/resources/jsp/footer.jsp"/>
 	<script>
 	function inputNumberFormat(obj) {
 		obj.value = comma(uncomma(obj.value));

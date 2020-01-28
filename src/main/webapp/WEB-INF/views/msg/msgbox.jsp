@@ -6,10 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Single Bangle</title>
+<title>쪽지</title>
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="/css/footer.css">
 </head>
 <style>
 	 /* 메뉴 폰트 */
@@ -107,7 +108,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 
-<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
+<div id="board" style="width: 500px; height: 57vh; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle; font-weight: bold"><p>받은쪽지함 | </p></div>
 <div style="float: left; height: inherit; vertical-align: middle;">
@@ -134,6 +135,7 @@
  <div class="bRow"><div style="margin: auto;">${navi }</div></div>
 </div>
 <div>${navi }</div>
+<jsp:include page="/resources/jsp/footer.jsp" />
 <script>
 		$("#sendbox").on("click", function(){
 		location.href="${pageContext.request.contextPath }/msg/sendMsg.do?sender=${receiver}";

@@ -11,6 +11,7 @@
         <title>병원 검색</title>
         
         <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
         	*{
 				box-sizing: border-box;
@@ -200,6 +201,8 @@
 	        
 		</div>
 		<br><br><br>
+		
+		<jsp:include page="/resources/jsp/footer.jsp" />
 		
         <script>
             //////////////////////////////////////////////////

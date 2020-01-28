@@ -19,6 +19,7 @@
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <title>post Notice</title>
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
 #bHeader {
 	background-color: #0085cb;
@@ -97,12 +98,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<div id="mainWrapper">
 		<form id="frm" action="/notice/postNotice" method="post">
 			<div id="bHeader"></div>
@@ -138,10 +134,16 @@
         $("#contents").val(content);
     });
     $("#toList").click(() => {
-        history.back();
+    	location.href="/notice";
     })
   </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>

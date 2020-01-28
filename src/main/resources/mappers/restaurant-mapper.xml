@@ -33,6 +33,10 @@
 		update restaurant set title = #{title} where seq = #{seq}
 	</update>
 	
+	<update id="approval" parameterType="Integer">
+		update restaurant set approvalCheck = 'Y' where seq = #{seq}
+	</update>
+	
 	<delete id="delete" parameterType="Integer">
 		delete from restaurant where seq = #{seq}
 	</delete>

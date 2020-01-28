@@ -6,9 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Single Bangle</title>
+<title>쪽지</title>
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
+<link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <style>
@@ -107,7 +108,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 
-<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
+<div id="board" style="width: 500px; height: 57vh; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle;">
 <button type="button" id="receiveBox" style="border: none; background-color: transparent; font-size: 16px;" id="sendbox">받은쪽지함 | </button></div>
@@ -133,6 +134,7 @@
 </c:choose>
  <div class="bRow"><div style="margin: auto;">${navi }</div></div>
 </div>
+<jsp:include page="/resources/jsp/footer.jsp" />
 <script>
 	$("#receiveBox").on("click",function(){
 		location.href="${pageContext.request.contextPath}/msg/msgList.do?receiver=${sender}"

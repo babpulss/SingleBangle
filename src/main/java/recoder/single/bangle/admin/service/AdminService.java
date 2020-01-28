@@ -8,7 +8,7 @@ public class AdminService {
 	private ReportingService reportingService;
 	
 	// 신고접수
-	public boolean reporting(String id, String reason, String url) {
+	public boolean reporting(String id, String reason, String url)  throws Exception {
 		return reportingService.addReporting(id, reason, url);
 	}
 	

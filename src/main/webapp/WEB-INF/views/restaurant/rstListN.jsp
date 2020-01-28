@@ -10,20 +10,9 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea7c69cd1bf56d37c0df13609580d2bd&libraries=services"></script>
-<title>혼밥/혼술</title>
-
+<title>혼밥 / 혼술 (비승인 목록)</title>
 <link rel="stylesheet" href="/css/nav.css">
 <style>
-/* 메뉴 폰트 */
-@font-face {
-	font-family: 'BMHANNAAir';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 html, body {
 	margin: 0px;
 	padding: 0px;
@@ -34,8 +23,8 @@ html, body {
 	font-family: 'BMHANNAAir';
 }
 
-#board {
-	margin: 65px 110px 0 110px;
+#mainWrapper {
+	margin-top: 80px;
 }
 
 #bHeader {
@@ -77,13 +66,13 @@ html, body {
 
 .bRow:last-child {
 	border-radius: 0 0 10px 10px;
-	background-color: #e05252;
+	background-color: #dce3e8;
 }
 
 #btns {
-	margin: 20px 110px 0 110px;
 	display: flex;
 	justify-content: flex-start;
+	margin-left: 10px;
 }
 
 #btns>button:first-child, #btns>div>button {
@@ -154,13 +143,12 @@ html, body {
 	left: 0;
 }
 
-#viewDashBoard:hover>a, #viewBlackList:hover>a, #viewReporting:hover>a
-	{
+#viewDashBoard:hover>a, #viewBlackList:hover>a, #viewReporting:hover>a {
 	transition: .5s ease;
-	color: red;
+	color: white;
 }
 
-@media ( max-width : 600px ) {
+ @media ( max-width : 600px ) { 
 	#board {
 		margin: 65px 0 0 0;
 	}
@@ -178,60 +166,54 @@ html, body {
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
-<c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
-	<br>
-	<br>
-	<br>
-	<div id="mainWrapper">
-		<div class="list">
-			<div id="btns">
-				<div id="viewDashBoard">
-					<div class="view1"></div>
-					<a href="#">대쉬보드 조회</a>
+	<c:choose>
+		<c:when test="${loginInfo.adminCheck eq \"Y\"}">
+			<div id="mainWrapper">
+				<div class="list">
+					<div id="btns">
+						<div id="viewDashBoard">
+							<div class="view1"></div>
+							<a href="#">대쉬보드 조회</a>
+						</div>
+						<div id="viewBlackList">
+							<div id="view2"></div>
+							<a href="#">블랙리스트 조회</a>
+						</div>
+						<div id="viewReporting">
+							<div class="view1"></div>
+							<a href="#">신고접수 확인 조회</a>
+						</div>
+					</div>
 				</div>
-				<div id="viewBlackList">
-					<div id="view2"></div>
-					<a href="#">블랙리스트 조회</a>
+				<h1>혼밥 / 혼술 (비승인 목록)</h1>
+				<div id="board">
+					<div id="bHeader" class="bRow">
+						<span>번호</span> <span>제목</span> <span>작성자</span> <span>작성일</span>
+					</div>
+
+					<c:forEach items="${list}" var="dto">
+						<div class="bRow">
+							<span>${dto.seq}</span> <span><a
+								href="${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=${dto.seq}">${dto.title}</a></span>
+							<span>${dto.writer}</span> <span>${dto.getFormedDate1()}</span>
+						</div>
+					</c:forEach>
+
+					<div class="bRow" style="height: 20px"></div>
 				</div>
-				<div id="viewReporting">
-					<div class="view1"></div>
-					<a href="#">신고접수 확인 조회</a>
+				<div id="btns">
+					<button type="button"
+						style="color: white; background-color: white;">목록</button>
+					<div>
+						<input type="text" placeholder="search">
+						<button type="button" id="searchBtn">검색</button>
+					</div>
+					<button type="button" id="writeBtn"
+						style="color: white; background-color: white;">글쓰기</button>
 				</div>
 			</div>
-		</div>
-		<div id="board">
-			<div id="bHeader" class="bRow">
-				<span>번호</span> <span>제목</span> <span>작성자</span> <span>작성일</span>
-			</div>
 
-			<c:forEach items="${list}" var="dto">
-				<div class="bRow">
-					<span>${dto.seq}</span> <span><a
-						href="${pageContext.request.contextPath}/restaurant/rstDetail.rst?seq=${dto.seq}">${dto.title}</a></span>
-					<span>${dto.writer}</span> <span>${dto.getFormedDate1()}</span>
-				</div>
-			</c:forEach>
-
-			<div class="bRow" style="height: 20px"></div>
-		</div>
-		<div id="btns">
-			<button type="button" style="color: white; background-color: white;">목록</button>
-			<div>
-				<input type="text" placeholder="search">
-				<button type="button" id="searchBtn">검색</button>
-			</div>
-			<button type="button" id="writeBtn"
-				style="color: white; background-color: white;">글쓰기</button>
-		</div>
-	</div>
-
-	<script>
+			<script>
 	$("#viewBlackList").on("click", function() {
 		location.href="${pageContext.request.contextPath}/admin/viewBlackList";
 	});
@@ -242,7 +224,12 @@ html, body {
 		location.href="${pageContext.request.contextPath}/admin";
 	});
         </script>
-</c:otherwise>
-</c:choose>
+		</c:when>
+		<c:otherwise>
+			<script>
+		location.href= "/";
+	</script>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

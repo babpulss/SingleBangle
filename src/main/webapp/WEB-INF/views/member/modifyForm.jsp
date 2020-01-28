@@ -11,6 +11,7 @@
         <title>정보 수정</title>
         
         <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -115,6 +116,15 @@
         </style>
     </head>
     <body>
+    	<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+    	
         <c:choose>
             <c:when test="${pwCheckResult==0}">
                 <script>
@@ -258,6 +268,8 @@
 	        </div>
         </div>
         <br><br><br>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
 
         <script>
             var validAll = 0;

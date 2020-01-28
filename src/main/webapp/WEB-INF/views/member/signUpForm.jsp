@@ -98,6 +98,15 @@
         </style>
     </head>
     <body>
+    	<c:choose>
+            <c:when test="${loginInfo!=null}">
+                <script>
+                    alert("로그인 된 상태에서는 회원가입을 진행하실 수 없습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>		
+            </c:when>
+        </c:choose>
+    	
         <div id="logo">
             <a href="${pageContext.request.contextPath}/"><img src="/img/index/logos/colorLogo.png"></a>
         </div>

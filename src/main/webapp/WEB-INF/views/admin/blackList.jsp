@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
 /* 메뉴 폰트 */
 * :not ( .rightSidebar ) { box-sizing : border-box ; font-family : ' BMHANNAAir '; }
@@ -113,7 +114,7 @@
 }
 #viewDashBoard:hover>a, #viewReporting:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
-	color: red;
+	color: white;
 }
 #btns {
 	display: flex;
@@ -146,12 +147,7 @@
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<div id="mainWrapper">
 		<div class="list">
 			<div id="btns">
@@ -272,8 +268,13 @@
 		
 		
 	</script>
-
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>

@@ -17,8 +17,9 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
-<title>post Notice</title>
+<title>수정 - ${dto.title}</title>
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
 #bHeader {
 	background-color: #0085cb;
@@ -96,19 +97,22 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+<c:choose>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 	<div id="mainWrapper">
-		<form id="frm" action="/notice/postNotice" method="post">
+		<form id="frm" action="/notice/updateNotice" method="post">
 			<div id="bHeader"></div>
 			<div id="bTitles">
 				<div>
 					<span>Title: </span><input type="text" id="title" name="title" value="${dto.title}">
 				</div>
 			</div>
-			<div id="summernote"></div>
+			<div id="summernote">${dto.contents}</div>
 			<input type="hidden" id="contents" name="contents">
+			<input type="hidden" name="seq" value="${dto.seq}">
 			<div id="btns">
 				<button type="button" id="toList">목록</button>
-				<button>수정 완료</button>
+				<button>수정완료</button>
 			</div>
 			<div id="bFooter"></div>
 		</form>
@@ -120,7 +124,6 @@
             lang: "ko-KO",
             airMode: true
         });
-		$(".note-editable").html("${dto.contents}");
     });
     $("#frm").on("submit", function() {
         var content = $(".note-editable").html();
@@ -128,12 +131,19 @@
             alert('editor content is empty');
             return false;
         }
-
         $("#contents").val(content);
     });
     $("#toList").click(() => {
     	location.href="/notice";
     })
   </script>
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
+</c:otherwise>
+</c:choose>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>

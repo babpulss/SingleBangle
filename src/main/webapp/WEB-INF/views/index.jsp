@@ -9,6 +9,7 @@
 <title>Single Bangle</title>
 <link rel="stylesheet" href="/css/nav.css" />
 <link rel="stylesheet" href="/css/index/index.css" />
+<link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
@@ -51,26 +52,37 @@
 				</div>
 			</div>
 			<div id="imgBox">
-				<div class="imgDiv">
+				<div class="imgDiv" style="cursor:pointer;">
 					<img src="/img/index/cate_living.png">
 					<div class="indexText">Living Point</div>
 				</div>
-				<div class="imgDiv">
+				<div class="imgDiv" style="cursor:pointer;">
 					<img src="/img/index/cate_local.png">
 					<div class="indexText">
 						혼밥/혼술 플레이스<br> 병원 위치검색
 					</div>
 				</div>
-				<div class="imgDiv">
+				<div class="imgDiv"  style="cursor:pointer;">
 					<img src="/img/index/cate_reMarket.png">
 					<div class="indexText">
 						쇼핑을 바꾸는 쇼핑<br> Re:Market
 					</div>
 				</div>
-				<div class="imgDiv">
-					<img src="/img/index/cate_account.png">
+				<c:choose>
+            <c:when test="${loginInfo==null}">
+                <div class="imgDiv" style="cursor:pointer;">
+					<img onclick="alert('로그인 후 이용가능합니다.')" src="/img/index/cate_account.png">
+					<div class="indexText">나만의 가계부를 PDF로</div>
+				</div>		
+            </c:when>
+            <c:otherwise>
+            <div class="imgDiv" style="cursor:pointer;">
+					<img src="/img/index/cate_account.png" onclick="location.href='${pageContext.request.contextPath}/accountBook/accountBook'">
 					<div class="indexText">나만의 가계부를 PDF로</div>
 				</div>
+            </c:otherwise>
+        </c:choose>
+				
 			</div>
 		</div>
 		<div id="fourthRow">
@@ -91,41 +103,10 @@
 				혼자 살 수 밖에 없고,<br> 혼자 살 수 있게 되었고,<br> 혼자 살고 싶다.<br>
 			</div>
 		</div>
-		<div id="footer">
-			<div id="footer1">
-				<div>
-					<a href="#"><b>이용규칙</b></a>
-				</div>
-				<div>
-					<a href="#"><b>운영알림판</b></a>
-				</div>
-				<div>
-					<a href="#"><b>도움말</b></a>
-				</div>
-				<div>
-					<a href="#"><b>버그신고</b></a>
-				</div>
-			</div>
-			<div id="footer2">
-				<div>
-					<a href="#">개인정보 처리방침</a>
-				</div>
-				<div>
-					<a href="#">이용약관</a>
-				</div>
-				<div>
-					<a href="#">책임의 한계와 법적고지</a>
-				</div>
-				<div>
-					<a href="#">청소년 보호정책</a>
-				</div>
-			</div>
-		</div>
-		<div id="footer3">
-			<img src="/img/index/logos/fullLogoColor.png"> <strong>ⓒ
-				2020 · SingleBanlge</strong>
-		</div>
+		
 	</div>
+	
+	<jsp:include page="/resources/jsp/footer.jsp" />
 
 </body>
 </html>

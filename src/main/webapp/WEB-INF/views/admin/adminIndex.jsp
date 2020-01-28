@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
 #mainWrapper {
 	margin-top: 80px;
@@ -57,7 +58,7 @@
 }
 #viewBlackList:hover>a, #viewReporting:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
-	color: red;
+	color: white;
 }
 #btns {
 	display: flex;
@@ -76,12 +77,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 <c:choose>
-<c:when test="${loginInfo.adminCheck eq \"N\"}">
-	<script>
-		location.href= "/";
-	</script>
-</c:when>
-<c:otherwise>
+<c:when test="${loginInfo.adminCheck eq \"Y\"}">
 <div id="mainWrapper">
 <div class="list">
 			<div id="btns">
@@ -117,7 +113,13 @@
 	});
 </script>
 
+</c:when>
+<c:otherwise>
+	<script>
+		location.href= "/";
+	</script>
 </c:otherwise>
 </c:choose>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>

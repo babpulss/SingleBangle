@@ -44,6 +44,10 @@ public class RestaurantDAO {
 		return sst.update("Restaurant.update", dto);
 	}
 	
+	public int approval(int seq) throws Exception {
+		return sst.update("Restaurant.approval", seq);
+	}
+	
 	public int delete(int seq) throws Exception {
 		return sst.delete("Restaurant.delete", seq);
 	}
