@@ -725,6 +725,9 @@ public class BoardService {
 		return boardDao.cmtUpdate(seq, contents);
 	}
 
+	public int deleteFile(int seq) {
+		return fileDao.deleteFile(seq);
+	}
 }
 
 

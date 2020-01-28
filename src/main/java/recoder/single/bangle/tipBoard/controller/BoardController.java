@@ -22,6 +22,7 @@ import recoder.single.bangle.tipBoard.DTO.FileDTO;
 import recoder.single.bangle.tipBoard.DTO.ReportDTO;
 import recoder.single.bangle.tipBoard.DTO.ScrapDTO;
 import recoder.single.bangle.tipBoard.service.BoardService;
+import utils.XSSprotect;
 
 @Controller
 @RequestMapping("/board")
@@ -48,6 +49,8 @@ public class BoardController {
 		//realPath: 파일이 저장되는 곳!
 		String realPath = session.getServletContext().getRealPath("/files");
  		
+		dtoB.setTitle(XSSprotect.replaceParameter(dtoB.getTitle()));
+		
 		System.out.println("realPath: "+realPath);
 		
 		//writer: 세션에서 가져온 id값 을 dto의 writer에 넣는다! 즉, 게시판의 writer는 로그인한 사람의 id값임!
@@ -118,7 +121,10 @@ public class BoardController {
 	@RequestMapping("/updateTip.bo")
 	public String updateTip(BoardDTO dtoB, FileDTO dtoF, Model model) {
 		System.out.println("updateTip.bo에 잘 도착!");
-		// 여기서 에러 생김!
+		
+		dtoB.setTitle(XSSprotect.replaceParameter(dtoB.getTitle()));
+		//dtoB.setContents(XSSprotect.replaceParameter(dtoB.getContents()));
+		
 		String realPath = session.getServletContext().getRealPath("/files");
 		String writer = ((MemberDTO) session.getAttribute("loginInfo")).getId();
 		dtoB.setWriter(writer);
@@ -142,7 +148,7 @@ public class BoardController {
 
 //		게시글 지우면 그 게시글이 가진 파일도 지우기
 // 		해야됨		
-		
+		boardService.deleteFile(seq);
 		
 		int deleteResult = boardService.deleteTip(seq);
 		if(deleteResult>0) {
@@ -294,7 +300,11 @@ public class BoardController {
 	@ResponseBody
 	public String addComment(CommentDTO dtoC) {
 		System.out.println("addComment.bo에 도착!");
+		
+		dtoC.setContents(XSSprotect.replaceParameter(dtoC.getContents()));
+		
 		System.out.println(dtoC.toString());
+		
 		JsonObject obj = new JsonObject();
 	
 		int cmtResult = boardService.addComment(dtoC);
@@ -366,6 +376,9 @@ public class BoardController {
 	@RequestMapping("/replyUpdate.bo")
 	public String replyUpdate(int seq, String contents, Model model) {
 		System.out.println("replyUpdate에 도착!");
+		System.out.println(contents);
+		contents = XSSprotect.replaceParameter(contents);
+		System.out.println(contents);
 		int rootSeq = boardService.getRootSeq(seq);
 		System.out.println("댓글을 단 글의 seq: "+ rootSeq);
 		int cmtUpdateResult = boardService.cmtUpdate(seq, contents);

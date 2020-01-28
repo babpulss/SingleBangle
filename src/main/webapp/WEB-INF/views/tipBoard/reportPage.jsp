@@ -37,6 +37,14 @@
 	}
 </style>
 <body>
+<c:choose>
+            <c:when test="${loginInfo==null}">
+                <script>
+                    alert("로그인 후 이용하실 수 있습니다.");
+                    location.href="${pageContext.request.contextPath}/member/login.mem";
+                </script>      
+            </c:when>
+        </c:choose>
 	<div id="reportForm">
 	<div style="text-align:center;"><img src="/img/tipBoard/reportAlert.png" style="width:20px; margin-top:40px; margin-right:5px;"><h3 style="display:inline-block; text-align:center;">신고하신 게시글은 관리자 확인 후 삭제 조치됩니다.</h3></div>
 	<form action="reportProc.bo" method="post" id="reportForm">

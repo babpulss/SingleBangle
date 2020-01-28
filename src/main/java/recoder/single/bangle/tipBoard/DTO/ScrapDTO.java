@@ -1,6 +1,7 @@
 package recoder.single.bangle.tipBoard.DTO;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 public class ScrapDTO {
 	private int seq;
@@ -10,6 +11,8 @@ public class ScrapDTO {
 	private String id;
 	private Timestamp scrapDate;
 	
+	private String formedDate;
+
 	public ScrapDTO() {
 		super();
 	}
@@ -71,4 +74,10 @@ public class ScrapDTO {
 	public void setScrapDate(Timestamp scrapDate) {
 		this.scrapDate = scrapDate;
 	}
+	
+	public String getFormedDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(this.scrapDate);
+	}
+	
 }
