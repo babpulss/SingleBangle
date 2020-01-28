@@ -23,13 +23,12 @@ public class AdminScheduler {
 	}
 	
 	
-	@Scheduled(cron= "0 35 20 1-31 * ?")
+	@Scheduled(cron= "0 35 20 * * ?")
 	public void myJob() {
 		try {
 			kakao.deleteMovie();
 			kakao.insertMovie();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
