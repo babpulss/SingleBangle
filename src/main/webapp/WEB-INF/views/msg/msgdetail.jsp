@@ -98,12 +98,14 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+<br><br><br>
 	<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 		<form action="${pageContext.request.contextPath }/msg/msgList.do">
 		<input type="hidden" name="receiver" value="${dto.receiver }">
 		<input type="hidden" name="seq" value="${dto.seq }">
 		<div id="bHeader" class="bRow">
-		<button type="button" style="border: none; position: relative; left: 70px; background-color: transparent; font-size: 15px;" id="msg">답장하기</button>
+		<button type="button" style="border: none; position: relative; left: 70px; background-color: transparent; font-size: 15px;" class="msg_${dto.sender }" onclick="msg('${dto.sender}')">
+		답장하기</button>
 		</div>
 		<div class="bRow">
 		<div style="font-weight: bold; width: 40%; float: left">보낸사람 </div><div style="width: 60%; float: left">${dto.sender }</div>
@@ -125,15 +127,36 @@
 	</div>
 	<jsp:include page="/resources/jsp/footer.jsp"/>
 	<script>
-		$("#msg").on("click",function(){
-			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }";
-			window.open(url, "메세지", "width=550px, height=500px, location=no, status=no, scrollbars=no");
-		});
+	
+	function msg(sender){
+		var id = sender;
+		 $.ajax({
+            url:"${pageContext.request.contextPath}/member/idDuplCheck.mem",
+            type:"post",
+            data:{
+                id:id
+            },
+            dataType:"json"
+        }).done(function(data){
+            if(data.result == 1){
+            	var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }";
+    			window.open(url, "메세지", "width=550px, height=500px, location=no, status=no, scrollbars=no");
+            }
+            else{
+                alert("이미 탈퇴한 회원입니다.");
+            }
+        }).fail(function(a, b, c){
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            alert("비동기 통신 실패");
+        });
+    }
 		
 		$("#deleteMsg").on("click", function(){
 			alert("선택한 쪽지를 삭제했습니다.");
 			location.href="${pageContext.request.contextPath}/msg/deleteMsg.do?seq=${dto.seq}&receiver=${dto.receiver}";
-		})
+		});
 		
 	</script>
 </body>
