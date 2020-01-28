@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="houseContent">
+	<select id="selectBySeq" resultType="recoder.single.bangle.house.DTO.HouseContentDTO" parameterType="Integer">
+		select *
+		from houseContent
+		where houseSeq = #{houseSeq}
+	</select>
+	
+	<select id="selectByFristImg" resultType="recoder.single.bangle.house.DTO.HouseContentDTO" parameterType="Integer">
+		select * 
+		from houseContent 
+		where houseSeq = #{houseSeq} 
+		order by seq asc;
+	</select>
+	
+	<insert id="insertAll" parameterType="java.util.List">
+		insert all 
+		<foreach collection="list" item="item" index="index" close="select * from dual">
+  		 into houseContent values(
+  			(select get_houseContent_seq() from dual),
+  			(select get_house_seq() from dual), 
+  			#{item.imgTitle}, #{item.imgContent}, #{item.sysName}, #{item.oriName}
+   		)
+  		</foreach>
+	</insert>	
+	
+	<delete id="deleteBySeq" parameterType="Integer">
+		delete from houseContent where houseSeq = ${seq}
+	</delete> 		
+	
+	<delete id="deleteByContentSeq" parameterType="Integer">
+  		delete from houseContent where seq = #{seq}
+  	</delete>
+</mapper>

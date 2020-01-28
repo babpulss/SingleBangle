@@ -46,7 +46,7 @@
   <class id="5" language="java" name="recoder.single.bangle.restaurant.DTO.RestaurantDTO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/restaurant/DTO/RestaurantDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1252" y="582"/>    
+    <position height="-1" width="-1" x="1207" y="483"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -65,14 +65,14 @@
   </class>  
   <association id="7">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="8" name="rstFileDao">        
+      <attribute id="8" name="rstDao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="9" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="10">    
@@ -89,14 +89,14 @@
   </association>  
   <association id="13">    
     <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="14" name="rstDao">        
+      <attribute id="14" name="rstFileDao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="15" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="3" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

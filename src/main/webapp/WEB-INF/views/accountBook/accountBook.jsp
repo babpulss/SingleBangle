@@ -140,7 +140,7 @@
 							</select></td>
 
 							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="8" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
+								placeholder="(ex. 10000)" maxlength="10" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
@@ -219,7 +219,7 @@
         }
     }
 	function characterCheck() {
-        var RegExp = /[ \{\}\[\]\/?.;|\)*~`!^\+┼<>@\#$%&\'\"\\\(\=]/gi;//정규식 구문
+        var RegExp = /[\{\}\[\]\/?.;|\)*~`!^\+┼<>@\#$%&\'\"\\\(\=]/gi;//정규식 구문
         var obj = document.getElementsByName("remarks")[0]
         if (RegExp.test(obj.value)) {
             alert("특수문자는 입력하실 수 없습니다.");

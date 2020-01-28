@@ -178,7 +178,15 @@ html, body {
 				<c:when test="${!empty list}">
 					<c:forEach items="${list}" var="i">
 						<div class="bRow">
-							<span>${i.id}</span> <span>${i.reportingDate}</span> <span>${i.reason}</span>
+							<span>${i.id}</span> <span>${i.reportingDate}</span> 
+							<span><c:choose>
+							<c:when test="${i.reason == '1'}">영리목적/홍보성</c:when>
+							<c:when test="${i.reason == '2'}">불법정보</c:when>
+							<c:when test="${i.reason == '3'}">음란성/선정성</c:when>
+							<c:when test="${i.reason == '4'}">욕설/인신공격</c:when>
+							<c:when test="${i.reason == '5'}">개인정보노출</c:when>
+							<c:otherwise>같은 내용의 반복 게시 (도배)</c:otherwise>
+							</c:choose></span>
 							<span> <a href="${i.reportedUrl}" target="_blank">URL로
 									이동(${i.reportedUrl})</a>
 							</span> <span>

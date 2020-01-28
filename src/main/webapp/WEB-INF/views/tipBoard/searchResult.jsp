@@ -5,22 +5,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리빙포인트 글 검색 결과</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
+
 <style>
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
-            font-family: 'BMHANNAAir';
         }
         #board {
             margin: 65px 110px 0 110px;
@@ -176,5 +170,6 @@ $("#btnToBack").on("click", function() {
 	location.href = "${pageContext.request.contextPath}/";
 })
 </script>
+	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

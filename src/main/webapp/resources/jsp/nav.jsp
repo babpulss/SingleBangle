@@ -56,11 +56,11 @@
 					<a href="${pageContext.request.contextPath}/hosp/hospList.hp"><div class="sidebar"><span id="submenuSpan"></span><i class="far fa-hospital sidebar"></i> 병원 검색</div></a>
 				</div>
 				</li>
-				<li class="has-subnav sidebar"><a href="#"> <i
+				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/movie/list"> <i
 						style="line-height: 50px" class="fa fa-book"></i> <span class="nav-text sidebar">
 							문화생활 </span>
 				</a> </li> 
-				<li class="has-subnav sidebar"><a href="#"> <i
+				<li class="has-subnav sidebar"><a href="${pageContext.request.contextPath}/house/houseMain"> <i
 						style="line-height: 50px" class="fa fa-home"></i> <span class="nav-text sidebar">
 							랜선집들이 </span>
 				</a></li>
