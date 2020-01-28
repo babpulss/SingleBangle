@@ -141,7 +141,7 @@
 				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button></div>
 			</c:when>
 			<c:when test="${loginInfo != null && dto.writer != loginInfo.id}">
-				<div><button id="msg" type="button" style="border: none; width: 60px; height: 30px; border-radius: 10px;">쪽지보내기</button>
+				<div><button id="msg" type="button" style="border: none; width: 65px; height: 30px; border-radius: 10px;">쪽지보내기</button>
 				<button id="report" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">신고하기</button>
 				<button id="back" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">돌아가기</button>
 				<c:choose>
@@ -305,7 +305,7 @@
 		
 		$("#msg").on("click",function(){
 			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.writer }";
-			window.open(url, "메세지", "width=500px, height=500px, location=no, status=no, scrollbars=no");
+			window.open(url, "메세지", "width=450px, height=500px, location=no, status=no, scrollbars=no");
 		})
 		
 		$("#report").on("click",function(){
