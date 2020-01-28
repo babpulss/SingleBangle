@@ -64,7 +64,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "redirect:error";
+			return "redirect:/error";
 		}
 		
 		return "accountBook/accountBook";
@@ -101,7 +101,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "redirect:error";
+			return "redirect:/error";
 		}		
 		
 		return "accountBook/detailAccountBook";
@@ -129,7 +129,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
-			return "redirect:error";
+			return "redirect:/error";
 		}
 		
 		return "redirect:accountBook";
@@ -160,7 +160,7 @@ public class AccountController {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return "redirect:error";
+			return "redirect:/error";
 		}		
 		
 		return "accountBook/pdfAccountView";
@@ -180,12 +180,12 @@ public class AccountController {
 			if(result>0) {
 				return "redirect:accountBook";
 			}else {
-				return "redirect:error";
+				return "redirect:/error";
 			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			return "redirect:error";
+			return "redirect:/error";
 		}
 		
 	}
@@ -198,11 +198,11 @@ public class AccountController {
 			if(result > 0) {
 				return "redirect:detailAccount";
 			}else {
-				return "redirect:error";
+				return "redirect:/error";
 			}			
 		} catch (Exception e) {
 			// TODO: handle exception
-			return "redirect:error";
+			return "redirect:/error";
 		}
 	}
 	
@@ -250,7 +250,7 @@ public class AccountController {
 			
 			return "accountBook/detailAccountBook";
 		}else {
-			return "redirect:error";
+			return "redirect:/error";
 		}
 	}
 	
