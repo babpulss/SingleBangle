@@ -19,7 +19,6 @@ import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,7 +123,14 @@ public class AccountController {
 			dtos = new AccountDTO(0, id, userName, dto.getReportingDate(), null, dto.getDetails(), dto.getPayments(), dto.getSpec(), 0, dto.getExpense(), dto.getRemarks());
 			System.out.println(dtos);
 		}
-		accService.insertAccountData(dtos);
+		try {
+			accService.insertAccountData(dtos);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return "error";
+		}
 		
 		return "redirect:accountBook";
 	}
@@ -169,22 +175,33 @@ public class AccountController {
 	@RequestMapping("/deleteAccountByMonth")
 	public String deleteAccountMonth() {
 		String formedReportingDate = request.getParameter("formedReportingDate");
-		
-		int result = accService.deleteAccountByMonth(formedReportingDate);
-		if(result>0) {
-			return "redirect:accountBook";
+		try {
+			int result = accService.deleteAccountByMonth(formedReportingDate);
+			if(result>0) {
+				return "redirect:accountBook";
+			}else {
+				return "error";
+			}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "error";
 		}
 		
-		return "error";
 	}
 	
 	@RequestMapping("/deleteAccountBySeq.do")
 	public String deleteAccountSeq() {
 		int seq = Integer.parseInt(request.getParameter("deleteSeq"));
-		int result = accService.deleteAccountBySeq(seq);
-		if(result > 0) {
-		return "redirect:detailAccount";
-		}else {
+		try {
+			int result = accService.deleteAccountBySeq(seq);
+			if(result > 0) {
+				return "redirect:detailAccount";
+			}else {
+				return "error";
+			}			
+		} catch (Exception e) {
+			// TODO: handle exception
 			return "error";
 		}
 	}
@@ -228,6 +245,7 @@ public class AccountController {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				return "error";
 			}		
 			
 			return "accountBook/detailAccountBook";
