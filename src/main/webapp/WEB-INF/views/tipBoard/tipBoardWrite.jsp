@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리빙포인트 글 작성</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -13,20 +13,12 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/footer.css">
   <style>
- /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
-            font-family: 'BMHANNAAir';
         }
         #board {
             margin: 65px 110px 0 110px;
@@ -169,7 +161,7 @@
 <br>
 <div id="mainWrapper">
 	<div id="writeForm">
-		<form action="writeProc.bo" method="post" id="frm">
+		<form action="writeProc.bo" method="post" id="frm" onsubmit="return validCheck()">
 		<div id="writeTitle">리빙포인트 게시글 작성 </div>
 		<hr>
 		<span class="writeIndex">카테고리</span>  <select id="selectCategory" name="category">
@@ -179,13 +171,13 @@
 			<option value="4">동식물</option>
 			<option value="5">기타</option>
 		</select> &nbsp;&nbsp;
-		<input type="text" name="title" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;" placeholder="  게시글 제목을 입력하세요.">
+		<input type="text" id="inputTitle" name="title" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;" placeholder="  게시글 제목을 입력하세요.">
 		<br><br>
-		<textarea id="contents" name="contents" hidden></textarea>
+		<textarea id="contents" id="inputContents" name="contents" hidden></textarea>
 		<div id="summernote"></div>
 		<br>
 		<div style="text-align:center;" id="writeBtns">
-	<button type="submit">전송</button>
+	<button type="submit" id="goWriteProc">전송</button>
 	<button type="button" id="backList">취소</button>
 		</div>
 	</form>
@@ -203,6 +195,19 @@
       $("#backList").on("click",function(){
     	  location.href = "${pageContext.request.contextPath}/board/boardList.bo";
       })
+      
+    function validCheck(){
+    	  var title = $("#inputTitle").val();
+    	  var contents = $("#inputContents").html();
+    	  
+    	  if(title =="" || contents == ""){
+    		  alert("내용을 입력해주세요!");
+    		  return false;
+    	  }
+    	confirm("글을 작성하시겠습니까?");
+
+      }
     </script>
+    	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

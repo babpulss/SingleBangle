@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리빙포인트 글 수정</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
@@ -13,20 +13,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js"></script>
     <link rel="stylesheet" href="/css/nav.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    
   <style>
- /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
-            font-family: 'BMHANNAAir';
         }
         #board {
             margin: 65px 110px 0 110px;
@@ -161,7 +154,7 @@
 <br>
 <div id="mainWrapper">
 	<div id="writeForm">
-		<form action="${pageContext.request.contentType}/board/updateTip.bo?seq=${dtoB.seq}" method="post" id="frm" onsubmit="return boardWriteCheck()">
+		<form action="${pageContext.request.contentType}/board/updateTip.bo?seq=${dtoB.seq}" method="post" id="frm" onsubmit="return validCheck()">
 			<div id="writeTitle">글 수정</div>
 				<hr>
 		<span class="writeIndex">카테고리</span>  <select id="selectCategory" name="category">
@@ -171,7 +164,7 @@
 			<option value="4">동식물</option>
 			<option value="5">기타</option>
 		</select>&nbsp;&nbsp;
-		<input type="text" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;"  id="title" name="title" size="50" value="${dtoB.title }" required>
+		<input type="text" id="inputTitle" style="width:400px; border:none; border-bottom: 1px solid #c5c7c9;"  id="title" name="title" size="50" value="${dtoB.title }" required>
 		<br><br>
 		<textarea rows="30" cols="50" name="contents" id="contents" style="resize:none;" hidden></textarea>
 		<div id="summernote">${dtoB.contents}</div>
@@ -200,9 +193,19 @@
         width: 700
     });
 	
-    $("#frm").on("submit",function(){
-		$("#contents").val($(".note-editable").html());
-	});
+    function validCheck(){
+    	$("#contents").val($(".note-editable").html());
+	  var title = $("#inputTitle").val();
+  	  var contents = $(".note-editable").html();
+  	  
+  	  if(title =="" || contents == ""){
+  		  alert("내용을 입력해주세요!");
+  		  return false;
+  	  }
+  	return confirm("글을 수정하시겠습니까?");
+
+    }
     </script>
+    	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

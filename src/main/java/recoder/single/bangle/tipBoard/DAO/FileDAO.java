@@ -12,11 +12,11 @@ public class FileDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public int insertFile(FileDTO dto) {
+	public int insertFile(FileDTO dto) throws Exception {
 		return sst.insert("File.insert",dto);
 	}
 	
-	public int deleteFile(int seq) {
+	public int deleteFile(int seq) throws Exception {
 		return sst.delete("File.deleteFile",seq);
 	}
 	

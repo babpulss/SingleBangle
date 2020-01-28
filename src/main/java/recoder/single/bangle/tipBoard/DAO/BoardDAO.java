@@ -95,7 +95,7 @@ public class BoardDAO {
 			return sst.insert("Tip.scrap",dtoS);
 		}
 		
-		public int deleteScrap(int seq) {
+		public int deleteScrap(int seq) throws Exception{
 			return sst.delete("Tip.deleteScrap", seq);
 		}
 		
@@ -132,7 +132,7 @@ public class BoardDAO {
 			return sst.selectOne("Tip.tipCount");
 		}
 		
-		public List<CommentDTO> selectByPageCmt(int startNum, int endNum, int seq){
+		public List<CommentDTO> selectByPageCmt(int startNum, int endNum, int seq) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
@@ -140,14 +140,14 @@ public class BoardDAO {
 			return sst.selectList("Tip.selectByPageCmt", param);
 		}
 		
-		public List<BoardDTO> selectByPage(int startNum, int endNum){
+		public List<BoardDTO> selectByPage(int startNum, int endNum) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
 			return sst.selectList("Tip.selectByPage", param);
 		}
 		
-		public List<BoardDTO> selectByPageTitle(int startNum, int endNum, String input){
+		public List<BoardDTO> selectByPageTitle(int startNum, int endNum, String input) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
@@ -156,7 +156,7 @@ public class BoardDAO {
 			return sst.selectList("Tip.selectByPageTitle", param);
 		}
 		
-		public List<BoardDTO> selectByPageContents(int startNum, int endNum, String input){
+		public List<BoardDTO> selectByPageContents(int startNum, int endNum, String input) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
@@ -164,7 +164,7 @@ public class BoardDAO {
 			return sst.selectList("Tip.selectByPageContents", param);
 		}
 		
-		public List<BoardDTO> selectByPageBoth(int startNum, int endNum, String input){
+		public List<BoardDTO> selectByPageBoth(int startNum, int endNum, String input) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("startNum", startNum);
 			param.put("endNum", endNum);
@@ -172,48 +172,48 @@ public class BoardDAO {
 			return sst.selectList("Tip.selectByPageBoth", param);
 		}
 		
-		public int searchTitleCount(String title){
+		public int searchTitleCount(String title) throws Exception{
 			return sst.selectOne("Tip.searchTitleCount", title);
 		}
 		
-		public List<BoardDTO> searchContents(String contents){
+		public List<BoardDTO> searchContents(String contents) throws Exception{
 			return sst.selectList("Tip.searchContents", contents);
 		}
 		
-		public List<BoardDTO> searchBoth(String both){
+		public List<BoardDTO> searchBoth(String both) throws Exception{
 			return sst.selectList("Tip.searchBoth", both);
 		}
 		
-		public int report(ReportDTO dtoR){
+		public int report(ReportDTO dtoR) throws Exception{
 			return sst.insert("Tip.report",dtoR);
 		}
 		
-		public int addComment(CommentDTO dtoC) {
+		public int addComment(CommentDTO dtoC) throws Exception{
 			return sst.insert("Tip.addComment",dtoC);
 		}
 		
-		public List<CommentDTO> cmtList(int rootSeq){
+		public List<CommentDTO> cmtList(int rootSeq) throws Exception{
 			return sst.selectList("Tip.cmtList", rootSeq);
 		}
 		
-		public int cmtDelete(int seq) {
+		public int cmtDelete(int seq) throws Exception{
 			return sst.delete("Tip.cmtDelete", seq);
 		}
 		
-		public int commentDelete(int seq) {
+		public int commentDelete(int seq) throws Exception{
 			return sst.delete("Tip.commentDelete", seq);
 		}
 		
-		public int cmtCount(int seq) {
+		public int cmtCount(int seq) throws Exception{
 			//여기서 seq는 게시글의 seq이므로 rootSeq이다.
 			return sst.selectOne("Tip.cmtCount", seq);
 		}
 		
-		public int getRootSeq(int seq) {
+		public int getRootSeq(int seq) throws Exception{
 			return sst.selectOne("Tip.getRootSeq", seq);
 		}
 		
-		public int cmtUpdate(int seq, String contents) {
+		public int cmtUpdate(int seq, String contents) throws Exception{
 			Map<String, Object> param = new HashMap<>();
 			param.put("seq", seq);
 			param.put("contents", contents);

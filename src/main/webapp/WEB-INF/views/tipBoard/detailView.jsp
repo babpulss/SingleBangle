@@ -5,26 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글 상세보기</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+<link rel="stylesheet" href="/css/footer.css">
  <style>
- 		 /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+
         html, body { margin: 0px; padding: 0px;}
         * {
-             box-sizing: border-box; 
-            font-family: 'BMHANNAAir';
-        }
+            box-sizing: border-box; 
+ 	        font-family: 'BMHANNAAir'; 
+       }
         #board {
             margin: 65px 110px 0 110px;
         }
@@ -577,6 +569,6 @@ $(function(){
   //]]>
   
 	</script>
-	
+	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

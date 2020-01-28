@@ -9,17 +9,11 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <style>
-@font-face {
-		font-family: 'BMHANNAAir';
-		src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-		format('woff');
-		font-weight: normal;
-		font-style: normal;
-	}	
 
 	*{
-	font-family: 'BMHANNAAir';
 	font-size: 17px;
+	font-family: 'BMHANNAAir'; 
+	
 	}
 	
 	#reportForm{

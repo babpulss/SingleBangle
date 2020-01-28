@@ -5,16 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>리빙포인트 게시판</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
+
 <style>
  /* 메뉴 폰트 */
         @font-face { font-family: 'MapoPeacefull'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoPeacefullA.woff') format('woff'); font-weight: normal; font-style: normal; }
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
-            font-family: 'BMHANNAAir';
         }
         #board {
             margin: 65px 110px 0 110px;
@@ -138,22 +140,22 @@
         <div class="bRow" style="height:20px"></div>
    </div>
 <form action="tipSearch.bo" method="get">
-	<div id="btns">
-		<button type="button" id="btnToBack">메인</button>
-		<div>
-		<select id="searchType" name="tipCategory">
-			<option value="title">제목</option>
-			<option value="contents">본문</option>
-			<option value="both">제목+본문</option>
-		</select> 
-			<input type="text" placeholder="  search"  name="searchInput">
-			<button type="submit">검색</button>
-		</div>
-		<button type="button" id="btnToWrite">글쓰기</button>
-	</div>
+   <div id="btns">
+      <button type="button" id="btnToBack">메인</button>
+      <div>
+      <select id="searchType" name="tipCategory">
+         <option value="title">제목</option>
+         <option value="contents">본문</option>
+         <option value="both">제목+본문</option>
+      </select> 
+         <input type="text" placeholder="  search"  name="searchInput">
+         <button type="submit">검색</button>
+      </div>
+      <button type="button" id="btnToWrite">글쓰기</button>
+   </div>
 </form>
 <br>
-<div id="paging" style="text-align:center;">${getNavi} </div>	
+<div id="paging" style="text-align:center;">${getNavi} </div>   
 </div>
 <br><br>
 
@@ -165,5 +167,6 @@
 			location.href = "${pageContext.request.contextPath}/";
 		})
 	</script>
+	<jsp:include page="/resources/jsp/footer.jsp"></jsp:include>
 </body>
 </html>
