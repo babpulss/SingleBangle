@@ -146,7 +146,6 @@ public class MarketController {
 
 	@RequestMapping("/writeboard.do") //게시판에서 글쓰기버튼 클릭
 	public String writeBoard() {
-		System.out.println("writeboard.do 도착");
 		return "market/writemarket";
 	}
 
@@ -169,15 +168,20 @@ public class MarketController {
 
 	@RequestMapping("/report.do")//신고하기 누르기
 	public String report(Model model) {
-		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
-		String id = loginInfo.getId();
-		int seq = Integer.parseInt(request.getParameter("seq"));
-		String reportedUrl = request.getParameter("url");
-		System.out.println(reportedUrl);
-		model.addAttribute("id", id);
-		model.addAttribute("seq", seq);
-		model.addAttribute("reportedUrl", reportedUrl);
-		return "market/reportPage";
+		try {
+			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
+			String id = loginInfo.getId();
+			int seq = Integer.parseInt(request.getParameter("seq"));
+			String reportedUrl = request.getParameter("url");
+			System.out.println(reportedUrl);
+			model.addAttribute("id", id);
+			model.addAttribute("seq", seq);
+			model.addAttribute("reportedUrl", reportedUrl);
+			return "market/reportPage";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/reportProc.do")//신고사유 받아오기
@@ -366,38 +370,5 @@ public class MarketController {
 
 	}
 
-
-	@RequestMapping("/filedownload.do")
-	public void filedownload() {
-		String sys_name = request.getParameter("sys_name");//다운할 파일 이름 출력o
-		String path = session.getServletContext().getRealPath("files"); //다운위치 출력o
-		String fullPath = path + "/" + sys_name;
-
-		File f = new File(fullPath);
-
-		try(
-				FileInputStream fis = new FileInputStream(f);
-				DataInputStream fileDis = new DataInputStream(fis);
-				ServletOutputStream sos = response.getOutputStream();
-				){
-			byte[] fileContents = new byte[(int)f.length()];
-			fileDis.readFully(fileContents); // 파일 내용 준비 완료
-
-			response.reset();//response 백지화
-			response.setContentType("application/octet-stream");
-
-			String encFileName = new String(sys_name.getBytes("utf8"),"iso-8859-1");
-
-			response.setHeader("Content-Disposition", "attachment; filename=\""+ encFileName +"\"");
-			response.setHeader("Content-Length", String.valueOf(f.length()));
-
-			sos.write(fileContents);
-			sos.flush();
-
-		}catch(Exception e) {
-			e.printStackTrace();
-			
-		}
-	}
 
 }

@@ -207,7 +207,7 @@
 	<script>
 	
 	var updateSellDone = function(seq){
-		if(confirm("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.") == true){
+		if(confirm("판매완료상태로 전환합니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.") == true){
 			var updateSellDone = "#updateSellDone_"+seq;
 			var doneYes = "#doneYes_"+seq;
 			$(updateSellDone).css("display","none");

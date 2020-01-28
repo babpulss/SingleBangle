@@ -36,10 +36,15 @@ public class MsgController {
 
 	@RequestMapping("/writeMsg.do")
 	public String writeMsg(Model model) {
-		String receiver = request.getParameter("receiver");
-		model.addAttribute("receiver", receiver);
-		System.out.println("쪽지 보내기 도착");
-		return "msg/writemsg";
+		try {
+			String receiver = request.getParameter("receiver");
+			model.addAttribute("receiver", receiver);
+			System.out.println("쪽지 보내기 도착");
+			return "msg/writemsg";
+		}catch(Exception e) {
+			e.printStackTrace();
+			return "redirect:/error";
+		}
 	}
 
 	@RequestMapping("/deleteMsg")
@@ -100,7 +105,7 @@ public class MsgController {
 			return "msg/msgbox";
 		}catch(Exception e) {
 			e.printStackTrace();
-			return null;
+			return "redirect:/error";
 		}
 	}
 
