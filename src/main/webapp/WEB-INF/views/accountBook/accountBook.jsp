@@ -20,6 +20,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 	<link rel="stylesheet" href="/css/nav.css"/>
+	<link rel="stylesheet" href="/css/footer.css"/>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
 
@@ -189,6 +190,7 @@
 	</div>
 	</main>
 	</div>
+	<jsp:include page="/resources/jsp/footer.jsp"/>
 	<script>
 	function inputNumberFormat(obj) {
 		obj.value = comma(uncomma(obj.value));
