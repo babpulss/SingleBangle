@@ -52,8 +52,10 @@
   100%{border-right: 1px solid #fff} 
 }
 @media (max-width: 600px) {
-	.on {
-		border: none;
+	@keyframes cursor{ 
+	  0%{border-right: none} 
+	  50%{border-right: none} 
+	  100%{border-right: none} 
 	}
 }
 
