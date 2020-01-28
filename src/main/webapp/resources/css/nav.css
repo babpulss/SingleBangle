@@ -176,7 +176,7 @@ nav ul, nav li {
 	top: 0px;
 	height: 60px;
 	background-color: white;
-	z-index: 1000;
+	z-index: 4;
 	box-shadow: -5px 0px 10px 0 black;
 }
 /* 좌측 네비바 */
@@ -193,7 +193,7 @@ nav ul, nav li {
 	color: white;
 	font-size: 50px;
 	overflow-x: auto;
-	z-index: 900;
+	z-index: 3;
 }
 
 #sidebar ul {

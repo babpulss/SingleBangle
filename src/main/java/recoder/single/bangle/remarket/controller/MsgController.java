@@ -86,23 +86,26 @@ public class MsgController {
 	@RequestMapping("/msgList.do")//메세지 리스트 확인하기
 	public String msgList(Model model) {
 		try {
+			MemberDTO member = (MemberDTO) session.getAttribute("loginInfo");
 			String receiver = (String)request.getParameter("receiver");
-			System.out.println("receiver" + receiver);
-			String navi = dao.getPageNavi(1, receiver);
-			System.out.println("navi : " + navi);
-			int cpage=1;
-			String page = request.getParameter("cpage");
-			if(page != null) {
-				cpage = Integer.parseInt(page);
-			}
-			int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
-			int end = cpage * Configuration.recordCountPerPage;
-			List<MsgDTO> list = dao.selectByPage(start, end, receiver);
+			if(member.getId().contentEquals(receiver)) {
+				String navi = dao.getPageNavi(1, receiver);
+				int cpage=1;
+				String page = request.getParameter("cpage");
+				if(page != null) {
+					cpage = Integer.parseInt(page);
+				}
+				int start = cpage * Configuration.recordCountPerPage - (Configuration.recordCountPerPage -1);
+				int end = cpage * Configuration.recordCountPerPage;
+				List<MsgDTO> list = dao.selectByPage(start, end, receiver);
 
-			model.addAttribute("navi", navi);
-			model.addAttribute("list", list);
-			model.addAttribute("receiver", receiver);
-			return "msg/msgbox";
+				model.addAttribute("navi", navi);
+				model.addAttribute("list", list);
+				model.addAttribute("receiver", receiver);
+				return "msg/msgbox";
+			}else {
+				return "redirect:/error";
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 			return "redirect:/error";
@@ -136,8 +139,14 @@ public class MsgController {
 	public String msgDetail(int seq, Model model) {
 		try {
 			MsgDTO dto = service.msgDetail(seq);
-			model.addAttribute("dto", dto);
-			return "msg/msgdetail";
+			MemberDTO member = (MemberDTO) session.getAttribute("loginInfo");
+			if(dto.getReceiver().contentEquals(member.getId())) {
+				model.addAttribute("dto", dto);
+				return "msg/msgdetail";
+			}else {
+				return "redirect:/error";
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "redirect:/error";
