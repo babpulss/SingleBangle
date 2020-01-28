@@ -7,6 +7,10 @@
 	<insert id="insert">
 		insert into livingFile values (file_seq.nextval,#{rootSeq},#{fileName},#{oriFileName})
 	</insert>
+	
+	<delete id="deleteFile">
+		delete from livingFile where rootSeq = #{value}
+	</delete>
 
 <!-- 	<select id="selectPic" resultType="java.lang.String"> -->
 <!-- 		select fileName from livingFile where rootSeq = #{rootSeq} -->

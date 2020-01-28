@@ -63,12 +63,24 @@
             }
             
             #scrapContainer{
-            	width: 80%;
+            	width: 70%;
             	min-width: 500px;
             	margin: auto;
             }
             .pagination {
             	text-align: center;
+            	display: inline-block;
+            	margin:auto;
+            }
+            .scrapIndex{
+            	text-align:center;
+            	background-color:#dce3e8; 
+            	font-weight: bold;
+            	font-size:15px;
+            }
+            #toMyPage{
+            	background-color: none;
+            	border: 1px solid #d2d4d6;
             }
         </style>
     </head>
@@ -121,33 +133,50 @@
 	        
 	        <br><br><br>
 	        <div id="scrapContainer">
-		        <h3>My Scrap List</h3>
-		        <div id="scrapBox">
-		            <div class="row">
-		                <div class="col-1">글번호</div>
-		                <div class="col-2">카테고리</div>
-		                <div class="col-7">제목</div>
-		                <div class="col-2">스크랩날짜</div>
-		            </div>
-		            <c:forEach items="${myScrapList}" var="dto">
-		                <div class="row">
-		                    <div class="col-1">${dto.rootSeq}</div>
-		                    <div class="col-2">${dto.category}</div>
-		                    <div class="col-7"><a href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a></div>
-		                    <div class="col-2">${dto.scrapDate}</div>
-		                </div>
-		            </c:forEach>
-					<div class="pagination">${pagination}</div>
-		        </div>
+		        <h2>My Scrap List</h2>
+		        <br>
+			<div id="scrapBox">
+				<div class="row">
+					<div class="col-1 scrapIndex">글번호</div>
+					<div class="col-2 scrapIndex">카테고리</div>
+					<div class="col-7 scrapIndex">제목</div>
+					<div class="col-2 scrapIndex">스크랩날짜</div>
+				</div>
+				<c:forEach items="${myScrapList}" var="dto">
+					<div class="row">
+						<div class="col-1" style="text-align: center">${dto.rootSeq}</div>
+						<div class="col-2" style="text-align: center">
+							<c:choose>
+								<c:when test="${dto.category == 1}">청소</c:when>
+								<c:when test="${dto.category == 2}">요리</c:when>
+								<c:when test="${dto.category == 3}">건강</c:when>
+								<c:when test="${dto.category == 4}">동식물</c:when>
+								<c:otherwise>기타</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="col-7">
+							<a
+								href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
+						</div>
+						<div class="col-2" style="text-align: center">${dto.getFormedDate()}</div>
+					</div>
+				</c:forEach>
+				<br>
+				<div style="text-align:center;">
+					<div class="pagination" style="text-align:center;">${pagination}</div>
+				</div>
+			</div>
+			<div style="text-align:right">
 		        <button id="toMyPage">돌아가기</button>
+		        </div>
 	        </div>
 		</div>
 		<br><br><br>
         
         <script>
             $("#toMyPage").on("click",function(){
-                location.href = "${pageContext.request.contextPath}/member/myPage.mem";
-            })
-        </script>
+				location.href = "${pageContext.request.contextPath}/member/myPage.mem";
+				})
+		</script>
     </body>
 </html>
