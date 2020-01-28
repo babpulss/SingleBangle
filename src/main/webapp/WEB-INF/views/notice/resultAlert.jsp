@@ -16,5 +16,6 @@
 	</c:if>
 			location.href= "/notice";
 	</script>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>
