@@ -20,7 +20,7 @@
 						href="${pageContext.request.contextPath}/member/signUp.mem">Join</a></span>
 				</c:when>
 				<c:otherwise>
-					<span id="note" style="position: relative; right: 170px; top: 5px;">
+					<span id="note" style="position: relative; right: 10vw; top: 5px;">
 					<a href="${pageContext.request.contextPath }/msg/msgList.do?receiver=${loginInfo.id}">
 					<img style="width: 20px; height: 20px;" src="/img/msg/msg.png">
 					</a></span>
