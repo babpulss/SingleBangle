@@ -16,19 +16,19 @@ public class ReportingDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public List<ReportingDTO> getReportingList() {
+	public List<ReportingDTO> getReportingList() throws Exception {
 		return sst.selectList("Admin.getReportingList");
 	}
 	
-	public int deleteReporting(int seq) {
+	public int deleteReporting(int seq)  throws Exception {
 		return sst.delete("Admin.deleteReporting", seq);
 	}
 
-	public int confirmReporting(int seq) {
+	public int confirmReporting(int seq)  throws Exception {
 		return sst.update("Admin.confirmReporting", seq);
 	}
 
-	public int addReporting(String id, String reason, String url) {
+	public int addReporting(String id, String reason, String url)  throws Exception {
 		Map<String, String> param = new HashMap<>();
 		param.put("id", id);
 		param.put("reason", reason);

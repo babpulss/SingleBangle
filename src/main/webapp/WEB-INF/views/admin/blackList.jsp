@@ -114,7 +114,7 @@
 }
 #viewDashBoard:hover>a, #viewReporting:hover>a, #viewRestaurant:hover>a {
 	transition: .5s ease;
-	color: red;
+	color: white;
 }
 #btns {
 	display: flex;

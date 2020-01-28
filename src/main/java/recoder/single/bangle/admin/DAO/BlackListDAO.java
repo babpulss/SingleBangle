@@ -14,23 +14,23 @@ public class BlackListDAO {
 	@Autowired
 	private SqlSessionTemplate sst;
 	
-	public List<BlackMemberDTO> getBlackList() {
+	public List<BlackMemberDTO> getBlackList()  throws Exception {
 		return sst.selectList("Admin.getBlackList");
 	}
 	
-	public int unblock(String id) {
+	public int unblock(String id)  throws Exception {
 		return sst.delete("Admin.unblock", id);
 	}
 	
-	public int block(BlackMemberDTO dto) {
+	public int block(BlackMemberDTO dto)  throws Exception {
 		return sst.insert("Admin.block", dto);
 	}
 
-	public BlackMemberDTO searchByBlockedId(String id) {
+	public BlackMemberDTO searchByBlockedId(String id)  throws Exception {
 		return sst.selectOne("Admin.searchByBlockedId", id);
 	}
 
-	public int checkId(String id) {
+	public int checkId(String id)  throws Exception {
 		Integer result = sst.selectOne("Admin.checkId", id);
 		return result == null ? 0 : result;
 	}
