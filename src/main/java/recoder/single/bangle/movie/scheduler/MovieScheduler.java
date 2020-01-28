@@ -11,19 +11,20 @@ public class MovieScheduler {
 	@Autowired
 	private KakaoAPI kakao;
 
-//	@Scheduled(fixedRate = 5000)
-//	public void test() {
-//		System.out.println("1분");
-//		try {
-//			//kakao.deleteMovie();
-//			kakao.insertMovie();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-
-	@Scheduled(cron = "0 10 00 * * ?")
+	/*
+	@Scheduled(fixedRate = 60000)
+	public void test() {
+		System.out.println("1분");
+		try {
+			kakao.deleteMovie();
+			kakao.insertMovie();
+		} catch (Exception e) {			
+			e.printStackTrace();
+		}	
+	}*/
+	/*
+	//@Scheduled(cron = "0 10 00 * * ?")
+	@Scheduled(cron= "0 35 20 1/1 * ? *")
 	public void myJob() {
 		try {
 			kakao.deleteMovie();
@@ -33,5 +34,5 @@ public class MovieScheduler {
 			e.printStackTrace();
 		}
 	}
-
+*/
 }

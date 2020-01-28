@@ -1,6 +1,5 @@
 package recoder.single.bangle.house.controller;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +21,7 @@ import recoder.single.bangle.house.DTO.HouseContentDTO;
 import recoder.single.bangle.house.DTO.HouseDTO;
 import recoder.single.bangle.house.service.HouseService;
 import recoder.single.bangle.member.DTO.MemberDTO;
+import utils.XSSprotect;
 
 
 @RequestMapping("/house")
@@ -58,6 +58,7 @@ public class HouseController {
 	public String getHouseContent(int curPage) {
 		//집들이 내용 추가로 가져옴
 		try {
+			System.out.println(curPage);
 			Gson gson = new Gson();
 			List<Map<String, Object>> list = houseService.getHouseContent(curPage);
 			System.out.println(gson.toJson(list));
@@ -94,6 +95,7 @@ public class HouseController {
 			System.out.println("houseCommentProc 도착" );
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 			dto.setWriter(loginInfo.getId());
+			dto.setContent(XSSprotect.replaceParameter(dto.getContent()));
 			Map<String, Object> map = houseService.commentWrite(dto);
 			Gson gson = new Gson();
 			String json = gson.toJson(map);
@@ -135,12 +137,15 @@ public class HouseController {
 		try {
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 			String writer = loginInfo.getId();
-			HouseDTO houseDTO = new HouseDTO(0, writer, title, null, 0);
+			HouseDTO houseDTO = new HouseDTO(0, writer, XSSprotect.replaceParameter(title), null, 0);
 			List<HouseContentDTO> contentList = new ArrayList<>();
 
 			for(int i= 0; i<imgTitle.length; i++) { 
 				contentList.add( 
-						new HouseContentDTO(0, 0, imgTitle[i], imgContent[i], null, null) 
+						new HouseContentDTO(0, 0, 
+								XSSprotect.replaceParameter(imgTitle[i]),
+								XSSprotect.replaceParameter(imgContent[i]), 
+								null, null) 
 						); 
 			}
 
@@ -184,12 +189,13 @@ public class HouseController {
 
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo"); 
 			String writer = loginInfo.getId();
-			HouseDTO houseDTO = new HouseDTO(0, writer, title, null, 0); 
+			HouseDTO houseDTO = new HouseDTO(0, writer, XSSprotect.replaceParameter(title), null, 0); 
 			List<HouseContentDTO> contentList = new ArrayList<>();
 
 			for(int i= 0; i<imgTitle.length; i++) {
 				contentList.add( 
-					new HouseContentDTO(0, 0, imgTitle[i], imgContent[i], null, null) 
+					new HouseContentDTO(0, 0, XSSprotect.replaceParameter(imgTitle[i]),
+							XSSprotect.replaceParameter(imgContent[i]), null, null) 
 				); 
 			} 
 			
@@ -207,8 +213,6 @@ public class HouseController {
 		try {
 			MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 			String id = loginInfo.getId();
-			System.out.println("id" + id);
-			System.out.println("시퀀스" + seq);
 			if(houseService.deleteBySeq(id, seq)) {
 				model.addAttribute("stat", 1);
 			}else {
