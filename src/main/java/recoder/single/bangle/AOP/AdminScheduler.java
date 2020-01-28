@@ -23,7 +23,7 @@ public class AdminScheduler {
 	}
 	
 	
-	@Scheduled(cron= "0 35 20 1/1 * ?")
+	@Scheduled(cron= "0 35 20 1-31 * ?")
 	public void myJob() {
 		try {
 			kakao.deleteMovie();
