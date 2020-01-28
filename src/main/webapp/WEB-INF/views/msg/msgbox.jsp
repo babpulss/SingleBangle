@@ -100,7 +100,7 @@
 </style>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
+<br><br><br>
 <div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle; font-weight: bold"><p>받은쪽지함 | </p></div>

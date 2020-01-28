@@ -98,6 +98,7 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+<br><br><br>
 	<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 		<form action="${pageContext.request.contextPath }/msg/msgList.do">
 		<input type="hidden" name="receiver" value="${dto.receiver }">
