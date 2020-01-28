@@ -223,7 +223,7 @@
   <class id="23" language="java" name="recoder.single.bangle.member.DTO.MemberDTO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/member/DTO/MemberDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2796" y="1084"/>    
+    <position height="-1" width="-1" x="2800" y="1160"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
