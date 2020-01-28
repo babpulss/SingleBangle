@@ -126,6 +126,14 @@
     });
     $("#frm").on("submit", function() {
         var content = $(".note-editable").html();
+        var title = $("#title").val();
+        console.log(content.length);
+        console.log(content);
+        console.log(title.length);
+        if (content.length > 300 || title.length > 10) {
+        	alert("too long");
+        	return false;
+        }
         if (content.trim() == "") {
             alert('editor content is empty');
             return false;
