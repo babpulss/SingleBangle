@@ -51,6 +51,11 @@
   50%{border-right: 1px solid #000} 
   100%{border-right: 1px solid #fff} 
 }
+@media (max-width: 600px) {
+	.on {
+		border: none;
+	}
+}
 
 /* 두번째 행 */
 #secondRow img {

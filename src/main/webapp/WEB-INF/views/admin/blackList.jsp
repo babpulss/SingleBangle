@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/css/nav.css">
+<link rel="stylesheet" href="/css/footer.css">
 <style>
 /* 메뉴 폰트 */
 * :not ( .rightSidebar ) { box-sizing : border-box ; font-family : ' BMHANNAAir '; }
@@ -274,5 +275,6 @@
 	</script>
 </c:otherwise>
 </c:choose>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>
