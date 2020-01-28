@@ -11,15 +11,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/footer.css">
 <style>
-	 /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+	
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
@@ -116,10 +108,10 @@
 		<div style="font-weight: bold; width: 40%; float: left">보낸사람 </div><div style="width: 60%; float: left">${dto.sender }</div>
 		</div>
 		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">제목 </div><div style="width: 60%; float: left">${dto.title }</div>
+		<div style="font-weight: bold; width: 40%; float: left">제목 </div><div style="width: 60%; float: left"><c:out value="${dto.title }"></c:out></div>
 		</div>
 		<div class="bRow">
-		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left">${dto.contents }</div>
+		<div style="font-weight: bold; width: 40%; float: left">내용 </div><div style="width: 60%; float: left"><c:out value="${dto.contents }"></c:out></div>
 		</div>
 		<div class="bRow">
 		<div style="width: 100%; text-align: center">

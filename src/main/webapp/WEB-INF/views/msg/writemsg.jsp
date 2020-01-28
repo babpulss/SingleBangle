@@ -96,13 +96,13 @@
 <form action="replyMsgProc.do" id="frm" method="post">
 	<table>
 		<tr><td>받는사람 : <input style="border:none" type="text" name="receiver" value="${receiver }" readonly><td></tr>
-		<tr><td>제목 : <input type="text" id="title" name="title" style="width: 80%;"></tr>
+		<tr><td>제목 : <input type="text" id="title" name="title" style="width: 80%; border: none; border-bottom: 1px solid black;"></tr>
 		<tr><td>내용
 		<tr><td>
-		<textarea style="resize:none;" id="contents" name="contents" rows="20px" cols="55px"></textarea>
+		<textarea style="resize:none;" id="contents" name="contents" rows="20px" cols="60px"></textarea>
 		</tr>
 		<tr style="text-align: right"><td>
-		<button id="send" type="button" style="border: none; width: 50px; height: 30px; border-radius: 10px;">보내기</button></tr>
+		<button id="send" type="button" style="border: none; width: 55px; height: 30px; border-radius: 10px;">보내기</button></tr>
 	</table>
 	</form>
 	

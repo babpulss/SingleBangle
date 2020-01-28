@@ -13,15 +13,7 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <style>
-	 /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+	
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
@@ -127,7 +119,7 @@
 		<div class="bRow">
 		<div style="width:50%; float:left">${list.receiver }</div>
 		<div style="width:50%; float:left">
-		<a href="${pageContext.request.contextPath }/msg/sendMsgDetail.do?seq=${list.seq}">${list.title }</a></div>
+		<a href="${pageContext.request.contextPath }/msg/sendMsgDetail.do?seq=${list.seq}"><c:out value="${list.title }"></c:out></a></div>
 		</div>
 	</c:forEach>
 	</c:otherwise>

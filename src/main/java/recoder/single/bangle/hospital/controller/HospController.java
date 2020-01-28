@@ -36,6 +36,7 @@ public class HospController {
 			codeList = hospSvc.getSgguCd(sidoCd);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/error";
 		}
 		
 		Gson g = new Gson();
@@ -71,6 +72,7 @@ public class HospController {
 			codeList = hospSvc.getEmdongNm(sidoCdNm, sgguCdNm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/error";
 		}
 		
 		Gson g = new Gson();
@@ -91,6 +93,7 @@ public class HospController {
 			hospList = hospSvc.getHosp(sidoCd, sgguCd, emdongNm, yadmNm);
 		} catch (Exception e) {
 			e.printStackTrace();
+			return "redirect:/error";
 		}
 		
 		Gson g = new Gson();

@@ -17,7 +17,7 @@
 				box-sizing: border-box;
 			}
 			body {
-				background-color: #f5f5f5;
+				background-color: #f7f7ef;
 			}
         	
         	#hospHeader{
