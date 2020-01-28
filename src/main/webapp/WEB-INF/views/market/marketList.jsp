@@ -97,6 +97,8 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+
+<br><br><br>
 <div id="mainWrapper"> 
 	 <div id="board">
         <div id="bHeader" class="bRow">
