@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>쪽지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -97,7 +98,7 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-	<div id="board" style="width: 500px; height: 57vh; margin: auto; position: relative; top: 65px;">
+	<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 		<form action="${pageContext.request.contextPath }/msg/msgList.do">
 		<input type="hidden" name="receiver" value="${dto.receiver }">
 		<input type="hidden" name="seq" value="${dto.seq }">
@@ -122,7 +123,7 @@
 		</div>
 		</form>
 	</div>
-	<jsp:include page="/resources/jsp/footer.jsp" />
+	<jsp:include page="/resources/jsp/footer.jsp"/>
 	<script>
 		$("#msg").on("click",function(){
 			var url = "${pageContext.request.contextPath }/msg/writeMsg.do?receiver=${dto.sender }";

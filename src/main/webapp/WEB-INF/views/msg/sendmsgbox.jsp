@@ -100,7 +100,7 @@
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
 
-<div id="board" style="width: 500px; height: 57vh; margin: auto; position: relative; top: 65px;">
+<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle;">
 <button type="button" id="receiveBox" style="border: none; background-color: transparent; font-size: 16px;" id="sendbox">받은쪽지함 | </button></div>
