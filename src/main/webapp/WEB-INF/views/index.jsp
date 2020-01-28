@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="/css/index/index.css" />
 <link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+#footerContainer{
+	transform: translateY(10px);
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
