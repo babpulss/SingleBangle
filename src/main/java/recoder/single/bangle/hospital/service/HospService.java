@@ -63,7 +63,7 @@ public class HospService {
 		urlBuilder.append("&" + URLEncoder.encode("sidoCd","UTF-8") + "=" + URLEncoder.encode(sidoCd, "UTF-8")); /*addrTp 2일 경우 입력*/
 
 		StringBuilder sb = this.urlConnection(urlBuilder);
-		System.out.println("시군구 코드 JSON 전체 : " + sb.toString());
+//		System.out.println("시군구 코드 JSON 전체 : " + sb.toString());
 
 		JsonParser parser = new JsonParser();
 		JsonElement data = parser.parse(sb.toString());
@@ -74,7 +74,7 @@ public class HospService {
 		List<HospCodeDTO> codeList = new ArrayList<>();
 		if(totalCount > 0) {
 			JsonObject obj = data.getAsJsonObject().getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items");
-			System.out.println("시군구 코드 목록 : " + obj.get("item"));
+//			System.out.println("시군구 코드 목록 : " + obj.get("item"));
 			System.out.println();
 			
 			boolean isArray = obj.get("item").isJsonArray();
@@ -119,7 +119,7 @@ public class HospService {
 		urlBuilder.append("&" + URLEncoder.encode("sgguCdNm","UTF-8") + "=" + URLEncoder.encode(sgguCdNm, "UTF-8")); /*addrTp 3일 경우 시군구명 입력*/
 
 		StringBuilder sb = this.urlConnection(urlBuilder);
-		System.out.println("읍면동 코드 JSON 전체 : " + sb.toString());
+//		System.out.println("읍면동 코드 JSON 전체 : " + sb.toString());
 		
 		JsonParser parser = new JsonParser();
 		JsonElement data = parser.parse(sb.toString());
@@ -130,7 +130,7 @@ public class HospService {
 		List<HospCodeDTO> codeList = new ArrayList<>();
 		if(totalCount > 0) {
 			JsonObject obj = data.getAsJsonObject().getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items");
-			System.out.println("읍면동 코드 목록 : " + obj.get("item"));
+//			System.out.println("읍면동 코드 목록 : " + obj.get("item"));
 			System.out.println();
 			
 			boolean isArray = obj.get("item").isJsonArray();
@@ -182,7 +182,7 @@ public class HospService {
 //		urlBuilder.append("&" + URLEncoder.encode("radius","UTF-8") + "=" + URLEncoder.encode("3000", "UTF-8")); /*단위 : 미터(m)*/
 
 		StringBuilder sb = this.urlConnection(urlBuilder);
-		System.out.println("병원 검색 JSON 전체 : " + sb.toString());
+//		System.out.println("병원 검색 JSON 전체 : " + sb.toString());
 
 		JsonParser parser = new JsonParser();
 		JsonElement data = parser.parse(sb.toString());
@@ -193,7 +193,7 @@ public class HospService {
 		List<HospDTO> hospList = new ArrayList<>();
 		if(totalCount > 0) {
 			JsonObject obj = data.getAsJsonObject().getAsJsonObject("response").getAsJsonObject("body").getAsJsonObject("items");
-			System.out.println("병원 목록 : " + obj);
+//			System.out.println("병원 목록 : " + obj);
 			System.out.println();
 			
 			boolean isArray = obj.get("item").isJsonArray();

@@ -12,6 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
+	<br><br><br>
 	<div id="mainWrapper">
 		<div style="width: 500px; margin: auto;">
 			<img src="/img/temporary_error_sign.png" width=500px height=200px><br>
