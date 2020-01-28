@@ -6,16 +6,10 @@
 <head>
 <link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+  <link rel="stylesheet" href="/css/footer.css">
 <title>re마켓</title>
 <style>
-	 @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
+	
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
@@ -168,6 +162,7 @@
         
    </div>
 </div>
+<jsp:include page="/resources/jsp/footer.jsp" />
 	<script>
 		$("#write").on("click", function(){
 			location.href="${pageContext.request.contextPath}/market/writeboard.do";
