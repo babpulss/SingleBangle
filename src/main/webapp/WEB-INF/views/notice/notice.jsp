@@ -9,16 +9,8 @@
 <title>공지 사항</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="/css/nav.css"/>
+<link rel="stylesheet" href="/css/footer.css">
     <style>
-        /* 메뉴 폰트 */
-        @font-face {
-            font-family: 'BMHANNAAir';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.0/BMHANNAAir.woff')
-                format('woff');
-            font-weight: normal;
-            font-style: normal;
-        }
         html, body { margin: 0px; padding: 0px;}
         * {
              box-sizing: border-box; 
@@ -90,9 +82,20 @@
             #bHeader {
                 border-radius: 0;
             }
+            .bRow {
+            	border-bottom: 1px solid #dce3e8;
+            }
             .bRow>span:first-child {
                 display: none;
             }
+			.bRow>span:nth-child(2) {
+				flex-basis: 80%;
+				font-size: 12px;	
+			}
+			.bRow>span:last-child {
+				flex-basis: 20%;
+				font-size: 7px;
+			}
             #btns {
                 margin: 20px 0 0 0;
             }
@@ -119,5 +122,6 @@
 		<button type="button" onclick="location.href='/notice/writeNotice'">글쓰기</button>
    </div>
    </c:if>
+<jsp:include page="/resources/jsp/footer.jsp"/>
 </body>
 </html>
