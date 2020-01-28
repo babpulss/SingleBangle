@@ -100,7 +100,7 @@
 <br><br><br>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
         <div id="bHeader" class="bRow" style="font-size: 20px; font-weight: bold;">
-            <span style="margin: auto;">${dto.title }</span>
+            <span style="margin: auto;"><c:out value="${dto.title }"></c:out></span>
         </div>
 		<div id="contentBox">
 		<div style="border-bottom: 1px solid #c4c4c4;">
@@ -135,7 +135,7 @@
 			</c:when>
 		</c:choose>
 		<br>
-		<div>${dto.content }</div>
+		<div><c:out value="${dto.content }"></c:out></div>
 		<br>
 		<c:choose>
 			<c:when test="${dto.writer == loginInfo.id }">
@@ -167,7 +167,7 @@
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
+								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;"><c:out value="${list.recontent }"></c:out></div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
@@ -209,22 +209,26 @@
 	<script>
 	
 	var updateSellDone = function(seq){
-		var updateSellDone = "#updateSellDone_"+seq;
-		var doneYes = "#doneYes_"+seq;
-		$(updateSellDone).css("display","none");
-		$.ajax({
-			url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
-			type: "post",
-			data: {
-				seq : seq
-			},
-			success: function(data){
-				alert("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.");
-				window.location.reload();
-			}
-		}).fail(function(data){
-			console.log(data);
-		})
+		if(confirm("판매완료상태로 전환되었습니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.") == true){
+			var updateSellDone = "#updateSellDone_"+seq;
+			var doneYes = "#doneYes_"+seq;
+			$(updateSellDone).css("display","none");
+			$.ajax({
+				url: "${pageContext.request.contextPath}/market/updateSellDone.do?seq="+seq,
+				type: "post",
+				data: {
+					seq : seq
+				},
+				success: function(data){
+					window.location.reload();
+				}
+			}).fail(function(data){
+				console.log(data);
+			})
+		}else{
+			return false;
+		}
+		
 	};
 	
 	var deleteRe = function(seq){
