@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
+<title>문화 생활 - 현재 상영 영화</title>
+<link rel="shortcut icon" type="image/x-icon" href="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/209/film-frames_1f39e.png"/>
+<link rel="stylesheet"	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.css">
 	<link rel="stylesheet" href="/css/nav.css">
 <link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -32,6 +32,14 @@
 	
 	.video {
 		text-align: center;
+	}
+	
+	.poster{
+		display: block; 
+		margin: 0px auto; 
+	}
+	.background{
+		background-color: #eff0f1;
 	}
 </style>
 <script type="text/javascript">
@@ -62,9 +70,12 @@
 	<br>
 	<h3 style="text-align:center;">문화생활</h3>
 	<br>
+	<h5 style="text-align:center;">현재 상영영화</h5>	
+	<br>
 	<div class="cont"></div>
+	<div class="row">
 	<c:forEach items="${list}" var="dto">
-		<div class="card mb-3" style="max-width: 540px;">
+		<div class="col-md-3 col-sm-6 mt-5 ml-5 mr-5 background">
 			<div class="row no-gutters">
 				<div class="col-md-4">
 					<img src="${dto.img}" class="card-img" alt="...">
@@ -97,7 +108,7 @@
 									</div>
 									<div class="modal-body">
 										<h5>포스터</h5>
-										<img src="${dto.img}" alt="${dto.title}">
+										<img class="poster" src="${dto.img}" alt="${dto.title}">
 										<hr>
 										<h5>줄거리</h5>
 										<p>${dto.story}</p>
@@ -117,6 +128,7 @@
 			</div>
 		</div>
 	</c:forEach>
+	</div>
 	</div>
 	<jsp:include page="/resources/jsp/footer.jsp" />
 

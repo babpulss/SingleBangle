@@ -8,7 +8,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>랜선 집들이 작성</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -116,27 +116,43 @@
                 $("#btnDiv").before(div);
             })
             
+            
+            //제목 길이 유효성 검사
             $("#inputTitle").on("input", function() {
 			 	var inputTitle = $("#inputTitle").val();
-			 	if(inputTitle.length > 50){
-			 		alert("제목은 50자 미만으로만 작성 가능합니다.")
+			 	console.log(inputTitle.length)
+			 	if(inputTitle.length > 30){
+			 		alert("제목은 최대 30자까지 작성 가능합니다.")
 			 		$("#inputTitle").val("");
 			 	}
 			})
 
-			// 내용 길이 유효성 검사
-            $(".container").on("input", ".imgTitle", function(){
+            // 이미지 제목 길이 유효성 검사
+            $("#container").on("input", ".imgTitle", function(){
                var contentsNum = $(".imgTitle").index(this);
                console.log("내용 번호 : " + contentsNum);
                
                var contents = $(this).html();
-               var contentsRegex = /^[\w\W]{0,300}$/;
-               var contentsResult = contentsRegex.exec(contents);
+               var imgTitleLength = $($(".imgTitle")[contentsNum])[0].value.length;
+				console.log(imgTitleLength)
+               if(imgTitleLength >40){
+            	   alert("이미지 제목은 최대 40자까지 작성 가능합니다.");
+            	   $($(".imgTitle")[contentsNum]).val("");
+               }
+            })
+            
+            //이미지 설명 길이 유효성 검사
+            $("#container").on("input", ".imgContent", function(){
+               var contentsNum = $(".imgContent").index(this);
+               console.log("내용 번호 : " + contentsNum);
                
-               if(contentsResult != null){
-                  $($(".imgTitle")[contentsNum]).html("");
-                  validContents = 1;
-               }           
+               var contents = $(this).html();
+               var imgTitleLength = $($(".imgContent")[contentsNum])[0].value.length;
+				console.log(imgTitleLength)
+               if(imgTitleLength >300){
+            	   alert("이미지 설명은 최대 300자까지 작성 가능합니다.");
+            	   $($(".imgContent")[contentsNum]).val("");
+               }
             })
         })
 
@@ -154,7 +170,7 @@
 	</c:choose>
 	<jsp:include page="/resources/jsp/nav.jsp" />
 	<div id="mainWrapper">
-		<form class="container" action="housWriterProc" method="POST"
+		<form id="container" action="housWriterProc" method="POST"
 			id="myForm" enctype="multipart/form-data">
 			<div class="contents">
 				<div class="form-group">
@@ -205,14 +221,7 @@
 			</div>
 		</form>
 		<hr>
-		<!--    <form class="container">
-        <div class="form-group">
-            <label class="form-control-label" for="inputSuccess3">Input with <code>is-valid</code></label>
-            <input type="text" class="form-control is-valid" id="inputSuccess3">
-            <div class="valid-feedback">Success! You've done it.</div>
-        </div>
-    </form>-->
-	</div>
+		</div>
 	<jsp:include page="/resources/jsp/footer.jsp" />
 </body>
 
