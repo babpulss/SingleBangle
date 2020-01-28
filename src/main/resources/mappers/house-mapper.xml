@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="house">
+  	<select id="selectCount" resultType="Integer">
+  		select count(*) from house
+  	</select>
+  
+ 
+  	<select id="selectFirst" resultType="map">
+	  	        select *
+        from
+        (
+            select h.*, row_number() over (PARTITION by h.seq order by h.writeDate) as cnt, c.sysname, c.oriname 
+            from (select rownum numrow, h.* 
+                        from (
+                            select *
+                            from house
+                            order by seq desc
+                        ) h
+                ) h
+            INNER join houseContent c on h.seq = c.houseSeq
+            where numrow BETWEEN 1 and 15
+            order by c.seq
+        )
+        where cnt = 1
+        order by seq desc
+	</select>
+  	<select id="selectAfter" resultType="map" parameterType="map">
+  		select *
+        from
+        (
+            select h.*, row_number() over (PARTITION by h.seq order by h.writeDate) as cnt, c.sysname, c.oriname 
+            from (select rownum numrow, h.* 
+                        from (
+                            select *
+                            from house
+                            order by seq desc
+                        ) h
+                ) h
+            INNER join houseContent c on h.seq = c.houseSeq
+            where numrow BETWEEN ${startPage} and ${endPage}
+            order by c.seq
+        )
+        where cnt = 1
+        order by seq desc;
+  	</select>
+
+  	<select id="selectBySeq" resultType="recoder.single.bangle.house.DTO.HouseDTO" parameterType="Integer">
+  		select seq, writer, title, to_char(writedate,'yyyy-mm-dd') as writedate, viewcount
+  		from house where seq = #{seq}
+  	</select>
+  
+  	<select id="isWriter" resultType="Integer" parameterType="map">
+  		select count(*) from house where seq = ${seq} and writer = #{writer}
+  	</select>
+  	<update id="updateViewCount" parameterType="Integer">
+  		 update house set viewcount = viewcount+1 where seq = #{seq}
+  	</update>
+  
+  	<insert id="insertAll" parameterType="recoder.single.bangle.house.DTO.HouseDTO">
+  		insert into house values(house_seq.nextval, #{writer}, #{title}, sysdate, 0)
+  	</insert>
+  	
+  	<delete id="deleteBySeq" parameterType="Integer">
+		delete from housecontent where houseseq = ${houseseq}
+  	</delete>
+  </mapper>
