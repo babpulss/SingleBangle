@@ -19,23 +19,23 @@ public class BlackListService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	public List<BlackMemberDTO> getBlackList() {
+	public List<BlackMemberDTO> getBlackList()  throws Exception {
 		return blackListDAO.getBlackList();
 	}
 	
-	public boolean unblock(String id) {
+	public boolean unblock(String id)  throws Exception {
 		int result = blackListDAO.unblock(id);
 		if (result > 0) return true;
 		else return false;
 	}
 	
-	public boolean block(BlackMemberDTO dto) {
+	public boolean block(BlackMemberDTO dto)  throws Exception {
 		int result = blackListDAO.block(dto);
 		if (result > 0) return true;
 		else return false;
 	}
 
-	public BlackMemberDTO searchByBlockedId(String id) {
+	public BlackMemberDTO searchByBlockedId(String id)  throws Exception {
 		return blackListDAO.searchByBlockedId(id);
 	}
 	
@@ -43,7 +43,7 @@ public class BlackListService {
 		return  memberDAO.selectById(id);
 	}
 
-	public int checkId(String id) {
+	public int checkId(String id)  throws Exception {
 		return blackListDAO.checkId(id);
 		
 	}
