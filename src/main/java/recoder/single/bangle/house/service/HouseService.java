@@ -18,6 +18,7 @@ import recoder.single.bangle.house.DAO.HouseDAO;
 import recoder.single.bangle.house.DTO.HouseCommentDTO;
 import recoder.single.bangle.house.DTO.HouseContentDTO;
 import recoder.single.bangle.house.DTO.HouseDTO;
+import utils.XSSprotect;
 
 
 
@@ -70,10 +71,7 @@ public class HouseService {
 			filePath.mkdir();
 		}
 		int count = contentList.size();
-		System.out.println(contentList.toString());
 
-	
-		
 		for(int i =0; i<count; i++) {
 			String oriName = img[i].getOriginalFilename();
 		    String sysName = System.currentTimeMillis() + "_" + oriName;
@@ -84,15 +82,11 @@ public class HouseService {
 			contentList.get(i).setSysName(sysName);
 		}
 
-
-
 		//house 테이블 삽입
 		int houseResult = houseDAO.insertAll(houseDTO);
-		System.out.println("house 결과 : " + houseResult);
 
 		//houseContent 테이블 삽입
 		int contentResult = contentDAO.insertAll(contentList);
-		System.out.println("houseContent 결과 : " + contentResult);
 		if(houseResult >0 && contentResult > 0) {
 			return 1;
 		}else {

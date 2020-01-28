@@ -422,7 +422,7 @@
 		});
 		$(function() {
 			$("#detailTable").DataTable({
-
+				"searching": false
 			});
 		});
 	</script>
