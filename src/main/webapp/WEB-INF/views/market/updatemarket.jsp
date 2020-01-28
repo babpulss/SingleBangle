@@ -40,7 +40,7 @@
 </select><br>
 <textarea style="display:none;" name="content" id="content"></textarea>
 <div id="summernote">${dto.content }</div>
-	 <button type="button" id="confirm")>제출</button>
+	 <button type="button" id="confirm">제출</button>
 	 </div>
 </form>
     <script>
