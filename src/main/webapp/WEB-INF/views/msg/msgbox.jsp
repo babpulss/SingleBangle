@@ -127,7 +127,7 @@
 </c:choose>
  <div class="bRow"><div style="margin: auto;">${navi }</div></div>
 </div>
-<div>${navi }</div>
+
 <jsp:include page="/resources/jsp/footer.jsp" />
 <script>
 		$("#sendbox").on("click", function(){
