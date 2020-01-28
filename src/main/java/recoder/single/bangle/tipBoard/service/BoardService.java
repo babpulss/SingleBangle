@@ -260,7 +260,12 @@ public class BoardService {
 		int delScrapResult = boardDao.deleteScrap(seq);
 		return delScrapResult;
 	}
-
+	
+	public int deleteScrapBySeq(int seq) throws Exception{
+		int deleteScrapBySeq = boardDao.deleteScrapBySeq(seq);
+		return deleteScrapBySeq;
+	}
+	
 	public int scrapCheck(int seq, String id) throws Exception {
 		int scrapCheck = boardDao.scrapCheck(seq, id);
 		return scrapCheck;

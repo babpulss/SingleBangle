@@ -136,36 +136,33 @@
 	        <div id="scrapContainer">
 		        <h2>My Scrap List</h2>
 		        <br>
-				<div id="scrapBox">
+			<div id="scrapBox" style="min-width:900px;">
+				<div class="row">
+					<div class="col-1 scrapIndex">글번호</div>
+					<div class="col-2 scrapIndex">카테고리</div>
+					<div class="col-6 scrapIndex">제목</div>
+					<div class="col-2 scrapIndex">스크랩날짜</div>
+					<div class="col-1 scrapIndex">삭제</div>
+				</div>
+				<c:forEach items="${myScrapList}" var="dto">
 					<div class="row">
-						<div class="col-2 scrapIndex">글번호</div>
-						<div class="col-2 scrapIndex">카테고리</div>
-						<div class="col-5 scrapIndex">제목</div>
-						<div class="col-3 scrapIndex">스크랩 날짜</div>
-					</div>
-					<c:forEach items="${myScrapList}" var="dto">
-						<div class="row">
-							<div class="col-2" style="text-align: center">${dto.rootSeq}</div>
-							<div class="col-2" style="text-align: center">
-								<c:choose>
-									<c:when test="${dto.category == 1}">청소</c:when>
-									<c:when test="${dto.category == 2}">요리</c:when>
-									<c:when test="${dto.category == 3}">건강</c:when>
-									<c:when test="${dto.category == 4}">동식물</c:when>
-									<c:otherwise>기타</c:otherwise>
-								</c:choose>
-							</div>
-							<div class="col-5">
-								<a
-									href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
-							</div>
-							<div class="col-3" style="text-align: center">${dto.getFormedDate()}</div>
+						<div class="col-1" style="text-align: center">${dto.rootSeq}</div>
+						<div class="col-2" style="text-align: center">
+							<c:choose>
+								<c:when test="${dto.category == 1}">청소</c:when>
+								<c:when test="${dto.category == 2}">요리</c:when>
+								<c:when test="${dto.category == 3}">건강</c:when>
+								<c:when test="${dto.category == 4}">동식물</c:when>
+								<c:otherwise>기타</c:otherwise>
+							</c:choose>
 						</div>
-					</c:forEach>
-					<br>
-					<div style="text-align:center;">
-						<div class="pagination" style="text-align:center;">${pagination}</div>
+						<div class="col-6">
+							<a href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
+						</div>
+						<div class="col-2" style="text-align: center">${dto.getFormedDate()}</div>
+						<div class="col-1" style="text-align: center"><a id="scrapDelete" href="${pageContext.request.contextPath}/board/scrapDelete.bo?seq=${dto.seq}">삭제</a></div>
 					</div>
+					</c:forEach>
 				</div>
 				<div style="text-align:right">
 			        <button id="toMyPage">돌아가기</button>
@@ -180,6 +177,7 @@
             $("#toMyPage").on("click",function(){
 				location.href = "${pageContext.request.contextPath}/member/myPage.mem";
 				})
+			
 		</script>
     </body>
 </html>
