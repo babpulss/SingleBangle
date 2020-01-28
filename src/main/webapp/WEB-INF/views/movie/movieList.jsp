@@ -35,6 +35,8 @@
 <script type="text/javascript">
 	function videoShow(title, videoId) {
 		var tag = "#video_" + videoId;
+		$(tag).html("");
+		$(tag).empty();
 		var iframe = "<iframe title='"
 				+ title
 				+ "'width='640' height='360'src='https://play-tv.kakao.com/embed/player/cliplink/"
@@ -45,7 +47,8 @@
 
 	function videoHide(videoId) {
 		var tag = "#video_" + videoId + " iframe";;
-		//$(tag).html("");
+		$(tag).html("");
+		$(tag).empty();
 		$(tag).removeAttr("src");
 	}
 </script>
@@ -101,10 +104,6 @@
 								</div>
 							</div>
 						</div>
-						<%-- 	<iframe title="${dto.title}" width="640" height="360"
-							src="https://play-tv.kakao.com/embed/player/cliplink/${dto.videoId}?service=kakao_tv"
-							allowfullscreen frameborder="0" scrolling="no" allow="autoplay">
-						</iframe>  --%>
 					</div>
 				</div>
 			</div>

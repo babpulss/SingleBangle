@@ -11,6 +11,7 @@
         <title>스크랩 목록</title>
         
         <link rel="stylesheet" href="/css/nav.css">
+        <link rel="stylesheet" href="/css/footer.css">
         <style>
             *{
                 box-sizing: border-box;
@@ -161,18 +162,16 @@
 						<div class="col-2" style="text-align: center">${dto.getFormedDate()}</div>
 						<div class="col-1" style="text-align: center"><a id="scrapDelete" href="${pageContext.request.contextPath}/board/scrapDelete.bo?seq=${dto.seq}">삭제</a></div>
 					</div>
-				</c:forEach>
-				<br>
-				<div style="text-align:center;">
-					<div class="pagination" style="text-align:center;">${pagination}</div>
+					</c:forEach>
 				</div>
-			</div>
-			<div style="text-align:right">
-		        <button id="toMyPage">돌아가기</button>
+				<div style="text-align:right">
+			        <button id="toMyPage">돌아가기</button>
 		        </div>
 	        </div>
 		</div>
 		<br><br><br>
+        
+        <jsp:include page="/resources/jsp/footer.jsp" />
         
         <script>
             $("#toMyPage").on("click",function(){

@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>쪽지</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/nav.css"/>
 <link rel="stylesheet" href="/css/index/index.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
@@ -99,8 +100,8 @@
 </style>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
-
-<div id="board" style="width: 500px; height: 57vh; margin: auto; position: relative; top: 65px;">
+<br><br><br>
+<div id="board" style="width: 500px; margin: auto; position: relative; top: 65px;">
 <div style="height: 20px; display: table; padding: 10px;">
 <div style="float: left; display: table-cell; height: inherit; vertical-align: middle; font-weight: bold"><p>받은쪽지함 | </p></div>
 <div style="float: left; height: inherit; vertical-align: middle;">

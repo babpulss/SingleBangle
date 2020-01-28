@@ -61,13 +61,13 @@ public class AccountController {
 			session.setAttribute("id",id);
 			request.setAttribute("list", list);
 			
+			return "accountBook/accountBook";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "redirect:/error";
 		}
 		
-		return "accountBook/accountBook";
 	}
 //	가계부 상세리스트
 	@RequestMapping("/detailAccount")
@@ -98,13 +98,13 @@ public class AccountController {
 			request.setAttribute("out", out);
 			request.setAttribute("formedDate", formedDate);
 			request.setAttribute("list", list);
+			return "accountBook/detailAccountBook";
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "redirect:/error";
 		}		
 		
-		return "accountBook/detailAccountBook";
 	}
 	
 	@RequestMapping("/Account.add")
@@ -125,6 +125,7 @@ public class AccountController {
 		}
 		try {
 			accService.insertAccountData(dtos);
+			return "redirect:accountBook";
 			
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -132,7 +133,6 @@ public class AccountController {
 			return "redirect:/error";
 		}
 		
-		return "redirect:accountBook";
 	}
 	
 	@RequestMapping("/ListViewForPDF")
@@ -211,6 +211,7 @@ public class AccountController {
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
 		dto.setId(memberdto.getId());
 		dto.setUserName(memberdto.getName());
+		System.out.println(dto);
 		if(dto.getSpec().equals("수입")&&dto.getExpense()!=0) {
 			dto.setIncome(dto.getExpense());
 			dto.setExpense(0);
@@ -218,6 +219,8 @@ public class AccountController {
 			dto.setExpense(dto.getIncome());
 			dto.setIncome(0);
 		}
+		System.out.println("수입 : "+dto.getIncome());
+		System.out.println("지출 : "+dto.getExpense());
 		System.out.println("controller"+dto);
 		int result = accService.modifyAccountData(dto);
 		if(result>0) {
@@ -242,13 +245,13 @@ public class AccountController {
 				request.setAttribute("out", out);
 				request.setAttribute("formedDate", formedDate);
 				request.setAttribute("list", list);
+				return "accountBook/detailAccountBook";
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return "redirect:error";
 			}		
 			
-			return "accountBook/detailAccountBook";
 		}else {
 			return "redirect:/error";
 		}

@@ -36,7 +36,7 @@ public class Adviser {
 	@Around("execution(* recoder.single.bangle.*.*(..)) ||" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
 			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
-			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())") 
+			"!execution(void recoder.single.bangle.AOP.AdminScheduler.*())") 
 	public Object getInfoFromIndex(ProceedingJoinPoint pjp) {
 		String url = req.getRequestURL().toString();
 		String path = req.getServletPath();
@@ -59,7 +59,7 @@ public class Adviser {
 	@Before("execution(* recoder.single.bangle.index.*.*(..))" +
 			"execution(* recoder.single.bangle.*.*.*.*(..)) ||" + 
 			"execution(* recoder.single.bangle.*.*.*(..)) &&" +
-			"!execution(void recoder.single.bangle.AOP.AdminScheduler.blockedId())")
+			"!execution(void recoder.single.bangle.AOP.AdminScheduler.*())")
 	public void beford(JoinPoint jp) {
 		MemberDTO loginInfo = (MemberDTO) session.getAttribute("loginInfo");
 		if(loginInfo != null) {

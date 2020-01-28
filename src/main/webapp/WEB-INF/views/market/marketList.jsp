@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/css/nav.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <link rel="stylesheet" href="/css/footer.css">
@@ -96,6 +97,8 @@
 </head>
 <body>
 <jsp:include page="/resources/jsp/nav.jsp"/>
+
+<br><br><br>
 <div id="mainWrapper"> 
 	 <div id="board">
         <div id="bHeader" class="bRow">

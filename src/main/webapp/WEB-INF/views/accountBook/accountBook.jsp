@@ -116,8 +116,7 @@
 						<tr>
 							<td id="datePic"><input type="text" id="datepicker" name="reportingDate" required="required"></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
-								id="detailsSelect" name="details">
-									<option selected>선택</option>
+								id="detailsSelect" name="details">							
 									<option value="식비">식비</option>
 									<option value="문화 생활비">문화 생활비</option>
 									<option value="교통비">교통비</option>
@@ -128,19 +127,17 @@
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 								id="paymentsSelect" name="payments"required="required">
-									<option selected>선택</option>
 									<option value="카드" selected="selected">카드</option>
 									<option value="현금">현금</option>
 							</select></td>
 							<td><select class="custom-select mb-2 mr-sm-2 mb-sm-0"
 								id="specSelect" name="spec"required="required">
-									<option selected>선택</option>
 									<option value="수입">수입</option>
 									<option value="지출" selected="selected">지출</option>
 							</select></td>
 
 							<td><input type="text" id="price" name="price"
-								placeholder="(ex. 10000)" maxlength="8" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
+								placeholder="(ex. 10000)" maxlength="10" onkeyup="inputNumberFormat(this)" onkeydown="characterCheck()"oninput="numberMaxLength(this);" required="required"></td>
 
 							<td><input type="text" id="remarks" name="remarks"
 								placeholder="비고란" maxlength="30" onkeyup="characterCheck()" onkeydown="characterCheck()"></td>
@@ -219,7 +216,7 @@
         }
     }
 	function characterCheck() {
-        var RegExp = /[ \{\}\[\]\/?.;|\)*~`!^\+┼<>@\#$%&\'\"\\\(\=]/gi;//정규식 구문
+        var RegExp = /[\{\}\[\]\/?.;|\)*~`!^\+┼<>@\#$%&\'\"\\\(\=]/gi;//정규식 구문
         var obj = document.getElementsByName("remarks")[0]
         if (RegExp.test(obj.value)) {
             alert("특수문자는 입력하실 수 없습니다.");

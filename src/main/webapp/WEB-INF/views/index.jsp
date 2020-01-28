@@ -11,6 +11,12 @@
 <link rel="stylesheet" href="/css/index/index.css" />
 <link rel="stylesheet" href="/css/footer.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<style>
+#footerContainer{
+	transform: translateY(10px);
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/resources/jsp/nav.jsp" />
@@ -53,17 +59,17 @@
 			</div>
 			<div id="imgBox">
 				<div class="imgDiv" style="cursor:pointer;">
-					<img src="/img/index/cate_living.png">
+					<img src="/img/index/cate_living.png" onclick="location.href='${pageContext.request.contextPath}/board/boardList.bo'">
 					<div class="indexText">Living Point</div>
 				</div>
 				<div class="imgDiv" style="cursor:pointer;">
-					<img src="/img/index/cate_local.png">
+					<img src="/img/index/cate_local.png" onclick="location.href='${pageContext.request.contextPath}/hosp/hospList.hp'">
 					<div class="indexText">
 						혼밥/혼술 플레이스<br> 병원 위치검색
 					</div>
 				</div>
 				<div class="imgDiv"  style="cursor:pointer;">
-					<img src="/img/index/cate_reMarket.png">
+					<img src="/img/index/cate_reMarket.png" onclick="location.href='${pageContext.request.contextPath}/market/boardList.do'">
 					<div class="indexText">
 						쇼핑을 바꾸는 쇼핑<br> Re:Market
 					</div>

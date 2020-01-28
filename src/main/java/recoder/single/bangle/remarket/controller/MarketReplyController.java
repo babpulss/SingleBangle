@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import recoder.single.bangle.member.DTO.MemberDTO;
 import recoder.single.bangle.remarket.DTO.MarketReplyDTO;
 import recoder.single.bangle.remarket.service.MarketReplyService;
+import utils.XSSprotect;
 
 @Controller
 @RequestMapping("/marketReply")
@@ -33,6 +34,7 @@ public class MarketReplyController {
 	public String insert() { //댓글작성
 		try {
 			String recontent = request.getParameter("recontent");
+			recontent = XSSprotect.replaceParameter(recontent);
 			MemberDTO dto = (MemberDTO) session.getAttribute("loginInfo");
 			String writer = dto.getId();
 			System.out.println("writer : " + writer);

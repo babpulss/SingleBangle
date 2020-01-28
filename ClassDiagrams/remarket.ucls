@@ -46,7 +46,7 @@
   <class id="5" language="java" name="recoder.single.bangle.remarket.service.MarketService" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/service/MarketService.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="912" y="108"/>    
+    <position height="-1" width="-1" x="642" y="124"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   <class id="7" language="java" name="recoder.single.bangle.remarket.DAO.MarketDAO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DAO/MarketDAO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="513" width="312" x="2096" y="-44"/>    
+    <position height="-1" width="-1" x="2248" y="411"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -86,7 +86,7 @@
   <class id="9" language="java" name="recoder.single.bangle.remarket.DAO.MarketReplyDAO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DAO/MarketReplyDAO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2224" y="1192"/>    
+    <position height="-1" width="-1" x="2232" y="1191"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -96,7 +96,7 @@
   <class id="10" language="java" name="recoder.single.bangle.remarket.DAO.MsgDAO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DAO/MsgDAO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2204" y="1596"/>    
+    <position height="-1" width="-1" x="2200" y="1516"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -116,7 +116,7 @@
   <class id="12" language="java" name="recoder.single.bangle.remarket.DTO.MarketFileDTO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DTO/MarketFileDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2992" y="1048"/>    
+    <position height="-1" width="-1" x="2770" y="142"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -126,7 +126,7 @@
   <class id="13" language="java" name="recoder.single.bangle.remarket.DTO.MarketReplyDTO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DTO/MarketReplyDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3620" y="168"/>    
+    <position height="-1" width="-1" x="3492" y="169"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -136,7 +136,7 @@
   <class id="14" language="java" name="recoder.single.bangle.remarket.DTO.MsgDTO" project="SingleBangle" 
     file="/SingleBangle/src/main/java/recoder/single/bangle/remarket/DTO/MsgDTO.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3608" y="724"/>    
+    <position height="-1" width="-1" x="2748" y="535"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -146,89 +146,89 @@
   <association id="15">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="16" name="rdao">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="8" y="-1"/>      
       </attribute>      
       <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="8" y="-1"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="18">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="19" name="dao">        
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="19" name="service">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="20" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
+    <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="21">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="22" name="service">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-270" y="16"/>      
       </attribute>      
       <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-270" y="16"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="24">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="25" name="service">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="25" name="dao">        
+        <position height="0" width="0" x="-4" y="-80"/>      
       </attribute>      
       <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="-80"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="6" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="27">    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="28" name="file_dao">        
-        <position height="0" width="0" x="0" y="0"/>      
+      <attribute id="28" name="dao">        
+        <position height="0" width="0" x="-4" y="199"/>      
       </attribute>      
       <multiplicity id="29" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="199"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="30">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="31" name="dao">        
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="31" name="reService">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="33">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="34" name="reService">        
+      <attribute id="34" name="file_dao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="35" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="36">    
-    <end type="SOURCE" refId="1" navigable="false">      
+    <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="37" name="file_dao">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
@@ -240,51 +240,51 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="39">    
-    <end type="SOURCE" refId="5" navigable="false">      
+    <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="40" name="dao">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="199"/>      
       </attribute>      
       <multiplicity id="41" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="199"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="42">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="43" name="dao">        
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="43" name="service">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="44" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="45">    
-    <end type="SOURCE" refId="4" navigable="false">      
+    <end type="SOURCE" refId="3" navigable="false">      
       <attribute id="46" name="dao">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="-80"/>      
       </attribute>      
       <multiplicity id="47" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-4" y="-80"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="10" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="48">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="49" name="service">        
-        <position height="0" width="0" x="0" y="0"/>      
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="49" name="dao">        
+        <position height="0" width="0" x="8" y="-1"/>      
       </attribute>      
       <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="8" y="-1"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
+    <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
