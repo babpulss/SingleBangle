@@ -211,6 +211,7 @@ public class AccountController {
 		MemberDTO memberdto = (MemberDTO)session.getAttribute("loginInfo");
 		dto.setId(memberdto.getId());
 		dto.setUserName(memberdto.getName());
+		System.out.println(dto);
 		if(dto.getSpec().equals("수입")&&dto.getExpense()!=0) {
 			dto.setIncome(dto.getExpense());
 			dto.setExpense(0);
