@@ -167,7 +167,7 @@
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
+								<div id="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;"><c:out value="${list.recontent }"></c:out></div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
