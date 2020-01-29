@@ -164,8 +164,8 @@
 				<c:otherwise>
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
-								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div class="reText_${list.seq }" contenteditable="false" style="width:50%; overflow-y: scroll; float:left;">${list.recontent }</div>
+								<div style="width:20%; float:left;">${list.writer }</div>
+								<div class="reText_${list.seq }" contenteditable="false" style="font-size:13px; width:50%; overflow-y: scroll; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
