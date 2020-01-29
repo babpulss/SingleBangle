@@ -65,7 +65,7 @@
             
             #scrapContainer{
             	width: 70%;
-            	min-width: 500px;
+            	min-width: 700px;
             	margin: auto;
             }
             .pagination {
@@ -136,17 +136,17 @@
 	        <div id="scrapContainer">
 		        <h2>My Scrap List</h2>
 		        <br>
-			<div id="scrapBox" style="min-width:900px;">
+			<div id="scrapBox">
 				<div class="row">
-					<div class="col-1 scrapIndex">글번호</div>
+					<div class="col-2 scrapIndex">글번호</div>
 					<div class="col-2 scrapIndex">카테고리</div>
-					<div class="col-6 scrapIndex">제목</div>
+					<div class="col-4 scrapIndex">제목</div>
 					<div class="col-2 scrapIndex">스크랩날짜</div>
-					<div class="col-1 scrapIndex">삭제</div>
+					<div class="col-2 scrapIndex">삭제</div>
 				</div>
 				<c:forEach items="${myScrapList}" var="dto">
 					<div class="row">
-						<div class="col-1" style="text-align: center">${dto.rootSeq}</div>
+						<div class="col-2" style="text-align: center">${dto.rootSeq}</div>
 						<div class="col-2" style="text-align: center">
 							<c:choose>
 								<c:when test="${dto.category == 1}">청소</c:when>
@@ -156,11 +156,11 @@
 								<c:otherwise>기타</c:otherwise>
 							</c:choose>
 						</div>
-						<div class="col-6">
+						<div class="col-4">
 							<a href="${pageContext.request.contextPath}/board/detailView.bo?seq=${dto.rootSeq}">${dto.title}</a>
 						</div>
 						<div class="col-2" style="text-align: center">${dto.getFormedDate()}</div>
-						<div class="col-1" style="text-align: center"><a id="scrapDelete" href="${pageContext.request.contextPath}/board/scrapDelete.bo?seq=${dto.seq}">삭제</a></div>
+						<div class="col-2" style="text-align: center"><a id="scrapDelete" href="${pageContext.request.contextPath}/board/scrapDelete.bo?seq=${dto.seq}">삭제</a></div>
 					</div>
 					</c:forEach>
 				</div>
