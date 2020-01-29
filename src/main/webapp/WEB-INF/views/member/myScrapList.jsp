@@ -93,7 +93,7 @@
 	        <div id="myPageContainer">
 	            <div id="myPageHeader">
 	                <div id="myPageTitle"><b>스크랩 목록</b></div>
-	                <div id="myPageNotice"><b>${loginInfo.id}</b>님이 스크랩하신 글 목록입니다.</div>
+	                <div id="myPageNotice"><b>${loginInfo.name}</b>님이 스크랩하신 글 목록입니다.</div>
 	            </div>
 	            <br><br><br>
 	            <div id="menuContainer">
