@@ -165,7 +165,7 @@
 						<c:forEach items="${renavilist }" var="list">
 								<div class="outputRe">
 								<div style="width:20%; float:left; font-weight: bold;">${list.writer }</div>
-								<div class="reText_${list.seq }" contenteditable="false" style="width:50%; float:left;">${list.recontent }</div>
+								<div class="reText_${list.seq }" contenteditable="false" style="width:50%; overflow-y: scroll; float:left;">${list.recontent }</div>
 								<input type="hidden" id="reTextProc_${list.seq }">
 								<c:choose>
 									<c:when test="${list.writer == loginInfo.id }">
@@ -184,7 +184,7 @@
 						</c:forEach>
 				</c:otherwise>
 			</c:choose>
-		<div style="text-align: center">${navi }</div>
+		
 			<c:choose>
 				<c:when test="${loginInfo != null }">
 					<br>
@@ -202,9 +202,18 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
+		<div style="text-align: center">${navi }</div>
 		</div>
 	<jsp:include page="/resources/jsp/footer.jsp" />
 	<script>
+	
+	$("#recontent").on("focusout", function() {
+		var inputComment =  $("#recontent").val();
+		if(inputComment.length > 30){
+			alert("댓글은 30자 미만으로 작성해주세요.");
+			 $("#recontent").val("");
+		}
+	})
 	
 	var updateSellDone = function(seq){
 		if(confirm("판매완료상태로 전환합니다. \n 판매완료 처리 된 상품은 다시 판매중으로 돌릴 수 없습니다.") == true){
