@@ -557,8 +557,8 @@ $(function(){
         imageUrl: 'https://iconmonstr.com/wp-content/g/gd/makefg.php?i=../assets/preview/2013/png/iconmonstr-light-bulb-17.png&r=66&g=100&b=194',
 
         link: {
-          mobileWebUrl: 'http://192.168.160.75/board/detailView.bo?seq=${detailView.seq}',
-          webUrl: 'http://192.168.160.75/board/detailView.bo?seq=${detailView.seq}'
+          mobileWebUrl: 'http://192.168.60.23/board/detailView.bo?seq=${detailView.seq}',
+          webUrl: 'http://192.168.60.23/board/detailView.bo?seq=${detailView.seq}'
         }
       },
       social: {
@@ -570,8 +570,8 @@ $(function(){
         {
           title: '웹으로 보기',
           link: {
-            mobileWebUrl: 'http://192.168.160.75/board/detailView.bo?seq=${detailView.seq}',
-            webUrl: 'http://192.168.160.75/board/detailView.bo?seq=${detailView.seq}'
+            mobileWebUrl: 'http://192.168.60.23/board/detailView.bo?seq=${detailView.seq}',
+            webUrl: 'http://192.168.60.23/board/detailView.bo?seq=${detailView.seq}'
           }
         }
       ]
