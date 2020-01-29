@@ -98,7 +98,7 @@
 <jsp:include page="/resources/jsp/nav.jsp"/>
  <div id="board" style="width: 800px; position: relative; top: 65px; margin: auto;">
         <div id="bHeader" class="bRow" style="font-size: 20px; font-weight: bold;">
-            <span style="margin: auto;">${dto.title }</span>
+            <div style="margin: auto;">${dto.title }</div>
         </div>
 		<div id="contentBox">
 		<div style="border-bottom: 1px solid #c4c4c4;">
